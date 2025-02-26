@@ -123,16 +123,35 @@ class AppStrings {
   static const String exTellUsMoreAboutYourself= "Ex : Tell us more about yourself";
 
   ///GovernmentIssuedIDUpload
-  static const String govtIssuedCNICUpload= "Govt-issued CNIC Upload";
-  static const String scanFrontSideOfYourCNIC= "Scan Front side of your CNIC";
   static const String holdStill= "Hold Still";
+  static const String govtIssuedCNICUpload= "Govt-issued CNIC Upload";
   static const String scanBackSideOfYourCNIC= "Scan Back side of your CNIC";
+  static const String scanFrontSideOfYourCNIC= "Scan Front side of your CNIC";
   static const String alignYourGovernmentIssuedCNICWithinTheMarkersForAutomaticScanning= "Align your government-issued CNIC within the markers for automatic scanning.";
 
   ///Bar ID Card Upload
-  static const String scanFrontSideOfYourID= "Scan Front side of your ID";
   static const String scanBackSideOfYourID= "Scan Back side of your ID";
+  static const String scanFrontSideOfYourID= "Scan Front side of your ID";
   static const String alignYourCertificateWithinTheMarkersForAutomaticScanning= "Align your certificate within the markers for automatic scanning.";
+
+  ///Selfie for Identity Verification
+  static const String placeYourFaceIntoTheGridAndHoldStill= "Place your face into the grid and hold still";
+
+  ///Your Application is Under Review
+  static const String ifRejected= "If Rejected:";
+  static const String ifApproved= "If Approved:";
+  static const String whatHappensNext= "What Happens Next?";
+  static const String contactSupportTeam= "Contact Support Team";
+  static const String yourApplicationIsUnderReview= "Your Application is Under Review";
+  static const String approvalTypicallyTakes2448Hours= "Approval typically takes 24-48 hours.";
+  static const String thankYouForSubmittingYourDetails = "Thank you for submitting your details! ";
+  static const String wellNotifyYouWithReasonsAndStepsToReapply= "We’ll notify you with reasons and steps to reapply";
+  static const String ourAdminWillVerifyYourCredentialsAndSubmittedDocuments= "Our admin will verify your credentials and submitted documents.";
+  static const String forAnyQueriesFeelFreeToContactOurSupportTeamStayTuned = "For any queries, feel free to contact our support team. Stay tuned!";
+  static const String yourProfileWillBeVisibleToUsersAllowingThemToConnectWithYou= "Your profile will be visible to users, allowing them to connect with you.";
+  static const String ourTeamIsCurrentlyReviewingYourInformationToEnsureComplianceWithOurStandards= "Our team is currently reviewing your information to ensure compliance with our standards.";
+  static const String youReceiveANotificationOnceYourProfileIsApprovedOrIfAnyUpdatesAreNeeded= "You’ll receive a notification once your profile is approved or if any updates are needed.";
+
 
 
   ///Validator
