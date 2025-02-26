@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../export_casekarao.dart';
+import '../export_resources.dart';
 
 class CustomRouteGenerator {
   CustomRouteGenerator._();
@@ -24,12 +26,12 @@ class CustomRouteGenerator {
       //       );
       //     },
       //   );
-      // case CustomRouteNames.kInitialRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return const SplashScreen();
-      //     },
-      //   );
+      case CustomRouteNames.kInitialRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const SplashScreen();
+          },
+        );
       // case CustomRouteNames.kChooseAccountScreenRoute:
       //   return MaterialPageRoute(
       //     builder: (context) {

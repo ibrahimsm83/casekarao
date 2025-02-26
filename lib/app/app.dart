@@ -46,16 +46,16 @@ class _MyAppState extends State<MyApp> {
   MaterialColor myappColor = const MaterialColor(
     0xFF27B0FF,
     <int, Color>{
-      50: Color(0xFF27B0FF), //10%
-      100: Color(0xFF27B0FF), //20%
-      200: Color(0xFF27B0FF), //30%
-      300: Color(0xFF27B0FF), //40%
-      400: Color(0xFF27B0FF), //50%
-      500: Color(0xFF27B0FF), //60%
-      600: Color(0xFF27B0FF), //70%
-      700: Color(0xFF27B0FF), //80%
-      800: Color(0xFF27B0FF), //90%
-      900: Color(0xFF27B0FF), //100%
+      50: Color(0xff4285F4), //10%
+      100: Color(0xff4285F4), //20%
+      200: Color(0xff4285F4), //30%
+      300: Color(0xff4285F4), //40%
+      400: Color(0xff4285F4), //50%
+      500: Color(0xff4285F4), //60%
+      600: Color(0xff4285F4), //70%
+      700: Color(0xff4285F4), //80%
+      800: Color(0xff4285F4), //90%
+      900: Color(0xff4285F4), //100%
     },
   );
 }
