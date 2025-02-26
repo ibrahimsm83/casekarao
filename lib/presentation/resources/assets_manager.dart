@@ -7,7 +7,7 @@ class ImageAssets {
 
   static const String appLogo = "$IMAGE_PATH/logo.png";
   static const String userImage = "$IMAGE_PATH/user.png";
-  static const String getStartedImage = "$IMAGE_PATH/getStarted.png";
+  static const String getStartedImage = "$IMAGE_PATH/getstarted.png";
 
   ///Registration
   static const String ckIcon = "$ICON_PATH/CK.svg";

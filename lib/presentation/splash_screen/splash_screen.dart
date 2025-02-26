@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     print("Splash screen");
     Navigator.pushNamedAndRemoveUntil(
       context,
-      CustomRouteNames.kChooseAccountScreenRoute,
+      CustomRouteNames.kLetsGetStartedScreenRouteRoute,
       (page) => false,
     );
   }

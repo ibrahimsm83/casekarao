@@ -32,12 +32,12 @@ class CustomRouteGenerator {
             return const SplashScreen();
           },
         );
-      // case CustomRouteNames.kChooseAccountScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return ChooseAccountScreen();
-      //     },
-      //   );
+      case CustomRouteNames.kLetsGetStartedScreenRouteRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return LetsGetStartedView();
+          },
+        );
       //
       // case CustomRouteNames.kLoginScreenRoute:
       //   return MaterialPageRoute(
