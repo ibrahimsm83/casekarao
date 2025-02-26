@@ -122,6 +122,17 @@ class AppStrings {
   static const String bioProfessionalSummary= "Bio/Professional Summary";
   static const String exTellUsMoreAboutYourself= "Ex : Tell us more about yourself";
 
+  ///GovernmentIssuedIDUpload
+  static const String govtIssuedCNICUpload= "Govt-issued CNIC Upload";
+  static const String scanFrontSideOfYourCNIC= "Scan Front side of your CNIC";
+  static const String holdStill= "Hold Still";
+  static const String scanBackSideOfYourCNIC= "Scan Back side of your CNIC";
+  static const String alignYourGovernmentIssuedCNICWithinTheMarkersForAutomaticScanning= "Align your government-issued CNIC within the markers for automatic scanning.";
+
+  ///Bar ID Card Upload
+  static const String scanFrontSideOfYourID= "Scan Front side of your ID";
+  static const String scanBackSideOfYourID= "Scan Back side of your ID";
+  static const String alignYourCertificateWithinTheMarkersForAutomaticScanning= "Align your certificate within the markers for automatic scanning.";
 
 
   ///Validator
