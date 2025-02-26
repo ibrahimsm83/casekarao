@@ -40,18 +40,101 @@ class AppStrings {
   static const String byProceedingYouAgreeToThe= "By proceeding, you agree to the";
 
   ///OTP
+  static const String continues= "Continue";
+  static const String resendCode= "Resend Code";
+  static const String inputOTPCode= "Input OTP Code";
+  static const String pleaseEnterTheOTPCodeThatWeHaveSentTo = "Please enter the OTP Code that we have sent to ";
+
+  ///SetupProfile
+  static const String setupProfile= "Setup Profile";
+  static const String optionalDetails= "Optional Details";
+  static const String legalExperience= "Legal Experience";
+  static const String saveAndContinue= "Save and Continue";
+  static const String barIDCardUpload= "Bar ID Card Upload";
+  static const String enhancingProfile= "(Enhancing Profile)";
+  static const String personalInformation= "Personal Information";
+  static const String businessAndAvailability= "Business & Availability";
+  static const String governmentIssuedIDUpload= "Government-issued ID Upload";
+  static const String educationAndCertifications= "Education & Certifications";
+  static const String selfieForIdentityVerification= "Selfie for Identity Verification";
+  static const String noteCompleteAllRequired= "Note: Complete all required fields for admin approval. Incomplete profiles will be rejected and hidden from users.";
+  static const String createYourLawyerProfileWithAccurateDetailsToHelpUsersFindYouEasily= "Create your lawyer profile with accurate details to help users find you easily.";
+
+  ///Legal Experience
+  static const String required= "Required";
+  static const String optional= "Optional";
+  static const String familyLaw= "Family Law";
+  static const String ex5Years= "Ex: 5 Years";
+  static const String criminalLaw= "Criminal Law";
+  static const String practiceAreas= "Practice Areas";
+  static const String enterTagsHere= "Enter tags here";
+  static const String yearsOfExperience= "Years of Experience";
+  static const String eCityLawSchoolAndCourt= "Ex: City Law School and Court";
+  static const String exCityLawSchoolAndCourt= "Ex: City Law School and Court";
+  static const String selectJurisdiction= "Select Jurisdiction/State of Practice";
+  static const String jurisdictionStateOfPractice= "Jurisdiction/State of Practice";
+  static const String lawFirmOrganizationNameIfApplicable= "Law Firm/Organization Name (if applicable)";
+  static const String barLicenseNumberWithIssuingAuthority= "Bar License Number (with issuing authority)";
+
+  ///Education & Certifications
+  static const String exLaw= "Ex : Law";
+  static const String ex2012= "Ex : 2012";
+  static const String degreeEarned= "Degree Earned";
+  static const String exLawSchool= "Ex : Law School";
+  static const String yearOfGraduation= "Year of Graduation";
+  static const String lawSchoolAttended= "Law School Attended";
+  static const String exCertificateName= "Ex : Certificate name";
+  static const String additionalCertificationsIfAny= "Additional Certifications (if any)";
+
+
+  ///PersonalInformation
+  static const String mM= "MM";
+  static const String dD= "DD";
+  static const String yYYY= "YYYY";
+  static const String submit= "Submit";
+  static const String verified= "Verified";
+  static const String uploadImage= "Upload Image";
+  static const String dateOfBirth= "Date of Birth";
+  static const String emailAddress= "Email Address";
+
+  ///Business & Availability
+  static const String mon= "Mon";
+  static const String tue= "Tue";
+  static const String wed= "Wed";
+  static const String thu= "Thu";
+  static const String fri= "Fri";
+  static const String sat= "Sat";
+  static const String sun= "Sun";
+  static const String to= "To";
+  static const String from= "From";
+  static const String hHMM= "HH:MM";
+  static const String monday= "Monday";
+  static const String friday= "Friday";
+  static const String thursday= "Thursday";
+  static const String officeAddress= "Office Address";
+  static const String availabilitySchedule= "Availability Schedule";
+  static const String exCompleteStreetAddress= "Ex : Complete Street Address";
+
+  ///Optional Details
+  static const String multiSelect= "Multi Select";
+  static const String selectLanguage= "Select language";
+  static const String languagesSpoken= "Languages Spoken";
+  static const String bioProfessionalSummary= "Bio/Professional Summary";
+  static const String exTellUsMoreAboutYourself= "Ex : Tell us more about yourself";
+
+
 
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";
   static const String enterEmailAddress = "Enter email address";
-  static const String enterfullName = "Enter full name";
-  static const String enterPhoneNumer = "Enter phone number";
+  static const String enterFullName = "Enter full name";
+  static const String enterPhoneNumber = "Enter phone number";
   static const String enterConfirmPassword = "Enter confirm Password ";
   static const String enterPassword = "Enter password";
   static const String passwordNotMatched = "Password not matched";
   static const String pleaseSelectTermCondition =
       "Please Select Terms and Condition, Privacy Policy";
-  static const passwordvalidator =
+  static const passwordValidator =
       "Contain at least 1 uppercase letter, 8 characters, 1 number";
 }
