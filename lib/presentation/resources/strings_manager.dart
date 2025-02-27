@@ -9,7 +9,7 @@ class AppStrings {
   static const String letsGetStarted = "Let’s Get Started";
   static const String continueWithApple= "Continue with Apple";
   static const String continueWithGoogle= "Continue with Google";
-  static const String alreadyHaveAnAccount= "Already have an account?";
+  static const String alreadyHaveAnAccount= "Already have an account?\t";
   static const String continueWithPhoneNumber= "Continue with Phone Number";
   static const String createAKaseKaraoAccountOrLogin= "Create a CaseKarao account or login if you already have an account";
 

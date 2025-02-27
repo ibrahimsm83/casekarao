@@ -11,95 +11,81 @@ class LetsGetStartedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: AppSize.sizeHeight(context) * 0.05),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 0.0,
-            ),
-            child: Container(
-              height: 290.h,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(22.0.r)),
-                image: const DecorationImage(
-                  colorFilter: ColorFilter.mode(
-                    Colors.black12,
-                    BlendMode.darken,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: AppSize.sizeHeight(context) * 0.05),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 0.0,
+              ),
+              child: Container(
+                height: 290.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(22.0.r)),
+                  image: const DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black12,
+                      BlendMode.darken,
+                    ),
+                    fit: BoxFit.cover,
+                    image: AssetImage(ImageAssets.getStartedImage),
                   ),
-                  fit: BoxFit.cover,
-                  image: AssetImage(ImageAssets.getStartedImage),
                 ),
               ),
-              //child: Text("hello"),
             ),
-          ),
-          SizedBox(height: AppSize.sizeHeight(context) * 0.03),
-          Text(
-            AppStrings.letsGetStarted,
-            style: getboldStyle(
-              color: ColorManager.primary,
-              fontSize: ScreenUtil().setSp(AppSize.s28),
+            SizedBox(height: AppSize.sizeHeight(context) * 0.03),
+            Text(
+              AppStrings.letsGetStarted,
+              style: getboldStyle(
+                color: ColorManager.primary,
+                fontSize: ScreenUtil().setSp(AppSize.s28),
+              ),
             ),
-          ),
-          SizedBox(height: AppSize.s10.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Text(
-              AppStrings.createAKaseKaraoAccountOrLogin,
+            SizedBox(height: AppSize.s10.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Text(
+                AppStrings.createAKaseKaraoAccountOrLogin,
+                textAlign: TextAlign.center,
+                style: getRegularStyle(
+                  color: ColorManager.primary,
+                  fontSize: ScreenUtil().setSp(AppSize.s14),
+                ),
+              ),
+            ),
+
+            SizedBox(height: AppSize.sizeHeight(context) * 0.04),
+            button(
+              text: AppStrings.continueWithPhoneNumber,
+              iconPath: ImageAssets.phoneIcon,
+              onTap: () {},
+            ),
+            Text(
+              AppStrings.or,
               textAlign: TextAlign.center,
               style: getRegularStyle(
-                color: ColorManager.primary,
+                color: ColorManager.kDarkGreyColor,
                 fontSize: ScreenUtil().setSp(AppSize.s14),
               ),
             ),
-          ),
-
-          SizedBox(height: AppSize.sizeHeight(context)*0.05),
-          button(
-              text: AppStrings.login,
-              color: ColorManager.primary,
-              context: context,
-              onTap: () {
-                // if (userController.userRole.value == UserRole.Patient) {
-                //   Navigator.pushNamed(
-                //     context,
-                //     CustomRouteNames.kDashboardScreenRoute,
-                //   );
-                // } else {
-                //   Navigator.pushNamed(
-                //     context,
-                //     CustomRouteNames.kDashboardScreenRoute,
-                //   );
-                // }
-                // CustomSnacksBar.showSnackBar(
-                //   context,
-                //   "HealthCare Dashboard Not Found",
-                //   icon: Icon(
-                //     Icons.check,
-                //     color: ColorManager.kWhiteColor,
-                //   ),
-                // );
-                //}
-
-                //  if (_formKey.currentState!.validate()) {
-                //   print(_emailController.text);
-                //   print(_passwordController.text);
-                //
-                //   CustomSnacksBar.showSnackBar(
-                //     context,
-                //     "Login Successfully",
-                //     icon: Icon(
-                //       Icons.check,
-                //       color: ColorManager.kWhiteColor,
-                //     ),
-                //   );
-                // }
-              }),
-          SizedBox(height: 10.h),
-          textspan(
+            button(
+              text: AppStrings.continueWithApple,
+              iconPath: ImageAssets.appleIcon,
+              onTap: () {},
+              color: ColorManager.kWhiteColor,
+              fontColor: ColorManager.primary,
+            ),
+            button(
+              text: AppStrings.continueWithGoogle,
+              iconPath: ImageAssets.googleIcon,
+              onTap: () {},
+              color: ColorManager.kWhiteColor,
+              fontColor: ColorManager.primary,
+            ),
+            textspan(
               text1: AppStrings.alreadyHaveAnAccount,
               text2: AppStrings.login,
               onTap: () {
@@ -107,51 +93,65 @@ class LetsGetStartedView extends StatelessWidget {
                 //   context,
                 //   CustomRouteNames.kSignUpScreenRoute,
                 // );
-              }),
-        ],
+              },
+            ),
+            SizedBox(height: 5.h),
+          ],
+        ),
       ),
     );
   }
-  Widget button(
-      {Function()? onTap, String? text, Color? color, BuildContext? context}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: AppSize.sizeWidth(context!) * 0.05, vertical: 8.0),
-      child: CustomButton(
-          color: color!,
-          text: text ?? "",
-          style: getboldStyle(
-            color: ColorManager.kWhiteColor,
-            fontSize: AppSize.s14.sp,
-          ),
-          onTap: onTap),
+
+  Widget button({
+    Function()? onTap,
+    String? text,
+    Color? color,
+    Color? fontColor,
+    String? iconPath,
+  }) {
+    return CustomButton(
+      color: color ?? ColorManager.primary,
+      iconPath: iconPath!,
+      isLeadingIcon: true,
+      text: text ?? "",
+      style: getmediumStyle(
+        color: fontColor ?? ColorManager.kWhiteColor,
+        fontSize: AppSize.s14.sp,
+      ),
+      onTap: onTap,
     );
   }
 
-  Widget textspan(
-      {String? text1,
-        String? text2,
-        BuildContext? context,
-        Function()? onTap}) {
+  Widget textspan({
+    String? text1,
+    String? text2,
+    BuildContext? context,
+    Function()? onTap,
+  }) {
     return Container(
       padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p14, vertical: AppPadding.p20),
+        horizontal: AppPadding.p14,
+        vertical: AppPadding.p20,
+      ),
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
           text: text1,
           style: getRegularStyle(
-              color: ColorManager.kGreyColor,
-              fontSize: ScreenUtil().setSp(AppSize.s12)),
+            color: ColorManager.kDarkGreyColor,
+            fontSize: ScreenUtil().setSp(AppSize.s12),
+          ),
           children: <TextSpan>[
             TextSpan(
-                text: text2,
-                style: TextStyle(
-                    color: ColorManager.secondary,
-                    fontFamily: FontConstants.fontFamily,
-                    fontWeight: FontWeightManager.bold,
-                    fontSize: ScreenUtil().setSp(AppSize.s12)),
-                recognizer: TapGestureRecognizer()..onTap = onTap)
+              text: text2,
+              style: TextStyle(
+                color: ColorManager.secondary,
+                fontFamily: FontConstants.fontFamily,
+                fontWeight: FontWeightManager.bold,
+                fontSize: ScreenUtil().setSp(AppSize.s12),
+              ),
+              recognizer: TapGestureRecognizer()..onTap = onTap,
+            ),
           ],
         ),
       ),
