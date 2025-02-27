@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.17
   get: ^4.7.2
   shimmer: ^3.0.0
+  another_flushbar: ^1.12.30
 
 dev_dependencies:
   flutter_test:

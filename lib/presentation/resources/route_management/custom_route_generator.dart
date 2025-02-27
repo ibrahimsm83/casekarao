@@ -39,12 +39,12 @@ class CustomRouteGenerator {
           },
         );
       //
-      // case CustomRouteNames.kLoginScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return const SignInScreen();
-      //     },
-      //   );
+      case CustomRouteNames.kLoginScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const LoginScreen();
+          },
+        );
       //
       // case CustomRouteNames.kSignUpScreenRoute:
       //   return MaterialPageRoute(

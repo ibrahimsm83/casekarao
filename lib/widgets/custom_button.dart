@@ -13,18 +13,20 @@ class CustomButton extends StatelessWidget {
   Function()? onTap;
   TextStyle? style;
   bool isLeadingIcon;
+  double horizontalMargin;
   String? iconPath;
 
   CustomButton({
-    Key? key,
+    super.key,
     this.onTap,
     this.text,
     this.style,
     this.fontWeight = FontWeight.normal,
     this.isLeadingIcon = false,
     this.iconPath,
+    this.horizontalMargin = 0.05,
     this.color = Colors.black,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +34,11 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppSize.sizeWidth(context!) * 0.05,
+          horizontal:  AppSize.sizeWidth(context) * horizontalMargin,//AppSize.sizeWidth(context!) * 0.05,
           vertical: 8.0,
         ),
         child: Container(
-          height: 48.h,
+          height: 44.h,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(22.r),

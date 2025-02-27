@@ -19,7 +19,7 @@ class AppStrings {
   static const String createAccount= "Create account";
   static const String phoneNumberHintText= "Ex : +1 234567897";
   static const String loginToYourAccount= "Login to your account";
-  static const String dontHaveAnAccount = "Don’t have an account? Create account";
+  static const String dontHaveAnAccount = "Don’t have an account?\t";
   static const String createAnAccountByFillingInTheDataBelow= "Create an account by filling in the data below";
 
   ///Register

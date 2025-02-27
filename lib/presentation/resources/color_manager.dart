@@ -8,6 +8,7 @@ class ColorManager {
   static Color kGreenColor = const Color(0xff34A853);
   static Color kDarkGreyColor = const Color(0xff505050);
   static Color kHintTextColor = const Color(0xffa4a4a2);
+  static Color kBackgroundColor = const Color(0xffeff1f3);
   static Color kRedColor = Colors.red;
 
 }

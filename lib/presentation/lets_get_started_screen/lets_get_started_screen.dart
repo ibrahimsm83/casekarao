@@ -2,7 +2,6 @@ import 'package:casekarao/presentation/resources/export_resources.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../export_casekarao.dart';
 
 class LetsGetStartedView extends StatelessWidget {
@@ -11,6 +10,7 @@ class LetsGetStartedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorManager.kBackgroundColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -19,7 +19,6 @@ class LetsGetStartedView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10.0,
-                vertical: 0.0,
               ),
               child: Container(
                 height: 290.h,
@@ -50,7 +49,7 @@ class LetsGetStartedView extends StatelessWidget {
               child: Text(
                 AppStrings.createAKaseKaraoAccountOrLogin,
                 textAlign: TextAlign.center,
-                style: getRegularStyle(
+                style: getmediumStyle(
                   color: ColorManager.primary,
                   fontSize: ScreenUtil().setSp(AppSize.s14),
                 ),
@@ -61,7 +60,9 @@ class LetsGetStartedView extends StatelessWidget {
             button(
               text: AppStrings.continueWithPhoneNumber,
               iconPath: ImageAssets.phoneIcon,
-              onTap: () {},
+              onTap: () {
+
+              },
             ),
             Text(
               AppStrings.or,
@@ -89,10 +90,10 @@ class LetsGetStartedView extends StatelessWidget {
               text1: AppStrings.alreadyHaveAnAccount,
               text2: AppStrings.login,
               onTap: () {
-                // Navigator.pushNamed(
-                //   context,
-                //   CustomRouteNames.kSignUpScreenRoute,
-                // );
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kLoginScreenRoute,
+                );
               },
             ),
             SizedBox(height: 5.h),
