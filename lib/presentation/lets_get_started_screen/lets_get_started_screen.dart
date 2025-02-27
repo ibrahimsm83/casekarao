@@ -86,7 +86,7 @@ class LetsGetStartedView extends StatelessWidget {
               color: ColorManager.kWhiteColor,
               fontColor: ColorManager.primary,
             ),
-            textspan(
+            CustomTextSpan(
               text1: AppStrings.alreadyHaveAnAccount,
               text2: AppStrings.login,
               onTap: () {
@@ -120,42 +120,6 @@ class LetsGetStartedView extends StatelessWidget {
         fontSize: AppSize.s14.sp,
       ),
       onTap: onTap,
-    );
-  }
-
-  Widget textspan({
-    String? text1,
-    String? text2,
-    BuildContext? context,
-    Function()? onTap,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppPadding.p14,
-        vertical: AppPadding.p20,
-      ),
-      child: RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(
-          text: text1,
-          style: getRegularStyle(
-            color: ColorManager.kDarkGreyColor,
-            fontSize: ScreenUtil().setSp(AppSize.s12),
-          ),
-          children: <TextSpan>[
-            TextSpan(
-              text: text2,
-              style: TextStyle(
-                color: ColorManager.secondary,
-                fontFamily: FontConstants.fontFamily,
-                fontWeight: FontWeightManager.bold,
-                fontSize: ScreenUtil().setSp(AppSize.s12),
-              ),
-              recognizer: TapGestureRecognizer()..onTap = onTap,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

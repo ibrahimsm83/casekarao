@@ -37,7 +37,7 @@ class AppStrings {
   static const String emailHintText= "Ex : bakerdavis@example.com";
   static const String createStrongPassword= "Create strong password";
   static const String letsCreateNewAccount= "Let’s Create new account";
-  static const String byProceedingYouAgreeToThe= "By proceeding, you agree to the";
+  static const String byProceedingYouAgreeToThe= "By proceeding, you agree to the\t";
 
   ///OTP
   static const String continues= "Continue";

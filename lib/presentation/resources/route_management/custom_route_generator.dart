@@ -46,12 +46,12 @@ class CustomRouteGenerator {
           },
         );
       //
-      // case CustomRouteNames.kSignUpScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return const SignUpScreen();
-      //     },
-      //   );
+      case CustomRouteNames.kCreateNewAccountScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const CreateNewAccountScreen();
+          },
+        );
       // case CustomRouteNames.kOtpVerificationScreenRoute:
       //   OtpScreenArgumentModel argumentModel =
       //       settings.arguments as OtpScreenArgumentModel;

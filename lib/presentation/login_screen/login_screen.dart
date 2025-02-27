@@ -199,14 +199,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: ColorManager.kWhiteColor,
                   fontColor: ColorManager.primary,
                 ),
-                textSpan(
+                CustomTextSpan(
                   text1: AppStrings.dontHaveAnAccount,
                   text2: AppStrings.createAccount,
                   onTap: () {
-                    // Navigator.pushNamed(
-                    //   context,
-                    //   CustomRouteNames.kLoginScreenRoute,
-                    // );
+                    Navigator.pushNamed(
+                      context,
+                      CustomRouteNames.kCreateNewAccountScreenRoute,
+                    );
                   },
                 ),
                 SizedBox(height: 5.h),
@@ -240,40 +240,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget textSpan({
-    String? text1,
-    String? text2,
-    BuildContext? context,
-    Function()? onTap,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppPadding.p14,
-        vertical: AppPadding.p20,
-      ),
-      alignment: Alignment.center,
-      child: RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(
-          text: text1,
-          style: getRegularStyle(
-            color: ColorManager.kDarkGreyColor,
-            fontSize: ScreenUtil().setSp(AppSize.s12),
-          ),
-          children: <TextSpan>[
-            TextSpan(
-              text: text2,
-              style: TextStyle(
-                color: ColorManager.secondary,
-                fontFamily: FontConstants.fontFamily,
-                fontWeight: FontWeightManager.bold,
-                fontSize: ScreenUtil().setSp(AppSize.s12),
-              ),
-              recognizer: TapGestureRecognizer()..onTap = onTap,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
