@@ -70,12 +70,12 @@ class CustomRouteGenerator {
             return const SetupProfileScreen();
           },
         );
-      // case CustomRouteNames.kMedicalDetailsScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return const MedicalDetailsScreen();
-      //     },
-      //   );
+      case CustomRouteNames.kPersonalInformationScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const PersonalInformationScreen();
+          },
+        );
       // case CustomRouteNames.kProfilePictureSetupScreenRoute:
       //   return MaterialPageRoute(
       //     builder: (context) {

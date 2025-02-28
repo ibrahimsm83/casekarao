@@ -137,10 +137,10 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
             button(
               text: AppStrings.saveAndContinue,
               onTap: () {
-                // Navigator.pushNamed(
-                //   context,
-                //   CustomRouteNames.kSetupProfileScreenRoute,
-                // );
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kPersonalInformationScreenRoute,
+                );
               },
             ),
             SizedBox(height: AppSize.s8.h),

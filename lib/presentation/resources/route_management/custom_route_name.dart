@@ -7,5 +7,6 @@ class CustomRouteNames {
   static const String kCreateNewAccountScreenRoute = "/CreateNewAccountScreenRoute";
   static const String kOtpVerificationScreenRoute = "/kOtpVerificationScreenRoute";
   static const String kSetupProfileScreenRoute = "/kSetupProfileScreenRoute";
+  static const String kPersonalInformationScreenRoute = "/kPersonalInformationScreenRoute";
 
 }

@@ -14,6 +14,7 @@ class CustomTextFormField extends StatefulWidget {
   TextEditingController? controller;
   Widget? suffixIcon;
   FocusNode? focusNode;
+  TextAlign textAlign;
   void Function(String)? onChanged;
   void Function()? onTextFiledTap;
   String? Function(String?)? validator;
@@ -31,6 +32,7 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines = 1,
     this.suffixIcon,
     this.horizontalMergin = 0.05,
+    this.textAlign = TextAlign.start,
     this.controller,
     this.obscureText = false,
   }) : super(key: key);
@@ -55,6 +57,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         horizontal: AppSize.sizeWidth(context) * widget.horizontalMergin,
       ),
       child: TextFormField(
+        textAlign: widget.textAlign,
         readOnly: widget.readOnly,
         onTap: widget.onTextFiledTap,
         keyboardType: widget.keyboardType,
@@ -64,7 +67,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         controller: widget.controller,
         maxLines: widget.maxLines,
         onChanged: widget.onChanged,
-        style: getRegularStyle(color: ColorManager.primary),
+        style: getRegularStyle(color: ColorManager.primary,),
         decoration: InputDecoration(
           filled: true,
           errorMaxLines: 2,
