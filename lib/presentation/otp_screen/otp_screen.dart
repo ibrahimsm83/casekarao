@@ -7,7 +7,8 @@ import '../../export_casekarao.dart';
 
 class OtpScreen extends StatefulWidget {
   String? phoneNumber;
-   OtpScreen({super.key,this.phoneNumber});
+
+  OtpScreen({super.key, this.phoneNumber});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -47,7 +48,10 @@ class _OtpScreenState extends State<OtpScreen> {
         key: formKey,
         child: SingleChildScrollView(
           child: Padding(
-            padding:  EdgeInsets.symmetric(  horizontal: AppSize.sizeWidth(context!) * 0.05,vertical: 20),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSize.sizeWidth(context!) * 0.05,
+              vertical: 20,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -151,10 +155,10 @@ class _OtpScreenState extends State<OtpScreen> {
                             color: ColorManager.kWhiteColor,
                           ),
                         );
-                        //Navigator.pushNamed(
-                        //           context,
-                        //           CustomRouteNames.kCreateNewPasswordScreenRoute,
-                        //         );
+                        Navigator.pushNamed(
+                          context,
+                          CustomRouteNames.kSetupProfileScreenRoute,
+                        );
                       });
                     }
                   },
@@ -167,10 +171,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     CustomSnacksBar.showSnackBar(
                       context,
                       "OTP sent successfully",
-                      icon: Icon(
-                        Icons.check,
-                        color: ColorManager.kWhiteColor,
-                      ),
+                      icon: Icon(Icons.check, color: ColorManager.kWhiteColor),
                     );
                   },
                 ),

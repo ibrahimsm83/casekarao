@@ -64,12 +64,12 @@ class CustomRouteGenerator {
                 );
           },
         );
-      // case CustomRouteNames.kPersonalInformationScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return const PersonalInformationScreen();
-      //     },
-      //   );
+      case CustomRouteNames.kSetupProfileScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const SetupProfileScreen();
+          },
+        );
       // case CustomRouteNames.kMedicalDetailsScreenRoute:
       //   return MaterialPageRoute(
       //     builder: (context) {

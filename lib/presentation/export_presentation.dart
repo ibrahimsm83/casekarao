@@ -4,3 +4,4 @@ export 'lets_get_started_screen/lets_get_started_screen.dart';
 export 'login_screen/login_screen.dart';
 export 'create_new_account_screen/create_new_account_screen.dart';
 export 'otp_screen/otp_screen.dart';
+export 'setup_profile_screen/setup_profile_screen.dart';
