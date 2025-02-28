@@ -39,6 +39,7 @@ dependencies:
   get: ^4.7.2
   shimmer: ^3.0.0
   another_flushbar: ^1.12.30
+  pin_code_fields: ^8.0.1
 
 dev_dependencies:
   flutter_test:

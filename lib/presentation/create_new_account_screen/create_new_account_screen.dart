@@ -245,21 +245,39 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                 button(
                   text: AppStrings.register,
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      print(_phoneNumberController.text);
-                      print(_passwordController.text);
-                      print(_emailController.text);
-                      print(_fullNameController.text);
+                    //if (_formKey.currentState!.validate()) {
+                      // print(_phoneNumberController.text);
+                      // print(_passwordController.text);
+                      // print(_emailController.text);
+                      // print(_fullNameController.text);
+                      if (_phoneNumberController.text.isNotEmpty) {
+                        Navigator.pushNamed(
+                          context,
+                          CustomRouteNames.kOtpVerificationScreenRoute,
+                          arguments: OtpScreenArgumentModel.required(
+                              phoneNumber: _phoneNumberController.text,
+                             ),
+                        );
+                      } else {
+                        CustomSnacksBar.showSnackBar(
+                          context,
+                          "Please Enter Phone Number ",
+                          icon: Icon(
+                            Icons.error,
+                            color: ColorManager.kWhiteColor,
+                          ),
+                        );
+                         }
 
-                      CustomSnacksBar.showSnackBar(
-                        context,
-                        "Registered Successfully",
-                        icon: Icon(
-                          Icons.check,
-                          color: ColorManager.kWhiteColor,
-                        ),
-                      );
-                    }
+                      // CustomSnacksBar.showSnackBar(
+                      //   context,
+                      //   "Registered Successfully",
+                      //   icon: Icon(
+                      //     Icons.check,
+                      //     color: ColorManager.kWhiteColor,
+                      //   ),
+                      // );
+                   // }
                   },
                 ),
                 CustomTextSpan(

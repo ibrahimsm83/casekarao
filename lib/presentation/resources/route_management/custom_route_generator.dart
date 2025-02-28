@@ -52,20 +52,18 @@ class CustomRouteGenerator {
             return const CreateNewAccountScreen();
           },
         );
-      // case CustomRouteNames.kOtpVerificationScreenRoute:
-      //   OtpScreenArgumentModel argumentModel =
-      //       settings.arguments as OtpScreenArgumentModel;
-      //   // final String email = settings.arguments as String;
-      //   // final bool isForgotPw = settings.arguments as bool;
-      //
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return OtpCodeVerificationScreen(
-      //           email: argumentModel.email, //email,
-      //           isForgotPassword: argumentModel.isForgotPwPage //isForgotPw,
-      //           );
-      //     },
-      //   );
+      case CustomRouteNames.kOtpVerificationScreenRoute:
+        OtpScreenArgumentModel argumentModel =
+            settings.arguments as OtpScreenArgumentModel;
+        // final String email = settings.arguments as String;
+        // final bool isForgotPw = settings.arguments as bool;
+        return MaterialPageRoute(
+          builder: (context) {
+            return OtpScreen(
+                phoneNumber: argumentModel.phoneNumber, //email,
+                );
+          },
+        );
       // case CustomRouteNames.kPersonalInformationScreenRoute:
       //   return MaterialPageRoute(
       //     builder: (context) {
