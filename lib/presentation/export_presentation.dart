@@ -6,3 +6,4 @@ export 'create_new_account_screen/create_new_account_screen.dart';
 export 'otp_screen/otp_screen.dart';
 export 'setup_profile_screen/setup_profile_screen.dart';
 export 'personal_information_screen/personal_information_screen.dart';
+export 'legal_experience_screen/legal_experience_screen.dart';

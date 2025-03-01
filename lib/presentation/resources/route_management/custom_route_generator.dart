@@ -76,12 +76,12 @@ class CustomRouteGenerator {
             return const PersonalInformationScreen();
           },
         );
-      // case CustomRouteNames.kProfilePictureSetupScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return const ProfilePictureSetup();
-      //     },
-      //   );
+      case CustomRouteNames.kLegalExperienceScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const LegalExperienceScreen();
+          },
+        );
       // case CustomRouteNames.kFingerPrintSetupScreenRoute:
       //   return MaterialPageRoute(
       //     builder: (context) {

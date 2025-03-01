@@ -5,15 +5,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../export_casekarao.dart';
 
-class PersonalInformationScreen extends StatefulWidget {
-  const PersonalInformationScreen({super.key});
+class LegalExperienceScreen extends StatefulWidget {
+  const LegalExperienceScreen({super.key});
 
   @override
-  State<PersonalInformationScreen> createState() =>
-      _PersonalInformationScreenState();
+  State<LegalExperienceScreen> createState() =>
+      _LegalExperienceScreenState();
 }
 
-class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
+class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
   final _formKey = GlobalKey<FormState>();
   FocusNode node1 = FocusNode();
   FocusNode node2 = FocusNode();
@@ -22,29 +22,12 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   FocusNode node5 = FocusNode();
   FocusNode node6 = FocusNode();
 
-  final _phoneNumberController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _fullNameController = TextEditingController();
-  final _dateController = TextEditingController();
-  final _monthController = TextEditingController();
-  final _yearController = TextEditingController();
+  final _barLicenseNumberController = TextEditingController();
+  final _yearsOfExpController = TextEditingController();
+  final _organizationController = TextEditingController();
 
-  @override
-  void initState() {
-    node1.addListener(() {
-      if (!node1.hasFocus) {
-        formatPhoneNumber();
-      }
-    });
-    super.initState();
-  }
 
-  void formatPhoneNumber() {
-    _phoneNumberController.text = _phoneNumberController.text.replaceAll(
-      " ",
-      "",
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,66 +77,13 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   ),
                 ),
                 SizedBox(height: AppSize.s8.h),
-                Align(
-                  alignment: Alignment.center,
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage(
-                      ImageAssets.userImage,
-                    ), // Local image
-                  ),
-                ),
-                SizedBox(height: AppSize.s8.h),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "David Wastson",
-                    style: getsemiboldStyle(
-                      color: ColorManager.primary,
-                      fontSize: ScreenUtil().setSp(AppSize.s16),
-                    ),
-                  ),
-                ),
-                SizedBox(height: AppSize.s8.h),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: ColorManager.kLightBlueColor.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
-                            child: SvgPicture.asset(ImageAssets.cameraIcon),
-                          ),
-                          Text(
-                            AppStrings.uploadImage,
-                            style: getRegularStyle(
-                              color: ColorManager.secondary,
-                              fontSize: ScreenUtil().setSp(AppSize.s16),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: AppSize.s8.h),
                 Padding(
                   padding: EdgeInsets.only(
                     top: AppSize.s20.h,
                     bottom: AppSize.s6.h,
                   ),
                   child: Text(
-                    AppStrings.fullName,
+                    AppStrings.barLicenseNumberWithIssuingAuthority,
                     style: getmediumStyle(
                       color: ColorManager.kDarkGreyColor,
                       fontSize: ScreenUtil().setSp(AppSize.s12),
@@ -161,14 +91,14 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   ),
                 ),
                 CustomTextFormField(
-                  hintText: AppStrings.fullNameHintText,
-                  controller: _fullNameController,
+                  hintText: AppStrings.phoneNumberHintText,
+                  controller: _barLicenseNumberController,
                   fillColor: ColorManager.kWhiteColor,
                   focusNode: node1,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
-                      return "Enter full name";
+                      return "Enter License Number";
                     }
                     return null;
                   },
@@ -179,7 +109,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                     bottom: AppSize.s6.h,
                   ),
                   child: Text(
-                    AppStrings.emailAddress,
+                    AppStrings.yearsOfExperience,
                     style: getmediumStyle(
                       color: ColorManager.kDarkGreyColor,
                       fontSize: ScreenUtil().setSp(AppSize.s12),
@@ -187,19 +117,17 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   ),
                 ),
                 CustomTextFormField(
-                  hintText: AppStrings.emailHintText,
-                  controller: _emailController,
+                  hintText: AppStrings.ex5Years,
+                  controller: _yearsOfExpController,
                   fillColor: ColorManager.kWhiteColor,
                   focusNode: node2,
                   horizontalMergin: 0.0,
-                  validator: (String? val) {
-                    if (val == null || val.isEmpty) {
-                      return AppStrings.enterEmailAddress;
-                    } else if (val.isValidEmail) {
+                    validator: (String? val) {
+                      if (val == null || val.isEmpty) {
+                        return "Enter Years of Experience";
+                      }
                       return null;
-                    }
-                    return 'Invalid Email';
-                  },
+                    },
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -207,7 +135,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                     bottom: AppSize.s6.h,
                   ),
                   child: Text(
-                    AppStrings.phoneNumber,
+                    AppStrings.lawFirmOrganizationNameIfApplicable,
                     style: getmediumStyle(
                       color: ColorManager.kDarkGreyColor,
                       fontSize: ScreenUtil().setSp(AppSize.s12),
@@ -216,14 +144,14 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 ),
 
                 CustomTextFormField(
-                  hintText: AppStrings.phoneHintText,
-                  controller: _phoneNumberController,
+                  hintText: AppStrings.exCityLawSchoolAndCourt,
+                  controller: _organizationController,
                   fillColor: ColorManager.kWhiteColor,
                   focusNode: node3,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
-                      return "Enter phone number";
+                      return "Enter Organization number";
                     }
                     return null;
                   },
@@ -235,76 +163,32 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                     bottom: AppSize.s6.h,
                   ),
                   child: Text(
-                    AppStrings.dateOfBirth,
+                    AppStrings.practiceAreas,
                     style: getmediumStyle(
                       color: ColorManager.kDarkGreyColor,
                       fontSize: ScreenUtil().setSp(AppSize.s12),
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                      child: CustomTextFormField(
-                        hintText: AppStrings.dD,
-                        textAlign: TextAlign.center,
-                        controller: _dateController,
-                        fillColor: ColorManager.kWhiteColor,
-                        focusNode: node4,
-                        horizontalMergin: 0.0,
-                        validator: (String? val) {
-                          if (val == null || val.isEmpty) {
-                            return "Enter phone number";
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    Flexible(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.0),
-                        child: CustomTextFormField(
-                          hintText: AppStrings.mM,
-                          textAlign: TextAlign.center,
-                          controller: _monthController,
-                          fillColor: ColorManager.kWhiteColor,
-                          focusNode: node5,
-                          horizontalMergin: 0.0,
-                          validator: (String? val) {
-                            if (val == null || val.isEmpty) {
-                              return "Enter phone number";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      child: CustomTextFormField(
-                        hintText: AppStrings.yYYY,
-                        textAlign: TextAlign.center,
-                        controller: _yearController,
-                        fillColor: ColorManager.kWhiteColor,
-                        focusNode: node6,
-                        horizontalMergin: 0.0,
-                        validator: (String? val) {
-                          if (val == null || val.isEmpty) {
-                            return "Enter phone number";
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ],
+
+                CustomTextFormField(
+                  hintText: AppStrings.enterTagsHere,
+                  controller: _organizationController,
+                  fillColor: ColorManager.kWhiteColor,
+                  focusNode: node3,
+                  horizontalMergin: 0.0,
+                  validator: (String? val) {
+                    if (val == null || val.isEmpty) {
+                      return "Enter Organization number";
+                    }
+                    return null;
+                  },
                 ),
+
                 SizedBox(height: AppSize.s10.h),
                 button(
                   text: AppStrings.submit,
                   onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kLegalExperienceScreenRoute,
-                    );
                   },
                 ),
 
