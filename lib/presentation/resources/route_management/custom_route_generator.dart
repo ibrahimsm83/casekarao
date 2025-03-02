@@ -88,12 +88,12 @@ class CustomRouteGenerator {
             return const EducationAndCertificationScreen();
           },
         );
-      // case CustomRouteNames.kFaceIdSetupScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return FaceIdSetupScreen();
-      //     },
-      //   );
+      case CustomRouteNames.kBusinessAndAvailabilityScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return BusinessAndAvailabilityScreen();
+          },
+        );
       //
       // case CustomRouteNames.kForgotPasswordScreenRoute:
       //   return MaterialPageRoute(

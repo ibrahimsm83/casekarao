@@ -8,3 +8,4 @@ export 'setup_profile_screen/setup_profile_screen.dart';
 export 'personal_information_screen/personal_information_screen.dart';
 export 'legal_experience_screen/legal_experience_screen.dart';
 export 'education_and_certifications_screen/education_and_certification_screen.dart';
+export 'business_availability_screen/business_and_availability_screen.dart';
