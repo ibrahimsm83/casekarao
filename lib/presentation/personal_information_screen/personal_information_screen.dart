@@ -254,7 +254,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                         horizontalMergin: 0.0,
                         validator: (String? val) {
                           if (val == null || val.isEmpty) {
-                            return "Enter phone number";
+                            return "Enter date";
                           }
                           return null;
                         },
@@ -272,7 +272,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                           horizontalMergin: 0.0,
                           validator: (String? val) {
                             if (val == null || val.isEmpty) {
-                              return "Enter phone number";
+                              return "Enter month";
                             }
                             return null;
                           },
@@ -289,7 +289,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                         horizontalMergin: 0.0,
                         validator: (String? val) {
                           if (val == null || val.isEmpty) {
-                            return "Enter phone number";
+                            return "Enter year";
                           }
                           return null;
                         },
@@ -301,10 +301,12 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 button(
                   text: AppStrings.submit,
                   onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kLegalExperienceScreenRoute,
-                    );
+                    if (!_formKey.currentState!.validate()) {
+                      Navigator.pushNamed(
+                        context,
+                        CustomRouteNames.kLegalExperienceScreenRoute,
+                      );
+                    }
                   },
                 ),
 

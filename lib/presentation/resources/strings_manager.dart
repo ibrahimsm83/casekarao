@@ -68,13 +68,16 @@ class AppStrings {
   static const String criminalLaw= "Criminal Law";
   static const String practiceAreas= "Practice Areas";
   static const String enterTagsHere= "Enter tags here";
-  static const String yearsOfExperience= "Years of Experience";
+  static const String yearsOfExperience= "Years of Experience\t";
   static const String eCityLawSchoolAndCourt= "Ex: City Law School and Court";
   static const String exCityLawSchoolAndCourt= "Ex: City Law School and Court";
   static const String selectJurisdiction= "Select Jurisdiction/State of Practice";
-  static const String jurisdictionStateOfPractice= "Jurisdiction/State of Practice";
+  static const String selectJurisdiction1= "Select Jurisdiction/State of Practice1";
+  static const String selectJurisdiction2= "Select Jurisdiction/State of Practice2";
+  static const String jurisdictionStateOfPractice= "Jurisdiction/State of Practice\t";
+  static const String jurisdictionStateOfPractice1= "Jurisdiction/State of Practice1";
   static const String lawFirmOrganizationNameIfApplicable= "Law Firm/Organization Name (if applicable)";
-  static const String barLicenseNumberWithIssuingAuthority= "Bar License Number (with issuing authority)";
+  static const String barLicenseNumberWithIssuingAuthority= "Bar License Number (with issuing authority)\t";
 
   ///Education & Certifications
   static const String exLaw= "Ex : Law";

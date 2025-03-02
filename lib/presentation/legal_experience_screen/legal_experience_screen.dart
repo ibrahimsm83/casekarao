@@ -9,8 +9,7 @@ class LegalExperienceScreen extends StatefulWidget {
   const LegalExperienceScreen({super.key});
 
   @override
-  State<LegalExperienceScreen> createState() =>
-      _LegalExperienceScreenState();
+  State<LegalExperienceScreen> createState() => _LegalExperienceScreenState();
 }
 
 class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
@@ -19,16 +18,11 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
   FocusNode node2 = FocusNode();
   FocusNode node3 = FocusNode();
   FocusNode node4 = FocusNode();
-  FocusNode node5 = FocusNode();
-  FocusNode node6 = FocusNode();
 
   final _barLicenseNumberController = TextEditingController();
   final _yearsOfExpController = TextEditingController();
   final _organizationController = TextEditingController();
-
-
-
-
+  String? selectedType;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +55,7 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
                 ),
                 SizedBox(height: AppSize.sizeHeight(context) * 0.01),
                 Text(
-                  AppStrings.personalInformation,
+                  AppStrings.legalExperience,
                   style: getsemiboldStyle(
                     color: ColorManager.primary,
                     fontSize: ScreenUtil().setSp(AppSize.s24),
@@ -77,19 +71,7 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
                   ),
                 ),
                 SizedBox(height: AppSize.s8.h),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: AppSize.s20.h,
-                    bottom: AppSize.s6.h,
-                  ),
-                  child: Text(
-                    AppStrings.barLicenseNumberWithIssuingAuthority,
-                    style: getmediumStyle(
-                      color: ColorManager.kDarkGreyColor,
-                      fontSize: ScreenUtil().setSp(AppSize.s12),
-                    ),
-                  ),
-                ),
+                heading(AppStrings.barLicenseNumberWithIssuingAuthority,AppStrings.required),
                 CustomTextFormField(
                   hintText: AppStrings.phoneNumberHintText,
                   controller: _barLicenseNumberController,
@@ -103,31 +85,21 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
                     return null;
                   },
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: AppSize.s10.h,
-                    bottom: AppSize.s6.h,
-                  ),
-                  child: Text(
-                    AppStrings.yearsOfExperience,
-                    style: getmediumStyle(
-                      color: ColorManager.kDarkGreyColor,
-                      fontSize: ScreenUtil().setSp(AppSize.s12),
-                    ),
-                  ),
-                ),
+                heading(AppStrings.jurisdictionStateOfPractice,AppStrings.required),
+                jurisdiction(),
+                heading(AppStrings.yearsOfExperience,AppStrings.optional),
                 CustomTextFormField(
                   hintText: AppStrings.ex5Years,
                   controller: _yearsOfExpController,
                   fillColor: ColorManager.kWhiteColor,
                   focusNode: node2,
                   horizontalMergin: 0.0,
-                    validator: (String? val) {
-                      if (val == null || val.isEmpty) {
-                        return "Enter Years of Experience";
-                      }
-                      return null;
-                    },
+                  validator: (String? val) {
+                    if (val == null || val.isEmpty) {
+                      return "Enter Years of Experience";
+                    }
+                    return null;
+                  },
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -175,7 +147,7 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
                   hintText: AppStrings.enterTagsHere,
                   controller: _organizationController,
                   fillColor: ColorManager.kWhiteColor,
-                  focusNode: node3,
+                  focusNode: node4,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
@@ -185,12 +157,16 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
                   },
                 ),
 
-                SizedBox(height: AppSize.s10.h),
-                button(
-                  text: AppStrings.submit,
-                  onTap: () {
-                  },
-                ),
+                SizedBox(height: AppSize.s20.h),
+                button(text: AppStrings.submit, onTap: () {
+
+                  if (_formKey.currentState!.validate()) {
+                    // Navigator.pushNamed(
+                    //   context,
+                    //   CustomRouteNames.kLegalExperienceScreenRoute,
+                    // );
+                  }
+                }),
 
                 SizedBox(height: 5.h),
               ],
@@ -222,39 +198,68 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
       onTap: onTap,
     );
   }
-
-  Widget textSpan({
-    String? text1,
-    String? text2,
-    BuildContext? context,
-    Function()? onTap,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppPadding.p14,
-        vertical: AppPadding.p10,
-      ),
-      alignment: Alignment.center,
-      child: RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(
-          text: text1,
-          style: getRegularStyle(
-            color: ColorManager.kDarkGreyColor,
-            fontSize: ScreenUtil().setSp(AppSize.s12),
-          ),
-          children: <TextSpan>[
-            TextSpan(
-              text: text2,
-              style: TextStyle(
-                color: ColorManager.primary,
-                fontFamily: FontConstants.fontFamily,
-                fontWeight: FontWeightManager.bold,
+Widget heading(String text1,String text2){
+    return
+      Padding(
+        padding: EdgeInsets.only(
+          top: AppSize.s20.h,
+          bottom: AppSize.s6.h,
+        ),
+        child: Row(
+          children: [
+            Text(
+              text1,
+              style: getmediumStyle(
+                color: ColorManager.kDarkGreyColor,
                 fontSize: ScreenUtil().setSp(AppSize.s12),
               ),
-              recognizer: TapGestureRecognizer()..onTap = onTap,
+            ),
+            Text(
+             text2,
+              style: getmediumStyle(
+                color: ColorManager.secondary,
+                fontSize: ScreenUtil().setSp(AppSize.s12),
+              ),
             ),
           ],
+        ),
+      );
+  }
+  Widget jurisdiction() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0.0),
+      child: SizedBox(
+        height: 45,
+        child: DropdownButtonFormField<String>(
+          value: selectedType,
+          style: getRegularStyle(color: ColorManager.primary),
+          dropdownColor: ColorManager.kWhiteColor,
+          icon: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: SvgPicture.asset(ImageAssets.arrowDownIcon),
+          ),
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 10.0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(
+                color: ColorManager.secondary,
+              ),
+            ),
+            labelText: AppStrings.selectJurisdiction,
+            labelStyle: getRegularStyle(color: ColorManager.kHintTextColor),
+          ),
+          onChanged: (String? newValue) {
+            setState(() {
+              selectedType = newValue;
+            });
+          },
+          items: [AppStrings.jurisdictionStateOfPractice1, AppStrings.selectJurisdiction1, AppStrings.selectJurisdiction2,].map((String lang) {
+            return DropdownMenuItem<String>(
+              value: lang,
+              child: Text(lang),
+            );
+          }).toList(),
         ),
       ),
     );
