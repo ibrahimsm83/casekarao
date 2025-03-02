@@ -179,11 +179,11 @@ class _BusinessAndAvailabilityScreenState
                 child: button(
                   text: AppStrings.submit,
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   CustomRouteNames.kLegalExperienceScreenRoute,
-                      // );
+                    if (!_formKey.currentState!.validate()) {
+                      Navigator.pushNamed(
+                        context,
+                        CustomRouteNames.kOptionalDetailsScreenRoute,
+                      );
                     }
                   },
                 ),
