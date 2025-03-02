@@ -144,7 +144,7 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
             SizedBox(height: AppSize.s8.h),
             Text(
               AppStrings
-                  .alignYourGovernmentIssuedCNICWithinTheMarkersForAutomaticScanning,
+                  .alignYourCertificateWithinTheMarkersForAutomaticScanning,
               textAlign: TextAlign.center,
               style: getmediumStyle(
                 color: ColorManager.kDarkGreyColor,
