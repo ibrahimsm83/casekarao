@@ -113,6 +113,12 @@ class CustomRouteGenerator {
             return BarIdCardUploadScreen();
           },
         );
+        case CustomRouteNames.kIdentityVerificationScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return IdentityVerificationScreen();
+          },
+        );
 
 
 

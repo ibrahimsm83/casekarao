@@ -12,3 +12,4 @@ export 'business_availability_screen/business_and_availability_screen.dart';
 export 'optinal_details_screen/optional_details_screen.dart';
 export 'cnic_upload_screen/cnic_upload_screen.dart';
 export 'bar_id_card_upload_screen/bar_id_card_upload_screen.dart';
+export 'identity_verification_screen/identity_verification_screen.dart';

@@ -57,18 +57,26 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
               ),
             ),
             SizedBox(height: AppSize.sizeHeight(context) * 0.05),
-            Container(
-              width: AppSize.sizeWidth(context),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(13.r),
-                color: ColorManager.secondary,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Center(
-                  child: Text(
-                    isFrontSide? AppStrings.scanFrontSideOfYourID:AppStrings.scanBackSideOfYourID,
-                    style: getmediumStyle(color: ColorManager.kWhiteColor),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kIdentityVerificationScreenRoute,
+                );
+              },
+              child: Container(
+                width: AppSize.sizeWidth(context),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13.r),
+                  color: ColorManager.secondary,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Center(
+                    child: Text(
+                      isFrontSide? AppStrings.scanFrontSideOfYourID:AppStrings.scanBackSideOfYourID,
+                      style: getmediumStyle(color: ColorManager.kWhiteColor),
+                    ),
                   ),
                 ),
               ),
