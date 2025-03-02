@@ -11,6 +11,7 @@ class CNICUploadScreen extends StatefulWidget {
 }
 
 class _CNICUploadScreenState extends State<CNICUploadScreen> {
+  bool isFrontSide=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,12 +65,92 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Center(child: Text(AppStrings.scanFrontSideOfYourCNIC,style: getmediumStyle(color: ColorManager.kWhiteColor),)),
+                child: Center(
+                  child: Text(
+                    isFrontSide? AppStrings.scanFrontSideOfYourCNIC:AppStrings.scanBackSideOfYourCNIC,
+                    style: getmediumStyle(color: ColorManager.kWhiteColor),
+                  ),
+                ),
               ),
             ),
 
-            SizedBox(height: AppSize.sizeHeight(context) * 0.2),
+            SizedBox(height: AppSize.sizeHeight(context) * 0.05),
 
+            Stack(
+              children: [
+
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: AppSize.sizeWidth(context),
+                      height: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(13.r),
+                        color: ColorManager.kWhiteColor,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(ImageAssets.scanIcon),
+                          Text(
+                            AppStrings.holdStill,
+                            style: getmediumStyle(color: ColorManager.primary),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      if(isFrontSide){
+                        isFrontSide=false;
+                      }else{
+                        isFrontSide=true;
+                      }
+                    });
+                  },
+                  child: Container(
+                    width: AppSize.sizeWidth(context),
+                    height: 215,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13.r),
+                      color: Colors.transparent,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SvgPicture.asset(ImageAssets.leftTopCornerIcon),
+                            SvgPicture.asset(ImageAssets.rightTopCornerIcon),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SvgPicture.asset(ImageAssets.leftBottomCornerIcon),
+                            SvgPicture.asset(ImageAssets.rightBottomCornerIcon),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: AppSize.s8.h),
+            Text(
+              AppStrings
+                  .alignYourGovernmentIssuedCNICWithinTheMarkersForAutomaticScanning,
+              textAlign: TextAlign.center,
+              style: getmediumStyle(
+                color: ColorManager.kDarkGreyColor,
+                fontSize: ScreenUtil().setSp(AppSize.s12),
+              ),
+            ),
             SizedBox(height: 5.h),
           ],
         ),
