@@ -82,12 +82,12 @@ class CustomRouteGenerator {
             return const LegalExperienceScreen();
           },
         );
-      // case CustomRouteNames.kFingerPrintSetupScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return const FingerPrintSetupScreen();
-      //     },
-      //   );
+      case CustomRouteNames.kEducationAndCertificationScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const EducationAndCertificationScreen();
+          },
+        );
       // case CustomRouteNames.kFaceIdSetupScreenRoute:
       //   return MaterialPageRoute(
       //     builder: (context) {

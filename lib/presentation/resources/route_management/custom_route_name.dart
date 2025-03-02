@@ -9,5 +9,6 @@ class CustomRouteNames {
   static const String kSetupProfileScreenRoute = "/kSetupProfileScreenRoute";
   static const String kPersonalInformationScreenRoute = "/kPersonalInformationScreenRoute";
   static const String kLegalExperienceScreenRoute = "/kLegalExperienceScreenRoute";
+  static const String kEducationAndCertificationScreenRoute = "/kEducationAndCertificationScreenRoute";
 
 }
