@@ -12,5 +12,6 @@ class CustomRouteNames {
   static const String kEducationAndCertificationScreenRoute = "/kEducationAndCertificationScreenRoute";
   static const String kBusinessAndAvailabilityScreenRoute = "/kBusinessAndAvailabilityScreenRoute";
   static const String kOptionalDetailsScreenRoute = "/kOptionalDetailsScreenRoute";
+  static const String kCNICUploadScreenRoute = "/kCNICUploadScreenRoute";
 
 }

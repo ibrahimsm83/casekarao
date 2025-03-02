@@ -99,10 +99,10 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                   text: AppStrings.submit,
                   onTap: () {
                     if (!_formKey.currentState!.validate()) {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   CustomRouteNames.kEducationAndCertificationScreenRoute,
-                      // );
+                      Navigator.pushNamed(
+                        context,
+                        CustomRouteNames.kCNICUploadScreenRoute,
+                      );
                     }
                   },
                 ),

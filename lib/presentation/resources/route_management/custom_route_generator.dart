@@ -101,12 +101,12 @@ class CustomRouteGenerator {
             return OptionalDetailsScreen();
           },
         );
-      // case CustomRouteNames.kCreateNewPasswordScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return CreateNewPasswordScreen();
-      //     },
-      //   );
+      case CustomRouteNames.kCNICUploadScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return CNICUploadScreen();
+          },
+        );
       //
       // case CustomRouteNames.kDashboardScreenRoute:
       //   return MaterialPageRoute(
