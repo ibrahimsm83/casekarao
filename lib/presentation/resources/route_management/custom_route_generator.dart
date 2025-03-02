@@ -107,14 +107,13 @@ class CustomRouteGenerator {
             return CNICUploadScreen();
           },
         );
-      //
-      // case CustomRouteNames.kDashboardScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return DashboardScreen();
-      //     },
-      //   );
-      //
+      case CustomRouteNames.kBarIdCardUploadScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return BarIdCardUploadScreen();
+          },
+        );
+
 
 
       default:

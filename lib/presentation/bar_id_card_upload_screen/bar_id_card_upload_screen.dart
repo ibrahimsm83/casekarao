@@ -3,16 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../export_casekarao.dart';
 
-class CNICUploadScreen extends StatefulWidget {
-  const CNICUploadScreen({super.key});
+class BarIdCardUploadScreen extends StatefulWidget {
+  const BarIdCardUploadScreen({super.key});
 
   @override
-  State<CNICUploadScreen> createState() => _CNICUploadScreenState();
+  State<BarIdCardUploadScreen> createState() => _BarIdCardUploadScreenState();
 }
 
-class _CNICUploadScreenState extends State<CNICUploadScreen> {
-  bool isFrontSide = true;
-
+class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
+  bool isFrontSide=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +41,7 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
             ),
             SizedBox(height: AppSize.sizeHeight(context) * 0.01),
             Text(
-              AppStrings.govtIssuedCNICUpload,
+              AppStrings.barIDCardUpload,
               style: getsemiboldStyle(
                 color: ColorManager.primary,
                 fontSize: ScreenUtil().setSp(AppSize.s24),
@@ -58,41 +57,33 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
               ),
             ),
             SizedBox(height: AppSize.sizeHeight(context) * 0.05),
-            InkWell(
-              onTap: (){
-                Navigator.pushNamed(
-                  context,
-                  CustomRouteNames.kBarIdCardUploadScreenRoute,
-                );
-              },
-              child: Container(
-                width: AppSize.sizeWidth(context),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(13.r),
-                  color: ColorManager.secondary,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Center(
-                    child: Text(
-                      isFrontSide
-                          ? AppStrings.scanFrontSideOfYourCNIC
-                          : AppStrings.scanBackSideOfYourCNIC,
-                      style: getmediumStyle(color: ColorManager.kWhiteColor),
-                    ),
+            Container(
+              width: AppSize.sizeWidth(context),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(13.r),
+                color: ColorManager.secondary,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Center(
+                  child: Text(
+                    isFrontSide? AppStrings.scanFrontSideOfYourID:AppStrings.scanBackSideOfYourID,
+                    style: getmediumStyle(color: ColorManager.kWhiteColor),
                   ),
                 ),
               ),
             ),
 
             SizedBox(height: AppSize.sizeHeight(context) * 0.05),
+
             Stack(
               children: [
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     width: AppSize.sizeWidth(context),
-                    height: 200,
+                    height: 290,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(13.r),
                       color: ColorManager.kWhiteColor,
@@ -111,18 +102,18 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
                 ),
 
                 InkWell(
-                  onTap: () {
+                  onTap: (){
                     setState(() {
-                      if (isFrontSide) {
-                        isFrontSide = false;
-                      } else {
-                        isFrontSide = true;
+                      if(isFrontSide){
+                        isFrontSide=false;
+                      }else{
+                        isFrontSide=true;
                       }
                     });
                   },
                   child: Container(
                     width: AppSize.sizeWidth(context),
-                    height: 215,
+                    height: 310,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(13.r),
                       color: Colors.transparent,
