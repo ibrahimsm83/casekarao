@@ -56,7 +56,10 @@ class IdentityVerificationScreen extends StatelessWidget {
             SizedBox(height: AppSize.s30.h),
             InkWell(
               onTap: (){
-                //Naviagte
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kApplicationUnderReviewScreenRoute,
+                );
               },
               child: Align(
                 alignment: Alignment.center,

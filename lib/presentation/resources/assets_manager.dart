@@ -22,6 +22,8 @@ class ImageAssets {
   static const String backArrowIcon = "$ICON_PATH/backArrow.svg";
   static const String arrowDownIcon = "$ICON_PATH/arrowDown.svg";
   static const String clipboardIcon = "$ICON_PATH/clipboard.svg";
+  static const String ifApprovedIcon = "$ICON_PATH/If_Approved.svg";
+  static const String ifRejectedIcon = "$ICON_PATH/If_Rejected.svg";
   static const String leftTopCornerIcon = "$ICON_PATH/leftTopCorner.svg";
   static const String rightTopCornerIcon = "$ICON_PATH/rightTopCorner.svg";
   static const String leftBottomCornerIcon = "$ICON_PATH/leftBottomCorner.svg";
