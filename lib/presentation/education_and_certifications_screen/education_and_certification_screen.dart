@@ -179,19 +179,6 @@ class _EducationAndCertificationScreenState extends State<EducationAndCertificat
                     return null;
                   },
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: AppSize.s10.h,
-                    bottom: AppSize.s6.h,
-                  ),
-                  child: Text(
-                    AppStrings.additionalCertificationsIfAny,
-                    style: getmediumStyle(
-                      color: ColorManager.kDarkGreyColor,
-                      fontSize: ScreenUtil().setSp(AppSize.s12),
-                    ),
-                  ),
-                ),
                 SizedBox(height: AppSize.s20.h),
 
                 button(text: AppStrings.submit, onTap: () {

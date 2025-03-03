@@ -1,5 +1,4 @@
 import 'package:casekarao/presentation/resources/export_resources.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../export_casekarao.dart';
@@ -24,13 +23,10 @@ class LetsGetStartedView extends StatelessWidget {
                 height: 290.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(22.0.r)),
-                  image: const DecorationImage(
-                    colorFilter: ColorFilter.mode(
-                      Colors.black12,
-                      BlendMode.darken,
-                    ),
+                  image:  DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(ImageAssets.getStartedImage),
+                    image: AssetImage(ImageAssets.letStartedImage,
+                    ),
                   ),
                 ),
               ),
