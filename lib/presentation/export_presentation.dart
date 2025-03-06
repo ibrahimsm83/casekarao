@@ -1,0 +1,16 @@
+export 'resources/export_resources.dart';
+export 'splash_screen/splash_screen.dart';
+export 'lets_get_started_screen/lets_get_started_screen.dart';
+export 'login_screen/login_screen.dart';
+export 'create_new_account_screen/create_new_account_screen.dart';
+export 'otp_screen/otp_screen.dart';
+export 'setup_profile_screen/setup_profile_screen.dart';
+export 'personal_information_screen/personal_information_screen.dart';
+export 'legal_experience_screen/legal_experience_screen.dart';
+export 'education_and_certifications_screen/education_and_certification_screen.dart';
+export 'business_availability_screen/business_and_availability_screen.dart';
+export 'optinal_details_screen/optional_details_screen.dart';
+export 'cnic_upload_screen/cnic_upload_screen.dart';
+export 'bar_id_card_upload_screen/bar_id_card_upload_screen.dart';
+export 'identity_verification_screen/identity_verification_screen.dart';
+export 'application_under_review_screen/application_under_review _screen.dart';
