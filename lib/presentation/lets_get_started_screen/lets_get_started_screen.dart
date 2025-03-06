@@ -32,6 +32,7 @@ class LetsGetStartedView extends StatelessWidget {
               ),
             ),
             SizedBox(height: AppSize.sizeHeight(context) * 0.03),
+
             Text(
               AppStrings.letsGetStarted,
               style: getboldStyle(
