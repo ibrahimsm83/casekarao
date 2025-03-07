@@ -155,6 +155,56 @@ class AppStrings {
   static const String ourTeamIsCurrentlyReviewingYourInformationToEnsureComplianceWithOurStandards= "Our team is currently reviewing your information to ensure compliance with our standards.";
   static const String youReceiveANotificationOnceYourProfileIsApprovedOrIfAnyUpdatesAreNeeded= "You’ll receive a notification once your profile is approved or if any updates are needed.";
 
+  ///Home
+
+  static const String kPaid= "Paid";
+  static const String kHome= "Home";
+  static const String kDays= "Days";
+  static const String kWelcome= "Welcome";
+  static const String kPending= "Pending";
+  static const String kViewAll= "View all";
+  static const String kMessage= "Message";
+  static const String kOnGoing= "On Going";
+  static const String kCanceled= "Canceled";
+  static const String kSettings= "Settings";
+  static const String kEarnings= "Earnings";
+  static const String kCompleted= "Completed";
+  static const String kMurderCase= "Murder Case";
+  static const String kViewDetails= "View details";
+  static const String kAppointments= "Appointments";
+  static const String k1stMilestone= "1st Milestone";
+  static const String kOnGoingCases= "On Going Cases";
+  static const String kJaylonHerwitz= "Jaylon Herwitz";
+  static const String kHitAndRunCase= "Hit and Run Case";
+  static const String kPaymentStatus = "Payment Status:\t";
+  static const String kMilestoneExpiry = "Milestone Expiry:\t";
+  static const String kNewConsultationRequests= "New Consultation Requests";
+  static const String kConsultationRequestsDetails= "Consultation Requests Details";
+  static const String kLoremIpsumIsSimplyDummy= "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+  static const String kLoremIpsum= "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+
+
+   ///Consultation Requests Details
+
+  static const String kDate= "Date";
+  static const String kReject= "Reject";
+  static const String kAccept= "Accept";
+  static const String kTimingSlot= "Timing Slot";
+  static const String kCasefiledBy= "Case filed by";
+  static const String kAttachedDocuments= "Attached Documents";
+
+  ///Create Milestones
+  static const String kPKR= "PKR";
+  static const String kAmount= "Amount";
+  static const String kDuration= "Duration";
+  static const String k2ndMilestone= "2nd Milestone";
+  static const String kAddaMilestone= "Add a Milestone";
+  static const String kCreateMilestones= "Create Milestones";
+  static const String kNameTheMilestone= "Name the Milestone";
+  static const String kEnterDetailDescription= "Enter Detail Description";
+  static const String kUseMilestoneIsDeliver = "Use Milestone is deliver step by step for more complex cases.";
+  static const String kPaymentForDeliveredMilestones= "Payment for delivered milestones will be available after the entire case is marked as completed or in case the client decides not to continue to the next milestone.";
+
 
 
   ///Validator
