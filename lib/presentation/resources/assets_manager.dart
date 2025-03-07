@@ -30,5 +30,15 @@ class ImageAssets {
   static const String leftBottomCornerIcon = "$ICON_PATH/leftBottomCorner.svg";
   static const String rightBottomCornerIcon = "$ICON_PATH/rightBottomCorner.svg";
 
+  ///Home
+  static const String kHomeIcon = "$ICON_PATH/home.svg";
+  static const String kEarningIcon = "$ICON_PATH/earning.svg";
+  static const String kMessageIcon = "$ICON_PATH/message.svg";
+  static const String kSettingsIcon = "$ICON_PATH/Settings.svg";
+  static const String kCalendarIcon = "$ICON_PATH/calendar.svg";
+  static const String kRightArrowIcon = "$ICON_PATH/rightArrow.svg";
+  static const String kAppointmentIcon = "$ICON_PATH/appointment.svg";
+  static const String kNotificationIcon = "$ICON_PATH/Notification.svg";
+
 
 }

@@ -118,10 +118,16 @@ class CustomRouteGenerator {
           builder: (context) {
             return IdentityVerificationScreen();
           },
-        ); case CustomRouteNames.kApplicationUnderReviewScreenRoute:
+        );
+        case CustomRouteNames.kApplicationUnderReviewScreenRoute:
         return MaterialPageRoute(
           builder: (context) {
             return ApplicationUnderReviewScreen();
+          },
+        );  case CustomRouteNames.kDashboardScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return DashboardScreen();
           },
         );
 
