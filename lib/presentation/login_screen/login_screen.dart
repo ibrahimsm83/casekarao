@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 button(
                   text: AppStrings.login,
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (!_formKey.currentState!.validate()) {
                       print(_phoneNumberController.text);
                       print(_passwordController.text);
                       //context.go('/Homepage');
@@ -168,6 +168,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           Icons.check,
                           color: ColorManager.kWhiteColor,
                         ),
+                      );
+                      Navigator.pushNamed(
+                        context,
+                        CustomRouteNames.kDashboardScreenRoute,
                       );
                     }
                   },
@@ -239,5 +243,4 @@ class _LoginScreenState extends State<LoginScreen> {
       onTap: onTap,
     );
   }
-
 }
