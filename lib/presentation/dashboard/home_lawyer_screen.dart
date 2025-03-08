@@ -1,5 +1,4 @@
 import 'package:casekarao/export_casekarao.dart';
-import 'package:casekarao/presentation/case_list_screen/case_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,78 +11,109 @@ class HomeLawyerScreen extends StatefulWidget {
 }
 
 class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
-  final List<String> statuses = ["Pending", "Ongoing", "Canceled", "Completed"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.kBackgroundColor,
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppSize.sizeWidth(context!) * 0.03,
-        ),
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            welcome(),
-            _buildStatusRow(
-              firstStatus: StatusItem(
-                title: AppStrings.kPending,
-                subtitle: AppStrings.kViewDetails,
-                count: "05",
-                countBgColor: ColorManager.kLightYellowColor,
-                countTextColor: ColorManager.kDarkYellowColor,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kPendingScreenRoute,
-                  );
-                },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSize.sizeWidth(context!) * 0.03,
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              welcome(),
+              _buildStatusRow(
+                firstStatus: StatusItem(
+                  title: AppStrings.kPending,
+                  subtitle: AppStrings.kViewDetails,
+                  count: "05",
+                  countBgColor: ColorManager.kLightYellowColor,
+                  countTextColor: ColorManager.kDarkYellowColor,
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      CustomRouteNames.kPendingScreenRoute,
+                    );
+                  },
+                ),
+                secondStatus: StatusItem(
+                  title: AppStrings.kOnGoing,
+                  subtitle: AppStrings.kViewDetails,
+                  count: "13",
+                  countBgColor: ColorManager.kLightBlueColor,
+                  countTextColor: ColorManager.kDarkBlueColor,
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      CustomRouteNames.kOnGoingScreenRoute,
+                    );
+                  },
+                ),
               ),
-              secondStatus: StatusItem(
-                title: AppStrings.kOnGoing,
-                subtitle: AppStrings.kViewDetails,
-                count: "13",
-                countBgColor: ColorManager.kLightBlueColor,
-                countTextColor: ColorManager.kDarkBlueColor,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kOnGoingScreenRoute,
-                  );
-                },
+              const SizedBox(height: 05),
+              _buildStatusRow(
+                firstStatus: StatusItem(
+                  title: AppStrings.kCanceled,
+                  subtitle: AppStrings.kViewDetails,
+                  count: "01",
+                  countBgColor: ColorManager.kLightRedColor,
+                  countTextColor: ColorManager.kDarkRedColor,
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      CustomRouteNames.kCanceledScreenRoute,
+                    );
+                  },
+                ),
+                secondStatus: StatusItem(
+                  title: AppStrings.kCompleted,
+                  subtitle: AppStrings.kViewDetails,
+                  count: "50",
+                  countBgColor: ColorManager.kLightGreenColor,
+                  countTextColor: ColorManager.kDarkGreenColor,
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      CustomRouteNames.kCompletedScreenRoute,
+                    );
+                  },
+                ),
               ),
-            ),
-            const SizedBox(height: 05),
-            _buildStatusRow(
-              firstStatus: StatusItem(
-                title: AppStrings.kCanceled,
-                subtitle: AppStrings.kViewDetails,
-                count: "01",
-                countBgColor: ColorManager.kLightRedColor,
-                countTextColor: ColorManager.kDarkRedColor,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kCanceledScreenRoute,
-                  );
-                },
+              const SizedBox(height: 10),
+              rowText(
+                  text1: AppStrings.kNewConsultationRequests,
+                  text2: AppStrings.kViewAll,
+              onTap: (){
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kPendingScreenRoute,
+                );
+              }
               ),
-              secondStatus: StatusItem(
-                title: AppStrings.kCompleted,
-                subtitle: AppStrings.kViewDetails,
-                count: "50",
-                countBgColor: ColorManager.kLightGreenColor,
-                countTextColor: ColorManager.kDarkGreenColor,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kCompletedScreenRoute,
-                  );
-                },
+               SizedBox(height: 16.h),
+              SizedBox(
+                height: 200,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (context, i) => SizedBox(width:10.0),
+                  itemCount: DataList.pendingList.length,
+                  itemBuilder: (context, index) {
+                    return PendingStatusCard(status: DataList.pendingList[index],);
+                    //CaseCard(caseData: filteredCases[index]);
+                  },
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 10),
+              rowText(
+                  text1: AppStrings.kOnGoingCases,
+                  text2: AppStrings.kViewAll),
+              SizedBox(height: 16.h),
+          OnGoingStatusCard(status:DataList.onGoingList[0]),
+            ],
+          ),
         ),
       ),
     );
@@ -128,7 +158,27 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
       ),
     );
   }
-
+  Widget rowText({String? text1, String? text2, Function()? onTap}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text1 ?? "",
+            style: getsemiboldStyle(color: ColorManager.primary, fontSize: ScreenUtil().setSp(FontSize.s16.sp)),
+            textAlign: TextAlign.left,
+          ),
+          GestureDetector(
+            onTap: onTap,
+            child: Text(text2 ?? "", //AppStrings.viewAll,
+                style: getRegularStyle(
+                    color: ColorManager.primary, fontSize: ScreenUtil().setSp(FontSize.s12.sp))),
+          ),
+        ],
+      ),
+    );
+  }
   /// Builds a row containing two status cards
   Widget _buildStatusRow({
     required StatusItem firstStatus,
@@ -189,47 +239,4 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
     );
   }
 
-  // Widget status({required String title,required String subtitle,required String count,required Function()? onTap,required Color countTextColor,required Color countBgColor,}) {
-  //   return Card(
-  //     color: ColorManager.kWhiteColor,
-  //     shape: RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.circular(AppSize.s14.r), // Rounded corners
-  //     ),
-  //     child: ListTile(
-  //       onTap:onTap,
-  //       leading: Container(
-  //         height: 35.h,
-  //         width: 35.h,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.all(Radius.circular(8.r)),
-  //           color: countBgColor.withOpacity(0.3),
-  //         ),
-  //         child: Center(
-  //           child: Text(
-  //             count,
-  //             textAlign: TextAlign.center,
-  //             style: getsemiboldStyle(
-  //               color:countTextColor,
-  //               fontSize: ScreenUtil().setSp(AppSize.s16),
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //       title: Text(
-  //         title,
-  //         style: getsemiboldStyle(
-  //           color: ColorManager.primary,
-  //           fontSize: ScreenUtil().setSp(AppSize.s14),
-  //         ),
-  //       ),
-  //       subtitle: Text(
-  //       subtitle,
-  //         style: getRegularStyle(
-  //           color: ColorManager.kGreyColor,
-  //           fontSize: ScreenUtil().setSp(AppSize.s10),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
