@@ -10,6 +10,14 @@ class ColorManager {
   static Color kLightBlueColor = const Color(0xff4285F4);
   static Color kHintTextColor = const Color(0xffa4a4a2);
   static Color kBackgroundColor = const Color(0xffeff1f3);
+  static Color kLightYellowColor = const Color(0xffFBBC05);
+  static Color kDarkYellowColor = const Color(0xffD88912);
+  static Color kDarkBlueColor = const Color(0xff1E59BB);
+  static Color kLightRedColor = const Color(0xffEA4335);
+  static Color kDarkRedColor = const Color(0xffDE2E1F);
+  static Color kLightGreenColor = const Color(0xff34A853);
+  static Color kDarkGreenColor = const Color(0xff178033);
+  static Color kTitleBgColor = const Color(0xffE2E3E4);
   static Color kRedColor = Colors.red;
 
 }
