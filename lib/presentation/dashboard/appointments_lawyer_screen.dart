@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class HomeLawyerScreen extends StatefulWidget {
-  const HomeLawyerScreen({super.key});
+class AppointmentsLawyerScreen extends StatefulWidget {
+  const AppointmentsLawyerScreen({super.key});
 
   @override
-  State<HomeLawyerScreen> createState() => _HomeLawyerScreenState();
+  State<AppointmentsLawyerScreen> createState() => _AppointmentsLawyerScreenState();
 }
 
-class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
+class _AppointmentsLawyerScreenState extends State<AppointmentsLawyerScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -23,77 +23,21 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 10),
+              SizedBox(height: ScreenUtil().setHeight(10.0)),
               welcome(),
-              _buildStatusRow(
-                firstStatus: StatusItem(
-                  title: AppStrings.kPending,
-                  subtitle: AppStrings.kViewDetails,
-                  count: "05",
-                  countBgColor: ColorManager.kLightYellowColor,
-                  countTextColor: ColorManager.kDarkYellowColor,
-                  onTap: () {
+              SizedBox(height: ScreenUtil().setHeight(20.0)),
+
+              rowText(
+                  text1: AppStrings.kNewConsultationRequests,
+                  text2: AppStrings.kViewAll,
+                  onTap: (){
                     Navigator.pushNamed(
                       context,
                       CustomRouteNames.kPendingScreenRoute,
                     );
-                  },
-                ),
-                secondStatus: StatusItem(
-                  title: AppStrings.kOnGoing,
-                  subtitle: AppStrings.kViewDetails,
-                  count: "13",
-                  countBgColor: ColorManager.kLightBlueColor,
-                  countTextColor: ColorManager.kDarkBlueColor,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kOnGoingScreenRoute,
-                    );
-                  },
-                ),
+                  }
               ),
-              const SizedBox(height: 05),
-              _buildStatusRow(
-                firstStatus: StatusItem(
-                  title: AppStrings.kCanceled,
-                  subtitle: AppStrings.kViewDetails,
-                  count: "01",
-                  countBgColor: ColorManager.kLightRedColor,
-                  countTextColor: ColorManager.kDarkRedColor,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kCanceledScreenRoute,
-                    );
-                  },
-                ),
-                secondStatus: StatusItem(
-                  title: AppStrings.kCompleted,
-                  subtitle: AppStrings.kViewDetails,
-                  count: "50",
-                  countBgColor: ColorManager.kLightGreenColor,
-                  countTextColor: ColorManager.kDarkGreenColor,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kCompletedScreenRoute,
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 10),
-              rowText(
-                  text1: AppStrings.kNewConsultationRequests,
-                  text2: AppStrings.kViewAll,
-              onTap: (){
-                Navigator.pushNamed(
-                  context,
-                  CustomRouteNames.kPendingScreenRoute,
-                );
-              }
-              ),
-               SizedBox(height: 16.h),
+              SizedBox(height: 16.h),
               SizedBox(
                 height: 200,
                 child: ListView.separated(
@@ -118,7 +62,8 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   }
               ),
               SizedBox(height: 16.h),
-          OnGoingStatusCard(status:DataList.onGoingList[0]),
+              OnGoingStatusCard(status:DataList.onGoingList[0]),
+              OnGoingStatusCard(status:DataList.onGoingList[4]),
             ],
           ),
         ),
@@ -127,7 +72,38 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
   }
 
   Widget welcome() {
-    return ListTile(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+      Text(
+        "David Waston",
+        style: getsemiboldStyle(
+          color: ColorManager.primary,
+          fontSize: ScreenUtil().setSp(AppSize.s16),
+        ),
+      ),
+      InkWell(
+        onTap: () {
+          //Notification screen
+        },
+        child: Container(
+          height: 44.h,
+          width: 44.h,
+          decoration: BoxDecoration(
+            color: ColorManager.kWhiteColor,
+            borderRadius: BorderRadius.all(Radius.circular(16.r)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: SvgPicture.asset(ImageAssets.kNotificationIcon),
+          ),
+        ),
+      ),
+
+    ],);
+
+
+      ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
       leading: ClipOval(
         child: Image.asset(ImageAssets.userImage, height: 60, width: 60),
