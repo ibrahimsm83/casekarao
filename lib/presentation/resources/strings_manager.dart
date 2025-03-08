@@ -165,6 +165,7 @@ class AppStrings {
   static const String kViewAll= "View all";
   static const String kMessage= "Message";
   static const String kOnGoing= "On Going";
+  static const String kExpired = "Expired";
   static const String kCanceled= "Canceled";
   static const String kSettings= "Settings";
   static const String kEarnings= "Earnings";

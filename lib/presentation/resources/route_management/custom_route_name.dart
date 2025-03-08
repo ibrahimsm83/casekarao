@@ -17,5 +17,9 @@ class CustomRouteNames {
   static const String kIdentityVerificationScreenRoute = "/kIdentityVerificationScreenRoute";
   static const String kApplicationUnderReviewScreenRoute = "/kApplicationUnderReviewScreenRoute";
   static const String kDashboardScreenRoute = "/kDashboardScreenRoute";
+  static const String kPendingScreenRoute = "/kPendingScreenRoute";
+  static const String kOnGoingScreenRoute = "/kOnGoingScreenRoute";
+  static const String kCanceledScreenRoute = "/kCanceledScreenRoute";
+  static const String kCompletedScreenRoute = "/kCompletedScreenRoute";
 
 }

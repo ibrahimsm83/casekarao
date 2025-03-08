@@ -13,6 +13,7 @@ class HomeLawyerScreen extends StatefulWidget {
 
 class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
   final List<String> statuses = ["Pending", "Ongoing", "Canceled", "Completed"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +34,10 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                 countBgColor: ColorManager.kLightYellowColor,
                 countTextColor: ColorManager.kDarkYellowColor,
                 onTap: () {
-                  print("pending taped");
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CaseListScreen(status:statuses[0])));
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kPendingScreenRoute,
+                  );
                 },
               ),
               secondStatus: StatusItem(
@@ -44,8 +47,10 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                 countBgColor: ColorManager.kLightBlueColor,
                 countTextColor: ColorManager.kDarkBlueColor,
                 onTap: () {
-                  print("ongoing taped");
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CaseListScreen(status:statuses[1])));
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kOnGoingScreenRoute,
+                  );
                 },
               ),
             ),
@@ -58,8 +63,10 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                 countBgColor: ColorManager.kLightRedColor,
                 countTextColor: ColorManager.kDarkRedColor,
                 onTap: () {
-                  print("canceled taped");
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CaseListScreen(status:statuses[2])));
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kCanceledScreenRoute,
+                  );
                 },
               ),
               secondStatus: StatusItem(
@@ -69,12 +76,13 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                 countBgColor: ColorManager.kLightGreenColor,
                 countTextColor: ColorManager.kDarkGreenColor,
                 onTap: () {
-                  print("completed tapped");
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CaseListScreen(status:statuses[3])));
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kCompletedScreenRoute,
+                  );
                 },
               ),
             ),
-
           ],
         ),
       ),
@@ -122,7 +130,10 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
   }
 
   /// Builds a row containing two status cards
-  Widget _buildStatusRow({required StatusItem firstStatus, required StatusItem secondStatus}) {
+  Widget _buildStatusRow({
+    required StatusItem firstStatus,
+    required StatusItem secondStatus,
+  }) {
     return Row(
       children: [
         Expanded(child: _buildStatusTile(firstStatus)),
@@ -131,6 +142,7 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
       ],
     );
   }
+
   /// Builds an individual status tile with a rounded card and ListTile
   Widget _buildStatusTile(StatusItem status) {
     return Card(
@@ -220,5 +232,4 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
   //     ),
   //   );
   // }
-
 }

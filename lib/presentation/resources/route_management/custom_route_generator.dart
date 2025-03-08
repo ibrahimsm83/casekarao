@@ -124,10 +124,35 @@ class CustomRouteGenerator {
           builder: (context) {
             return ApplicationUnderReviewScreen();
           },
-        );  case CustomRouteNames.kDashboardScreenRoute:
+        );
+        case CustomRouteNames.kDashboardScreenRoute:
         return MaterialPageRoute(
           builder: (context) {
             return DashboardScreen();
+          },
+        );
+        case CustomRouteNames.kPendingScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return PendingScreen();
+          },
+        );
+        case CustomRouteNames.kOnGoingScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return OnGoingScreen();
+          },
+        );
+        case CustomRouteNames.kCanceledScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return CanceledScreen();
+          },
+        );
+        case CustomRouteNames.kCompletedScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return CompletedScreen();
           },
         );
 
