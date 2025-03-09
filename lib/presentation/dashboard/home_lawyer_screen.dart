@@ -101,7 +101,15 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   separatorBuilder: (context, i) => SizedBox(width:10.0),
                   itemCount: DataList.pendingList.length,
                   itemBuilder: (context, index) {
-                    return PendingStatusCard(status: DataList.pendingList[index],);
+                    return PendingStatusCard(status: DataList.pendingList[index],
+                    onTap: (){
+                      Navigator.pushNamed(
+                        context,
+                        CustomRouteNames.kConsultationRequestsDetailsScreenRoute,
+                        arguments: DataList.pendingList[index],
+                      );
+                    },
+                    );
                     //CaseCard(caseData: filteredCases[index]);
                   },
                 ),

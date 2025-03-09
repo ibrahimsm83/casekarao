@@ -155,9 +155,13 @@ class CustomRouteGenerator {
             return CompletedScreen();
           },
         );
-
-
-
+        case CustomRouteNames.kConsultationRequestsDetailsScreenRoute:
+          final argument = settings.arguments as PendingStatusItemModel;
+        return MaterialPageRoute(
+          builder: (context) {
+            return ConsultationRequestsDetailsScreen(data: argument,);
+          },
+        );
       default:
         return null;
     }

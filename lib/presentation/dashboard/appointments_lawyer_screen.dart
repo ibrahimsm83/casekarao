@@ -45,7 +45,11 @@ class _AppointmentsLawyerScreenState extends State<AppointmentsLawyerScreen> {
                   separatorBuilder: (context, i) => SizedBox(width:10.0),
                   itemCount: DataList.pendingList.length,
                   itemBuilder: (context, index) {
-                    return PendingStatusCard(status: DataList.pendingList[index],);
+                    return PendingStatusCard(status: DataList.pendingList[index],
+                    onTap: (){
+                      print("tapped $index");
+                    },
+                    );
                     //CaseCard(caseData: filteredCases[index]);
                   },
                 ),

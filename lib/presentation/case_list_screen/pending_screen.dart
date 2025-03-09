@@ -49,7 +49,9 @@ class PendingScreen extends StatelessWidget {
           return Padding(
               padding: EdgeInsets.symmetric(
               horizontal: AppSize.sizeWidth(context!) * 0.04),
-          child: PendingStatusCard(status:DataList.pendingList[index],));
+          child: PendingStatusCard(status:DataList.pendingList[index],onTap:() {
+            print("tapped");
+          },));
           //CaseCard(caseData: filteredCases[index]);
         },
       ),

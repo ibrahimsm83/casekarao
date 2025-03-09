@@ -43,8 +43,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: <Widget>[
             HomeLawyerScreen(),
             AppointmentsLawyerScreen(),
-            //Container(child: Center(child: Text("Home"))),
-            Container(child: Center(child: Text("Appointment"))),
             Container(child: Center(child: Text("Earnings"))),
             Container(child: Center(child: Text("Settings"))),
             // userController.userRole.value==UserRole.Patient?HomeView():HomeHealthView(),

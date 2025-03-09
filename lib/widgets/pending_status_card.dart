@@ -6,8 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import '../export_casekarao.dart';
 
 class PendingStatusCard extends StatelessWidget {
-  PendingStatusItemModel status;
-   PendingStatusCard({super.key,required this.status});
+  final PendingStatusItemModel status;
+  final Function()? onTap;
+   PendingStatusCard({super.key,required this.status,required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +111,6 @@ class PendingStatusCard extends StatelessWidget {
                                 backgroundImage: AssetImage(status.userImage),
                                 radius: 14,
                               ),
-
                               Padding(
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: Text(
@@ -125,7 +125,7 @@ class PendingStatusCard extends StatelessWidget {
                           ),
 
                           InkWell(
-                            onTap: () {},
+                            onTap: onTap,
                             child: Container(
                               decoration: BoxDecoration(
                                 color: ColorManager.kBackgroundColor,
