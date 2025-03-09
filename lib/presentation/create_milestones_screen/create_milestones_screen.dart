@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../export_casekarao.dart';
 
 class CreateMilestonesScreen extends StatefulWidget {
-  const CreateMilestonesScreen({Key? key}) : super(key: key);
+  const CreateMilestonesScreen({super.key});
 
   @override
   State<CreateMilestonesScreen> createState() => _CreateMilestonesScreenState();
@@ -103,8 +103,6 @@ class _CreateMilestonesScreenState extends State<CreateMilestonesScreen> {
             SizedBox(height: AppSize.sizeHeight(context) * 0.06),
 
             button(text: AppStrings.submit, onTap: () {
-
-
             }),
             SizedBox(height: AppSize.s10.h),
           ],
