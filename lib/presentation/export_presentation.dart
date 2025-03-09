@@ -20,3 +20,4 @@ export 'case_list_screen/on_going_screen.dart';
 export 'case_list_screen/canceled_screen.dart';
 export 'case_list_screen/completed_screen.dart';
 export 'consultation_requests_details_screen/consultation_requests_details_screen.dart';
+export 'create_milestones_screen/create_milestones_screen.dart';

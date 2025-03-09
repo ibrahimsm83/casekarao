@@ -245,10 +245,10 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                           text: AppStrings.kAccept,
                           color: ColorManager.secondary,
                           onTap: () {
-                            // Navigator.pushNamed(
-                            //   context,
-                            //   CustomRouteNames.kDashboardScreenRoute,
-                            // );
+                            Navigator.pushNamed(
+                              context,
+                              CustomRouteNames.kCreateMilestonesScreenRoute,
+                            );
                           },
                         ),
                       ),

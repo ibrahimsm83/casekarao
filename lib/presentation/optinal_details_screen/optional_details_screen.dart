@@ -106,7 +106,6 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                     }
                   },
                 ),
-
                 SizedBox(height: 5.h),
               ],
             ),
