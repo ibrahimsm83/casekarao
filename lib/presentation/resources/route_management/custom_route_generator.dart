@@ -169,6 +169,13 @@ class CustomRouteGenerator {
             return CreateMilestonesScreen();
           },
         );
+
+        case CustomRouteNames.kCaseDetailsScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return CaseDetailsScreen();
+          },
+        );
       default:
         return null;
     }

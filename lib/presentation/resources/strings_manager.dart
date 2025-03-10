@@ -206,7 +206,9 @@ class AppStrings {
   static const String kUseMilestoneIsDeliver = "Use Milestone is deliver step by step for more complex cases.";
   static const String kPaymentForDeliveredMilestones= "Payment for delivered milestones will be available after the entire case is marked as completed or in case the client decides not to continue to the next milestone.";
 
-
+  ///Case Details
+  static const String kDocuments= "Documents";
+  static const String kCaseDiscussion= "Case Discussion";
 
   ///Validator
   static const String otpCode = "Otp Code";

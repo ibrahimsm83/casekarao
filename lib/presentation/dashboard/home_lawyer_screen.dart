@@ -126,7 +126,7 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   }
               ),
               SizedBox(height: 16.h),
-          OnGoingStatusCard(status:DataList.onGoingList[0]),
+          OnGoingStatusCard(status:DataList.onGoingList[0],onDetailsTap: (){},),
             ],
           ),
         ),

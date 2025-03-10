@@ -66,8 +66,18 @@ class _AppointmentsLawyerScreenState extends State<AppointmentsLawyerScreen> {
                   }
               ),
               SizedBox(height: 16.h),
-              OnGoingStatusCard(status:DataList.onGoingList[0]),
-              OnGoingStatusCard(status:DataList.onGoingList[4]),
+              OnGoingStatusCard(status:DataList.onGoingList[0],onDetailsTap: (){
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kCaseDetailsScreenRoute,
+                );
+              },),
+              OnGoingStatusCard(status:DataList.onGoingList[4],onDetailsTap: (){
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kCaseDetailsScreenRoute,
+                );
+              },),
             ],
           ),
         ),
@@ -105,45 +115,6 @@ class _AppointmentsLawyerScreenState extends State<AppointmentsLawyerScreen> {
       ),
 
     ],);
-
-
-      ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
-      leading: ClipOval(
-        child: Image.asset(ImageAssets.userImage, height: 60, width: 60),
-      ),
-      title: Text(
-        AppStrings.kWelcome,
-        style: getlightStyle(
-          color: ColorManager.kGreyColor,
-          fontSize: ScreenUtil().setSp(AppSize.s14),
-        ),
-      ),
-      subtitle: Text(
-        "David Waston",
-        style: getsemiboldStyle(
-          color: ColorManager.primary,
-          fontSize: ScreenUtil().setSp(AppSize.s16),
-        ),
-      ),
-      trailing: InkWell(
-        onTap: () {
-          //Notification screen
-        },
-        child: Container(
-          height: 44.h,
-          width: 44.h,
-          decoration: BoxDecoration(
-            color: ColorManager.kWhiteColor,
-            borderRadius: BorderRadius.all(Radius.circular(16.r)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: SvgPicture.asset(ImageAssets.kNotificationIcon),
-          ),
-        ),
-      ),
-    );
   }
   Widget rowText({String? text1, String? text2, Function()? onTap}) {
     return Padding(

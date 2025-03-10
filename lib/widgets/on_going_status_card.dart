@@ -7,8 +7,9 @@ import 'package:flutter_svg/svg.dart';
 import '../export_casekarao.dart';
 
 class OnGoingStatusCard extends StatelessWidget {
-  OnGoingStatusItemModel status;
-   OnGoingStatusCard({super.key,required this.status});
+  final OnGoingStatusItemModel status;
+  final Function()? onDetailsTap;
+   const OnGoingStatusCard({super.key,required this.status,required this.onDetailsTap});
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +163,7 @@ class OnGoingStatusCard extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: onDetailsTap,
                   child: Container(
                     decoration: BoxDecoration(
                       color: ColorManager.kBackgroundColor,
