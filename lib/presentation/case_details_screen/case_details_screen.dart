@@ -57,8 +57,18 @@ class CaseDetailsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppSize.s12.h),
-              caseCard(DataList.caseDetailsList.first),
-              caseCard(DataList.caseDetailsList[1]),
+              caseCard(cdm:  DataList.caseDetailsList.first,onDocumentsTap: (){
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kDocumentsScreenRoute,
+                );
+              },onCaseDisTap: (){}),
+              caseCard(cdm: DataList.caseDetailsList[1],onDocumentsTap: (){},onCaseDisTap: (){
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kDocumentsScreenRoute,
+                );
+              }),
             ],
           ),
         ),
@@ -66,7 +76,7 @@ class CaseDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget caseCard(CaseDetailsModel cdm) {
+  Widget caseCard({required CaseDetailsModel cdm,Function()? onDocumentsTap,Function()? onCaseDisTap,}) {
     return Card(
       color: ColorManager.kWhiteColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -125,7 +135,7 @@ class CaseDetailsScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: InkWell(
-                      onTap: () {},
+                      onTap: onDocumentsTap,
                       child: Container(
                         decoration: BoxDecoration(
                           color: ColorManager.kBackgroundColor,
@@ -150,7 +160,6 @@ class CaseDetailsScreen extends StatelessWidget {
                               ),
                               Container(
                                 width: 17.w,
-                                // Circle size
                                 height: 17.h,
                                 decoration: BoxDecoration(
                                   color: ColorManager.secondary, // Circle color
@@ -164,10 +173,6 @@ class CaseDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // ClipOval(
-                              //
-                              //   child: Text(cdm.docCount.toString(),style: getRegularStyle(color: ColorManager.kWhiteColor),),
-                              // )
                             ],
                           ),
                         ),
@@ -177,7 +182,7 @@ class CaseDetailsScreen extends StatelessWidget {
                   SizedBox(width: 5.w),
                   Expanded(
                     child: InkWell(
-                      onTap: () {},
+                      onTap: onCaseDisTap,
                       child: Container(
                         decoration: BoxDecoration(
                           color: ColorManager.kBackgroundColor,
@@ -217,10 +222,6 @@ class CaseDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // ClipOval(
-                              //
-                              //   child: Text(cdm.docCount.toString(),style: getRegularStyle(color: ColorManager.kWhiteColor),),
-                              // )
                             ],
                           ),
                         ),

@@ -9,6 +9,7 @@ class ImageAssets {
   static const String userImage = "$IMAGE_PATH/user.png";
   static const String getStartedImage = "$IMAGE_PATH/getstarted.png";
   static const String letStartedImage = "$IMAGE_PATH/letstarted.png";
+  static const String documentsImage = "$IMAGE_PATH/documentImage.png";
 
   ///Registration
   static const String ckIcon = "$ICON_PATH/CK.svg";
@@ -36,6 +37,7 @@ class ImageAssets {
   static const String kMessageIcon = "$ICON_PATH/message.svg";
   static const String kSettingsIcon = "$ICON_PATH/Settings.svg";
   static const String kCalendarIcon = "$ICON_PATH/calendar.svg";
+  static const String kPDFIcon = "$ICON_PATH/pdfIcon.svg";
   static const String kCaseDiscIcon = "$ICON_PATH/caseDisc.svg";
   static const String kDocumentsIcon = "$ICON_PATH/documents.svg";
   static const String kRightArrowIcon = "$ICON_PATH/rightArrow.svg";
