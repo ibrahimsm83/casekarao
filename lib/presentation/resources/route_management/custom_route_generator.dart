@@ -182,6 +182,12 @@ class CustomRouteGenerator {
             return DocumentsScreen();
           },
         );
+        case CustomRouteNames.kCaseDiscussionScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return CaseDiscussionScreen();
+          },
+        );
       default:
         return null;
     }

@@ -214,6 +214,9 @@ class AppStrings {
   static const String kCaseDiscussion= "Case Discussion";
   static const String kUploadedByLawyer= "Uploaded by Lawyer";
 
+  ///Case Discussion
+  static const String kTypeAMessage= "Type a message ...";
+
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";

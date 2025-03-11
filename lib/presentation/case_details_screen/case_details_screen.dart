@@ -57,18 +57,36 @@ class CaseDetailsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppSize.s12.h),
-              caseCard(cdm:  DataList.caseDetailsList.first,onDocumentsTap: (){
-                Navigator.pushNamed(
-                  context,
-                  CustomRouteNames.kDocumentsScreenRoute,
-                );
-              },onCaseDisTap: (){}),
-              caseCard(cdm: DataList.caseDetailsList[1],onDocumentsTap: (){},onCaseDisTap: (){
-                Navigator.pushNamed(
-                  context,
-                  CustomRouteNames.kDocumentsScreenRoute,
-                );
-              }),
+              caseCard(
+                cdm: DataList.caseDetailsList.first,
+                onDocumentsTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kDocumentsScreenRoute,
+                  );
+                },
+                onCaseDisTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kCaseDiscussionScreenRoute,
+                  );
+                },
+              ),
+              caseCard(
+                cdm: DataList.caseDetailsList[1],
+                onDocumentsTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kDocumentsScreenRoute,
+                  );
+                },
+                onCaseDisTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kCaseDiscussionScreenRoute,
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -76,7 +94,11 @@ class CaseDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget caseCard({required CaseDetailsModel cdm,Function()? onDocumentsTap,Function()? onCaseDisTap,}) {
+  Widget caseCard({
+    required CaseDetailsModel cdm,
+    Function()? onDocumentsTap,
+    Function()? onCaseDisTap,
+  }) {
     return Card(
       color: ColorManager.kWhiteColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

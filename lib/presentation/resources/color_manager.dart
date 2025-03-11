@@ -20,6 +20,7 @@ class ColorManager {
   static Color kTitleBgColor = const Color(0xffE2E3E4);
   static Color kOrangeColor = const Color(0xffFB7B05);
   static Color kInputTexBgColor = const Color(0xffE7E9EB);
+  static Color kChatBgColor = const Color(0xffE4E5E5);
   static Color kRedColor = Colors.red;
 
 }
