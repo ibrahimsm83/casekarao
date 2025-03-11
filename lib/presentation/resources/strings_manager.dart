@@ -216,6 +216,25 @@ class AppStrings {
 
   ///Case Discussion
   static const String kTypeAMessage= "Type a message ...";
+  static const String kTotalEarning= "TotalEarning";
+  static const String kReceived= "Received";
+  static const String kRecentActivity= "Recent Activity";
+
+  ///Settings
+  static const String kLogout= "Logout";
+  static const String kViewProfile= "View Profile";
+  static const String kAccount= "Account";
+  static const String kAccountInformation= "Account Information";
+  static const String kChangePassword= "Change Password";
+  static const String kDispute= "Dispute";
+  static const String kNotifications= "Notifications";
+  static const String kPayout= "Payout";
+  static const String kHelpSupport= "Help & Support";
+  static const String kLiveChat= "Live Chat";
+  static const String kTermConditions= "Term & Conditions";
+  static const String kPrivacyPolicy= "Privacy Policy";
+  static const String kAboutCaseKarao= "About CaseKarao";
+
 
   ///Validator
   static const String otpCode = "Otp Code";

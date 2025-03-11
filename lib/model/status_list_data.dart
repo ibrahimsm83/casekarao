@@ -129,5 +129,15 @@ static List<CaseDetailsModel> caseDetailsList=[
   CaseDetailsModel(mileStoneNumber: "1st Milestone",mileStoneStatus: "Milestone Completed",caseName: "Case Initialization",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,docCount: 9,caseDiscussionCount: 9,amount: 3000.00,paymentStatus: "Payment Verified",expiryDays: 7),
   CaseDetailsModel(mileStoneNumber: "2st Milestone",mileStoneStatus: "Active Milestone",caseName: "Case Opening",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,docCount: 9,caseDiscussionCount: 9,amount: 3000.00,paymentStatus: "Payment Verified",expiryDays: 7),
 ];
-
+///Recent Activity data List
+ 
+ static List<RecentActivityModel> recentActivityList=[
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "1st Milestone", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Received"),
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "1st Milestone", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Received"),
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "1st Milestone", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Received"),
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "1st Milestone", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Received"),
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "1st Milestone", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Received"),
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "1st Milestone", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Received"),
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "1st Milestone", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Received"),
+ ];
 }

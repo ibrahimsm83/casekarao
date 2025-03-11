@@ -49,5 +49,21 @@ class ImageAssets {
   static const String kPlusIcon = "$ICON_PATH/plus.svg";
   static const String kSmileCircleIcon = "$ICON_PATH/SmileCircle.svg";
 
+  static const String kBellIcon = "$ICON_PATH/bell.svg";
+  static const String kFlagIcon = "$ICON_PATH/flag.svg";
+  static const String kStarIcon = "$ICON_PATH/star.svg";
+  static const String kLockIcon = "$ICON_PATH/lock.svg";
+
+  ///Settings
+  static const String kAboutIcon = "$ICON_PATH/about.svg";
+  static const String kLogoutIcon = "$ICON_PATH/logout.svg";
+  static const String kPersonIcon = "$ICON_PATH/person.svg";
+  static const String kWalletIcon = "$ICON_PATH/wallet.svg";
+  static const String kLocationIcon = "$ICON_PATH/location.svg";
+  static const String kLiveChatIcon = "$ICON_PATH/liveChat.svg";
+  static const String kForwardArrowIcon = "$ICON_PATH/forwardArrow.svg";
+  static const String kPrivacyPolicyIcon = "$ICON_PATH/privacyPolicy.svg";
+  static const String kTermConditionIcon = "$ICON_PATH/termCondition.svg";
+
 
 }
