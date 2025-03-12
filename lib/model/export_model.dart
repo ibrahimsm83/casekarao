@@ -3,3 +3,4 @@ export 'status_item_model.dart';
 export 'status_list_data.dart';
 export 'case_details_model.dart';
 export 'recent_activity_model.dart';
+export 'user_settings_model.dart';
