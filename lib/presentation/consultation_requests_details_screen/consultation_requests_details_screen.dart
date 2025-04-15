@@ -157,16 +157,38 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                       left: AppSize.sizeWidth(context!) * 0.04,
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CircleAvatar(
-                          backgroundImage: AssetImage(ImageAssets.userImage),
-                          radius: 20,
+                        Flexible(
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage: AssetImage(ImageAssets.userImage),
+                                radius: 20,
+                              ),
+                              Text(
+                                data.userName,
+                                style: getmediumStyle(
+                                  color: ColorManager.primary,
+                                  fontSize: ScreenUtil().setSp(AppSize.s14),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        Text(
-                          data.userName,
-                          style: getmediumStyle(
+                        Flexible(
+                          child: button(
+                            text: AppStrings.kMessage,
+                            iconPath: ImageAssets.kMessage1Icon,
                             color: ColorManager.primary,
-                            fontSize: ScreenUtil().setSp(AppSize.s14),
+                            margin: 0.02,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                CustomRouteNames.kCaseDiscussionScreenRoute,
+                                arguments: true
+                              );
+                            },
                           ),
                         ),
                       ],
@@ -219,10 +241,11 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
     Color? color,
     Color? fontColor,
     String? iconPath,
+    double? margin,
   }) {
     return CustomButton(
       color: color ?? ColorManager.primary,
-      horizontalMargin: 0.0,
+      horizontalMargin:margin?? 0.0,
       iconPath: iconPath,
       isLeadingIcon: true,
       text: text ?? "",

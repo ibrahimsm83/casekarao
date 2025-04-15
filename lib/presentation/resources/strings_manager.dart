@@ -160,8 +160,10 @@ class AppStrings {
   static const String kPaid= "Paid";
   static const String kHome= "Home";
   static const String kDays= "Days";
+  static const String kCase= "Case";
   static const String kWelcome= "Welcome";
   static const String kPending= "Pending";
+  static const String kRequests= "Requests";
   static const String kViewAll= "View all";
   static const String kMessage= "Message";
   static const String kOnGoing= "On Going";
@@ -176,6 +178,7 @@ class AppStrings {
   static const String k1stMilestone= "1st Milestone";
   static const String kOnGoingCases= "On Going Cases";
   static const String kJaylonHerwitz= "Jaylon Herwitz";
+  static const String kOfferRequests= "Offer Requests";
   static const String kHitAndRunCase= "Hit and Run Case";
   static const String kPaymentStatus = "Payment Status:\t";
   static const String kMilestoneExpiry = "Milestone Expiry:\t";
@@ -218,6 +221,7 @@ class AppStrings {
   static const String kTypeAMessage= "Type a message ...";
   static const String kTotalEarning= "TotalEarning";
   static const String kReceived= "Received";
+  static const String kViewOffer= "View Offer";
   static const String kRecentActivity= "Recent Activity";
 
   ///Settings

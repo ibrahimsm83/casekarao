@@ -42,10 +42,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           },
           children: <Widget>[
             HomeLawyerScreen(),
+            Container(child: Center(child: Text("Case"))),
             AppointmentsLawyerScreen(),
             EarningsLawyerScreen(),
             SettingsLawyerScreen(),
-            // Container(child: Center(child: Text("Earnings"))),
+
             // Container(child: Center(child: Text("Settings"))),
             // userController.userRole.value==UserRole.Patient?HomeView():HomeHealthView(),
             // AppointmentView(),
@@ -79,19 +80,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   currentindex: 0,
                 ),
                 bottomNavbaritem(
+                  title: AppStrings.kCase,
+                  IconName: ImageAssets.kSuitCaseIcon,
+                  currentindex: 1,
+                ),
+                bottomNavbaritem(
                   title: AppStrings.kAppointments,
                   IconName: ImageAssets.kAppointmentIcon,
-                  currentindex: 1,
+                  currentindex: 2,
                 ),
                 bottomNavbaritem(
                   title: AppStrings.kEarnings,
                   IconName: ImageAssets.kEarningIcon,
-                  currentindex: 2,
+                  currentindex: 3,
                 ),
                 bottomNavbaritem(
                   title: AppStrings.kSettings,
                   IconName: ImageAssets.kSettingsIcon,
-                  currentindex: 3,
+                  currentindex: 4,
                 ),
               ],
             ),

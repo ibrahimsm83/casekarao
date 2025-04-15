@@ -9,7 +9,8 @@ import '../export_casekarao.dart';
 class OnGoingStatusCard extends StatelessWidget {
   final OnGoingStatusItemModel status;
   final Function()? onDetailsTap;
-   const OnGoingStatusCard({super.key,required this.status,required this.onDetailsTap});
+  final Function()? onMessageTap;
+   const OnGoingStatusCard({super.key,required this.status,required this.onDetailsTap,required this.onMessageTap});
 
   @override
   Widget build(BuildContext context) {
@@ -132,32 +133,35 @@ class OnGoingStatusCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: ColorManager.secondary,
-                      borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                        vertical: 5.0,
+                InkWell(
+                  onTap: onMessageTap,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: ColorManager.secondary,
+                        borderRadius: BorderRadius.all(Radius.circular(8.r)),
                       ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(ImageAssets.kMessageIcon),
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Text(
-                              AppStrings.kMessage,
-                              style: getRegularStyle(
-                                color: ColorManager.kWhiteColor,
-                                fontSize: ScreenUtil().setSp(AppSize.s10),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 5.0,
+                        ),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(ImageAssets.kMessageIcon),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Text(
+                                AppStrings.kMessage,
+                                style: getRegularStyle(
+                                  color: ColorManager.kWhiteColor,
+                                  fontSize: ScreenUtil().setSp(AppSize.s10),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

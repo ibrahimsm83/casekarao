@@ -15,7 +15,7 @@ export 'bar_id_card_upload_screen/bar_id_card_upload_screen.dart';
 export 'identity_verification_screen/identity_verification_screen.dart';
 export 'application_under_review_screen/application_under_review _screen.dart';
 export 'dashboard/dashboard_export.dart';
-export 'case_list_screen/pending_screen.dart';
+export 'case_list_screen/request_screen.dart';
 export 'case_list_screen/on_going_screen.dart';
 export 'case_list_screen/canceled_screen.dart';
 export 'case_list_screen/completed_screen.dart';

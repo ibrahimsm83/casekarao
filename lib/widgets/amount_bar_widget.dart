@@ -5,10 +5,12 @@ import '../export_casekarao.dart';
 class AmountBarWidget extends StatelessWidget {
   final num amount;
   final Color? backGroundColor;
+  final double? fontSize;
 
   const AmountBarWidget({
     super.key,
     required this.amount,
+    this.fontSize,
     this.backGroundColor,
   });
 
@@ -20,7 +22,7 @@ class AmountBarWidget extends StatelessWidget {
         color: backGroundColor ?? ColorManager.kWhiteColor,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 6.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -28,7 +30,7 @@ class AmountBarWidget extends StatelessWidget {
               AppStrings.kAmount,
               style: getboldStyle(
                 color: ColorManager.primary,
-                fontSize: ScreenUtil().setSp(AppSize.s16),
+                fontSize: ScreenUtil().setSp(fontSize??FontSize.s16),
               ),
             ),
             Row(
@@ -39,7 +41,7 @@ class AmountBarWidget extends StatelessWidget {
                     color: ColorManager.kGreenColor,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.all(4.4),
                     child: Text(
                       '\$',
                       style: getsemiboldStyle(
@@ -54,7 +56,7 @@ class AmountBarWidget extends StatelessWidget {
                   '$amount PKR',
                   style: getmediumStyle(
                     color: ColorManager.kDarkGreyColor,
-                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                    fontSize: ScreenUtil().setSp(AppSize.s10),
                   ),
                 ),
               ],

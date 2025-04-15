@@ -27,7 +27,7 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
               welcome(),
               _buildStatusRow(
                 firstStatus: StatusItem(
-                  title: AppStrings.kPending,
+                  title: AppStrings.kRequests,
                   subtitle: AppStrings.kViewDetails,
                   count: "05",
                   countBgColor: ColorManager.kLightYellowColor,
@@ -126,7 +126,15 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   }
               ),
               SizedBox(height: 16.h),
-          OnGoingStatusCard(status:DataList.onGoingList[0],onDetailsTap: (){},),
+          OnGoingStatusCard(status:DataList.onGoingList[0],onDetailsTap: (){},
+            onMessageTap: (){
+              Navigator.pushNamed(
+                context,
+                CustomRouteNames.kCaseDiscussionScreenRoute,
+                  arguments: false
+              );
+            },
+          ),
             ],
           ),
         ),

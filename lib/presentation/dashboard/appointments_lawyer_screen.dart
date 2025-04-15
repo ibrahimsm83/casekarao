@@ -71,13 +71,29 @@ class _AppointmentsLawyerScreenState extends State<AppointmentsLawyerScreen> {
                   context,
                   CustomRouteNames.kCaseDetailsScreenRoute,
                 );
-              },),
+              },
+              onMessageTap: (){
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kCaseDiscussionScreenRoute,
+                    arguments: false
+                );
+              },
+              ),
               OnGoingStatusCard(status:DataList.onGoingList[4],onDetailsTap: (){
                 Navigator.pushNamed(
                   context,
                   CustomRouteNames.kCaseDetailsScreenRoute,
                 );
-              },),
+              },
+                onMessageTap: (){
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kCaseDiscussionScreenRoute,
+                      arguments: false
+                  );
+                },
+              ),
             ],
           ),
         ),

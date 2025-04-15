@@ -135,7 +135,7 @@ class CustomRouteGenerator {
         case CustomRouteNames.kPendingScreenRoute:
         return MaterialPageRoute(
           builder: (context) {
-            return PendingScreen();
+            return RequestsScreen();
           },
         );
         case CustomRouteNames.kOnGoingScreenRoute:
@@ -184,9 +184,10 @@ class CustomRouteGenerator {
           },
         );
         case CustomRouteNames.kCaseDiscussionScreenRoute:
+          final isFiled = settings.arguments as bool;
         return MaterialPageRoute(
           builder: (context) {
-            return CaseDiscussionScreen();
+            return CaseDiscussionScreen(isCaseFiled: isFiled,);
           },
         );
       default:

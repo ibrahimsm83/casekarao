@@ -4,10 +4,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../export_casekarao.dart';
 
-class PendingScreen extends StatelessWidget {
-  PendingScreen({super.key});
-
-
+class RequestsScreen extends StatelessWidget {
+  RequestsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +33,7 @@ class PendingScreen extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          AppStrings.kPending,
+          AppStrings.kOfferRequests,
           style: getsemiboldStyle(
             color: ColorManager.primary,
             fontSize: ScreenUtil().setSp(FontSize.s16),

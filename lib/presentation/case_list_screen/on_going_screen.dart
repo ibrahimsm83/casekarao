@@ -51,7 +51,15 @@ class OnGoingScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal: AppSize.sizeWidth(context!) * 0.04,
             ),
-            child: OnGoingStatusCard(status:DataList.onGoingList[index],onDetailsTap: (){},),
+            child: OnGoingStatusCard(status:DataList.onGoingList[index],onDetailsTap: (){},
+              onMessageTap: (){
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kCaseDiscussionScreenRoute,
+                  arguments: false
+                );
+              },
+            ),
           );
           //CaseCard(caseData: filteredCases[index]);
         },
