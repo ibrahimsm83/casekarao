@@ -92,7 +92,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                   },
                 ),
                 heading(AppStrings.languagesSpoken, AppStrings.multiSelect),
-                jurisdiction(),
+                language(),
 
                 SizedBox(height: AppSize.sizeHeight(context) * 0.2),
                 button(
@@ -161,7 +161,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
     );
   }
 
-  Widget jurisdiction() {
+  Widget language() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0.0),
       child: SizedBox(

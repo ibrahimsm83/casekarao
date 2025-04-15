@@ -80,70 +80,18 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-        
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: AppSize.sizeWidth(context!) * 0.03,
                 vertical: AppSize.sizeHeight(context!) * 0.04,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppStrings.kTimingSlot,
-                        style: getsemiboldStyle(
-                          color: ColorManager.primary,
-                          fontSize: ScreenUtil().setSp(AppSize.s16),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(ImageAssets.clockIcon),
-                          SizedBox(width: 5.0),
-                          Text(
-                            data.time, //"11:30am to 12:30pm",
-                            style: getmediumStyle(
-                              color: ColorManager.kDarkGreyColor,
-                              fontSize: ScreenUtil().setSp(AppSize.s10),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-        
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppStrings.kDate,
-                        style: getsemiboldStyle(
-                          color: ColorManager.primary,
-                          fontSize: ScreenUtil().setSp(AppSize.s16),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(ImageAssets.kCalendarIcon),
-                          SizedBox(width: 5.0),
-                          Text(
-                            data.day, //"Tuesday 18 Feb, 2025",
-                            style: getmediumStyle(
-                              color: ColorManager.kDarkGreyColor,
-                              fontSize: ScreenUtil().setSp(AppSize.s10),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              child: AmountBarWidget(
+                amount: 500.00,
+                backGroundColor: ColorManager.kWhiteColor,
+              )
+
             ),
-        
+            //
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: AppSize.sizeWidth(context!) * 0.04,
@@ -205,7 +153,9 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(left: AppSize.sizeWidth(context!) * 0.04, ),
+                    padding: EdgeInsets.only(
+                      left: AppSize.sizeWidth(context!) * 0.04,
+                    ),
                     child: Row(
                       children: [
                         CircleAvatar(
@@ -222,41 +172,40 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: button(
-                          text: AppStrings.kReject,
-                          color: ColorManager.kLightRedColor,
-                          onTap: () {
-
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: button(
+                            text: AppStrings.kReject,
+                            color: ColorManager.kLightRedColor,
+                            onTap: () {
                               // Navigator.pushNamed(
                               //   context,
                               //   CustomRouteNames.kDashboardScreenRoute,
                               // );
-                          },
+                            },
+                          ),
                         ),
-                      ),
-                      SizedBox(width: AppSize.s8.h),
-                      Flexible(
-                        child: button(
-                          text: AppStrings.kAccept,
-                          color: ColorManager.secondary,
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              CustomRouteNames.kCreateMilestonesScreenRoute,
-                            );
-                          },
+                        SizedBox(width: AppSize.s8.h),
+                        Flexible(
+                          child: button(
+                            text: AppStrings.kAccept,
+                            color: ColorManager.secondary,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                CustomRouteNames.kCreateMilestonesScreenRoute,
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-
-              ],),
+                ],
+              ),
             ),
           ],
         ),

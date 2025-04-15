@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import '../../export_casekarao.dart';
 
 class SetupProfileScreen extends StatefulWidget {
-  const SetupProfileScreen({super.key});
+  final bool? isCompleteAllRequiredField;
+  const SetupProfileScreen({super.key,this.isCompleteAllRequiredField});
 
   @override
   State<SetupProfileScreen> createState() => _SetupProfileScreenState();
@@ -31,6 +32,14 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
         selectedItems.add(item);
       }
     });
+  }
+  @override
+  void initState() {
+    if(widget.isCompleteAllRequiredField??false){
+      selectedItems=items;
+    }
+
+    super.initState();
   }
 
   @override
@@ -87,7 +96,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                   String item = items[index];
                   bool isSelected = selectedItems.contains(item);
                   return ListTile(
-                    onTap: () {
+                    onTap: widget.isCompleteAllRequiredField??false ?(){}:() {
                       toggleSelection(item);
                     },
                     minTileHeight: 45.h,
@@ -137,10 +146,18 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
             button(
               text: AppStrings.saveAndContinue,
               onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  CustomRouteNames.kPersonalInformationScreenRoute,
-                );
+                if(widget.isCompleteAllRequiredField??false){
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kApplicationUnderReviewScreenRoute,
+                  );
+                }else{
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kPersonalInformationScreenRoute,
+                  );
+                }
+
               },
             ),
             SizedBox(height: AppSize.s8.h),

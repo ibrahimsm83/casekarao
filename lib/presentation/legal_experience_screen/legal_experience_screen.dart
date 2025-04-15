@@ -20,6 +20,7 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
   FocusNode node4 = FocusNode();
 
   final _barLicenseNumberController = TextEditingController();
+  final _organizationNameController = TextEditingController();
   final _yearsOfExpController = TextEditingController();
   final _organizationController = TextEditingController();
   String? selectedType;
@@ -117,13 +118,13 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
 
                 CustomTextFormField(
                   hintText: AppStrings.exCityLawSchoolAndCourt,
-                  controller: _organizationController,
+                  controller: _organizationNameController,
                   fillColor: ColorManager.kWhiteColor,
                   focusNode: node3,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
-                      return "Enter Organization number";
+                      return "Enter Organization name";
                     }
                     return null;
                   },
@@ -151,7 +152,7 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
-                      return "Enter Organization number";
+                      return "Enter Practise Area";
                     }
                     return null;
                   },

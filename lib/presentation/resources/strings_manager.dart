@@ -121,7 +121,7 @@ class AppStrings {
   ///Optional Details
   static const String multiSelect= "Multi Select";
   static const String selectLanguage= "Select language";
-  static const String languagesSpoken= "Languages Spoken";
+  static const String languagesSpoken= "Languages Spoken\t\t";
   static const String bioProfessionalSummary= "Bio/Professional Summary";
   static const String exTellUsMoreAboutYourself= "Ex : Tell us more about yourself";
 

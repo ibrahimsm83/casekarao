@@ -158,6 +158,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         Navigator.pushNamed(
                           context,
                           CustomRouteNames.kSetupProfileScreenRoute,
+                          arguments: false,
                         );
                       });
                     }

@@ -65,9 +65,10 @@ class CustomRouteGenerator {
           },
         );
       case CustomRouteNames.kSetupProfileScreenRoute:
+        final bool isCompleteAllRequiredFields = settings.arguments as bool;
         return MaterialPageRoute(
           builder: (context) {
-            return const SetupProfileScreen();
+            return SetupProfileScreen(isCompleteAllRequiredField: isCompleteAllRequiredFields,);
           },
         );
       case CustomRouteNames.kPersonalInformationScreenRoute:

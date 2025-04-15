@@ -58,8 +58,10 @@ class IdentityVerificationScreen extends StatelessWidget {
               onTap: (){
                 Navigator.pushNamed(
                   context,
-                  CustomRouteNames.kApplicationUnderReviewScreenRoute,
+                  CustomRouteNames.kSetupProfileScreenRoute,
+                  arguments: true,
                 );
+
               },
               child: Align(
                 alignment: Alignment.center,
