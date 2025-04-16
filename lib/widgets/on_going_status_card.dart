@@ -83,29 +83,6 @@ class OnGoingStatusCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Flexible(
-                    child: Row(
-                      children: [
-                        Text(
-                          "Milestone Expiry: ",
-                          style: getmediumStyle(
-                            fontSize: ScreenUtil().setSp(AppSize.s10),
-                            color: ColorManager.primary,
-                          ),
-                        ),
-                        Text(
-                          " ${status.mileStoneExpiry} Days",
-                          style: getmediumStyle(
-                            fontSize: ScreenUtil().setSp(AppSize.s10),
-                            color:
-                            status.paymentStatus == "Pending"
-                                ? ColorManager.kRedColor
-                                : ColorManager.kGreenColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),

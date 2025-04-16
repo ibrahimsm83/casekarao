@@ -3,3 +3,4 @@ export 'home_lawyer_screen.dart';
 export 'appointments_lawyer_screen.dart';
 export 'earnings_lawyer_screen.dart';
 export 'settings_lawyer_screen.dart';
+export 'cases_screen.dart';
