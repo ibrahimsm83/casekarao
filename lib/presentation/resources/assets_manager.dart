@@ -43,6 +43,7 @@ class ImageAssets {
   static const String kDocumentsIcon = "$ICON_PATH/documents.svg";
   static const String kRightArrowIcon = "$ICON_PATH/rightArrow.svg";
   static const String kAppointmentIcon = "$ICON_PATH/appointment.svg";
+  static const String kMessageHomeIcon = "$ICON_PATH/messageshome.svg";
   static const String kNotificationIcon = "$ICON_PATH/Notification.svg";
 
   ///Case Discussion

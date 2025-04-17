@@ -43,7 +43,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: <Widget>[
             HomeLawyerScreen(),
             CasesScreen(),
-            AppointmentsLawyerScreen(),
+            Container(child: Text("Message"),),
+            // AppointmentsLawyerScreen(),
             EarningsLawyerScreen(),
             SettingsLawyerScreen(),
 
@@ -85,8 +86,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   currentindex: 1,
                 ),
                 bottomNavbaritem(
-                  title: AppStrings.kAppointments,
-                  IconName: ImageAssets.kAppointmentIcon,
+                  title: AppStrings.kMessage,
+                  IconName: ImageAssets.kMessageHomeIcon,
                   currentindex: 2,
                 ),
                 bottomNavbaritem(
