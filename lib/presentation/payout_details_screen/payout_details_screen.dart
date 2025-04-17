@@ -122,6 +122,7 @@ class _PayoutDetailsScreenState extends State<PayoutDetailsScreen> {
               ),
             ),
             button(text: AppStrings.kAddPayout, onTap: () {
+              Navigator.pushNamed(context, CustomRouteNames.kAddPayoutScreenRoute);
             }),
           ],
         ),

@@ -247,6 +247,14 @@ class AppStrings {
   static const String kTransfered = "Transfered";
   static const String kRecentPayoutDetails= "Recent Payout Details";
 
+  ///Add Payout
+  static const String kAccountTitleHintText= "e.g: Nathan Drake";
+  static const String kAccountTitle= "Account Title";
+  static const String kAccountNumber= "Account Number";
+  static const String kRoutingNumber= "Routing Number";
+  static const String kFetchedDetails= "Fetched Details";
+  static const String kMakeItDefaultPayoutDetails= "Make it default payout details";
+
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";

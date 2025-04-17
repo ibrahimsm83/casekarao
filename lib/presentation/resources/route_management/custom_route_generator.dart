@@ -196,6 +196,12 @@ class CustomRouteGenerator {
             return CaseDiscussionScreen(isCaseFiled: isFiled,);
           },
         );
+      case CustomRouteNames.kAddPayoutScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return AddPayoutScreen();
+          },
+        );
       default:
         return null;
     }
