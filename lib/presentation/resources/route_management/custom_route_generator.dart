@@ -202,6 +202,12 @@ class CustomRouteGenerator {
             return AddPayoutScreen();
           },
         );
+        case CustomRouteNames.kNotificationSettingScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return NotificationSettingScreen();
+          },
+        );
       default:
         return null;
     }

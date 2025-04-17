@@ -255,6 +255,13 @@ class AppStrings {
   static const String kFetchedDetails= "Fetched Details";
   static const String kMakeItDefaultPayoutDetails= "Make it default payout details";
 
+  ///Notification Settings
+  static const String kNotificationSettings ="Notification Settings";
+  static const String kEnablePushNotification= "Enable Push Notification";
+  static const String kMilestoneNotification= "Milestone Notification";
+  static const String kPayoutNotification ="Payout Notification";
+  static const String kNewCaseNotification= "New Case Notification";
+
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";
