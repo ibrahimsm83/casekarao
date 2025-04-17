@@ -21,7 +21,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
   ];
 
   List<UserSettingsModel> helpAndSupportList=[
-    UserSettingsModel(title:  AppStrings.kLiveChat, iconPath:  ImageAssets.kLiveChatIcon, navigateRoute: ''),
+    UserSettingsModel(title:  AppStrings.kLiveChat, iconPath:  ImageAssets.kLiveChatIcon, navigateRoute: CustomRouteNames.kLiveChatScreenRoute),
     UserSettingsModel(title:  AppStrings.kTermConditions, iconPath:  ImageAssets.kTermConditionIcon, navigateRoute: ''),
     UserSettingsModel(title:  AppStrings.kPrivacyPolicy, iconPath:  ImageAssets.kPrivacyPolicyIcon, navigateRoute: ''),
     UserSettingsModel(title:  AppStrings.kAboutCaseKarao, iconPath:  ImageAssets.kAboutIcon, navigateRoute: ''),
@@ -158,6 +158,9 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
                           title: helpAndSupportList[index].title,
                           leadingIcon: helpAndSupportList[index].iconPath,
                           onTap: () {
+                            if(index==0){
+                              Navigator.pushNamed(context, helpAndSupportList[index].navigateRoute);
+                            }
                             // if(index==1|| index==2||index==3|| index==4||index==6||index==7){
                             //   Navigator.pushNamed(context, choicsRoute[index]);
                             // }

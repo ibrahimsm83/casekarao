@@ -220,6 +220,12 @@ class CustomRouteGenerator {
             return AddDisputeScreen();
           },
         );
+        case CustomRouteNames.kLiveChatScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return LiveChatScreen();
+          },
+        );
       default:
         return null;
     }

@@ -7,10 +7,15 @@ class ImageAssets {
 
   static const String appLogo = "$IMAGE_PATH/logo.png";
   static const String userImage = "$IMAGE_PATH/user.png";
+  static const String starUserImage2 = "$IMAGE_PATH/userstar2.png";
+  static const String starUserImage1 = "$IMAGE_PATH/userstar1.png";
+  static const String starUserImage3 = "$IMAGE_PATH/userstar3.png";
+  static const String starUserImage4 = "$IMAGE_PATH/userstar4.png";
   static const String getStartedImage = "$IMAGE_PATH/getstarted.png";
   static const String letStartedImage = "$IMAGE_PATH/letstarted.png";
   static const String documentsImage = "$IMAGE_PATH/documentImage.png";
   static const String bankImage = "$IMAGE_PATH/bankImage.png";
+  static const String chatBubblesImage = "$IMAGE_PATH/chatbubbles.png";
 
   ///Registration
   static const String ckIcon = "$ICON_PATH/CK.svg";
@@ -70,5 +75,9 @@ class ImageAssets {
   static const String kPrivacyPolicyIcon = "$ICON_PATH/privacyPolicy.svg";
   static const String kTermConditionIcon = "$ICON_PATH/termCondition.svg";
 
+  ///Live Chat
+  static const String kTimerIcon = "$ICON_PATH/timer.svg";
+  // static const String kLockIcon = "$ICON_PATH/lock.svg";
+  static const String kStartLiveChatIcon = "$ICON_PATH/startLiveChat.svg";
 
 }

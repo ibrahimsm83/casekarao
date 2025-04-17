@@ -8,3 +8,4 @@ export 'pending_status_card.dart';
 export 'on_going_status_card.dart';
 export 'user_info_widget.dart';
 export 'amount_bar_widget.dart';
+export 'stacked_widget.dart';

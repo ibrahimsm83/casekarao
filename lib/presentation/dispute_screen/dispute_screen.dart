@@ -115,7 +115,6 @@ class DisputeScreen extends StatelessWidget {
           ),
           Spacer(),
           button(text: AppStrings.kAddDispute, onTap: () {
-
             Navigator.pushNamed(context, CustomRouteNames.kAddDisputeScreenRoute);
           }),
           SizedBox(height: 20.0),

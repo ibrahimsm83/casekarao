@@ -274,6 +274,11 @@ class AppStrings {
   static const String kDisputeTitleHinttext= "e.g: Case name or Case ID";
   static const String kPleaseUploadAttachmentsMax5 = "Please upload attachments (max 5) ";
 
+  ///Live chat
+  static const String kStartLiveChat= "Start Live Chat";
+  static const String kFiveMinReplyTime= "~5 mins reply time";
+  static const String kChatWithOurLiveRepresentative= "Chat with our live representative.";
+  static const String kAllConversationsAreSafePrivate= "All conversations are safe & private.";
 
   ///Validator
   static const String otpCode = "Otp Code";
