@@ -32,63 +32,47 @@ class CaseDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppSize.sizeWidth(context!) * 0.03,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: AppSize.sizeHeight(context) * 0.01),
-              Text(
-                AppStrings.kMurderCase,
-                style: getsemiboldStyle(
-                  color: ColorManager.primary,
-                  fontSize: ScreenUtil().setSp(AppSize.s24),
-                ),
-              ),
-              SizedBox(height: AppSize.s8.h),
-              Text(
-                AppStrings.kLoremIpsum,
-                style: getmediumStyle(
-                  color: ColorManager.kDarkGreyColor,
-                  fontSize: ScreenUtil().setSp(AppSize.s12),
-                ),
-              ),
-              SizedBox(height: AppSize.s12.h),
-              caseCard(
-                cdm: DataList.caseDetailsList.first,
-                onDocumentsTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kDocumentsScreenRoute,
-                  );
-                },
-                onCaseDisTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kCaseDiscussionScreenRoute,
-                  );
-                },
-              ),
-              caseCard(
-                cdm: DataList.caseDetailsList[1],
-                onDocumentsTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kDocumentsScreenRoute,
-                  );
-                },
-                onCaseDisTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kCaseDiscussionScreenRoute,
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSize.sizeWidth(context!) * 0.03,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: AppSize.sizeHeight(context) * 0.01),
+            _buildAmountWidget(),
+            SizedBox(height: AppSize.s12.h),
+            Flexible(
+              child: ListView.separated(
+                //shrinkWrap: true,
+                separatorBuilder: (context, i) => SizedBox(height: 5.0),
+                itemCount: DataList.caseDetailsList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppSize.sizeWidth(context!) * 0.01,
+                    ),
+                    child: caseCard(
+                      cdm: DataList.caseDetailsList[index],
+                      onDocumentsTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          CustomRouteNames.kDocumentsScreenRoute,
+                        );
+                      },
+                      onCaseDisTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          CustomRouteNames.kCaseDiscussionScreenRoute,
+                          arguments: false,
+                        );
+                      },
+                    ),
                   );
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -115,20 +99,32 @@ class CaseDetailsScreen extends StatelessWidget {
               children: [
                 Text(
                   cdm.mileStoneNumber,
-                  style: getsemiboldStyle(
-                    color: ColorManager.primary,
-                    fontSize: ScreenUtil().setSp(AppSize.s16),
-                  ),
-                ),
-                Text(
-                  cdm.mileStoneStatus,
                   style: getmediumStyle(
-                    color:
-                        cdm.mileStoneStatus == "Milestone Completed"
-                            ? ColorManager.secondary
-                            : ColorManager.kGreenColor,
+                    color: ColorManager.secondary,
                     fontSize: ScreenUtil().setSp(AppSize.s12),
                   ),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Container(
+                        height: 10,
+                        width: 10,
+                        decoration: BoxDecoration(
+                          color: ColorManager.kGreenColor,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      cdm.mileStoneStatus,
+                      style: getmediumStyle(
+                        color: ColorManager.kGreenColor,
+                        fontSize: ScreenUtil().setSp(AppSize.s12),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -143,6 +139,7 @@ class CaseDetailsScreen extends StatelessWidget {
             SizedBox(height: 4.h),
             Text(
               cdm.caseDesc,
+              maxLines: 4,
               style: getRegularStyle(
                 color: ColorManager.primary,
                 fontSize: ScreenUtil().setSp(AppSize.s10),
@@ -150,132 +147,76 @@ class CaseDetailsScreen extends StatelessWidget {
             ),
 
             ///Buttons
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: onDocumentsTap,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: ColorManager.kBackgroundColor,
-                          borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                            vertical: 5.0,
-                          ),
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(ImageAssets.kDocumentsIcon),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  AppStrings.kDocuments,
-                                  style: getRegularStyle(
-                                    color: ColorManager.primary,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: 17.w,
-                                height: 17.h,
-                                decoration: BoxDecoration(
-                                  color: ColorManager.secondary, // Circle color
-                                  shape: BoxShape.circle,
-                                ),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  cdm.docCount.toString(), // Display count
-                                  style: getRegularStyle(
-                                    color: ColorManager.kWhiteColor,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 5.w),
-                  Expanded(
-                    child: InkWell(
-                      onTap: onCaseDisTap,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: ColorManager.kBackgroundColor,
-                          borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                            vertical: 5.0,
-                          ),
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(ImageAssets.kCaseDiscIcon),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  AppStrings.kCaseDiscussion,
-                                  style: getRegularStyle(
-                                    color: ColorManager.primary,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: 17.w,
-                                // Circle size
-                                height: 17.h,
-                                decoration: BoxDecoration(
-                                  color: ColorManager.secondary, // Circle color
-                                  shape: BoxShape.circle,
-                                ),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  cdm.caseDiscussionCount.toString(),
-                                  // Display count
-                                  style: getRegularStyle(
-                                    color: ColorManager.kWhiteColor,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            SizedBox(height: 6.h),
+            button(
+              text: AppStrings.kAddDispute,
+              color: Colors.transparent,
+              fontColor: ColorManager.kGreyColor,
+              onTap: () {},
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget button({
+    Function()? onTap,
+    String? text,
+    Color? color,
+    Color? fontColor,
+    String? iconPath,
+  }) {
+    return CustomButton(
+      color: color ?? ColorManager.primary,
+      horizontalMargin: 0.0,
+      iconPath: iconPath,
+      isLeadingIcon: false,
+      borderColor: ColorManager.kGreyColor,
+      text: text ?? "",
+
+      style: getmediumStyle(
+        color: fontColor ?? ColorManager.kWhiteColor,
+        fontSize: AppSize.s14.sp,
+      ),
+      onTap: onTap,
+    );
+  }
+
+  Widget _buildAmountWidget() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppSize.s14.r),
+        color: ColorManager.kWhiteColor,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 6.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
             Text(
-              "PKR ${cdm.amount}",
+              AppStrings.kMurderCase,
               style: getsemiboldStyle(
                 color: ColorManager.primary,
-                fontSize: ScreenUtil().setSp(AppSize.s12),
+                fontSize: ScreenUtil().setSp(AppSize.s24),
               ),
             ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  cdm.paymentStatus,
+                  AppStrings.kPaymentVerified,
                   style: getsemiboldStyle(
                     color: ColorManager.kGreenColor,
                     fontSize: ScreenUtil().setSp(AppSize.s12),
                   ),
                 ),
+                SizedBox(width: 5.0),
                 Text(
-                  "MileStone expire in ${cdm.expiryDays} days",
-                  style: getRegularStyle(
+                  'PKR 30000.0',
+                  style: getsemiboldStyle(
                     color: ColorManager.primary,
-                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                    fontSize: ScreenUtil().setSp(AppSize.s14),
                   ),
                 ),
               ],

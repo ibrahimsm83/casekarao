@@ -10,6 +10,7 @@ class CustomButton extends StatelessWidget {
   String? text;
   FontWeight? fontWeight;
   final Color? color;
+  final Color? borderColor;
   Function()? onTap;
   TextStyle? style;
   bool isLeadingIcon;
@@ -21,6 +22,7 @@ class CustomButton extends StatelessWidget {
     this.onTap,
     this.text,
     this.style,
+    this.borderColor,
     this.fontWeight = FontWeight.normal,
     this.isLeadingIcon = false,
     this.iconPath,
@@ -42,6 +44,7 @@ class CustomButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(22.r),
+            border: Border.all(color: borderColor??Colors.transparent)
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

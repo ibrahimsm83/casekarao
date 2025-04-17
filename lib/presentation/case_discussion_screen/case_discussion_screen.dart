@@ -36,7 +36,11 @@ class CaseDiscussionScreen extends StatelessWidget {
           isCaseFiled ?? false
               ? viewOffer()
               : InkWell(
-                onTap: () => Navigator.pop(context),
+                onTap:
+                    () => Navigator.pushNamed(
+                      context,
+                      CustomRouteNames.kDocumentsScreenRoute,
+                    ),
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10.0, bottom: 5.0),
                   child: Container(

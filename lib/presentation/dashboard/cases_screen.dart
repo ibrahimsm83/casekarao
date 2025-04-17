@@ -53,7 +53,12 @@ class CasesScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal: AppSize.sizeWidth(context!) * 0.04,
             ),
-            child: OnGoingStatusCard(status:DataList.onGoingList[index],onDetailsTap: (){},
+            child: OnGoingStatusCard(status:DataList.onGoingList[index],onDetailsTap: (){
+              Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kCaseDetailsScreenRoute,
+              );
+            },
               onMessageTap: (){
                 Navigator.pushNamed(
                     context,

@@ -181,6 +181,7 @@ class AppStrings {
   static const String kOfferRequests= "Offer Requests";
   static const String kHitAndRunCase= "Hit and Run Case";
   static const String kPaymentStatus = "Payment Status:\t";
+  static const String kPaymentVerified = "Payment Verified";
   static const String kMilestoneExpiry = "Milestone Expiry:\t";
   static const String kNewConsultationRequests= "New Consultation Requests";
   static const String kConsultationRequestsDetails= "Consultation Requests Details";
@@ -213,6 +214,7 @@ class AppStrings {
   static const String kPDF= "PDF";
   static const String k2pages= "2 pages";
   static const String kDocuments= "Documents";
+  static const String kAddDispute= "Add Dispute";
   static const String kUploadDocument= "Upload Document";
   static const String kCaseDiscussion= "Case Discussion";
   static const String kUploadedByLawyer= "Uploaded by Lawyer";
