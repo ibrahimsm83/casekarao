@@ -152,4 +152,13 @@ static List<CaseDetailsModel> caseDetailsList=[
    UserMessageModel(title: "Cristofer Septimus", subtitle: "How are you doing?", userImage: ImageAssets.userImage, messageCount: 0, dateTime: "Saturday"),
 
  ];
+
+
+ static List<RecentActivityModel> payoutDetailsList=[
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "Case Completed", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Transfared"),
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "Case Completed", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Transfared"),
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "Case Completed", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Transfared"),
+   RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "Case Completed", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Transfared"),
+
+ ];
 }

@@ -183,6 +183,12 @@ class CustomRouteGenerator {
             return DocumentsScreen();
           },
         );
+        case CustomRouteNames.kPayoutDetailsScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return PayoutDetailsScreen();
+          },
+        );
         case CustomRouteNames.kCaseDiscussionScreenRoute:
           final isFiled = settings.arguments as bool;
         return MaterialPageRoute(

@@ -235,12 +235,17 @@ class AppStrings {
   static const String kDispute= "Dispute";
   static const String kNotifications= "Notifications";
   static const String kPayout= "Payout";
+  static const String kPayoutDetails= "Payout Details";
   static const String kHelpSupport= "Help & Support";
   static const String kLiveChat= "Live Chat";
   static const String kTermConditions= "Term & Conditions";
   static const String kPrivacyPolicy= "Privacy Policy";
   static const String kAboutCaseKarao= "About CaseKarao";
 
+  ///Payout Details
+  static const String kAddPayout= "Add Payout";
+  static const String kTransfered = "Transfered";
+  static const String kRecentPayoutDetails= "Recent Payout Details";
 
   ///Validator
   static const String otpCode = "Otp Code";

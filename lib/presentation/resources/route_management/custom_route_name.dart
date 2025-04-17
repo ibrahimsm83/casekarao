@@ -26,5 +26,6 @@ class CustomRouteNames {
   static const String kCaseDetailsScreenRoute = "/kCaseDetailsScreenRoute";
   static const String kDocumentsScreenRoute = "/kDocumentsScreenRoute";
   static const String kCaseDiscussionScreenRoute = "/kCaseDiscussionScreenRoute";
+  static const String kPayoutDetailsScreenRoute = "/kPayoutDetailsScreenRoute";
 
 }

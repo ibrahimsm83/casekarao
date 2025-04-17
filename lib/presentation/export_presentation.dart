@@ -24,3 +24,4 @@ export 'create_milestones_screen/create_milestones_screen.dart';
 export 'case_details_screen/case_details_screen.dart';
 export 'documents_screen/documents_screen.dart';
 export 'case_discussion_screen/case_discussion_screen.dart';
+export 'payout_details_screen/payout_details_screen.dart';

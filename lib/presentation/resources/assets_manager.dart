@@ -10,6 +10,7 @@ class ImageAssets {
   static const String getStartedImage = "$IMAGE_PATH/getstarted.png";
   static const String letStartedImage = "$IMAGE_PATH/letstarted.png";
   static const String documentsImage = "$IMAGE_PATH/documentImage.png";
+  static const String bankImage = "$IMAGE_PATH/bankImage.png";
 
   ///Registration
   static const String ckIcon = "$ICON_PATH/CK.svg";

@@ -17,7 +17,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
     UserSettingsModel(title:  AppStrings.kChangePassword, iconPath:  ImageAssets.kLockIcon, navigateRoute: ''),
     UserSettingsModel(title:  AppStrings.kDispute, iconPath:  ImageAssets.kFlagIcon, navigateRoute: ''),
     UserSettingsModel(title:  AppStrings.kNotifications, iconPath:  ImageAssets.kNotificationIcon, navigateRoute: ''),
-    UserSettingsModel(title:  AppStrings.kPayout, iconPath:  ImageAssets.kWalletIcon, navigateRoute: ''),
+    UserSettingsModel(title:  AppStrings.kPayout, iconPath:  ImageAssets.kWalletIcon, navigateRoute:  CustomRouteNames.kPayoutDetailsScreenRoute,),
   ];
 
   List<UserSettingsModel> helpAndSupportList=[
@@ -115,9 +115,13 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
                           title: accountList[index].title,
                           leadingIcon: accountList[index].iconPath,
                           onTap: () {
+                            print("indes dsdds $index");
                             // if(index==1|| index==2||index==3|| index==4||index==6||index==7){
                             //   Navigator.pushNamed(context, choicsRoute[index]);
-                            // }
+                            // } /
+                             if(index==4){
+                              Navigator.pushNamed(context, accountList[index].navigateRoute);
+                            }
                           },
                         ),
                       ),
