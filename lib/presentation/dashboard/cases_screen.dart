@@ -30,16 +30,19 @@ class CasesScreen extends StatelessWidget {
             onTap: () {
               //Notification screen
             },
-            child: Container(
-              height: 44.h,
-              width: 44.h,
-              decoration: BoxDecoration(
-                color: ColorManager.kWhiteColor,
-                borderRadius: BorderRadius.all(Radius.circular(16.r)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: SvgPicture.asset(ImageAssets.kNotificationIcon),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Container(
+                height: 44.h,
+                width: 44.h,
+                decoration: BoxDecoration(
+                  color: ColorManager.kWhiteColor,
+                  borderRadius: BorderRadius.all(Radius.circular(16.r)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: SvgPicture.asset(ImageAssets.kNotificationIcon),
+                ),
               ),
             ),
           ),

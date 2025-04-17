@@ -43,7 +43,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: <Widget>[
             HomeLawyerScreen(),
             CasesScreen(),
-            Container(child: Text("Message"),),
+           // Container(child: Text("Message"),),
+            MessagesScreen(),
             // AppointmentsLawyerScreen(),
             EarningsLawyerScreen(),
             SettingsLawyerScreen(),

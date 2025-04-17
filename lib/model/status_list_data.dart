@@ -142,4 +142,14 @@ static List<CaseDetailsModel> caseDetailsList=[
    RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "1st Milestone", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Received"),
    RecentActivityModel(title: "Evans Richard", subtitle: "Murder Case", milestone: "1st Milestone", userImage: ImageAssets.userImage, receivedAmount: 500, amountStatus: "Received"),
  ];
+
+ static List<UserMessageModel> userMessageList=[
+   UserMessageModel(title: "Charlie Franci", subtitle: "How are you doing?", userImage: ImageAssets.userImage, messageCount: 2, dateTime: "Today"),
+   UserMessageModel(title: "Nolan Baptista", subtitle: "How are you doing?", userImage: ImageAssets.userImage, messageCount: 0, dateTime: "3:23 pm"),
+   UserMessageModel(title: "Gustavo Culhane", subtitle: "How are you doing?", userImage: ImageAssets.userImage, messageCount: 0, dateTime: "2:12 pm"),
+   UserMessageModel(title: "Zaire Franci", subtitle: "How are you doing?", userImage: ImageAssets.userImage, messageCount: 0, dateTime: "Wednesday"),
+   UserMessageModel(title: "Roger Stanton", subtitle: "How are you doing?", userImage: ImageAssets.userImage, messageCount: 0, dateTime: "Friday"),
+   UserMessageModel(title: "Cristofer Septimus", subtitle: "How are you doing?", userImage: ImageAssets.userImage, messageCount: 0, dateTime: "Saturday"),
+
+ ];
 }
