@@ -15,7 +15,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
   List<UserSettingsModel> accountList=[
     UserSettingsModel(title:  AppStrings.kAccountInformation, iconPath:  ImageAssets.kPersonIcon, navigateRoute: ''),
     UserSettingsModel(title:  AppStrings.kChangePassword, iconPath:  ImageAssets.kLockIcon, navigateRoute: ''),
-    UserSettingsModel(title:  AppStrings.kDispute, iconPath:  ImageAssets.kFlagIcon, navigateRoute: ''),
+    UserSettingsModel(title:  AppStrings.kDispute, iconPath:  ImageAssets.kFlagIcon, navigateRoute:  CustomRouteNames.kDisputeScreenRoute),
     UserSettingsModel(title:  AppStrings.kNotifications, iconPath:  ImageAssets.kNotificationIcon, navigateRoute:  CustomRouteNames.kNotificationSettingScreenRoute),
     UserSettingsModel(title:  AppStrings.kPayout, iconPath:  ImageAssets.kWalletIcon, navigateRoute:  CustomRouteNames.kPayoutDetailsScreenRoute,),
   ];
@@ -119,7 +119,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
                             // if(index==1|| index==2||index==3|| index==4||index==6||index==7){
                             //   Navigator.pushNamed(context, choicsRoute[index]);
                             // } /
-                             if(index==3||index==4){
+                             if(index==2||index==3||index==4){
                               Navigator.pushNamed(context, accountList[index].navigateRoute);
                             }
                           },

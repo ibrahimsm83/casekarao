@@ -262,6 +262,11 @@ class AppStrings {
   static const String kPayoutNotification ="Payout Notification";
   static const String kNewCaseNotification= "New Case Notification";
 
+  ///Dispute
+  static const String kDisputeLoremIpsum= "Lorem Ipsum is simply dummy text of";
+  static const String kRejected= "Rejected";
+  static const String kApproved= "Approved";
+
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";

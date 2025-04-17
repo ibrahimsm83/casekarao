@@ -208,6 +208,12 @@ class CustomRouteGenerator {
             return NotificationSettingScreen();
           },
         );
+        case CustomRouteNames.kDisputeScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return DisputeScreen();
+          },
+        );
       default:
         return null;
     }
