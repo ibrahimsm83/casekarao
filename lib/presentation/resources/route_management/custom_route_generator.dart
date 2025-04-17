@@ -214,6 +214,12 @@ class CustomRouteGenerator {
             return DisputeScreen();
           },
         );
+        case CustomRouteNames.kAddDisputeScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return AddDisputeScreen();
+          },
+        );
       default:
         return null;
     }

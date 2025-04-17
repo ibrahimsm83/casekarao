@@ -63,53 +63,85 @@ class DisputeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: disputes.length,
-        itemBuilder: (context, index) {
-          final dispute = disputes[index];
-          return Container(
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14.r),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: disputes.length,
+            itemBuilder: (context, index) {
+              final dispute = disputes[index];
+              return Container(
+                margin: EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14.r),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Dispute ID ${dispute.id}',
-                      style: getRegularStyle(
-                        color: ColorManager.kGreyColor,
-                        fontSize: ScreenUtil().setSp(FontSize.s8.sp),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Dispute ID ${dispute.id}',
+                          style: getRegularStyle(
+                            color: ColorManager.kGreyColor,
+                            fontSize: ScreenUtil().setSp(FontSize.s8.sp),
+                          ),
+                        ),
+                        Text(
+                          dispute.status,
+                          style: getmediumStyle(
+                            color: _getStatusColor(dispute.status),
+                            fontSize: ScreenUtil().setSp(FontSize.s10.sp),
+                          ),
+                        ),
+                      ],
                     ),
+                    SizedBox(height: 6),
                     Text(
-                      dispute.status,
+                      dispute.description,
                       style: getmediumStyle(
-                        color: _getStatusColor(dispute.status),
+                        color: ColorManager.primary,
                         fontSize: ScreenUtil().setSp(FontSize.s10.sp),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 6),
-                Text(
-                  dispute.description,
-                  style: getmediumStyle(
-                    color: ColorManager.primary,
-                    fontSize: ScreenUtil().setSp(FontSize.s10.sp),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
+              );
+            },
+          ),
+          Spacer(),
+          button(text: AppStrings.kAddDispute, onTap: () {
+
+            Navigator.pushNamed(context, CustomRouteNames.kAddDisputeScreenRoute);
+          }),
+          SizedBox(height: 20.0),
+        ],
       ),
+    );
+  }
+  Widget button({
+    Function()? onTap,
+    String? text,
+    Color? color,
+    Color? fontColor,
+    String? iconPath,
+  }) {
+    return CustomButton(
+      color: color ?? ColorManager.primary,
+      horizontalMargin: 0.04,
+      iconPath: iconPath,
+      isLeadingIcon: true,
+      text: text ?? "",
+
+      style: getmediumStyle(
+        color: fontColor ?? ColorManager.kWhiteColor,
+        fontSize: AppSize.s14.sp,
+      ),
+      onTap: onTap,
     );
   }
 }

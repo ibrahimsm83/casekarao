@@ -30,5 +30,6 @@ class CustomRouteNames {
   static const String kAddPayoutScreenRoute = "/kAddPayoutScreenRoute";
   static const String kNotificationSettingScreenRoute = "/kNotificationSettingScreenRoute";
   static const String kDisputeScreenRoute = "/kDisputeScreenRoute";
+  static const String kAddDisputeScreenRoute = "/kAddDisputeScreenRoute";
 
 }

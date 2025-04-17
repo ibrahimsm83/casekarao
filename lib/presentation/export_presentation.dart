@@ -28,3 +28,4 @@ export 'payout_details_screen/payout_details_screen.dart';
 export 'add_payout_screen/add_payout_screen.dart';
 export 'notification_settings_screen/notification_setting_screen.dart';
 export 'dispute_screen/dispute_screen.dart';
+export 'add_dispute_screen/add_dispute_screen.dart';

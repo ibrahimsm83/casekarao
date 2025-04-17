@@ -267,6 +267,14 @@ class AppStrings {
   static const String kRejected= "Rejected";
   static const String kApproved= "Approved";
 
+  ///Dispute
+  static const String kAttachMedia= "Attach Media";
+  static const String kDisputeTitle= "Dispute Title";
+  static const String kDisputeDescription= "Dispute Description";
+  static const String kDisputeTitleHinttext= "e.g: Case name or Case ID";
+  static const String kPleaseUploadAttachmentsMax5 = "Please upload attachments (max 5) ";
+
+
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";
