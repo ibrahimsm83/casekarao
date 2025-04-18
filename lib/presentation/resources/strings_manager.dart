@@ -293,6 +293,17 @@ class AppStrings {
   static const String kInOrderToChange= "In order to change password please enter your old password.";
   static const String kPleaseSetYourNewPassword= "Please set your new password to change it.";
 
+  /// Account Information
+  static const String kLegalExperience= "Legal Experience";
+  static const String kAccountPreferences= "Account Preferences";
+  static const String kPersonalInformation= "Personal Information";
+  static const String kBusinessAvailability= "Business & Availabilitye";
+  static const String kEducationCertifications= "Education & Certifications";
+  static const String kGovernmentIissuedIDUpload= "Government-issued ID Upload";
+  static const String kBarIDCardUpload= "Bar ID Card Upload";
+  static const String kOptionalDetails= "Optional Details";
+  static const String kEnhancingProfile= "(Enhancing Profile)";
+  static const String kSelfieforIdentityVerification= "Selfie for Identity Verification";
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";

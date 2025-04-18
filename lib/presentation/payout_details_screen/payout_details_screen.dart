@@ -84,7 +84,7 @@ class _PayoutDetailsScreenState extends State<PayoutDetailsScreen> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: bankCardsList.length,
-                padding: const EdgeInsets.all(16),
+                // padding: const EdgeInsets.all(10),
                 itemBuilder: (context, index) {
                   return BankCard(
                     card: bankCardsList[index],
@@ -156,9 +156,12 @@ class _PayoutDetailsScreenState extends State<PayoutDetailsScreen> {
       contentPadding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
       tileColor: ColorManager.kWhiteColor,
-      leading: CircleAvatar(
-        radius: 20, // Size of the avatar
-        backgroundImage: AssetImage(data.userImage), // Local image
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 5.0),
+        child: CircleAvatar(
+          radius: 20, // Size of the avatar
+          backgroundImage: AssetImage(data.userImage), // Local image
+        ),
       ),
       title: Text(
         data.title,
@@ -186,25 +189,28 @@ class _PayoutDetailsScreenState extends State<PayoutDetailsScreen> {
           ),
         ],
       ),
-      trailing: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "PKR${data.receivedAmount}",
-            style: getsemiboldStyle(
-              color: ColorManager.primary,
-              fontSize: ScreenUtil().setSp(AppSize.s14),
+      trailing: Padding(
+        padding: const EdgeInsets.only(right: 8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "PKR${data.receivedAmount}",
+              style: getsemiboldStyle(
+                color: ColorManager.primary,
+                fontSize: ScreenUtil().setSp(AppSize.s14),
+              ),
             ),
-          ),
-          SizedBox(width: 10.0),
-          Text(
-            data.amountStatus,
-            style: getRegularStyle(
-              color: ColorManager.kDarkGreyColor,
-              fontSize: ScreenUtil().setSp(AppSize.s10),
+            SizedBox(width: 10.0),
+            Text(
+              data.amountStatus,
+              style: getRegularStyle(
+                color: ColorManager.kDarkGreyColor,
+                fontSize: ScreenUtil().setSp(AppSize.s10),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -13,7 +13,7 @@ class SettingsLawyerScreen extends StatefulWidget {
 class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
 
   List<UserSettingsModel> accountList=[
-    UserSettingsModel(title:  AppStrings.kAccountInformation, iconPath:  ImageAssets.kPersonIcon, navigateRoute: ''),
+    UserSettingsModel(title:  AppStrings.kAccountInformation, iconPath:  ImageAssets.kPersonIcon, navigateRoute: CustomRouteNames.kAccountInformationScreenRoute),
     UserSettingsModel(title:  AppStrings.kChangePassword, iconPath:  ImageAssets.kLockIcon, navigateRoute:  CustomRouteNames.kChangePasswordScreenRoute),
     UserSettingsModel(title:  AppStrings.kDispute, iconPath:  ImageAssets.kFlagIcon, navigateRoute:  CustomRouteNames.kDisputeScreenRoute),
     UserSettingsModel(title:  AppStrings.kNotifications, iconPath:  ImageAssets.kNotificationIcon, navigateRoute:  CustomRouteNames.kNotificationSettingScreenRoute),
@@ -82,7 +82,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              UserInfoWidget(),
+              UserInfoWidget(isShowViewProfileButton: true),
 
               Padding(
                 padding: EdgeInsets.only(
@@ -115,7 +115,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
                           title: accountList[index].title,
                           leadingIcon: accountList[index].iconPath,
                           onTap: () {
-                             if(index==1||index==2||index==3||index==4){
+                             if(index==0||index==1||index==2||index==3||index==4){
                               Navigator.pushNamed(context, accountList[index].navigateRoute);
                             }
                           },

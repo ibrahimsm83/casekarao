@@ -32,3 +32,4 @@ export 'add_dispute_screen/add_dispute_screen.dart';
 export 'live_chat_screen/live_chat_screen.dart';
 export 'terms_and_conditions_screen/terms_condition_screen.dart';
 export 'change_password_screen/change_password_screen.dart';
+export 'account_information_screen/account_information_screen.dart';

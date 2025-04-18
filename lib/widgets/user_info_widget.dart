@@ -4,7 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../export_casekarao.dart';
 
 class UserInfoWidget extends StatelessWidget {
-  const UserInfoWidget({super.key});
+  bool? isShowViewProfileButton;
+   UserInfoWidget({super.key,this.isShowViewProfileButton=false});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class UserInfoWidget extends StatelessWidget {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage(ImageAssets.userImage),
+                              image: AssetImage(ImageAssets.starUserImage4),
                             ),
                           ),
                         ),
@@ -139,16 +140,19 @@ class UserInfoWidget extends StatelessWidget {
                 ],)
               ],
             ),
-            button(
-              color: ColorManager.kLightBlueColor.withOpacity(0.4),
-              text: AppStrings.kViewProfile,
-              fontColor: ColorManager.secondary,
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  CustomRouteNames.kDashboardScreenRoute,
-                );
-              },
+            Visibility(
+              visible: isShowViewProfileButton??false,
+              child: button(
+                color: ColorManager.kLightBlueColor.withOpacity(0.4),
+                text: AppStrings.kViewProfile,
+                fontColor: ColorManager.secondary,
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kDashboardScreenRoute,
+                  );
+                },
+              ),
             ),
           ],
         ),

@@ -243,6 +243,12 @@ class CustomRouteGenerator {
             return ChangePasswordScreen();
           },
         );
+        case CustomRouteNames.kAccountInformationScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return AccountInformationScreen();
+          },
+        );
 
       default:
         return null;
