@@ -284,6 +284,15 @@ class AppStrings {
   static const String kTermsAndConditions= "Terms & Conditions";
   // static const String kAboutCaseKarao= "About Case Karao";
 
+  ///ChangePassword
+  static const String kTOldPassword= "Old Password";
+  static const String kNewPassword= "New Password";
+  static const String kPassword= "Password";
+  static const String kConfirmPassword= "Confirm password";
+  static const String kCreateStrongPassword= "Create strong password";
+  static const String kInOrderToChange= "In order to change password please enter your old password.";
+  static const String kPleaseSetYourNewPassword= "Please set your new password to change it.";
+
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";

@@ -237,6 +237,13 @@ class CustomRouteGenerator {
             );
           },
         );
+      case CustomRouteNames.kChangePasswordScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return ChangePasswordScreen();
+          },
+        );
+
       default:
         return null;
     }
