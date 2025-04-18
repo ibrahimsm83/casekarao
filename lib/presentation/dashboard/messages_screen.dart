@@ -46,26 +46,33 @@ class MessagesScreen extends StatelessWidget {
       body: ListView.separated(
         separatorBuilder:
             (context, i) => Padding(
-              padding: const EdgeInsets.only(left: 60.0, right: 20,bottom: 10.0),
+              padding: const EdgeInsets.only(
+                left: 60.0,
+                right: 20,
+                bottom: 10.0,
+              ),
               child: Divider(height: 10.0),
             ),
         itemCount: DataList.userMessageList.length,
         itemBuilder: (context, index) {
           return userList(
             DataList.userMessageList[index],
-            // onTap: () {
-            //   print("tapped $index");
-            // },
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                CustomRouteNames.kCaseDiscussionScreenRoute,
+                arguments: true,
+              );
+            },
           );
-          //CaseCard(caseData: filteredCases[index]);
         },
       ),
-      //CaseCard(caseData: filteredCases[index]);
     );
   }
 
-  Widget userList(UserMessageModel data) {
+  Widget userList(UserMessageModel data, {void Function()? onTap}) {
     return ListTile(
+      onTap: onTap,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
       //  tileColor: ColorManager.kWhiteColor,
       leading: CircleAvatar(
@@ -76,7 +83,7 @@ class MessagesScreen extends StatelessWidget {
         data.title,
         style: getmediumStyle(
           color: ColorManager.primary,
-          fontSize: ScreenUtil().setSp(AppSize.s16),
+          fontSize: ScreenUtil().setSp(AppSize.s14),
         ),
       ),
       subtitle: Text(
@@ -116,13 +123,6 @@ class MessagesScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Text(
-          //   data.messageCount ==0?"":data.messageCount.toString(),
-          //   style: getRegularStyle(
-          //     color: ColorManager.kDarkGreyColor,
-          //     fontSize: ScreenUtil().setSp(AppSize.s10),
-          //   ),
-          // ),
         ],
       ),
     );
