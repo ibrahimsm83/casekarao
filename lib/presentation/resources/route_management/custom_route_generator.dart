@@ -226,6 +226,12 @@ class CustomRouteGenerator {
             return LiveChatScreen();
           },
         );
+        case CustomRouteNames.kTermsConditionScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return TermsConditionScreen();
+          },
+        );
       default:
         return null;
     }

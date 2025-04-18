@@ -30,3 +30,4 @@ export 'notification_settings_screen/notification_setting_screen.dart';
 export 'dispute_screen/dispute_screen.dart';
 export 'add_dispute_screen/add_dispute_screen.dart';
 export 'live_chat_screen/live_chat_screen.dart';
+export 'terms_and_conditions_screen/terms_condition_screen.dart';

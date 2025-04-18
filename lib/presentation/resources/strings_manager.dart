@@ -280,6 +280,10 @@ class AppStrings {
   static const String kChatWithOurLiveRepresentative= "Chat with our live representative.";
   static const String kAllConversationsAreSafePrivate= "All conversations are safe & private.";
 
+  ///termsCondition
+  static const String kTermsAndConditions= "Terms & Conditions";
+  // static const String kAboutCaseKarao= "About Case Karao";
+
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";
