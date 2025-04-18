@@ -227,9 +227,14 @@ class CustomRouteGenerator {
           },
         );
         case CustomRouteNames.kTermsConditionScreenRoute:
+          TermsAndConditionArgumentModel argumentModel =
+          settings.arguments as TermsAndConditionArgumentModel;
         return MaterialPageRoute(
           builder: (context) {
-            return TermsConditionScreen();
+            return TermsConditionScreen(
+              title: argumentModel.title,
+              details: argumentModel.details,
+            );
           },
         );
       default:

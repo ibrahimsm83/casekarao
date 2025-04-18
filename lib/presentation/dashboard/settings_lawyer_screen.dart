@@ -23,8 +23,8 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
   List<UserSettingsModel> helpAndSupportList=[
     UserSettingsModel(title:  AppStrings.kLiveChat, iconPath:  ImageAssets.kLiveChatIcon, navigateRoute: CustomRouteNames.kLiveChatScreenRoute),
     UserSettingsModel(title:  AppStrings.kTermConditions, iconPath:  ImageAssets.kTermConditionIcon, navigateRoute: CustomRouteNames.kTermsConditionScreenRoute),
-    UserSettingsModel(title:  AppStrings.kPrivacyPolicy, iconPath:  ImageAssets.kPrivacyPolicyIcon, navigateRoute: ''),
-    UserSettingsModel(title:  AppStrings.kAboutCaseKarao, iconPath:  ImageAssets.kAboutIcon, navigateRoute: ''),
+    UserSettingsModel(title:  AppStrings.kPrivacyPolicy, iconPath:  ImageAssets.kPrivacyPolicyIcon, navigateRoute: CustomRouteNames.kTermsConditionScreenRoute),
+    UserSettingsModel(title:  AppStrings.kAboutCaseKarao, iconPath:  ImageAssets.kAboutIcon, navigateRoute: CustomRouteNames.kTermsConditionScreenRoute),
   ];
 
   @override
@@ -111,7 +111,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
                   itemBuilder:
                       (context, index) => Padding(
                         padding: EdgeInsets.only(top: index == 0 ? 10.0 : 0.0),
-                        child: customeListTile(
+                        child: customListTile(
                           title: accountList[index].title,
                           leadingIcon: accountList[index].iconPath,
                           onTap: () {
@@ -154,16 +154,19 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
                   itemBuilder:
                       (context, index) => Padding(
                         padding: EdgeInsets.only(top: index == 0 ? 10.0 : 0.0),
-                        child: customeListTile(
+                        child: customListTile(
                           title: helpAndSupportList[index].title,
                           leadingIcon: helpAndSupportList[index].iconPath,
                           onTap: () {
-                            if(index==0||index==1){
-                              Navigator.pushNamed(context, helpAndSupportList[index].navigateRoute);
+                            if(index==0||index==1||index==2||index==3) {
+                              Navigator.pushNamed(context,
+                                  helpAndSupportList[index].navigateRoute,
+                                  arguments: TermsAndConditionArgumentModel
+                                      .required(
+                                      title: helpAndSupportList[index].title,
+                                      details: "")
+                              );
                             }
-                            // if(index==1|| index==2||index==3|| index==4||index==6||index==7){
-                            //   Navigator.pushNamed(context, choicsRoute[index]);
-                            // }
                           },
                         ),
                       ),
@@ -176,7 +179,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
     );
   }
 
-  Widget customeListTile({
+  Widget customListTile({
     String? title,
     String? leadingIcon,
     void Function()? onTap,

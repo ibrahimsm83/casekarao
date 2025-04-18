@@ -5,3 +5,4 @@ class OtpScreenArgumentModel {
 
   OtpScreenArgumentModel.required({required this.phoneNumber});
 }
+
