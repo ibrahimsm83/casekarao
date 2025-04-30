@@ -89,12 +89,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontSize: ScreenUtil().setSp(AppSize.s24),
                   ),
                 ),
-                SizedBox(height: AppSize.s8.h),
+                SizedBox(height: AppSize.s4.h),
                 Text(
                   AppStrings.createAnAccountByFillingInTheDataBelow,
                   style: getmediumStyle(
                     color: ColorManager.kDarkGreyColor,
-                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                    fontSize: ScreenUtil().setSp(AppSize.s14),
                   ),
                 ),
                 //SizedBox(height: AppSize.s20.h),

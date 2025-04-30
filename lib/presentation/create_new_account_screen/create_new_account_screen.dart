@@ -68,7 +68,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
           key: _formKey,
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: AppSize.sizeWidth(context!) * 0.05,
+              horizontal: AppSize.sizeWidth(context) * 0.05,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,7 +102,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                   AppStrings.createAnAccountByFillingInTheDataBelow,
                   style: getmediumStyle(
                     color: ColorManager.kDarkGreyColor,
-                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                    fontSize: ScreenUtil().setSp(AppSize.s14),
                   ),
                 ),
                 Padding(
@@ -231,6 +231,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                 SizedBox(height: AppSize.s10.h),
                 // Progress Bar for Password Strength
                 LinearProgressIndicator(
+                  borderRadius: BorderRadius.circular(10),
                   value: _strength,
                   backgroundColor: Colors.grey[300],
                   color:
@@ -246,38 +247,38 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                   text: AppStrings.register,
                   onTap: () {
                     //if (_formKey.currentState!.validate()) {
-                      // print(_phoneNumberController.text);
-                      // print(_passwordController.text);
-                      // print(_emailController.text);
-                      // print(_fullNameController.text);
-                      if (_phoneNumberController.text.isNotEmpty) {
-                        Navigator.pushNamed(
-                          context,
-                          CustomRouteNames.kOtpVerificationScreenRoute,
-                          arguments: OtpScreenArgumentModel.required(
-                              phoneNumber: _phoneNumberController.text,
-                             ),
-                        );
-                      } else {
-                        CustomSnacksBar.showSnackBar(
-                          context,
-                          "Please Enter Phone Number ",
-                          icon: Icon(
-                            Icons.error,
-                            color: ColorManager.kWhiteColor,
-                          ),
-                        );
-                         }
+                    // print(_phoneNumberController.text);
+                    // print(_passwordController.text);
+                    // print(_emailController.text);
+                    // print(_fullNameController.text);
+                    if (_phoneNumberController.text.isNotEmpty) {
+                      Navigator.pushNamed(
+                        context,
+                        CustomRouteNames.kOtpVerificationScreenRoute,
+                        arguments: OtpScreenArgumentModel.required(
+                          phoneNumber: _phoneNumberController.text,
+                        ),
+                      );
+                    } else {
+                      CustomSnacksBar.showSnackBar(
+                        context,
+                        "Please Enter Phone Number ",
+                        icon: Icon(
+                          Icons.error,
+                          color: ColorManager.kWhiteColor,
+                        ),
+                      );
+                    }
 
-                      // CustomSnacksBar.showSnackBar(
-                      //   context,
-                      //   "Registered Successfully",
-                      //   icon: Icon(
-                      //     Icons.check,
-                      //     color: ColorManager.kWhiteColor,
-                      //   ),
-                      // );
-                   // }
+                    // CustomSnacksBar.showSnackBar(
+                    //   context,
+                    //   "Registered Successfully",
+                    //   icon: Icon(
+                    //     Icons.check,
+                    //     color: ColorManager.kWhiteColor,
+                    //   ),
+                    // );
+                    // }
                   },
                 ),
                 CustomTextSpan(
