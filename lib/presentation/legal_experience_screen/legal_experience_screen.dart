@@ -113,7 +113,7 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: AppSize.s10.h,
+                    top: AppSize.s8.h,
                     bottom: AppSize.s6.h,
                   ),
                   child: Text(
@@ -141,7 +141,7 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
 
                 Padding(
                   padding: EdgeInsets.only(
-                    top: AppSize.s10.h,
+                    top: AppSize.s8.h,
                     bottom: AppSize.s6.h,
                   ),
                   child: Text(
@@ -231,7 +231,7 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
 
   Widget heading(String text1, String text2) {
     return Padding(
-      padding: EdgeInsets.only(top: AppSize.s20.h, bottom: AppSize.s6.h),
+      padding: EdgeInsets.only(top: AppSize.s8.h, bottom: AppSize.s6.h),
       child: Row(
         children: [
           Text(
