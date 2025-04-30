@@ -50,7 +50,7 @@ class _OtpScreenState extends State<OtpScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: AppSize.sizeWidth(context!) * 0.05,
-              vertical: 20,
+              //vertical: 5,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +128,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   // },
                 ),
 
-                SizedBox(height: AppSize.sizeHeight(context) * 0.2),
+                SizedBox(height: AppSize.sizeHeight(context) * 0.1),
                 button(
                   text: AppStrings.continues,
                   onTap: () {
