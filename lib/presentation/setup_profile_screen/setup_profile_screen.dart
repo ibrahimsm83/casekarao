@@ -5,7 +5,7 @@ import '../../export_casekarao.dart';
 
 class SetupProfileScreen extends StatefulWidget {
   final bool? isCompleteAllRequiredField;
-  const SetupProfileScreen({super.key,this.isCompleteAllRequiredField});
+  const SetupProfileScreen({super.key, this.isCompleteAllRequiredField});
 
   @override
   State<SetupProfileScreen> createState() => _SetupProfileScreenState();
@@ -33,10 +33,11 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
       }
     });
   }
+
   @override
   void initState() {
-    if(widget.isCompleteAllRequiredField??false){
-      selectedItems=items;
+    if (widget.isCompleteAllRequiredField ?? false) {
+      selectedItems = items;
     }
 
     super.initState();
@@ -96,9 +97,12 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                   String item = items[index];
                   bool isSelected = selectedItems.contains(item);
                   return ListTile(
-                    onTap: widget.isCompleteAllRequiredField??false ?(){}:() {
-                      toggleSelection(item);
-                    },
+                    onTap:
+                        widget.isCompleteAllRequiredField ?? false
+                            ? () {}
+                            : () {
+                              toggleSelection(item);
+                            },
                     minTileHeight: 45.h,
                     tileColor: ColorManager.kWhiteColor,
                     title: Text(
@@ -114,8 +118,9 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                       ), // Set border radius
                     ),
                     trailing: Container(
-                      height: 24.h,
-                      width: 24.w,
+                      padding: EdgeInsets.all(0),
+                      height: 20.h,
+                      width: 20.w,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color:
@@ -125,6 +130,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                       ),
                       child: Icon(
                         Icons.check,
+                        size: 20,
                         color:
                             isSelected
                                 ? ColorManager.kWhiteColor
@@ -146,18 +152,17 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
             button(
               text: AppStrings.saveAndContinue,
               onTap: () {
-                if(widget.isCompleteAllRequiredField??false){
+                if (widget.isCompleteAllRequiredField ?? false) {
                   Navigator.pushNamed(
                     context,
                     CustomRouteNames.kApplicationUnderReviewScreenRoute,
                   );
-                }else{
+                } else {
                   Navigator.pushNamed(
                     context,
                     CustomRouteNames.kPersonalInformationScreenRoute,
                   );
                 }
-
               },
             ),
             SizedBox(height: AppSize.s8.h),
