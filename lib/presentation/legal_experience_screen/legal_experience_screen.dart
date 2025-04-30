@@ -264,7 +264,13 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
           dropdownColor: ColorManager.kWhiteColor,
           icon: Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: SvgPicture.asset(ImageAssets.arrowDownIcon),
+            child: SvgPicture.asset(
+              ImageAssets.arrowDownIcon,
+              colorFilter: ColorFilter.mode(
+                ColorManager.kGreyColor,
+                BlendMode.srcIn,
+              ),
+            ),
           ),
           decoration: InputDecoration(
             filled: true,
@@ -272,10 +278,19 @@ class _LegalExperienceScreenState extends State<LegalExperienceScreen> {
             contentPadding: EdgeInsets.only(left: 10.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(color: ColorManager.secondary),
+              borderSide: BorderSide(color: ColorManager.kWhiteColor),
             ),
-            labelText: AppStrings.selectJurisdiction,
-            labelStyle: getRegularStyle(color: ColorManager.kHintTextColor),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(color: ColorManager.kWhiteColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(color: ColorManager.kWhiteColor),
+            ),
+            hintText: AppStrings.selectJurisdiction,
+            hintStyle: getRegularStyle(color: ColorManager.kHintTextColor),
+            floatingLabelBehavior: FloatingLabelBehavior.never,
           ),
           onChanged: (String? newValue) {
             setState(() {
