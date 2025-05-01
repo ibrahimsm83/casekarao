@@ -77,19 +77,42 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                     ),
                   ),
                 ),
-                CustomTextFormField(
-                  hintText: AppStrings.exTellUsMoreAboutYourself,
-                  controller: _bioController,
-                  fillColor: ColorManager.kWhiteColor,
-                  maxLines: 6,
-                  focusNode: node1,
-                  horizontalMergin: 0.0,
-                  validator: (String? val) {
-                    if (val == null || val.isEmpty) {
-                      return "Enter Bio";
-                    }
-                    return null;
-                  },
+                Stack(
+                  children: [
+                    CustomTextFormField(
+                      hintText: AppStrings.exTellUsMoreAboutYourself,
+                      controller: _bioController,
+                      fillColor: ColorManager.kWhiteColor,
+                      maxLines: 6,
+                      focusNode: node1,
+                      horizontalMergin: 0.0,
+                      onChanged: (value) {
+                        setState(() {
+                          // Update UI to refresh counterd
+                        });
+                      },
+                      validator: (String? val) {
+                        if (val == null || val.isEmpty) {
+                          return "Enter Bio";
+                        }
+                        if (val.length < 501) {
+                          return "Bio cannot exceed 500 characters";
+                        }
+                        return null;
+                      },
+                    ),
+                    Positioned(
+                      right: 15,
+                      bottom: 10,
+                      child: Text(
+                        "${_bioController.text.length}/500",
+                        style: getRegularStyle(
+                          color: ColorManager.kGreyColor,
+                          fontSize: ScreenUtil().setSp(AppSize.s12),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 heading(AppStrings.languagesSpoken, AppStrings.multiSelect),
                 language(),
@@ -182,7 +205,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
               borderRadius: BorderRadius.circular(10.0),
               borderSide: BorderSide(color: ColorManager.secondary),
             ),
-            labelText: "English",
+            labelText: "Select Language",
             labelStyle: getRegularStyle(color: ColorManager.kHintTextColor),
           ),
           onChanged: (String? newValue) {
