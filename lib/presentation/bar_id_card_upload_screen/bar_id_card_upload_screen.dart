@@ -11,7 +11,7 @@ class BarIdCardUploadScreen extends StatefulWidget {
 }
 
 class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
-  bool isFrontSide=true;
+  bool isFrontSide = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +58,7 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
             ),
             SizedBox(height: AppSize.sizeHeight(context) * 0.05),
             InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.pushNamed(
                   context,
                   CustomRouteNames.kIdentityVerificationScreenRoute,
@@ -74,7 +74,9 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Center(
                     child: Text(
-                      isFrontSide? AppStrings.scanFrontSideOfYourID:AppStrings.scanBackSideOfYourID,
+                      isFrontSide
+                          ? AppStrings.scanFrontSideOfYourID
+                          : AppStrings.scanBackSideOfYourID,
                       style: getmediumStyle(color: ColorManager.kWhiteColor),
                     ),
                   ),
@@ -86,7 +88,6 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
 
             Stack(
               children: [
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -110,12 +111,12 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
                 ),
 
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
-                      if(isFrontSide){
-                        isFrontSide=false;
-                      }else{
-                        isFrontSide=true;
+                      if (isFrontSide) {
+                        isFrontSide = false;
+                      } else {
+                        isFrontSide = true;
                       }
                     });
                   },
@@ -149,7 +150,7 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
                 ),
               ],
             ),
-            SizedBox(height: AppSize.s8.h),
+            SizedBox(height: AppSize.s18.h),
             Text(
               AppStrings
                   .alignYourCertificateWithinTheMarkersForAutomaticScanning,

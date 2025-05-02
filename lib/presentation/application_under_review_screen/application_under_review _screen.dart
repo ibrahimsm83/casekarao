@@ -39,8 +39,8 @@ class ApplicationUnderReviewScreen extends StatelessWidget {
               ),
 
               Container(
-                height: 74.h,
-                width: 74.w,
+                height: 60.h,
+                width: 60.w,
                 decoration: BoxDecoration(
                   color: ColorManager.kLightBlueColor.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(22.r),
@@ -55,14 +55,15 @@ class ApplicationUnderReviewScreen extends StatelessWidget {
                 AppStrings.yourApplicationIsUnderReview,
                 style: getsemiboldStyle(
                   color: ColorManager.primary,
-                  fontSize: ScreenUtil().setSp(AppSize.s22),
+                  fontSize: ScreenUtil().setSp(AppSize.s20),
                 ),
               ),
+              SizedBox(height: 8),
               Text(
                 AppStrings.thankYouForSubmittingYourDetails,
                 style: getRegularStyle(
                   color: ColorManager.primary,
-                  fontSize: ScreenUtil().setSp(AppSize.s14),
+                  fontSize: ScreenUtil().setSp(AppSize.s12),
                 ),
               ),
               Text(
@@ -71,7 +72,7 @@ class ApplicationUnderReviewScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: getRegularStyle(
                   color: ColorManager.primary,
-                  fontSize: ScreenUtil().setSp(AppSize.s14),
+                  fontSize: ScreenUtil().setSp(AppSize.s12),
                 ),
               ),
               SizedBox(height: AppSize.s10.h),
@@ -82,7 +83,7 @@ class ApplicationUnderReviewScreen extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(13.r)),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -185,64 +186,71 @@ class ApplicationUnderReviewScreen extends StatelessWidget {
   }
 
   Widget whatHappens() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.circle, size: 8, color: Colors.black), // Small dot icon
-            SizedBox(width: 10.0),
-            Flexible(
-              child: Text(
-                AppStrings
-                    .ourAdminWillVerifyYourCredentialsAndSubmittedDocuments,
-                style: getRegularStyle(
-                  color: ColorManager.primary,
-                  fontSize: ScreenUtil().setSp(AppSize.s12),
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.circle,
+                size: 8,
+                color: Colors.black,
+              ), // Small dot icon
+              SizedBox(width: 10.0),
+              Flexible(
+                child: Text(
+                  AppStrings
+                      .ourAdminWillVerifyYourCredentialsAndSubmittedDocuments,
+                  style: getRegularStyle(
+                    color: ColorManager.primary,
+                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        SizedBox(height: 10.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.circle, size: 8, color: Colors.black),
-            SizedBox(width: 10.0),
-            Flexible(
-              child: Text(
-                AppStrings.approvalTypicallyTakes2448Hours,
-                style: getRegularStyle(
-                  color: ColorManager.primary,
-                  fontSize: ScreenUtil().setSp(AppSize.s12),
+            ],
+          ),
+          SizedBox(height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.circle, size: 8, color: Colors.black),
+              SizedBox(width: 10.0),
+              Flexible(
+                child: Text(
+                  AppStrings.approvalTypicallyTakes2448Hours,
+                  style: getRegularStyle(
+                    color: ColorManager.primary,
+                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        SizedBox(height: 10.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.circle, size: 8, color: Colors.black),
-            SizedBox(width: 10.0),
-            Flexible(
-              child: Text(
-                AppStrings
-                    .youReceiveANotificationOnceYourProfileIsApprovedOrIfAnyUpdatesAreNeeded,
-                style: getRegularStyle(
-                  color: ColorManager.primary,
-                  fontSize: ScreenUtil().setSp(AppSize.s12),
+            ],
+          ),
+          SizedBox(height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.circle, size: 8, color: Colors.black),
+              SizedBox(width: 10.0),
+              Flexible(
+                child: Text(
+                  AppStrings
+                      .youReceiveANotificationOnceYourProfileIsApprovedOrIfAnyUpdatesAreNeeded,
+                  style: getRegularStyle(
+                    color: ColorManager.primary,
+                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 
