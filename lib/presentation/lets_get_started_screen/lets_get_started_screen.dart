@@ -1,10 +1,37 @@
-import 'package:casekarao/presentation/resources/export_resources.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import '../../export_casekarao.dart';
 
-class LetsGetStartedView extends StatelessWidget {
+class LetsGetStartedView extends StatefulWidget {
   const LetsGetStartedView({super.key});
+
+  @override
+  State<LetsGetStartedView> createState() => _LetsGetStartedViewState();
+}
+
+class _LetsGetStartedViewState extends State<LetsGetStartedView> {
+  final UserRoleController _userRoleController = Get.find<UserRoleController>();
+
+  @override
+  void initState() {
+    super.initState();
+    // Show the user type selection popup when the screen loads
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showUserTypeSelectionDialog();
+    });
+  }
+
+  void _showUserTypeSelectionDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // User must select an option
+      builder: (BuildContext context) {
+        return _buildUserTypeSelectionDialog();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,14 +131,116 @@ class LetsGetStartedView extends StatelessWidget {
   }) {
     return CustomButton(
       color: color ?? ColorManager.primary,
-      iconPath: iconPath!,
-      isLeadingIcon: true,
+      iconPath: iconPath,
+      isLeadingIcon: iconPath != null,
       text: text ?? "",
       style: getmediumStyle(
         color: fontColor ?? ColorManager.kWhiteColor,
         fontSize: AppSize.s14.sp,
       ),
       onTap: onTap,
+    );
+  }
+
+  Widget _buildUserTypeSelectionDialog() {
+    String? selectedUserType;
+
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: ColorManager.kWhiteColor,
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Select User Type',
+                  style: getsemiboldStyle(
+                    color: ColorManager.primary,
+                    fontSize: FontSize.s16.sp,
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                // Dropdown for user type selection
+                SizedBox(
+                  height: 45.h,
+                  child: DropdownButtonFormField<String>(
+                    value: selectedUserType,
+                    style: getRegularStyle(color: ColorManager.primary),
+                    dropdownColor: ColorManager.kWhiteColor,
+                    icon: Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: SvgPicture.asset(
+                        ImageAssets.arrowDownIcon,
+                        colorFilter: ColorFilter.mode(
+                          ColorManager.kGreyColor,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: ColorManager.kWhiteColor,
+                      contentPadding: EdgeInsets.only(left: 10.0),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0.r),
+                        borderSide: BorderSide(color: ColorManager.secondary),
+                      ),
+                      hintText: "Select user type",
+                      hintStyle: getRegularStyle(
+                        color: ColorManager.kHintTextColor,
+                      ),
+                    ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedUserType = newValue;
+                      });
+                    },
+                    items:
+                        ["User", "Lawyer"].map((String userType) {
+                          return DropdownMenuItem<String>(
+                            value: userType,
+                            child: Text(userType),
+                          );
+                        }).toList(),
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                // Done button
+                button(
+                  text: "Done",
+                  color: ColorManager.primary,
+                  onTap: () {
+                    if (selectedUserType != null) {
+                      // Set the global user type
+                      _userRoleController.isUser = selectedUserType == "User";
+                      Navigator.of(context).pop();
+                    } else {
+                      // Show error message if no selection is made
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Please select a user type'),
+                          backgroundColor: ColorManager.kRedColor,
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
