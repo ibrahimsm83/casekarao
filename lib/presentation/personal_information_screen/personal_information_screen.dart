@@ -84,7 +84,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                     fontSize: ScreenUtil().setSp(AppSize.s24),
                   ),
                 ),
-                SizedBox(height: AppSize.s8.h),
+                SizedBox(height: AppSize.s1_5),
                 Text(
                   AppStrings
                       .createYourLawyerProfileWithAccurateDetailsToHelpUsersFindYouEasily,

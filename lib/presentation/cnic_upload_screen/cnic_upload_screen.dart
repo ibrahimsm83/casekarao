@@ -59,7 +59,7 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
             ),
             SizedBox(height: AppSize.sizeHeight(context) * 0.05),
             InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.pushNamed(
                   context,
                   CustomRouteNames.kBarIdCardUploadScreenRoute,
@@ -92,7 +92,7 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     width: AppSize.sizeWidth(context),
-                    height: 200,
+                    height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(13.r),
                       color: ColorManager.kWhiteColor,
@@ -122,7 +122,7 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
                   },
                   child: Container(
                     width: AppSize.sizeWidth(context),
-                    height: 215,
+                    height: 165,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(13.r),
                       color: Colors.transparent,
@@ -150,7 +150,7 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
                 ),
               ],
             ),
-            SizedBox(height: AppSize.s8.h),
+            SizedBox(height: AppSize.s18.h),
             Text(
               AppStrings
                   .alignYourGovernmentIssuedCNICWithinTheMarkersForAutomaticScanning,

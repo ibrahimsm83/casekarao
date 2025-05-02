@@ -33,7 +33,7 @@ class _BusinessAndAvailabilityScreenState
                 onTap: () => Navigator.pop(context),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: AppSize.sizeWidth(context!) * 0.05,
+                    horizontal: AppSize.sizeWidth(context) * 0.05,
                   ),
                   child: Container(
                     height: 44.h,
@@ -52,7 +52,7 @@ class _BusinessAndAvailabilityScreenState
               SizedBox(height: AppSize.sizeHeight(context) * 0.01),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: AppSize.sizeWidth(context!) * 0.05,
+                  horizontal: AppSize.sizeWidth(context) * 0.05,
                 ),
                 child: Text(
                   AppStrings.businessAndAvailability,
@@ -65,7 +65,7 @@ class _BusinessAndAvailabilityScreenState
               SizedBox(height: AppSize.s8.h),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: AppSize.sizeWidth(context!) * 0.05,
+                  horizontal: AppSize.sizeWidth(context) * 0.05,
                 ),
                 child: Text(
                   AppStrings
@@ -81,7 +81,7 @@ class _BusinessAndAvailabilityScreenState
                 padding: EdgeInsets.only(
                   top: AppSize.s10.h,
                   bottom: AppSize.s6.h,
-                  left: AppSize.sizeWidth(context!) * 0.05,
+                  left: AppSize.sizeWidth(context) * 0.05,
                 ),
                 child: Text(
                   AppStrings.officeAddress,
@@ -107,9 +107,9 @@ class _BusinessAndAvailabilityScreenState
               // SizedBox(height: AppSize.s8.h),
               Padding(
                 padding: EdgeInsets.only(
-                  top: AppSize.s10.h,
-                  bottom: AppSize.s6.h,
-                  left: AppSize.sizeWidth(context!) * 0.05,
+                  top: AppSize.s18.h,
+                  bottom: AppSize.s12.h,
+                  left: AppSize.sizeWidth(context) * 0.05,
                 ),
                 child: Text(
                   AppStrings.availabilitySchedule,
@@ -122,7 +122,7 @@ class _BusinessAndAvailabilityScreenState
               availabilitySchedule(),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: AppSize.sizeWidth(context!) * 0.05,
+                  horizontal: AppSize.sizeWidth(context) * 0.05,
                 ),
                 child: Divider(),
               ),
@@ -130,7 +130,7 @@ class _BusinessAndAvailabilityScreenState
                 padding: EdgeInsets.only(
                   top: AppSize.s10.h,
                   bottom: AppSize.s6.h,
-                  left: AppSize.sizeWidth(context!) * 0.05,
+                  left: AppSize.sizeWidth(context) * 0.05,
                 ),
                 child: Text(
                   AppStrings.monday,
@@ -145,7 +145,7 @@ class _BusinessAndAvailabilityScreenState
                 padding: EdgeInsets.only(
                   top: AppSize.s10.h,
                   bottom: AppSize.s6.h,
-                  left: AppSize.sizeWidth(context!) * 0.05,
+                  left: AppSize.sizeWidth(context) * 0.05,
                 ),
                 child: Text(
                   AppStrings.thursday,
@@ -160,7 +160,7 @@ class _BusinessAndAvailabilityScreenState
                 padding: EdgeInsets.only(
                   top: AppSize.s10.h,
                   bottom: AppSize.s6.h,
-                  left: AppSize.sizeWidth(context!) * 0.05,
+                  left: AppSize.sizeWidth(context) * 0.05,
                 ),
                 child: Text(
                   AppStrings.friday,
@@ -174,7 +174,7 @@ class _BusinessAndAvailabilityScreenState
               SizedBox(height: AppSize.s20.h),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: AppSize.sizeWidth(context!) * 0.05,
+                  horizontal: AppSize.sizeWidth(context) * 0.05,
                 ),
                 child: button(
                   text: AppStrings.submit,
@@ -200,7 +200,7 @@ class _BusinessAndAvailabilityScreenState
   Widget fromTo() {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: AppSize.sizeWidth(context!) * 0.03,
+        horizontal: AppSize.sizeWidth(context) * 0.03,
       ),
       child: Row(
         children: [

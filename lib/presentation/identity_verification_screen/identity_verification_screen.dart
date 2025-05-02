@@ -41,7 +41,7 @@ class IdentityVerificationScreen extends StatelessWidget {
               AppStrings.selfieForIdentityVerification,
               style: getsemiboldStyle(
                 color: ColorManager.primary,
-                fontSize: ScreenUtil().setSp(AppSize.s24),
+                fontSize: ScreenUtil().setSp(AppSize.s22),
               ),
             ),
             SizedBox(height: AppSize.s8.h),
@@ -55,13 +55,12 @@ class IdentityVerificationScreen extends StatelessWidget {
             ),
             SizedBox(height: AppSize.s30.h),
             InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.pushNamed(
                   context,
                   CustomRouteNames.kSetupProfileScreenRoute,
                   arguments: true,
                 );
-
               },
               child: Align(
                 alignment: Alignment.center,
@@ -93,7 +92,7 @@ class IdentityVerificationScreen extends StatelessWidget {
             // ),
             SizedBox(height: 20),
             Align(
-              alignment:Alignment.center ,
+              alignment: Alignment.center,
               child: Text(
                 AppStrings.placeYourFaceIntoTheGridAndHoldStill,
                 style: getmediumStyle(

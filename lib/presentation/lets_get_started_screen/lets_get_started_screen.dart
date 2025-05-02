@@ -16,17 +16,14 @@ class LetsGetStartedView extends StatelessWidget {
           children: [
             SizedBox(height: AppSize.sizeHeight(context) * 0.05),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Container(
                 height: 290.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(22.0.r)),
-                  image:  DecorationImage(
+                  image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(ImageAssets.letStartedImage,
-                    ),
+                    image: AssetImage(ImageAssets.letStartedImage),
                   ),
                 ),
               ),
@@ -51,20 +48,19 @@ class LetsGetStartedView extends StatelessWidget {
                 ),
               ),
             ),
-
-            SizedBox(height: AppSize.sizeHeight(context) * 0.04),
-            button(
-              text: AppStrings.continueWithPhoneNumber,
-              iconPath: ImageAssets.phoneIcon,
-              onTap: () {
-
-              },
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: button(
+                text: AppStrings.continueWithPhoneNumber,
+                iconPath: ImageAssets.phoneIcon,
+                onTap: () {},
+              ),
             ),
             Text(
               AppStrings.or,
               textAlign: TextAlign.center,
               style: getRegularStyle(
-                color: ColorManager.kDarkGreyColor,
+                color: ColorManager.primary,
                 fontSize: ScreenUtil().setSp(AppSize.s14),
               ),
             ),

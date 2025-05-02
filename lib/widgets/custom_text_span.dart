@@ -23,7 +23,7 @@ class CustomTextSpan extends StatelessWidget {
         text: TextSpan(
           text: text1,
           style: getRegularStyle(
-            color: ColorManager.kDarkGreyColor,
+            color: ColorManager.primary,
             fontSize: ScreenUtil().setSp(AppSize.s12),
           ),
           children: <TextSpan>[
