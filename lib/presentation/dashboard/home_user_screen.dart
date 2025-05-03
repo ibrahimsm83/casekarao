@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class HomeLawyerScreen extends StatefulWidget {
-  const HomeLawyerScreen({super.key});
+class HomeUserScreen extends StatefulWidget {
+  const HomeUserScreen({super.key});
 
   @override
-  State<HomeLawyerScreen> createState() => _HomeLawyerScreenState();
+  State<HomeUserScreen> createState() => _HomeUserScreenState();
 }
 
-class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
+class _HomeUserScreenState extends State<HomeUserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,63 +24,63 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
             children: [
               const SizedBox(height: 10),
               welcome(),
-              _buildStatusRow(
-                firstStatus: StatusItem(
-                  title: AppStrings.kRequests,
-                  subtitle: AppStrings.kViewDetails,
-                  count: "05",
-                  countBgColor: ColorManager.kLightYellowColor,
-                  countTextColor: ColorManager.kDarkYellowColor,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kPendingScreenRoute,
-                    );
-                  },
-                ),
-                secondStatus: StatusItem(
-                  title: AppStrings.kOnGoing,
-                  subtitle: AppStrings.kViewDetails,
-                  count: "13",
-                  countBgColor: ColorManager.kLightBlueColor,
-                  countTextColor: ColorManager.kDarkBlueColor,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kOnGoingScreenRoute,
-                    );
-                  },
-                ),
-              ),
+              // _buildStatusRow(
+              //   firstStatus: StatusItem(
+              //     title: AppStrings.kRequests,
+              //     subtitle: AppStrings.kViewDetails,
+              //     count: "05",
+              //     countBgColor: ColorManager.kLightYellowColor,
+              //     countTextColor: ColorManager.kDarkYellowColor,
+              //     onTap: () {
+              //       Navigator.pushNamed(
+              //         context,
+              //         CustomRouteNames.kPendingScreenRoute,
+              //       );
+              //     },
+              //   ),
+              //   secondStatus: StatusItem(
+              //     title: AppStrings.kOnGoing,
+              //     subtitle: AppStrings.kViewDetails,
+              //     count: "13",
+              //     countBgColor: ColorManager.kLightBlueColor,
+              //     countTextColor: ColorManager.kDarkBlueColor,
+              //     onTap: () {
+              //       Navigator.pushNamed(
+              //         context,
+              //         CustomRouteNames.kOnGoingScreenRoute,
+              //       );
+              //     },
+              //   ),
+              // ),
               const SizedBox(height: 05),
-              _buildStatusRow(
-                firstStatus: StatusItem(
-                  title: AppStrings.kCanceled,
-                  subtitle: AppStrings.kViewDetails,
-                  count: "01",
-                  countBgColor: ColorManager.kLightRedColor,
-                  countTextColor: ColorManager.kDarkRedColor,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kCanceledScreenRoute,
-                    );
-                  },
-                ),
-                secondStatus: StatusItem(
-                  title: AppStrings.kCompleted,
-                  subtitle: AppStrings.kViewDetails,
-                  count: "50",
-                  countBgColor: ColorManager.kLightGreenColor,
-                  countTextColor: ColorManager.kDarkGreenColor,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kCompletedScreenRoute,
-                    );
-                  },
-                ),
-              ),
+              // _buildStatusRow(
+              //   firstStatus: StatusItem(
+              //     title: AppStrings.kCanceled,
+              //     subtitle: AppStrings.kViewDetails,
+              //     count: "01",
+              //     countBgColor: ColorManager.kLightRedColor,
+              //     countTextColor: ColorManager.kDarkRedColor,
+              //     onTap: () {
+              //       Navigator.pushNamed(
+              //         context,
+              //         CustomRouteNames.kCanceledScreenRoute,
+              //       );
+              //     },
+              //   ),
+              //   secondStatus: StatusItem(
+              //     title: AppStrings.kCompleted,
+              //     subtitle: AppStrings.kViewDetails,
+              //     count: "50",
+              //     countBgColor: ColorManager.kLightGreenColor,
+              //     countTextColor: ColorManager.kDarkGreenColor,
+              //     onTap: () {
+              //       Navigator.pushNamed(
+              //         context,
+              //         CustomRouteNames.kCompletedScreenRoute,
+              //       );
+              //     },
+              //   ),
+              // ),
               const SizedBox(height: 10),
               rowText(
                 text1: AppStrings.kNewConsultationRequests,
@@ -170,21 +170,47 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
           fontSize: ScreenUtil().setSp(AppSize.s14),
         ),
       ),
-      trailing: InkWell(
-        onTap: () {
-          //Notification screen
-        },
-        child: Container(
-          height: 44.h,
-          width: 44.h,
-          decoration: BoxDecoration(
-            color: ColorManager.kWhiteColor,
-            borderRadius: BorderRadius.all(Radius.circular(16.r)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: SvgPicture.asset(ImageAssets.kNotificationIcon),
-          ),
+      trailing: Container(
+        width: 110,
+        //color: Colors.red,
+        child: Row(
+          children: [
+            InkWell(
+              onTap: () {
+                //Notification screen
+              },
+              child: Container(
+                height: 44.h,
+                width: 44.h,
+                decoration: BoxDecoration(
+                  color: ColorManager.kWhiteColor,
+                  borderRadius: BorderRadius.all(Radius.circular(16.r)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: SvgPicture.asset(ImageAssets.kNotificationIcon),
+                ),
+              ),
+            ),
+            SizedBox(width: 10),
+            InkWell(
+              onTap: () {
+                //Notification screen
+              },
+              child: Container(
+                height: 44.h,
+                width: 44.h,
+                decoration: BoxDecoration(
+                  color: ColorManager.kWhiteColor,
+                  borderRadius: BorderRadius.all(Radius.circular(16.r)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: SvgPicture.asset(ImageAssets.kNotificationIcon),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

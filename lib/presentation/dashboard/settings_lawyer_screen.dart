@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import '../../export_casekarao.dart';
 
 class SettingsLawyerScreen extends StatefulWidget {
@@ -9,11 +10,14 @@ class SettingsLawyerScreen extends StatefulWidget {
   @override
   State<SettingsLawyerScreen> createState() => _SettingsLawyerScreenState();
 }
-
+  final UserRoleController _userRoleController = Get.find<UserRoleController>();
 class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
 
+
   List<UserSettingsModel> accountList=[
-    UserSettingsModel(title:  AppStrings.kAccountInformation, iconPath:  ImageAssets.kPersonIcon, navigateRoute: CustomRouteNames.kAccountInformationScreenRoute),
+      _userRoleController.isUser ?
+    UserSettingsModel(title:  AppStrings.kPersonalInformation, iconPath:  ImageAssets.kPersonIcon, navigateRoute: CustomRouteNames.kPersonalInformationScreenRoute)
+    :UserSettingsModel(title:  AppStrings.kAccountInformation, iconPath:  ImageAssets.kPersonIcon, navigateRoute: CustomRouteNames.kAccountInformationScreenRoute),
     UserSettingsModel(title:  AppStrings.kChangePassword, iconPath:  ImageAssets.kLockIcon, navigateRoute:  CustomRouteNames.kChangePasswordScreenRoute),
     UserSettingsModel(title:  AppStrings.kDispute, iconPath:  ImageAssets.kFlagIcon, navigateRoute:  CustomRouteNames.kDisputeScreenRoute),
     UserSettingsModel(title:  AppStrings.kNotifications, iconPath:  ImageAssets.kNotificationIcon, navigateRoute:  CustomRouteNames.kNotificationSettingScreenRoute),
@@ -109,7 +113,9 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
                   separatorBuilder:
                       (context, index) => const SizedBox(height: 0.0),
                   itemBuilder:
-                      (context, index) => Padding(
+                      (context, index) => 
+                      !_userRoleController.isUser || index!=4?
+                      Padding(
                         padding: EdgeInsets.only(top: index == 0 ? 10.0 : 0.0),
                         child: customListTile(
                           title: accountList[index].title,
@@ -120,7 +126,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
                             }
                           },
                         ),
-                      ),
+                      ):SizedBox(),
                 ),
               ),
               Padding(

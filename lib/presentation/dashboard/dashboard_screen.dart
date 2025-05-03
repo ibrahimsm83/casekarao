@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../export_casekarao.dart';
+import 'home_user_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -17,6 +18,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   late PageController _pagecontroller;
   var _currentIndex = 0;
+  final UserRoleController _userRoleController = Get.find<UserRoleController>();
 
   @override
   void initState() {
@@ -41,7 +43,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             });
           },
           children: <Widget>[
-            HomeLawyerScreen(),
+            _userRoleController.isUser ? HomeUserScreen() : HomeLawyerScreen(),
+
             CasesScreen(),
             MessagesScreen(),
             // AppointmentsLawyerScreen(),
@@ -53,58 +56,59 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
 
-      bottomNavigationBar:
-      Padding(
+      bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(AppSize.s14.r)), // Fully rounded corners
-            child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              currentIndex: _currentIndex,
-              backgroundColor: ColorManager.kWhiteColor,
-              selectedItemColor: ColorManager.secondary,
-              showUnselectedLabels: true,
-              selectedFontSize: 0.0,
-              onTap: (value) {
-                setState(() => _currentIndex = value);
-                _pagecontroller.jumpToPage(value);
-              },
-              items: [
-                bottomNavbaritem(
-                  title: AppStrings.kHome,
-                  IconName: ImageAssets.kHomeIcon,
-                  currentindex: 0,
-                ),
-                bottomNavbaritem(
-                  title: AppStrings.kCase,
-                  IconName: ImageAssets.kSuitCaseIcon,
-                  currentindex: 1,
-                ),
-                bottomNavbaritem(
-                  title: AppStrings.kMessage,
-                  IconName: ImageAssets.kMessageHomeIcon,
-                  currentindex: 2,
-                ),
-                bottomNavbaritem(
-                  title: AppStrings.kEarnings,
-                  IconName: ImageAssets.kEarningIcon,
-                  currentindex: 3,
-                ),
-                bottomNavbaritem(
-                  title: AppStrings.kSettings,
-                  IconName: ImageAssets.kSettingsIcon,
-                  currentindex: 4,
-                ),
-              ],
-            ),
-      ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.s14.r),
+          ), // Fully rounded corners
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _currentIndex,
+            backgroundColor: ColorManager.kWhiteColor,
+            selectedItemColor: ColorManager.secondary,
+            showUnselectedLabels: true,
+            selectedFontSize: 0.0,
+            onTap: (value) {
+              setState(() => _currentIndex = value);
+              _pagecontroller.jumpToPage(value);
+            },
+            items: [
+              bottomNavbaritem(
+                title: AppStrings.kHome,
+                iconName: ImageAssets.kHomeIcon,
+                currentindex: 0,
+              ),
+              bottomNavbaritem(
+                title: AppStrings.kCase,
+                iconName: ImageAssets.kSuitCaseIcon,
+                currentindex: 1,
+              ),
+              bottomNavbaritem(
+                title: AppStrings.kMessage,
+                iconName: ImageAssets.kMessageHomeIcon,
+                currentindex: 2,
+              ),
+              bottomNavbaritem(
+                title: AppStrings.kEarnings,
+                iconName: ImageAssets.kEarningIcon,
+                currentindex: 3,
+              ),
+              bottomNavbaritem(
+                title: AppStrings.kSettings,
+                iconName: ImageAssets.kSettingsIcon,
+                currentindex: 4,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 
   BottomNavigationBarItem bottomNavbaritem({
     String? title,
-    String? IconName,
+    String? iconName,
     int? currentindex,
   }) {
     return BottomNavigationBarItem(
@@ -114,7 +118,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           children: [
             SvgPicture.asset(
-              IconName!,
+              iconName!,
               color:
                   currentindex == _currentIndex
                       ? ColorManager.secondary
