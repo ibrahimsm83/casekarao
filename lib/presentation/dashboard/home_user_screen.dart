@@ -24,35 +24,6 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
             children: [
               const SizedBox(height: 10),
               welcome(),
-              // _buildStatusRow(
-              //   firstStatus: StatusItem(
-              //     title: AppStrings.kRequests,
-              //     subtitle: AppStrings.kViewDetails,
-              //     count: "05",
-              //     countBgColor: ColorManager.kLightYellowColor,
-              //     countTextColor: ColorManager.kDarkYellowColor,
-              //     onTap: () {
-              //       Navigator.pushNamed(
-              //         context,
-              //         CustomRouteNames.kPendingScreenRoute,
-              //       );
-              //     },
-              //   ),
-              //   secondStatus: StatusItem(
-              //     title: AppStrings.kOnGoing,
-              //     subtitle: AppStrings.kViewDetails,
-              //     count: "13",
-              //     countBgColor: ColorManager.kLightBlueColor,
-              //     countTextColor: ColorManager.kDarkBlueColor,
-              //     onTap: () {
-              //       Navigator.pushNamed(
-              //         context,
-              //         CustomRouteNames.kOnGoingScreenRoute,
-              //       );
-              //     },
-              //   ),
-              // ),
-
               // Find Top Class Lawyers section
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,9 +50,7 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                   ),
                 ],
               ),
-
               SizedBox(height: 24.h),
-
               // Popular Lawyers section
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,7 +88,7 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                       name: "David Watson",
                       experience: "08+ Experience",
                       location: "Sydney, Australia",
-                      imagePath: ImageAssets.userImage,
+                      imagePath: ImageAssets.starUserImage5,
                       rating: 4.5,
                     ),
                     SizedBox(width: 16.w),
@@ -127,7 +96,7 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                       name: "Gretchen Arcand",
                       experience: "10+ Experience",
                       location: "Sydney, Australia",
-                      imagePath: ImageAssets.userImage,
+                      imagePath: ImageAssets.starUserImage5,
                       rating: 4.5,
                     ),
                   ],
@@ -137,11 +106,14 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
               SizedBox(height: 24.h),
 
               // Ongoing Cases section
-              Text(
-                "Ongoing Cases",
-                style: getsemiboldStyle(
-                  color: ColorManager.primary,
-                  fontSize: ScreenUtil().setSp(FontSize.s20),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Ongoing Cases",
+                  style: getsemiboldStyle(
+                    color: ColorManager.primary,
+                    fontSize: ScreenUtil().setSp(FontSize.s20),
+                  ),
                 ),
               ),
 
@@ -157,35 +129,6 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                 lawyerName: "David Watson",
                 lawyerType: "Corporate Lawyer",
               ),
-              const SizedBox(height: 05),
-              // _buildStatusRow(
-              //   firstStatus: StatusItem(
-              //     title: AppStrings.kCanceled,
-              //     subtitle: AppStrings.kViewDetails,
-              //     count: "01",
-              //     countBgColor: ColorManager.kLightRedColor,
-              //     countTextColor: ColorManager.kDarkRedColor,
-              //     onTap: () {
-              //       Navigator.pushNamed(
-              //         context,
-              //         CustomRouteNames.kCanceledScreenRoute,
-              //       );
-              //     },
-              //   ),
-              //   secondStatus: StatusItem(
-              //     title: AppStrings.kCompleted,
-              //     subtitle: AppStrings.kViewDetails,
-              //     count: "50",
-              //     countBgColor: ColorManager.kLightGreenColor,
-              //     countTextColor: ColorManager.kDarkGreenColor,
-              //     onTap: () {
-              //       Navigator.pushNamed(
-              //         context,
-              //         CustomRouteNames.kCompletedScreenRoute,
-              //       );
-              //     },
-              //   ),
-              // ),
               const SizedBox(height: 10),
               rowText(
                 text1: AppStrings.kNewConsultationRequests,
@@ -352,9 +295,10 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
   // Build a category chip widget
   Widget _buildCategoryChip(String label) {
     return Container(
+      height: 38.h,
       decoration: BoxDecoration(
         color: ColorManager.kWhiteColor,
-        borderRadius: BorderRadius.circular(AppSize.s8.r),
+        borderRadius: BorderRadius.circular(AppSize.s22.r),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -365,7 +309,7 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
           label,
           style: getRegularStyle(
             color: ColorManager.primary,
-            fontSize: ScreenUtil().setSp(FontSize.s14),
+            fontSize: ScreenUtil().setSp(FontSize.s12),
           ),
         ),
       ),
@@ -398,7 +342,6 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(AppSize.s16.r),
                       topRight: Radius.circular(AppSize.s16.r),
-                      
                     ),
                     child: Image.asset(
                       imagePath,
@@ -407,85 +350,30 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // Positioned(
-                  //   top: AppSize.s10.h,
-                  //   right: AppSize.s10.w,
-                  //   child: Container(
-                  //     decoration: BoxDecoration(
-                  //       color: ColorManager.kCardBgColor,
-                  //       borderRadius: BorderRadius.circular(AppSize.s8.r),
-                  //     ),
-                  //     padding: EdgeInsets.symmetric(
-                  //       horizontal: AppPadding.p8.w,
-                  //       vertical: AppPadding.p4.h,
-                  //     ),
-                  //     child: Row(
-                  //       children: [
-                  //         SvgPicture.asset(
-                  //           ImageAssets.kStarIcon,
-                  //           height: AppSize.s16.h,
-                  //           width: AppSize.s16.w,
-                  //           colorFilter: ColorFilter.mode(
-                  //             ColorManager.kLightYellowColor,
-                  //             BlendMode.srcIn,
-                  //           ),
-                  //         ),
-                  //         SizedBox(width: AppSize.s4.w),
-                  //         Text(
-                  //           rating.toString(),
-                  //           style: getRegularStyle(
-                  //             color: ColorManager.primary,
-                  //             fontSize: ScreenUtil().setSp(FontSize.s12),
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  // Positioned(
-                  //    bottom: AppSize.s10.h,
-                  //   right: AppSize.s10.w,
-                  //   child: 
-                  // InkWell(
-                  //         onTap: () {},
-                  //         child: Container(
-                  //           decoration: BoxDecoration(
-                  //             color: ColorManager.kBackgroundColor,
-                  //             borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                  //           ),
-                  //           child: Padding(
-                  //             padding: const EdgeInsets.symmetric(
-                  //               horizontal: 8.0,
-                  //               vertical: 5.0,
-                  //             ),
-                  //             child: Row(
-                  //               children: [
-                  //                 // Padding(
-                  //                 //   padding: const EdgeInsets.all(4.0),
-                  //                 //   child: Text(
-                  //                 //     "View Details",
-                  //                 //     style: getRegularStyle(
-                  //                 //       color: ColorManager.primary,
-                  //                 //     ),
-                  //                 //   ),
-                  //                 // ),
-                  //                 SvgPicture.asset(ImageAssets.kRightArrowIcon),
-                  //               ],
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),)
+                  Positioned(
+                    bottom:0,
+                    right: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: ColorManager.kWhiteColor,
+                           borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(AppSize.s16.r),
+                      topRight: Radius.circular(AppSize.s16.r),
+                      ),
+                      ),
+                      height: 15,
+                      width: 170.w,
+                      ))
                 ],
               ),
           
               // Lawyer details
               Container(
                 decoration: BoxDecoration(
-        color: ColorManager.kDarkRedColor,
-        borderRadius: BorderRadius.circular(AppSize.s16.r),
-      ),
+                borderRadius: BorderRadius.circular(AppSize.s16.r),
+              ),
                 child: Padding(
-                  padding: EdgeInsets.all(AppPadding.p12.r),
+                  padding: EdgeInsets.only(left:AppPadding.p8.r,right:AppPadding.p8.r,top:0,bottom:AppPadding.p8.r),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -508,7 +396,7 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                         children: [
                           SvgPicture.asset(
                             ImageAssets.kLocationIcon,
-                             color: ColorManager.kGreyColor,
+                            color: ColorManager.kGreyColor,
                             height: AppSize.s14.h,
                             width: AppSize.s14.w,
                           ),
@@ -522,48 +410,7 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
-                          ),//SizedBox(height: AppSize.s8.h),
-                      // Align(
-                      //   alignment: Alignment.centerRight,
-                      //   child: SvgPicture.asset(
-                      //     ImageAssets.kRightArrowIcon,
-                      //     height: AppSize.s20.h,
-                      //     width: AppSize.s20.w,
-                      //     colorFilter: ColorFilter.mode(
-                      //       ColorManager.primary,
-                      //       BlendMode.srcIn,
-                      //     ),
-                      //   ),
-                      // ),
-                      // InkWell(
-                      //       onTap: () {},
-                      //       child: Container(
-                      //         decoration: BoxDecoration(
-                      //           color: ColorManager.kBackgroundColor,
-                      //           borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                      //         ),
-                      //         child: Padding(
-                      //           padding: const EdgeInsets.symmetric(
-                      //             horizontal: 8.0,
-                      //             vertical: 5.0,
-                      //           ),
-                      //           child: Row(
-                      //             children: [
-                      //               // Padding(
-                      //               //   padding: const EdgeInsets.all(4.0),
-                      //               //   child: Text(
-                      //               //     "View Details",
-                      //               //     style: getRegularStyle(
-                      //               //       color: ColorManager.primary,
-                      //               //     ),
-                      //               //   ),
-                      //               // ),
-                      //               SvgPicture.asset(ImageAssets.kRightArrowIcon),
-                      //             ],
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
+                          ),
                         ],
                       ),
                       
@@ -578,19 +425,21 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                 right: AppSize.s10.w,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: ColorManager.kCardBgColor,
-                    borderRadius: BorderRadius.circular(AppSize.s8.r),
+                    color: ColorManager.kCardBgColor.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(AppSize.s6.r),
                   ),
                   padding: EdgeInsets.symmetric(
                     horizontal: AppPadding.p8.w,
                     vertical: AppPadding.p4.h,
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SvgPicture.asset(
                         ImageAssets.kStarIcon,
-                        height: AppSize.s16.h,
-                        width: AppSize.s16.w,
+                        height: AppSize.s8.h,
+                        width: AppSize.s8.w,
                         colorFilter: ColorFilter.mode(
                           ColorManager.kLightYellowColor,
                           BlendMode.srcIn,
@@ -600,8 +449,8 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                       Text(
                         rating.toString(),
                         style: getRegularStyle(
-                          color: ColorManager.primary,
-                          fontSize: ScreenUtil().setSp(FontSize.s12),
+                          color: ColorManager.kWhiteColor,
+                          fontSize: ScreenUtil().setSp(FontSize.s8),
                         ),
                       ),
                     ],
@@ -615,8 +464,8 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
               InkWell(
                       onTap: () {},
                       child: Container(
-                         height: 35.h,
-                        width: 35.w,
+                         height: 30.h,
+                        width: 30.w,
                         decoration: BoxDecoration(
                           color: ColorManager.kBackgroundColor,
                           borderRadius: BorderRadius.all(Radius.circular(8.r)),

@@ -11,6 +11,7 @@ class ImageAssets {
   static const String starUserImage1 = "$IMAGE_PATH/userstar1.png";
   static const String starUserImage3 = "$IMAGE_PATH/userstar3.png";
   static const String starUserImage4 = "$IMAGE_PATH/userstar4.png";
+  static const String starUserImage5 = "$IMAGE_PATH/userstar5.png";
   static const String getStartedImage = "$IMAGE_PATH/getstarted.png";
   static const String letStartedImage = "$IMAGE_PATH/letstarted.png";
   static const String documentsImage = "$IMAGE_PATH/documentImage.png";
