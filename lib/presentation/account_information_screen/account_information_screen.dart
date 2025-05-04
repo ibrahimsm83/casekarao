@@ -146,7 +146,7 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
                   //selectedItems.contains(item);
                   return ListTile(
                     //onTap:(){},
-                    minTileHeight: 45.h,
+                    // minTileHeight parameter removed as it's not supported in this Flutter version
                     tileColor: ColorManager.kWhiteColor,
                     title: Text(
                       item,
