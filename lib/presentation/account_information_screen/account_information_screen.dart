@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../export_casekarao.dart';
 
 class AccountInformationScreen extends StatefulWidget {
-  const AccountInformationScreen({Key? key}) : super(key: key);
+  const AccountInformationScreen({super.key});
 
   @override
   State<AccountInformationScreen> createState() =>
@@ -78,7 +78,7 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppSize.sizeWidth(context!) * 0.03,
+          horizontal: AppSize.sizeWidth(context) * 0.03,
         ),
         child: SingleChildScrollView(
           child: Column(

@@ -18,7 +18,7 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
       backgroundColor: ColorManager.kBackgroundColor,
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppSize.sizeWidth(context!) * 0.05,
+          horizontal: AppSize.sizeWidth(context) * 0.05,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

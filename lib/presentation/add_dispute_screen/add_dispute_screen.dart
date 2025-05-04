@@ -55,7 +55,7 @@ class _AddDisputeScreenState extends State<AddDisputeScreen> {
         key: _formKey,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: AppSize.sizeWidth(context!) * 0.05,
+            horizontal: AppSize.sizeWidth(context) * 0.05,
           ),
           child: SingleChildScrollView(
             child: Column(
@@ -185,7 +185,7 @@ class _AddDisputeScreenState extends State<AddDisputeScreen> {
 class AddButton extends StatelessWidget {
   final VoidCallback onTap;
 
-  const AddButton({required this.onTap});
+  const AddButton({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

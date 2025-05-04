@@ -14,7 +14,7 @@ class ApplicationUnderReviewScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: AppSize.sizeWidth(context!) * 0.05,
+            horizontal: AppSize.sizeWidth(context) * 0.05,
           ),
           child: Column(
             children: [

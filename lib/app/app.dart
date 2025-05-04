@@ -9,7 +9,7 @@ class MyApp extends StatefulWidget {
   //const MyApp({Key? key}) : super(key: key); //default constractor
 
 //Private named constractor
-  MyApp._internal();
+  const MyApp._internal();
 
 //Single Instance--Singleton
   static final MyApp instance = MyApp._internal();
