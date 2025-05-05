@@ -130,67 +130,6 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                 lawyerType: "Corporate Lawyer",
               ),
               const SizedBox(height: 10),
-              rowText(
-                text1: AppStrings.kNewConsultationRequests,
-                text2: AppStrings.kViewAll,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kPendingScreenRoute,
-                  );
-                },
-              ),
-              SizedBox(height: 16.h),
-              SizedBox(
-                height: 200,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  separatorBuilder: (context, i) => SizedBox(width: 10.0),
-                  itemCount: DataList.pendingList.length,
-                  itemBuilder: (context, index) {
-                    return PendingStatusCard(
-                      status: DataList.pendingList[index],
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          CustomRouteNames
-                              .kConsultationRequestsDetailsScreenRoute,
-                          arguments: DataList.pendingList[index],
-                        );
-                      },
-                    );
-                    //CaseCard(caseData: filteredCases[index]);
-                  },
-                ),
-              ),
-              const SizedBox(height: 10),
-              rowText(
-                text1: AppStrings.kOnGoingCases,
-                text2: AppStrings.kViewAll,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kOnGoingScreenRoute,
-                  );
-                },
-              ),
-              SizedBox(height: 16.h),
-              OnGoingStatusCard(
-                status: DataList.onGoingList[0],
-                onDetailsTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kCaseDetailsScreenRoute,
-                  );
-                },
-                onMessageTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kCaseDiscussionScreenRoute,
-                    arguments: false,
-                  );
-                },
-              ),
             ],
           ),
         ),
@@ -235,7 +174,7 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
-                  child: SvgPicture.asset(ImageAssets.kNotificationIcon),
+                  child: SvgPicture.asset(ImageAssets.kSearchIcon),
                 ),
               ),
             ),

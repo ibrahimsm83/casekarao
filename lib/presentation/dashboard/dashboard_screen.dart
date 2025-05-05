@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../export_casekarao.dart';
+import 'consultations_screen.dart';
 import 'home_user_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -43,13 +44,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
             });
           },
           children: <Widget>[
-            _userRoleController.isUser ? HomeUserScreen() : HomeLawyerScreen(),
+            _userRoleController.isUser ? const HomeUserScreen() : const HomeLawyerScreen(),
 
-            CasesScreen(),
-            MessagesScreen(),
+            _userRoleController.isUser ? const ConsultationsScreen():const CasesScreen(),
+            const MessagesScreen(),
             // AppointmentsLawyerScreen(),
-            EarningsLawyerScreen(),
-            SettingsLawyerScreen(),
+            const EarningsLawyerScreen(),
+            const SettingsLawyerScreen(),
             // userController.userRole.value==UserRole.Patient?HomeView():HomeHealthView(),
             // userController.userRole.value==UserRole.Patient?ProfileView():ProfileProfessionalHealthCareView(),
           ],
@@ -80,8 +81,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 currentindex: 0,
               ),
               bottomNavbaritem(
-                title: AppStrings.kCase,
-                iconName: ImageAssets.kSuitCaseIcon,
+                title: _userRoleController.isUser ? AppStrings.kNewConsultation : AppStrings.kCase,
+                iconName: _userRoleController.isUser ? ImageAssets.kconsultmentIcon :  ImageAssets.kAppointmentIcon,
                 currentindex: 1,
               ),
               bottomNavbaritem(
@@ -124,7 +125,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ? ColorManager.secondary
                       : ColorManager.kGreyColor,
             ),
-            SizedBox(height: 5.0),
+            const SizedBox(height: 5.0),
             Text(
               title ?? "",
               style: TextStyle(
