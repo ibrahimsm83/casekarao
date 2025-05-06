@@ -54,7 +54,7 @@ class _ConsultationsScreenState extends State<ConsultationsScreen> {
       body: Padding(
         padding: const EdgeInsets.only(top:8.0),
         child: ListView.separated(
-          separatorBuilder: (context, i) => SizedBox(height: 5.0),
+          separatorBuilder: (context, i) => const SizedBox(height: 5.0),
           itemCount: DataList.onGoingList.length,
           itemBuilder: (context, index) {
             return Padding(

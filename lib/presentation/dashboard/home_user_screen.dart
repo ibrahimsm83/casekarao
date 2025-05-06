@@ -263,162 +263,174 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
     required String imagePath,
     required double rating,
   }) {
-    return Container(
-      width: 170.w,
-      decoration: BoxDecoration(
-        color: ColorManager.kWhiteColor,
-        borderRadius: BorderRadius.circular(AppSize.s16.r),
-      ),
-      child: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Lawyer image with rating
-              Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(AppSize.s16.r),
-                      topRight: Radius.circular(AppSize.s16.r),
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          CustomRouteNames.klawyerDetailsScreen,
+          arguments: DataList.pendingList[1],
+        );
+      },
+      child: Container(
+        width: 170.w,
+        decoration: BoxDecoration(
+          color: ColorManager.kWhiteColor,
+          borderRadius: BorderRadius.circular(AppSize.s16.r),
+        ),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Lawyer image with rating
+                Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(AppSize.s16.r),
+                        topRight: Radius.circular(AppSize.s16.r),
+                      ),
+                      child: Image.asset(
+                        imagePath,
+                        height: 150.h,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    child: Image.asset(
-                      imagePath,
-                      height: 150.h,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Positioned(
-                    bottom:0,
-                    right: 0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: ColorManager.kWhiteColor,
-                           borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(AppSize.s16.r),
-                      topRight: Radius.circular(AppSize.s16.r),
-                      ),
-                      ),
-                      height: 15,
-                      width: 170.w,
-                      ))
-                ],
-              ),
-          
-              // Lawyer details
-              Container(
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.s16.r),
-              ),
-                child: Padding(
-                  padding: EdgeInsets.only(left:AppPadding.p8.r,right:AppPadding.p8.r,top:0,bottom:AppPadding.p8.r),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        style: getsemiboldStyle(
-                          color: ColorManager.primary,
-                          fontSize: ScreenUtil().setSp(FontSize.s16),
-                        ),
-                      ),
-                      Text(
-                        experience,
-                        style: getRegularStyle(
-                          color: ColorManager.kGreenColor,
-                          fontSize: ScreenUtil().setSp(FontSize.s12),
-                        ),
-                      ),
-                      SizedBox(height: AppSize.s16.h),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            ImageAssets.kLocationIcon,
-                            color: ColorManager.kGreyColor,
-                            height: AppSize.s14.h,
-                            width: AppSize.s14.w,
-                          ),
-                          SizedBox(width: AppSize.s4.w),
-                          Flexible(
-                            child: Text(
-                              location,
-                              style: getRegularStyle(
-                                color: ColorManager.kDarkGreyColor,
-                                fontSize: ScreenUtil().setSp(FontSize.s8),
-                              ),
-                              overflow: TextOverflow.ellipsis,
+                    Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: ColorManager.kWhiteColor,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(AppSize.s16.r),
+                              topRight: Radius.circular(AppSize.s16.r),
                             ),
                           ),
-                        ],
-                      ),
-                      
-                    ],
-                  ),
+                          height: 15,
+                          width: 170.w,
+                        ))
+                  ],
                 ),
-              ),
-            ],
-          ),
-          Positioned(
-                top: AppSize.s10.h,
-                right: AppSize.s10.w,
-                child: Container(
+
+                // Lawyer details
+                Container(
                   decoration: BoxDecoration(
-                    color: ColorManager.kCardBgColor.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(AppSize.s6.r),
+                    borderRadius: BorderRadius.circular(AppSize.s16.r),
                   ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppPadding.p8.w,
-                    vertical: AppPadding.p4.h,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: AppPadding.p8.r,
+                        right: AppPadding.p8.r,
+                        top: 0,
+                        bottom: AppPadding.p8.r),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          style: getsemiboldStyle(
+                            color: ColorManager.primary,
+                            fontSize: ScreenUtil().setSp(FontSize.s16),
+                          ),
+                        ),
+                        Text(
+                          experience,
+                          style: getRegularStyle(
+                            color: ColorManager.kGreenColor,
+                            fontSize: ScreenUtil().setSp(FontSize.s12),
+                          ),
+                        ),
+                        SizedBox(height: AppSize.s16.h),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              ImageAssets.kLocationIcon,
+                              color: ColorManager.kGreyColor,
+                              height: AppSize.s14.h,
+                              width: AppSize.s14.w,
+                            ),
+                            SizedBox(width: AppSize.s4.w),
+                            Flexible(
+                              child: Text(
+                                location,
+                                style: getRegularStyle(
+                                  color: ColorManager.kDarkGreyColor,
+                                  fontSize: ScreenUtil().setSp(FontSize.s8),
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        ImageAssets.kStarIcon,
-                        height: AppSize.s8.h,
-                        width: AppSize.s8.w,
-                        colorFilter: ColorFilter.mode(
-                          ColorManager.kLightYellowColor,
-                          BlendMode.srcIn,
-                        ),
+                ),
+              ],
+            ),
+            Positioned(
+              top: AppSize.s10.h,
+              right: AppSize.s10.w,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: ColorManager.kCardBgColor.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(AppSize.s6.r),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppPadding.p8.w,
+                  vertical: AppPadding.p4.h,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      ImageAssets.kStarIcon,
+                      height: AppSize.s8.h,
+                      width: AppSize.s8.w,
+                      colorFilter: ColorFilter.mode(
+                        ColorManager.kLightYellowColor,
+                        BlendMode.srcIn,
                       ),
-                      SizedBox(width: AppSize.s4.w),
-                      Text(
-                        rating.toString(),
-                        style: getRegularStyle(
-                          color: ColorManager.kWhiteColor,
-                          fontSize: ScreenUtil().setSp(FontSize.s8),
-                        ),
+                    ),
+                    SizedBox(width: AppSize.s4.w),
+                    Text(
+                      rating.toString(),
+                      style: getRegularStyle(
+                        color: ColorManager.kWhiteColor,
+                        fontSize: ScreenUtil().setSp(FontSize.s8),
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: AppSize.s10.h,
+              right: AppSize.s10.w,
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  height: 30.h,
+                  width: 30.w,
+                  decoration: BoxDecoration(
+                    color: ColorManager.kBackgroundColor,
+                    borderRadius: BorderRadius.all(Radius.circular(8.r)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 5.0,
+                    ),
+                    child: SvgPicture.asset(ImageAssets.kRightArrowIcon),
                   ),
                 ),
               ),
-              Positioned(
-                 bottom: AppSize.s10.h,
-                right: AppSize.s10.w,
-                child: 
-              InkWell(
-                      onTap: () {},
-                      child: Container(
-                         height: 30.h,
-                        width: 30.w,
-                        decoration: BoxDecoration(
-                          color: ColorManager.kBackgroundColor,
-                          borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                            vertical: 5.0,
-                          ),
-                          child: SvgPicture.asset(ImageAssets.kRightArrowIcon),
-                        ),
-                      ),
-                    ),)
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -488,10 +500,9 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
               Text(
                 paymentStatus,
                 style: getmediumStyle(
-                  color:
-                      paymentStatus == "Pending"
-                          ? ColorManager.kOrangeColor
-                          : ColorManager.kGreenColor,
+                  color: paymentStatus == "Pending"
+                      ? ColorManager.kOrangeColor
+                      : ColorManager.kGreenColor,
                   fontSize: ScreenUtil().setSp(FontSize.s12),
                 ),
               ),

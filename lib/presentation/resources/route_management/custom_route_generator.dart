@@ -1,3 +1,4 @@
+import 'package:casekarao/presentation/lawyer_details_screen/lawyer_details_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../export_casekarao.dart';
 import '../export_resources.dart';
@@ -161,6 +162,13 @@ class CustomRouteGenerator {
         return MaterialPageRoute(
           builder: (context) {
             return ConsultationRequestsDetailsScreen(data: argument,);
+          },
+        );
+         case CustomRouteNames.klawyerDetailsScreen:
+          final argument = settings.arguments as PendingStatusItemModel;
+        return MaterialPageRoute(
+          builder: (context) {
+            return LawyerDetailsScreen(data: argument,);
           },
         );
 
