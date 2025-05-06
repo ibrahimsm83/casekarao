@@ -193,6 +193,7 @@ class AppStrings {
 
    ///Consultation Requests Details
 
+  static const String kMessageLawyer= "Message Lawyer";
   static const String kDate= "Date";
   static const String kReject= "Reject";
   static const String kAccept= "Accept";

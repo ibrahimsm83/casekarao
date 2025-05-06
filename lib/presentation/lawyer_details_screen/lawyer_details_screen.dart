@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,7 +14,8 @@ class LawyerDetailsScreen extends StatefulWidget {
   State<LawyerDetailsScreen> createState() => _LawyerDetailsScreenState();
 }
 
-class _LawyerDetailsScreenState extends State<LawyerDetailsScreen> with SingleTickerProviderStateMixin {
+class _LawyerDetailsScreenState extends State<LawyerDetailsScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -61,29 +63,44 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen> with SingleTi
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Profile section
-              _buildProfileSection(),
-              SizedBox(height: 16.h),
-
-              // Statistics section
-              _buildStatisticsSection(),
-              SizedBox(height: 16.h),
-
-              // About section with tabs
-              _buildAboutSection(),
-              SizedBox(height: 16.h),
-
-              // Availability section
-              _buildAvailabilitySection(),
-            ],
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 8.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Profile section
+                    _buildProfileSection(),
+                    SizedBox(height: 16.h),
+            
+                    // Statistics section
+                    _buildStatisticsSection(),
+                    SizedBox(height: 16.h),
+            
+                    // About section with tabs
+                    _buildAboutSection(),
+                    SizedBox(height: 16.h),
+            
+                   
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+           // Availability section
+                
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            child: button(
+              text: AppStrings.kMessageLawyer,
+              onTap: () {},
+            ),
+          ),
+                  
+        ],
       ),
     );
   }
@@ -121,72 +138,39 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen> with SingleTi
                   ),
                 ),
                 SizedBox(width: 8.w),
-                // Container(
-                //   decoration: BoxDecoration(
-                //     color: ColorManager.kCardBgColor.withOpacity(0.5),
-                //     borderRadius: BorderRadius.circular(AppSize.s6.r),
-                //   ),
-                //   padding: EdgeInsets.symmetric(
-                //     horizontal: AppPadding.p8.w,
-                //     vertical: AppPadding.p4.h,
-                //   ),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: [
-                //       SvgPicture.asset(
-                //         ImageAssets.kStarIcon,
-                //         height: AppSize.s12.h,
-                //         width: AppSize.s12.w,
-                //         colorFilter: ColorFilter.mode(
-                //           ColorManager.kLightYellowColor,
-                //           BlendMode.srcIn,
-                //         ),
-                //       ),
-                //       SizedBox(width: AppSize.s4.w),
-                //       Text(
-                //         "4.5",
-                //         style: getRegularStyle(
-                //           color: ColorManager.kWhiteColor,
-                //           fontSize: ScreenUtil().setSp(FontSize.s12),
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
                 Container(
-                decoration: BoxDecoration(
-                  color: ColorManager.kCardBgColor.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(AppSize.s6.r),
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppPadding.p8.w,
-                  vertical: AppPadding.p4.h,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      ImageAssets.kStarIcon,
-                      height: AppSize.s8.h,
-                      width: AppSize.s8.w,
-                      colorFilter: ColorFilter.mode(
-                        ColorManager.kLightYellowColor,
-                        BlendMode.srcIn,
+                  decoration: BoxDecoration(
+                    color: ColorManager.kCardBgColor.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(AppSize.s6.r),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppPadding.p8.w,
+                    vertical: AppPadding.p4.h,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        ImageAssets.kStarIcon,
+                        height: AppSize.s8.h,
+                        width: AppSize.s8.w,
+                        colorFilter: ColorFilter.mode(
+                          ColorManager.kLightYellowColor,
+                          BlendMode.srcIn,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: AppSize.s4.w),
-                    Text(
-                      "4.5",//rating.toString(),
-                      style: getRegularStyle(
-                        color: ColorManager.kWhiteColor,
-                        fontSize: ScreenUtil().setSp(FontSize.s8),
+                      SizedBox(width: AppSize.s4.w),
+                      Text(
+                        "4.5", //rating.toString(),
+                        style: getRegularStyle(
+                          color: ColorManager.kWhiteColor,
+                          fontSize: ScreenUtil().setSp(FontSize.s8),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
               ],
             ),
             Row(
@@ -248,7 +232,7 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen> with SingleTi
                 ),
               ],
             ),
-            SizedBox( width: 16.w),
+            SizedBox(width: 16.w),
             Column(
               children: [
                 Text(
@@ -291,6 +275,7 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen> with SingleTi
             labelColor: ColorManager.primary,
             unselectedLabelColor: ColorManager.kGreyColor,
             indicatorColor: Colors.transparent,
+            dividerColor: Colors.transparent,
             tabs: const [
               Tab(text: "About the Lawyer"),
               Tab(text: "Rating and Reviews"),
@@ -299,39 +284,64 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen> with SingleTi
 
           // Tab content
           SizedBox(
-            height: 180.h,
+            height: 280.h,
             child: TabBarView(
               controller: _tabController,
               children: [
                 // About tab content
                 Padding(
                   padding: EdgeInsets.all(16.r),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-                        style: getRegularStyle(
-                          color: ColorManager.kDarkGreyColor,
-                          fontSize: ScreenUtil().setSp(AppSize.s14),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                          style: getRegularStyle(
+                            color: ColorManager.kDarkGreyColor,
+                            fontSize: ScreenUtil().setSp(AppSize.s12),
+                          ),
+                          maxLines: 5,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 8.h),
-                      GestureDetector(
-                        onTap: () {
-                          // Handle see more tap
-                        },
-                        child: Text(
-                          "See more...",
-                          style: getmediumStyle(
-                            color: ColorManager.secondary,
-                            fontSize: ScreenUtil().setSp(AppSize.s14),
+                        GestureDetector(
+                          onTap: () {
+                            // Handle see more tap
+                          },
+                          child: Text(
+                            "See more...",
+                            style: getmediumStyle(
+                              color: ColorManager.primary,
+                              fontSize: ScreenUtil().setSp(AppSize.s14),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 10.w),
+                        Divider(
+                            thickness: 1.0,
+                            color: ColorManager.kGreyBackViewColor),
+                        SizedBox(height: 10.w),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Lawyer Availability",
+                              style: getsemiboldStyle(
+                                color: ColorManager.primary,
+                                fontSize: ScreenUtil().setSp(AppSize.s16),
+                              ),
+                            ),
+                            SizedBox(height: 16.h),
+                            _buildAvailabilityRow(
+                                "Monday", "10:00am to 05:00pm"),
+                            _buildAvailabilityRow(
+                                "Tuesday", "10:00am to 05:00pm"),
+                            _buildAvailabilityRow(
+                                "Wednesday", "10:00am to 05:00pm"),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 
@@ -356,40 +366,10 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen> with SingleTi
     );
   }
 
-  // Availability section
-  Widget _buildAvailabilitySection() {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: ColorManager.kWhiteColor,
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(16.r),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Lawyer Availability",
-              style: getsemiboldStyle(
-                color: ColorManager.primary,
-                fontSize: ScreenUtil().setSp(AppSize.s16),
-              ),
-            ),
-            SizedBox(height: 16.h),
-            _buildAvailabilityRow("Monday", "10:00am to 05:00pm"),
-            _buildAvailabilityRow("Tuesday", "10:00am to 05:00pm"),
-            _buildAvailabilityRow("Wednesday", "10:00am to 05:00pm"),
-          ],
-        ),
-      ),
-    );
-  }
-
   // Helper method for availability rows
   Widget _buildAvailabilityRow(String day, String hours) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 12.h),
+      padding: EdgeInsets.only(bottom: 8.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -397,14 +377,14 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen> with SingleTi
             day,
             style: getmediumStyle(
               color: ColorManager.primary,
-              fontSize: ScreenUtil().setSp(AppSize.s14),
+              fontSize: ScreenUtil().setSp(AppSize.s12),
             ),
           ),
           Text(
             hours,
             style: getRegularStyle(
               color: ColorManager.kDarkGreyColor,
-              fontSize: ScreenUtil().setSp(AppSize.s14),
+              fontSize: ScreenUtil().setSp(AppSize.s12),
             ),
           ),
         ],
