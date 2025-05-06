@@ -34,52 +34,50 @@ class CaseDiscussionScreen extends StatelessWidget {
         ),
         actions: [
           isCaseFiled ?? false
-              ? viewOffer()
+              ? viewOffer(context)
               : InkWell(
-                onTap:
-                    () => Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kDocumentsScreenRoute,
-                    ),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10.0, bottom: 5.0),
-                  child: Container(
-                    height: 40.h,
-                    width: 40.h,
-                    decoration: BoxDecoration(
-                      color: ColorManager.kWhiteColor,
-                      borderRadius: BorderRadius.all(Radius.circular(16.r)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(14.0),
-                      child: SvgPicture.asset(ImageAssets.kDocumentsIcon),
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kDocumentsScreenRoute,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10.0, bottom: 5.0),
+                    child: Container(
+                      height: 40.h,
+                      width: 40.h,
+                      decoration: BoxDecoration(
+                        color: ColorManager.kWhiteColor,
+                        borderRadius: BorderRadius.all(Radius.circular(16.r)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(14.0),
+                        child: SvgPicture.asset(ImageAssets.kDocumentsIcon),
+                      ),
                     ),
                   ),
                 ),
-              ),
         ],
-        title:
-            isCaseFiled ?? false
-                ? userInfo()
-                : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppStrings.kCaseDiscussion,
-                      style: getsemiboldStyle(
-                        color: ColorManager.primary,
-                        fontSize: ScreenUtil().setSp(FontSize.s16),
-                      ),
+        title: isCaseFiled ?? false
+            ? userInfo()
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppStrings.kCaseDiscussion,
+                    style: getsemiboldStyle(
+                      color: ColorManager.primary,
+                      fontSize: ScreenUtil().setSp(FontSize.s16),
                     ),
-                    Text(
-                      AppStrings.k1stMilestone,
-                      style: getsemiboldStyle(
-                        color: ColorManager.secondary,
-                        fontSize: ScreenUtil().setSp(FontSize.s10),
-                      ),
+                  ),
+                  Text(
+                    AppStrings.k1stMilestone,
+                    style: getsemiboldStyle(
+                      color: ColorManager.secondary,
+                      fontSize: ScreenUtil().setSp(FontSize.s10),
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -95,12 +93,10 @@ class CaseDiscussionScreen extends StatelessWidget {
                   SizedBox(height: 50),
                   userChatBubble('I just started a new book'),
                   SizedBox(height: 10),
-
                   otherUserChatBubble(
                     'Im Good, What\'s up',
                     ImageAssets.userImage,
                   ),
-
                   SizedBox(height: 10),
                   userChatBubble('How are you?'),
                   SizedBox(height: 10),
@@ -110,7 +106,6 @@ class CaseDiscussionScreen extends StatelessWidget {
                     'Im Good, What\'s up',
                     ImageAssets.userImage,
                   ),
-
                   SizedBox(height: 10),
                   userChatBubble('How are you?'),
                   SizedBox(height: 10),
@@ -128,7 +123,6 @@ class CaseDiscussionScreen extends StatelessWidget {
               child: Row(
                 children: [
                   SvgPicture.asset(ImageAssets.kPlusIcon),
-
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -279,43 +273,51 @@ class CaseDiscussionScreen extends StatelessWidget {
     );
   }
 
-  Widget viewOffer() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: ColorManager.kLightGreenColor.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(AppSize.s8.r),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 6.0),
-          child: Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: ColorManager.kGreenColor,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(4.4),
-                  child: Text(
-                    '\$',
-                    style: getsemiboldStyle(
-                      color: ColorManager.kWhiteColor,
-                      fontSize: ScreenUtil().setSp(AppSize.s10),
+  Widget viewOffer(context) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          CustomRouteNames.kOfferScreenRoute,
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(right: 8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorManager.kLightGreenColor.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(AppSize.s8.r),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 6.0),
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: ColorManager.kGreenColor,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.4),
+                    child: Text(
+                      '\$',
+                      style: getsemiboldStyle(
+                        color: ColorManager.kWhiteColor,
+                        fontSize: ScreenUtil().setSp(AppSize.s10),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(width: 5.0),
-              Text(
-                AppStrings.kViewOffer,
-                style: getRegularStyle(
-                  color: ColorManager.kGreenColor,
-                  fontSize: ScreenUtil().setSp(AppSize.s12),
+                SizedBox(width: 5.0),
+                Text(
+                  AppStrings.kViewOffer,
+                  style: getRegularStyle(
+                    color: ColorManager.kGreenColor,
+                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

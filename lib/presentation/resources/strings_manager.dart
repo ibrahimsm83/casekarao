@@ -218,6 +218,7 @@ class AppStrings {
   static const String k2pages= "2 pages";
   static const String kDocuments= "Documents";
   static const String kAddDispute= "Add Dispute";
+  static const String kSendOfferToLawyer= "Send Offer to Lawyer";
   static const String kUploadDocument= "Upload Document";
   static const String kCaseDiscussion= "Case Discussion";
   static const String kUploadedByLawyer= "Uploaded by Lawyer";

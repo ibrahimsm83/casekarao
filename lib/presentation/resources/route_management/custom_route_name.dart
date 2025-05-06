@@ -36,5 +36,6 @@ class CustomRouteNames {
   static const String kTermsConditionScreenRoute = "/kTermsConditionScreenRoute";
   static const String kChangePasswordScreenRoute = "/kChangePasswordScreenRoute";
   static const String kAccountInformationScreenRoute = "/kAccountInformationScreenRoute";
+  static const String kOfferScreenRoute = "/kOfferScreenRoute";
 
 }

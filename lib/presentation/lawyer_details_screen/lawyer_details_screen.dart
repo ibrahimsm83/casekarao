@@ -101,12 +101,11 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen>
                 Navigator.pushNamed(
                   context,
                   CustomRouteNames.kCaseDiscussionScreenRoute,
-                  arguments: false,
+                  arguments: true,
                 );
               },
             ),
           ),
-
         ],
       ),
     );

@@ -139,7 +139,7 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   Navigator.pushNamed(
                     context,
                     CustomRouteNames.kCaseDiscussionScreenRoute,
-                    arguments: false,
+                    arguments: true,
                   );
                 },
               ),
