@@ -36,25 +36,25 @@ class ReviewCard extends StatelessWidget {
                   review.reviewerName,
                   style: getsemiboldStyle(
                     color: ColorManager.primary,
-                    fontSize: ScreenUtil().setSp(AppSize.s14),
+                    fontSize: ScreenUtil().setSp(AppSize.s10),
                   ),
                 ),
-                SizedBox(height: 4.h),
             
                 // Star rating
                 Row(
                   children: [
                     StarRating(
                       rating: review.rating,
-                      size: 16,
+                      size: 15,
                       color: ColorManager.kLightYellowColor,
                       borderColor: ColorManager.kLightYellowColor,
                     ),
+                    SizedBox(width: 5.w),
                      Text(
                       review.reviewDate,
                       style: getRegularStyle(
                         color: ColorManager.kGreyColor,
-                        fontSize: ScreenUtil().setSp(AppSize.s12),
+                        fontSize: ScreenUtil().setSp(AppSize.s8),
                       ),
                     ),
                   ],
@@ -66,12 +66,13 @@ class ReviewCard extends StatelessWidget {
 
         // Review text
         Padding(
-          padding: EdgeInsets.only(top: 8.h, bottom: 16.h),
+          padding: EdgeInsets.only(top: 8.h, bottom: 4.h),
           child: Text(
             review.reviewText,
+            maxLines: 4,
             style: getRegularStyle(
               color: ColorManager.kDarkGreyColor,
-              fontSize: ScreenUtil().setSp(AppSize.s14),
+              fontSize: ScreenUtil().setSp(AppSize.s12),
             ),
           ),
         ),
@@ -81,7 +82,7 @@ class ReviewCard extends StatelessWidget {
           color: ColorManager.kGreyBackViewColor,
           thickness: 1,
         ),
-        SizedBox(height: 16.h),
+        SizedBox(height:4.h),
       ],
     );
   }

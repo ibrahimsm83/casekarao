@@ -75,11 +75,11 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen>
                   children: [
                     // Profile section
                     _buildProfileSection(),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 14.h),
 
                     // Statistics section
                     _buildStatisticsSection(),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 10.h),
 
                     // About section with tabs
                     _buildAboutSection(),
@@ -97,7 +97,13 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen>
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             child: button(
               text: AppStrings.kMessageLawyer,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kCaseDiscussionScreenRoute,
+                  arguments: false,
+                );
+              },
             ),
           ),
 
