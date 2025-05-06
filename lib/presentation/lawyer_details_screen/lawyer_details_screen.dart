@@ -4,6 +4,7 @@ import 'package:flutter_rating/flutter_rating.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../export_casekarao.dart';
+import '../../widgets/review_card.dart';
 
 class LawyerDetailsScreen extends StatefulWidget {
   final PendingStatusItemModel data;
@@ -75,23 +76,23 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen>
                     // Profile section
                     _buildProfileSection(),
                     SizedBox(height: 16.h),
-            
+
                     // Statistics section
                     _buildStatisticsSection(),
                     SizedBox(height: 16.h),
-            
+
                     // About section with tabs
                     _buildAboutSection(),
                     SizedBox(height: 16.h),
-            
-                   
+
+
                   ],
                 ),
               ),
             ),
           ),
            // Availability section
-                
+
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             child: button(
@@ -99,7 +100,7 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen>
               onTap: () {},
             ),
           ),
-                  
+
         ],
       ),
     );
@@ -347,17 +348,61 @@ class _LawyerDetailsScreenState extends State<LawyerDetailsScreen>
 
                 // Reviews tab content
                 Padding(
-                  padding: EdgeInsets.all(16.r),
-                  child: Center(
-                    child: Text(
-                      "No reviews yet",
-                      style: getmediumStyle(
-                        color: ColorManager.kDarkGreyColor,
-                        fontSize: ScreenUtil().setSp(AppSize.s14),
-                      ),
+                  padding: EdgeInsets.only(left: 16.w, right: 16.w,),
+                  // padding: EdgeInsets.all(16.r),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
+                          //crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Overall rating section
+                            Text(
+                              "4.8",
+                              style: getboldStyle(
+                                color: ColorManager.primary,
+                                fontSize: ScreenUtil().setSp(AppSize.s22),
+                              ),
+                            ),
+                            SizedBox(width: 10.h),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                StarRating(
+                                  rating: 4.8,
+                                  size: 18,
+                                  color: ColorManager.kLightYellowColor,
+                                  borderColor: ColorManager.kLightYellowColor,
+                                ),
+                                Text(
+                              "Based on 2.5k reviews",
+                              style: getRegularStyle(
+                                color: ColorManager.kGreyColor,
+                                fontSize: ScreenUtil().setSp(AppSize.s10),
+                              ),
+                            ),
+                              ],
+                            ),
+                            //SizedBox(height: 4.h),
+                            
+                            // SizedBox(height: 16.h),
+                            // Divider(
+                            //   color: ColorManager.kGreyBackViewColor,
+                            //   thickness: 1,
+                            // ),
+                            // SizedBox(height: 16.h),
+                        
+                           
+                          ],
+                        ),
+                         // // Reviews list
+                            ...ReviewData.lawyerReviews.map((review) =>
+                              ReviewCard(review: review)
+                            ).toList(),
+                      ],
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),

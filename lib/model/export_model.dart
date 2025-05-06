@@ -8,3 +8,5 @@ export 'user_model.dart';
 export 'bank_card_model.dart';
 export 'dispute_model.dart';
 export 'terms_conditions_args_model.dart';
+export 'review_model.dart';
+export 'review_data.dart';
