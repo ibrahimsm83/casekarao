@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating/flutter_rating.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../export_casekarao.dart';
 
-class LawyerDetailsScreen extends StatelessWidget {
-  PendingStatusItemModel data;
+class LawyerDetailsScreen extends StatefulWidget {
+  final PendingStatusItemModel data;
 
-  LawyerDetailsScreen({super.key, required this.data});
+  const LawyerDetailsScreen({super.key, required this.data});
 
+  @override
+  State<LawyerDetailsScreen> createState() => _LawyerDetailsScreenState();
+}
+
+class _LawyerDetailsScreenState extends State<LawyerDetailsScreen> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,191 +62,352 @@ class LawyerDetailsScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Container()
-        
-        
-        
-        // Column(
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: [
-        //     SizedBox(height: AppSize.sizeHeight(context) * 0.01),
-        //     Padding(
-        //       padding: EdgeInsets.symmetric(
-        //         horizontal: AppSize.sizeWidth(context) * 0.04,
-        //       ),
-        //       child: Text(
-        //         data.title,
-        //         style: getsemiboldStyle(
-        //           color: ColorManager.primary,
-        //           fontSize: ScreenUtil().setSp(AppSize.s24),
-        //         ),
-        //       ),
-        //     ),
-        //     SizedBox(height: AppSize.s8.h),
-        //     Padding(
-        //       padding: EdgeInsets.symmetric(
-        //         horizontal: AppSize.sizeWidth(context!) * 0.04,
-        //       ),
-        //       child: Text(
-        //         //data.subtitle,
-        //         AppStrings.kLoremIpsumIsSimplyDummy,
-        //         style: getmediumStyle(
-        //           color: ColorManager.kDarkGreyColor,
-        //           fontSize: ScreenUtil().setSp(AppSize.s12),
-        //         ),
-        //       ),
-        //     ),
-        //     Padding(
-        //       padding: EdgeInsets.symmetric(
-        //         horizontal: AppSize.sizeWidth(context!) * 0.03,
-        //         vertical: AppSize.sizeHeight(context!) * 0.04,
-        //       ),
-        //       child: AmountBarWidget(
-        //         amount: 500.00,
-        //         backGroundColor: ColorManager.kWhiteColor,
-        //       )
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Profile section
+              _buildProfileSection(),
+              SizedBox(height: 16.h),
 
-        //     ),
-        //     //
-        //     Padding(
-        //       padding: EdgeInsets.symmetric(
-        //         horizontal: AppSize.sizeWidth(context!) * 0.04,
-        //       ),
-        //       child: Text(
-        //         AppStrings.kAttachedDocuments,
-        //         style: getsemiboldStyle(
-        //           color: ColorManager.primary,
-        //           fontSize: ScreenUtil().setSp(AppSize.s16),
-        //         ),
-        //       ),
-        //     ),
-        //     SizedBox(height: AppSize.s8.h),
-        //     Padding(
-        //       padding: EdgeInsets.symmetric(
-        //         horizontal: AppSize.sizeWidth(context!) * 0.04,
-        //       ),
-        //       child: Wrap(
-        //         spacing: 8,
-        //         runSpacing: 8,
-        //         children:
-        //             imageUrls.map((url) {
-        //               return ClipRRect(
-        //                 borderRadius: BorderRadius.circular(10),
-        //                 child: Image.asset(
-        //                   url,
-        //                   width: 80,
-        //                   height: 80,
-        //                   fit: BoxFit.cover,
-        //                 ),
-        //               );
-        //             }).toList(),
-        //       ),
-        //     ),
-        //     SizedBox(height: AppSize.s20.h),
-        //     Container(
-        //       height: 200,
-        //       decoration: BoxDecoration(
-        //         color: ColorManager.kWhiteColor,
-        //         borderRadius: BorderRadius.only(
-        //           topLeft: Radius.circular(14.r),
-        //           topRight: Radius.circular(14.r),
-        //         ),
-        //       ),
-        //       child: Column(
-        //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           Padding(
-        //             padding: EdgeInsets.symmetric(
-        //               horizontal: AppSize.sizeWidth(context!) * 0.04,
-        //             ),
-        //             child: Text(
-        //               AppStrings.kCasefiledBy,
-        //               style: getsemiboldStyle(
-        //                 color: ColorManager.primary,
-        //                 fontSize: ScreenUtil().setSp(AppSize.s16),
-        //               ),
-        //             ),
-        //           ),
-        //           Padding(
-        //             padding: EdgeInsets.only(
-        //               left: AppSize.sizeWidth(context!) * 0.04,
-        //             ),
-        //             child: Row(
-        //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //               children: [
-        //                 Flexible(
-        //                   child: Row(
-        //                     children: [
-        //                       CircleAvatar(
-        //                         backgroundImage: AssetImage(ImageAssets.userImage),
-        //                         radius: 20,
-        //                       ),
-        //                       Text(
-        //                         data.userName,
-        //                         style: getmediumStyle(
-        //                           color: ColorManager.primary,
-        //                           fontSize: ScreenUtil().setSp(AppSize.s14),
-        //                         ),
-        //                       ),
-        //                     ],
-        //                   ),
-        //                 ),
-        //                 Flexible(
-        //                   child: button(
-        //                     text: AppStrings.kMessage,
-        //                     iconPath: ImageAssets.kMessage1Icon,
-        //                     color: ColorManager.primary,
-        //                     margin: 0.02,
-        //                     onTap: () {
-        //                       Navigator.pushNamed(
-        //                         context,
-        //                         CustomRouteNames.kCaseDiscussionScreenRoute,
-        //                         arguments: true
-        //                       );
-        //                     },
-        //                   ),
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //           Padding(
-        //             padding: const EdgeInsets.all(8.0),
-        //             child: Row(
-        //               children: [
-        //                 Flexible(
-        //                   child: button(
-        //                     text: AppStrings.kReject,
-        //                     color: ColorManager.kLightRedColor,
-        //                     onTap: () {
-        //                       // Navigator.pushNamed(
-        //                       //   context,
-        //                       //   CustomRouteNames.kDashboardScreenRoute,
-        //                       // );
-        //                     },
-        //                   ),
-        //                 ),
-        //                 SizedBox(width: AppSize.s8.h),
-        //                 Flexible(
-        //                   child: button(
-        //                     text: AppStrings.kAccept,
-        //                     color: ColorManager.secondary,
-        //                     onTap: () {
-        //                       Navigator.pushNamed(
-        //                         context,
-        //                         CustomRouteNames.kCreateMilestonesScreenRoute,
-        //                       );
-        //                     },
-        //                   ),
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //   ],
-        // ),
+              // Statistics section
+              _buildStatisticsSection(),
+              SizedBox(height: 16.h),
+
+              // About section with tabs
+              _buildAboutSection(),
+              SizedBox(height: 16.h),
+
+              // Availability section
+              _buildAvailabilitySection(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Profile section with image, name, rating and location
+  Widget _buildProfileSection() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: ColorManager.primary,
+        borderRadius: BorderRadius.circular(16.r),
+        image: DecorationImage(
+          image: const AssetImage(ImageAssets.starUserImage5),
+          fit: BoxFit.contain,
+          colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.5),
+            BlendMode.darken,
+          ),
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(16.r),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 120.h),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "David Watson",
+                  style: getboldStyle(
+                    color: ColorManager.kWhiteColor,
+                    fontSize: ScreenUtil().setSp(AppSize.s22),
+                  ),
+                ),
+                SizedBox(width: 8.w),
+                // Container(
+                //   decoration: BoxDecoration(
+                //     color: ColorManager.kCardBgColor.withOpacity(0.5),
+                //     borderRadius: BorderRadius.circular(AppSize.s6.r),
+                //   ),
+                //   padding: EdgeInsets.symmetric(
+                //     horizontal: AppPadding.p8.w,
+                //     vertical: AppPadding.p4.h,
+                //   ),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     children: [
+                //       SvgPicture.asset(
+                //         ImageAssets.kStarIcon,
+                //         height: AppSize.s12.h,
+                //         width: AppSize.s12.w,
+                //         colorFilter: ColorFilter.mode(
+                //           ColorManager.kLightYellowColor,
+                //           BlendMode.srcIn,
+                //         ),
+                //       ),
+                //       SizedBox(width: AppSize.s4.w),
+                //       Text(
+                //         "4.5",
+                //         style: getRegularStyle(
+                //           color: ColorManager.kWhiteColor,
+                //           fontSize: ScreenUtil().setSp(FontSize.s12),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                Container(
+                decoration: BoxDecoration(
+                  color: ColorManager.kCardBgColor.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(AppSize.s6.r),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppPadding.p8.w,
+                  vertical: AppPadding.p4.h,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      ImageAssets.kStarIcon,
+                      height: AppSize.s8.h,
+                      width: AppSize.s8.w,
+                      colorFilter: ColorFilter.mode(
+                        ColorManager.kLightYellowColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    SizedBox(width: AppSize.s4.w),
+                    Text(
+                      "4.5",//rating.toString(),
+                      style: getRegularStyle(
+                        color: ColorManager.kWhiteColor,
+                        fontSize: ScreenUtil().setSp(FontSize.s8),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ],
+            ),
+            Row(
+              children: [
+                SvgPicture.asset(
+                  ImageAssets.kLocationIcon,
+                  height: AppSize.s16.h,
+                  width: AppSize.s16.w,
+                  colorFilter: ColorFilter.mode(
+                    ColorManager.kGreyColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                SizedBox(width: 4.w),
+                Text(
+                  "Sydney, Australia",
+                  style: getRegularStyle(
+                    color: ColorManager.kGreyColor,
+                    fontSize: ScreenUtil().setSp(AppSize.s14),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Statistics section with Cases Won and Experience
+  Widget _buildStatisticsSection() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: ColorManager.kWhiteColor,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(16.r),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              children: [
+                Text(
+                  "100+",
+                  style: getboldStyle(
+                    color: ColorManager.primary,
+                    fontSize: ScreenUtil().setSp(AppSize.s22),
+                  ),
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  "Cases Won",
+                  style: getRegularStyle(
+                    color: ColorManager.kDarkGreyColor,
+                    fontSize: ScreenUtil().setSp(AppSize.s10),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox( width: 16.w),
+            Column(
+              children: [
+                Text(
+                  "08+",
+                  style: getboldStyle(
+                    color: ColorManager.primary,
+                    fontSize: ScreenUtil().setSp(AppSize.s22),
+                  ),
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  "Experience",
+                  style: getRegularStyle(
+                    color: ColorManager.kDarkGreyColor,
+                    fontSize: ScreenUtil().setSp(AppSize.s10),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // About section with tabs
+  Widget _buildAboutSection() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: ColorManager.kWhiteColor,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Tab bar
+          TabBar(
+            controller: _tabController,
+            labelColor: ColorManager.primary,
+            unselectedLabelColor: ColorManager.kGreyColor,
+            indicatorColor: Colors.transparent,
+            tabs: const [
+              Tab(text: "About the Lawyer"),
+              Tab(text: "Rating and Reviews"),
+            ],
+          ),
+
+          // Tab content
+          SizedBox(
+            height: 180.h,
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                // About tab content
+                Padding(
+                  padding: EdgeInsets.all(16.r),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                        style: getRegularStyle(
+                          color: ColorManager.kDarkGreyColor,
+                          fontSize: ScreenUtil().setSp(AppSize.s14),
+                        ),
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 8.h),
+                      GestureDetector(
+                        onTap: () {
+                          // Handle see more tap
+                        },
+                        child: Text(
+                          "See more...",
+                          style: getmediumStyle(
+                            color: ColorManager.secondary,
+                            fontSize: ScreenUtil().setSp(AppSize.s14),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Reviews tab content
+                Padding(
+                  padding: EdgeInsets.all(16.r),
+                  child: Center(
+                    child: Text(
+                      "No reviews yet",
+                      style: getmediumStyle(
+                        color: ColorManager.kDarkGreyColor,
+                        fontSize: ScreenUtil().setSp(AppSize.s14),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Availability section
+  Widget _buildAvailabilitySection() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: ColorManager.kWhiteColor,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(16.r),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Lawyer Availability",
+              style: getsemiboldStyle(
+                color: ColorManager.primary,
+                fontSize: ScreenUtil().setSp(AppSize.s16),
+              ),
+            ),
+            SizedBox(height: 16.h),
+            _buildAvailabilityRow("Monday", "10:00am to 05:00pm"),
+            _buildAvailabilityRow("Tuesday", "10:00am to 05:00pm"),
+            _buildAvailabilityRow("Wednesday", "10:00am to 05:00pm"),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Helper method for availability rows
+  Widget _buildAvailabilityRow(String day, String hours) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 12.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            day,
+            style: getmediumStyle(
+              color: ColorManager.primary,
+              fontSize: ScreenUtil().setSp(AppSize.s14),
+            ),
+          ),
+          Text(
+            hours,
+            style: getRegularStyle(
+              color: ColorManager.kDarkGreyColor,
+              fontSize: ScreenUtil().setSp(AppSize.s14),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -242,11 +422,10 @@ class LawyerDetailsScreen extends StatelessWidget {
   }) {
     return CustomButton(
       color: color ?? ColorManager.primary,
-      horizontalMargin:margin?? 0.0,
+      horizontalMargin: margin ?? 0.0,
       iconPath: iconPath,
       isLeadingIcon: true,
       text: text ?? "",
-
       style: getmediumStyle(
         color: fontColor ?? ColorManager.kWhiteColor,
         fontSize: AppSize.s14.sp,
