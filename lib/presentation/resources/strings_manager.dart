@@ -273,9 +273,15 @@ class AppStrings {
 
   ///Dispute
   static const String kAttachMedia= "Attach Media";
+  static const String kAttachDocument= "Attach Document";
   static const String kDisputeTitle= "Dispute Title";
+  static const String kCaseDetaildescription= "Ex: Enter detail description about the case";
+  static const String kCaseTitle= "Case Title";
+  static const String kCaseAmount= "Amount";
   static const String kDisputeDescription= "Dispute Description";
+  static const String kCaseDescription= "Case Description";
   static const String kDisputeTitleHinttext= "e.g: Case name or Case ID";
+  static const String kCorporateIssue= "Ex : Corporate Issue";
   static const String kPleaseUploadAttachmentsMax5 = "Please upload attachments (max 5) ";
 
   ///Live chat

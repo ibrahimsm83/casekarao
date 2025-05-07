@@ -68,7 +68,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                     bottom: AppSize.s6.h,
                   ),
                   child: Text(
-                    AppStrings.kDisputeTitle,
+                    AppStrings.kCaseTitle,
                     style: getmediumStyle(
                       color: ColorManager.kDarkGreyColor,
                       fontSize: ScreenUtil().setSp(AppSize.s12),
@@ -76,7 +76,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                   ),
                 ),
                 CustomTextFormField(
-                  hintText: AppStrings.kDisputeTitleHinttext,
+                  hintText: AppStrings.kCorporateIssue,
                   controller: _titleController,
                   fillColor: ColorManager.kWhiteColor,
                   focusNode: node,
@@ -88,15 +88,14 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                     return null;
                   },
                 ),
-
-                SizedBox(height: AppSize.s8.h),
+                //(height: AppSize.s8.h),
                 Padding(
                   padding: EdgeInsets.only(
                     top: AppSize.s10.h,
                     bottom: AppSize.s6.h,
                   ),
                   child: Text(
-                    AppStrings.kDisputeDescription,
+                    AppStrings.kCaseDescription,
                     style: getmediumStyle(
                       color: ColorManager.kDarkGreyColor,
                       fontSize: ScreenUtil().setSp(AppSize.s12),
@@ -104,7 +103,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                   ),
                 ),
                 CustomTextFormField(
-                  hintText: AppStrings.kDisputeLoremIpsum,
+                  hintText: AppStrings.kCaseDetaildescription,
                   controller: _desController,
                   fillColor: ColorManager.kWhiteColor,
                   maxLines: 6,
@@ -117,25 +116,57 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                     return null;
                   },
                 ),
+
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: AppSize.s10.h,
+                    bottom: AppSize.s6.h,
+                  ),
+                  child: Text(
+                    AppStrings.kCaseAmount,
+                    style: getmediumStyle(
+                      color: ColorManager.kDarkGreyColor,
+                      fontSize: ScreenUtil().setSp(AppSize.s12),
+                    ),
+                  ),
+                ),
+                CustomTextFormField(
+                  suffixIcon:const Padding(
+                    padding:  EdgeInsets.all(12.0),
+                    child: Text("PKR"),
+                  ),
+                  hintText: "Ex :500.00",//AppStrings.kCorporateIssue,
+                  controller: _titleController,
+                  fillColor: ColorManager.kWhiteColor,
+                  focusNode: node,
+                  horizontalMergin: 0.0,
+                  validator: (String? val) {
+                    if (val == null || val.isEmpty) {
+                      return "Enter Dispute Title";
+                    }
+                    return null;
+                  },
+                ),
+
                 SizedBox(height: AppSize.s15.h),
                 Text(
-                  AppStrings.kAttachMedia,
+                  AppStrings.kAttachDocument,
                   style: getsemiboldStyle(
                     color: ColorManager.primary,
                     fontSize: ScreenUtil().setSp(AppSize.s16),
                   ),
                 ),
 
-                Padding(
-                  padding: EdgeInsets.only(top: 5.h, bottom: AppSize.s15.h),
-                  child: Text(
-                    AppStrings.kPleaseUploadAttachmentsMax5,
-                    style: getRegularStyle(
-                      color: ColorManager.kDarkGreyColor,
-                      fontSize: ScreenUtil().setSp(AppSize.s12),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.only(top: 5.h, bottom: AppSize.s15.h),
+                //   child: Text(
+                //     AppStrings.kPleaseUploadAttachmentsMax5,
+                //     style: getRegularStyle(
+                //       color: ColorManager.kDarkGreyColor,
+                //       fontSize: ScreenUtil().setSp(AppSize.s12),
+                //     ),
+                //   ),
+                // ),
                 AddButton(
                   onTap: () {
                     print("Add button tapped");
