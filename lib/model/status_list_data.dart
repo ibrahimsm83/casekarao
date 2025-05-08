@@ -88,7 +88,7 @@ class DataList {
      userImage: ImageAssets.userImage,
      userName: "Randy Press",
      paymentStatus: AppStrings.kPaid,
-     mileStoneExpiry: "7",
+     mileStoneExpiry: "7", lowyerTitle: '',
    ),   OnGoingStatusItemModel(
      title: AppStrings.kMurderCase,
      title2: AppStrings.k1stMilestone,
@@ -96,7 +96,7 @@ class DataList {
      userImage: ImageAssets.userImage,
      userName: "Randy Press",
      paymentStatus: AppStrings.kPaid,
-     mileStoneExpiry: "12",
+     mileStoneExpiry: "12", lowyerTitle: '',
    ),   OnGoingStatusItemModel(
      title: AppStrings.kMurderCase,
      title2: AppStrings.k1stMilestone,
@@ -104,7 +104,7 @@ class DataList {
      userImage: ImageAssets.userImage,
      userName: "Randy Press",
      paymentStatus: AppStrings.kPending,
-     mileStoneExpiry: "2",
+     mileStoneExpiry: "2", lowyerTitle: '',
    ),   OnGoingStatusItemModel(
      title: AppStrings.kMurderCase,
      title2: AppStrings.k1stMilestone,
@@ -112,7 +112,7 @@ class DataList {
      userImage: ImageAssets.userImage,
      userName: "Randy Press",
      paymentStatus: AppStrings.kPending,
-     mileStoneExpiry: "2",
+     mileStoneExpiry: "2", lowyerTitle: '',
    ),   OnGoingStatusItemModel(
      title: AppStrings.kMurderCase,
      title2: AppStrings.k1stMilestone,
@@ -120,7 +120,7 @@ class DataList {
      userImage: ImageAssets.userImage,
      userName: "Randy Press",
      paymentStatus: AppStrings.kPending,
-     mileStoneExpiry: "2",
+     mileStoneExpiry: "2", lowyerTitle: '',
    ),
  ];
 

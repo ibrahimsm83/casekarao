@@ -45,6 +45,7 @@ class OnGoingStatusItemModel {
   final String subtitle;
   final String userImage;
   final String userName;
+  final String? lowyerTitle;
 
   OnGoingStatusItemModel({
     required this.title,
@@ -54,6 +55,7 @@ class OnGoingStatusItemModel {
     required this.userName,
     required this.paymentStatus,
     required this.mileStoneExpiry,
+     this.lowyerTitle,
   });
 }
 class CanceledStatusItemModel {

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../export_casekarao.dart';
 
@@ -34,16 +35,26 @@ class OnGoingStatusCard extends StatelessWidget {
                     fontSize: ScreenUtil().setSp(AppSize.s16),
                   ),
                 ),
-                Padding(
+                status.lowyerTitle == null ? const SizedBox() : Padding(
                   padding: const EdgeInsets.only(left: 5, top: 0),
                   child: Text(
-                    status.title2,
+                    status.lowyerTitle!,
                     style: getmediumStyle(
                       color: ColorManager.secondary,
                       fontSize: ScreenUtil().setSp(AppSize.s12),
                     ),
                   ),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 5, top: 0),
+                //   child: Text(
+                //     status.title2,
+                //     style: getmediumStyle(
+                //       color: ColorManager.secondary,
+                //       fontSize: ScreenUtil().setSp(AppSize.s12),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             SizedBox(height: 10.0),
@@ -100,12 +111,24 @@ class OnGoingStatusCard extends StatelessWidget {
 
                     Padding(
                       padding: const EdgeInsets.only(left: 5.0),
-                      child: Text(
-                        status.userName,
-                        style: getmediumStyle(
-                          color: ColorManager.primary,
-                          fontSize: ScreenUtil().setSp(AppSize.s10),
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            status.userName,
+                            style: getmediumStyle(
+                              color: ColorManager.primary,
+                              fontSize: ScreenUtil().setSp(AppSize.s8),
+                            ),
+                          ),
+                          Text(
+                            "Corporate Lawyer",
+                            style: getmediumStyle(
+                              color: ColorManager.primary,
+                              fontSize: ScreenUtil().setSp(AppSize.s6),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
