@@ -95,6 +95,7 @@ class AppStrings {
   static const String dD= "DD";
   static const String yYYY= "YYYY";
   static const String submit= "Submit";
+  static const String sendOffer= "Send Offer";
   static const String verified= "Verified";
   static const String uploadImage= "Upload Image";
   static const String dateOfBirth= "Date of Birth";

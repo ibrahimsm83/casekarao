@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../export_casekarao.dart';
 
 class SendOfferScreen extends StatefulWidget {
@@ -17,6 +16,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
   final _formKey = GlobalKey<FormState>();
   final _desController = TextEditingController();
   final _titleController = TextEditingController();
+   List<DocumentAttachment> _attachments = [];
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +132,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                 ),
                 CustomTextFormField(
                   suffixIcon:const Padding(
-                    padding:  EdgeInsets.all(12.0),
+                    padding:  EdgeInsets.all(15.0),
                     child: Text("PKR"),
                   ),
                   hintText: "Ex :500.00",//AppStrings.kCorporateIssue,
@@ -142,6 +142,8 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
+
+                      
                       return "Enter Dispute Title";
                     }
                     return null;
@@ -149,13 +151,13 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                 ),
 
                 SizedBox(height: AppSize.s15.h),
-                Text(
-                  AppStrings.kAttachDocument,
-                  style: getsemiboldStyle(
-                    color: ColorManager.primary,
-                    fontSize: ScreenUtil().setSp(AppSize.s16),
-                  ),
-                ),
+                // Text(
+                //   AppStrings.kAttachDocument,
+                //   style: getsemiboldStyle(
+                //     color: ColorManager.primary,
+                //     fontSize: ScreenUtil().setSp(AppSize.s16),
+                //   ),
+                // ),
 
                 // Padding(
                 //   padding: EdgeInsets.only(top: 5.h, bottom: AppSize.s15.h),
@@ -167,15 +169,30 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                 //     ),
                 //   ),
                 // ),
-                AddButton(
-                  onTap: () {
-                    print("Add button tapped");
-                    // Add your functionality here
-                  },
-                ),
+
+
+                // AddButton(
+                //   onTap: () {
+                //     print("Add button tapped");
+                //     // Add your functionality here
+                //   },
+                // ),
+                DocumentAttachmentSection(
+                title: 'Attach Document',
+                subtitle: '',//Please upload attachments (max 5)
+                maxAttachments: 5,
+                onAttachmentsChanged: (attachments) {
+                  setState(() {
+                    _attachments = attachments;
+                  });
+                },
+              ),
+
+
+
                 SizedBox(height: AppSize.sizeHeight(context) * 0.15),
                 button(
-                  text: AppStrings.submit,
+                  text: AppStrings.sendOffer,
                   onTap: () {
                     if (!_formKey.currentState!.validate()) {
                       //Navigator.pushNamed(context, CustomRouteNames.kAddPayoutScreenRoute);
@@ -309,31 +326,31 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
   }
 }
 
-class AddButton extends StatelessWidget {
-  final VoidCallback onTap;
+// class AddButton extends StatelessWidget {
+//   final VoidCallback onTap;
 
-  const AddButton({super.key, required this.onTap});
+//   const AddButton({super.key, required this.onTap});
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 80,
-        height: 80,
-        decoration: BoxDecoration(
-          color: Color(0xFFFAFAF7), // off-white
-          borderRadius: BorderRadius.circular(12.r), // rounded corners
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 8,
-              offset: Offset(2, 4),
-            ),
-          ],
-        ),
-        child: Center(child: Icon(Icons.add, size: 36, color: Colors.black)),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: onTap,
+//       child: Container(
+//         width: 80,
+//         height: 80,
+//         decoration: BoxDecoration(
+//           color: Color(0xFFFAFAF7), // off-white
+//           borderRadius: BorderRadius.circular(12.r), // rounded corners
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.black12,
+//               blurRadius: 8,
+//               offset: Offset(2, 4),
+//             ),
+//           ],
+//         ),
+//         child: Center(child: Icon(Icons.add, size: 36, color: Colors.black)),
+//       ),
+//     );
+//   }
+// }
