@@ -176,6 +176,7 @@ class AppStrings {
   static const String kMurderCase= "Murder Case";
   static const String kViewDetails= "View details";
   static const String kAppointments= "Appointments";
+  static const String kMyCases= "My Cases";
   static const String k1stMilestone= "1st Milestone";
   static const String kOnGoingCases= "On Going Cases";
   static const String kJaylonHerwitz= "Jaylon Herwitz";

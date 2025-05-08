@@ -41,6 +41,7 @@ class ImageAssets {
   ///Home
   static const String kHomeIcon = "$ICON_PATH/home.svg";
   static const String kEarningIcon = "$ICON_PATH/earning.svg";
+  static const String kMyCaseIcon = "$ICON_PATH/my_case.svg";
   static const String kMessageIcon = "$ICON_PATH/message.svg";
   static const String kMessage1Icon = "$ICON_PATH/message1.svg";
   static const String kSettingsIcon = "$ICON_PATH/Settings.svg";

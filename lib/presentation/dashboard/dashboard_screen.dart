@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../export_casekarao.dart';
 import 'consultations_screen.dart';
 import 'home_user_screen.dart';
+import 'my_case_user-screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -26,7 +27,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _pagecontroller = PageController(initialPage: _currentIndex);
     super.initState();
   }
-
   // final UserController userController = Get.find();
 
   @override
@@ -49,7 +49,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             _userRoleController.isUser ? const ConsultationsScreen():const CasesScreen(),
             const MessagesScreen(),
             // AppointmentsLawyerScreen(),
-            const EarningsLawyerScreen(),
+             _userRoleController.isUser ? const MyCaseUserScreen() : const EarningsLawyerScreen(),
             const SettingsLawyerScreen(),
             // userController.userRole.value==UserRole.Patient?HomeView():HomeHealthView(),
             // userController.userRole.value==UserRole.Patient?ProfileView():ProfileProfessionalHealthCareView(),
@@ -91,8 +91,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 currentindex: 2,
               ),
               bottomNavbaritem(
-                title: AppStrings.kEarnings,
-                iconName: ImageAssets.kEarningIcon,
+                title: _userRoleController.isUser ? AppStrings.kMyCases : AppStrings.kEarnings,
+                iconName: _userRoleController.isUser ?ImageAssets.kMyCaseIcon : ImageAssets.kEarningIcon,
                 currentindex: 3,
               ),
               bottomNavbaritem(

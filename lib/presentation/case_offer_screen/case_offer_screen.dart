@@ -142,7 +142,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
-                      return "Enter Dispute Title";
+                      return "Enter Title";
                     }
                     return null;
                   },
