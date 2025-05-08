@@ -16,7 +16,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
   final _formKey = GlobalKey<FormState>();
   final _desController = TextEditingController();
   final _titleController = TextEditingController();
-   List<DocumentAttachment> _attachments = [];
+  List<DocumentAttachment> _attachments = [];
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 _buildProfileSection(),
+                _buildProfileSection(),
                 Padding(
                   padding: EdgeInsets.only(
                     top: AppSize.s20.h,
@@ -131,19 +131,17 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                   ),
                 ),
                 CustomTextFormField(
-                  suffixIcon:const Padding(
-                    padding:  EdgeInsets.all(15.0),
+                  suffixIcon: const Padding(
+                    padding: EdgeInsets.all(15.0),
                     child: Text("PKR"),
                   ),
-                  hintText: "Ex :500.00",//AppStrings.kCorporateIssue,
+                  hintText: "Ex :500.00", //AppStrings.kCorporateIssue,
                   controller: _titleController,
                   fillColor: ColorManager.kWhiteColor,
                   focusNode: node,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
-
-                      
                       return "Enter Dispute Title";
                     }
                     return null;
@@ -170,7 +168,6 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                 //   ),
                 // ),
 
-
                 // AddButton(
                 //   onTap: () {
                 //     print("Add button tapped");
@@ -178,22 +175,21 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                 //   },
                 // ),
                 DocumentAttachmentSection(
-                title: 'Attach Document',
-                subtitle: '',//Please upload attachments (max 5)
-                maxAttachments: 5,
-                onAttachmentsChanged: (attachments) {
-                  setState(() {
-                    _attachments = attachments;
-                  });
-                },
-              ),
-
-
+                  title: 'Attach Document',
+                  subtitle: '', //Please upload attachments (max 5)
+                  maxAttachments: 5,
+                  onAttachmentsChanged: (attachments) {
+                    setState(() {
+                      _attachments = attachments;
+                    });
+                  },
+                ),
 
                 SizedBox(height: AppSize.sizeHeight(context) * 0.15),
                 button(
                   text: AppStrings.sendOffer,
                   onTap: () {
+                    print(_attachments[0].file);
                     if (!_formKey.currentState!.validate()) {
                       //Navigator.pushNamed(context, CustomRouteNames.kAddPayoutScreenRoute);
                     }
@@ -208,7 +204,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
     );
   }
 
-    // Profile section with image, name, rating and location
+  // Profile section with image, name, rating and location
   Widget _buildProfileSection() {
     return Container(
       width: double.infinity,
@@ -316,7 +312,6 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
       iconPath: iconPath,
       isLeadingIcon: true,
       text: text ?? "",
-
       style: getmediumStyle(
         color: fontColor ?? ColorManager.kWhiteColor,
         fontSize: AppSize.s14.sp,

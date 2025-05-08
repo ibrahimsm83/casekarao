@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import '../export_casekarao.dart';
 
 class DocumentAttachmentSection extends StatefulWidget {
@@ -95,11 +97,14 @@ class _DocumentAttachmentSectionState extends State<DocumentAttachmentSection> {
         children: [
           Center(
             child: attachment.isImage
-                ? Image.file(
-                    attachment.file,
-                    width: 60.w,
-                    height: 60.h,
-                    fit: BoxFit.cover,
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(4.r),
+                    child: Image.file(
+                      attachment.file,
+                      width: 60.w,
+                      height: 60.h,
+                      fit: BoxFit.cover,
+                    ),
                   )
                 : SvgPicture.asset(
                     ImageAssets.kDocumentsIcon,
@@ -167,21 +172,56 @@ class _DocumentAttachmentSectionState extends State<DocumentAttachmentSection> {
   }
 
   void _pickDocument() async {
-    // This is where you would implement file picking functionality
-    // For demonstration purposes, we'll just add a dummy document
     if (_attachments.length < widget.maxAttachments) {
-      setState(() {
-        _attachments.add(
-          DocumentAttachment(
-            name: 'Document ${_attachments.length + 1}',
-            isImage: false,
+      try {
+        final ImagePicker picker = ImagePicker();
+        final XFile? pickedFile = await picker.pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 80,
+        );
+
+        if (pickedFile != null) {
+          final File imageFile = File(pickedFile.path);
+          final String fileName = pickedFile.name;
+
+          setState(() {
+            _attachments.add(
+              DocumentAttachment(
+                name: fileName,
+                file: imageFile,
+                isImage: true,
+                path: pickedFile.path,
+              ),
+            );
+
+            if (widget.onAttachmentsChanged != null) {
+              widget.onAttachmentsChanged!(_attachments);
+            }
+          });
+        }
+      } catch (e) {
+        // Use a logger instead of print in production
+        debugPrint('Error picking image: $e');
+        // Show error message to user if widget is still mounted
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Failed to pick image: $e'),
+              backgroundColor: ColorManager.kRedColor,
+            ),
+          );
+        }
+      }
+    } else {
+      // Show max attachments reached message
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Maximum ${widget.maxAttachments} attachments allowed'),
+            backgroundColor: ColorManager.kDarkGreyColor,
           ),
         );
-        
-        if (widget.onAttachmentsChanged != null) {
-          widget.onAttachmentsChanged!(_attachments);
-        }
-      });
+      }
     }
   }
 }
@@ -189,11 +229,13 @@ class _DocumentAttachmentSectionState extends State<DocumentAttachmentSection> {
 class DocumentAttachment {
   final String name;
   final bool isImage;
-  final dynamic file; // This would be a File in a real implementation
+  final File file;
+  final String? path;
 
   DocumentAttachment({
     required this.name,
+    required this.file,
     this.isImage = false,
-    this.file,
+    this.path,
   });
 }
