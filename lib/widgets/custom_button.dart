@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,8 @@ class CustomButton extends StatelessWidget {
   bool isLeadingIcon;
   double horizontalMargin;
   String? iconPath;
+  BorderRadius? borderRadius;
+  Widget? counter;
 
   CustomButton({
     super.key,
@@ -28,6 +31,8 @@ class CustomButton extends StatelessWidget {
     this.iconPath,
     this.horizontalMargin = 0.05,
     this.color = Colors.black,
+    this.borderRadius,
+    this.counter,
   });
 
   @override
@@ -36,33 +41,39 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal:  AppSize.sizeWidth(context) * horizontalMargin,//AppSize.sizeWidth(context!) * 0.05,
+          horizontal: AppSize.sizeWidth(context) *
+              horizontalMargin, //AppSize.sizeWidth(context!) * 0.05,
           vertical: 8.0,
         ),
         child: Container(
           height: 44.h,
           decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(12.r),
-            border: Border.all(color: borderColor??Colors.transparent)
-          ),
+              color: color,
+              borderRadius: borderRadius ?? BorderRadius.circular(22.r),
+              border: Border.all(color: borderColor ?? Colors.transparent)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Visibility(
                 visible: isLeadingIcon,
                 child: Padding(
-                  padding: EdgeInsets.only(right: 12.w),
-                  child:
-                      iconPath != null && iconPath!.isNotEmpty
-                          ? SvgPicture.asset(iconPath!)
-                          : SizedBox(),
+                  padding: EdgeInsets.only(right: 6.w),
+                  child: iconPath != null && iconPath!.isNotEmpty
+                      ? SvgPicture.asset(iconPath!)
+                      : SizedBox(),
                 ),
               ),
               Text(
                 text!,
                 style: style,
                 // TextStyle(color: AppColors.whiteColor, fontWeight: fontWeight),
+              ),
+              Visibility(
+                visible: counter != null,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 6.w),
+                  child: counter ?? const SizedBox(),
+                ),
               ),
             ],
           ),

@@ -95,6 +95,111 @@ class UserCaseDetailsScreen extends StatelessWidget {
                 },
               ),
             ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                  //    button(
+                  //   text: AppStrings.kViewPaymentReceipt,
+                  //   color: ColorManager.primary,
+                  //   //color:  ColorManager.kGreenColor,
+                  //   fontColor: ColorManager.kWhiteColor,
+                  //   onTap: () {}
+                  //  ),
+                  Container(
+                    width: AppSize.sizeWidth(context)/2.3,
+                    child: CustomButton(
+                      counter: Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ColorManager.secondary,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left:6.0),
+                          child: Text(
+                            "9",
+                            style: getmediumStyle(
+                              color: ColorManager.kWhiteColor,
+                              fontSize: AppSize.s12.sp,
+                            ),
+                          ),
+                        ),
+                      ),
+                        borderRadius: BorderRadius.circular(22.r),
+                        color:  ColorManager.kWhiteColor,
+                        horizontalMargin: 0.0,
+                        iconPath:   ImageAssets.kDocumentsIcon,
+                        isLeadingIcon: true,
+                        //borderColor: ColorManager.kGreyColor,
+                        text: "Documents",
+                        style: getmediumStyle(
+                          color: ColorManager.primary,
+                          fontSize: AppSize.s10.sp,
+                        ),
+                        onTap: (){},
+                      ),
+                  ),
+                  //  button(
+                  //   text: AppStrings.kViewPaymentReceipt,
+                  //   color: ColorManager.primary,
+                  //   //color:  ColorManager.kGreenColor,
+                  //   fontColor: ColorManager.kWhiteColor,
+                  //   onTap: () {}
+                  //  ),
+                  Container(
+                    width: AppSize.sizeWidth(context)/2.3,
+                    child: CustomButton(
+                      counter: Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ColorManager.secondary,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left:6.0),
+                          child: Text(
+                            "9",
+                            style: getmediumStyle(
+                              color: ColorManager.kWhiteColor,
+                              fontSize: AppSize.s12.sp,
+                            ),
+                          ),
+                        ),
+                      ),
+                        borderRadius: BorderRadius.circular(22.r),
+                        color:  ColorManager.kWhiteColor,
+                        horizontalMargin: 0.0,
+                        iconPath:   ImageAssets.kdialogIcon,
+                        isLeadingIcon: true,
+                        //borderColor: ColorManager.kGreyColor,
+                        text: "Case Discussion",
+                        style: getmediumStyle(
+                          color: ColorManager.primary,
+                          fontSize: AppSize.s10.sp,
+                        ),
+                        onTap: (){},
+                      ),
+                  )
+                  ],
+                ),
+                SizedBox(
+                  height: 70,
+                  //color: ColorManager.kRedColor,
+                  child:  button(
+                    borderRadius: BorderRadius.circular(22.r),
+                    text: AppStrings.kViewPaymentReceipt,
+                    color: ColorManager.primary,
+                    //color:  ColorManager.kGreenColor,
+                    fontColor: ColorManager.kWhiteColor,
+                    onTap: () {}
+                   ),
+                  ),
+              ],
+            ),
           ],
         ),
       ),
@@ -195,7 +300,7 @@ class UserCaseDetailsScreen extends StatelessWidget {
                     onTap: cdm.mileStoneStatus == "Milestone Pending" ? () {
                       Navigator.pushNamed(context, CustomRouteNames.kAddDisputeScreenRoute);
                     }:null,
-                                   ),
+  ),
                  ),
               ],
             ),
@@ -212,8 +317,11 @@ class UserCaseDetailsScreen extends StatelessWidget {
     Color? fontColor,
     String? iconPath,
     Color? borderColor,
+     BorderRadius? borderRadius,
   }) {
     return CustomButton(
+      
+      borderRadius:borderRadius?? BorderRadius.circular(12.r),
       color: color ?? ColorManager.primary,
       horizontalMargin: 0.0,
       iconPath: iconPath,
