@@ -1,3 +1,4 @@
+import 'package:casekarao/presentation/case_details_screen/user_case_details_screen.dart';
 import 'package:casekarao/presentation/case_offer_screen/case_offer_screen.dart';
 import 'package:casekarao/presentation/lawyer_details_screen/lawyer_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -262,6 +263,12 @@ class CustomRouteGenerator {
         return MaterialPageRoute(
           builder: (context) {
             return const SendOfferScreen();
+          },
+        );
+        case CustomRouteNames.kUserCaseDetailsScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const UserCaseDetailsScreen();
           },
         );
 

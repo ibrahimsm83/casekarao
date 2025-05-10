@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../export_casekarao.dart';
 
 class OnGoingStatusCard extends StatelessWidget {
@@ -133,6 +132,7 @@ class OnGoingStatusCard extends StatelessWidget {
                     ),
                   ],
                 ),
+                 status.paymentStatus == "Pending" ?
                 InkWell(
                   onTap: onMessageTap,
                   child: Padding(
@@ -165,12 +165,12 @@ class OnGoingStatusCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
+                ):const SizedBox(),
                 InkWell(
                   onTap: onDetailsTap,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: ColorManager.kBackgroundColor,
+                      color: ColorManager.kbuttonBgColor,
                       borderRadius: BorderRadius.all(Radius.circular(8.r)),
                     ),
                     child: Padding(

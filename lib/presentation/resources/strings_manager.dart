@@ -173,6 +173,7 @@ class AppStrings {
   static const String kSettings= "Settings";
   static const String kEarnings= "Earnings";
   static const String kCompleted= "Completed";
+  static const String kMartkAsCompleted= "Marke as completed";
   static const String kMurderCase= "Murder Case";
   static const String kViewDetails= "View details";
   static const String kAppointments= "Appointments";

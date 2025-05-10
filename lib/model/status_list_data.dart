@@ -127,9 +127,10 @@ class DataList {
  ///CaseDetails data list
 static List<CaseDetailsModel> caseDetailsList=[
   CaseDetailsModel(mileStoneNumber: "1st Milestone",mileStoneStatus: "Milestone Completed",caseName: "Case Initialization",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,),
-  CaseDetailsModel(mileStoneNumber: "2st Milestone",mileStoneStatus: "Milestone Completed",caseName: "Case Initialization",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,),
-  CaseDetailsModel(mileStoneNumber: "3st Milestone",mileStoneStatus: "Milestone Completed",caseName: "Case Initialization",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,),
-  CaseDetailsModel(mileStoneNumber: "4st Milestone",mileStoneStatus: "Milestone Completed",caseName: "Case Initialization",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,),
+  CaseDetailsModel(mileStoneNumber: "2nd Milestone",mileStoneStatus: "Milestone Completed",caseName: "Case Initialization",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,),
+  CaseDetailsModel(mileStoneNumber: "3rd Milestone",mileStoneStatus: "Milestone Completed",caseName: "Case Initialization",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,),
+  CaseDetailsModel(mileStoneNumber: "4th Milestone",mileStoneStatus: "Milestone Completed",caseName: "Case Initialization",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,),
+  CaseDetailsModel(mileStoneNumber: "5th Milestone",mileStoneStatus: "Milestone Pending",caseName: "Case Initialization",caseDesc: AppStrings.kLoremIpsumIsSimplyDummy,),
 ];
 ///Recent Activity data List
  

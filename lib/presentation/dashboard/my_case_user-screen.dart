@@ -148,7 +148,11 @@ class _MyCaseUserScreenState extends State<MyCaseUserScreen> {
           child: OnGoingStatusCard(
             status: DataList.onGoingList[index],
             onDetailsTap: () {
+              DataList.onGoingList[index].paymentStatus == "Paid" ?
               Navigator.pushNamed(
+                context,
+                CustomRouteNames.kUserCaseDetailsScreenRoute,
+              ): Navigator.pushNamed(
                 context,
                 CustomRouteNames.kCaseDetailsScreenRoute,
               );
@@ -179,6 +183,7 @@ class _MyCaseUserScreenState extends State<MyCaseUserScreen> {
           child: OnGoingStatusCard(
             status: DataList.onGoingList[index],
             onDetailsTap: () {
+              // DataList.onGoingList[index].paymentStatus == "Paid" ?
               Navigator.pushNamed(
                 context,
                 CustomRouteNames.kCaseDetailsScreenRoute,

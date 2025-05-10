@@ -25,6 +25,7 @@ class CustomRouteNames {
   static const String kConsultationRequestsDetailsScreenRoute = "/kConsultationRequestsDetailsScreenRoute";
   static const String kCreateMilestonesScreenRoute = "/kCreateMilestonesScreenRoute";
   static const String kCaseDetailsScreenRoute = "/kCaseDetailsScreenRoute";
+  static const String kUserCaseDetailsScreenRoute = "/kUserCaseDetailsScreenRoute";
   static const String kDocumentsScreenRoute = "/kDocumentsScreenRoute";
   static const String kCaseDiscussionScreenRoute = "/kCaseDiscussionScreenRoute";
   static const String kPayoutDetailsScreenRoute = "/kPayoutDetailsScreenRoute";
