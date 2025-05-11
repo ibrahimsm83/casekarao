@@ -79,6 +79,7 @@ class ImageAssets {
   static const String kForwardArrowIcon = "$ICON_PATH/forwardArrow.svg";
   static const String kPrivacyPolicyIcon = "$ICON_PATH/privacyPolicy.svg";
   static const String kTermConditionIcon = "$ICON_PATH/termCondition.svg";
+  static const String kpopupIconIcon = "$ICON_PATH/popup-icon.svg";
 
   ///Live Chat
   static const String kTimerIcon = "$ICON_PATH/timer.svg";

@@ -11,3 +11,4 @@ export 'amount_bar_widget.dart';
 export 'stacked_widget.dart';
 export 'user_type_selection_popup.dart';
 export 'document_attachment_section.dart';
+export 'case_finalization_popup.dart';

@@ -67,7 +67,7 @@ class UserCaseDetailsScreen extends StatelessWidget {
             Flexible(
               child: ListView.separated(
                 //shrinkWrap: true,
-                separatorBuilder: (context, i) => SizedBox(height: 5.0),
+                separatorBuilder: (context, i) => const SizedBox(height: 5.0),
                 itemCount: DataList.caseDetailsList.length,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -100,14 +100,7 @@ class UserCaseDetailsScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                  //    button(
-                  //   text: AppStrings.kViewPaymentReceipt,
-                  //   color: ColorManager.primary,
-                  //   //color:  ColorManager.kGreenColor,
-                  //   fontColor: ColorManager.kWhiteColor,
-                  //   onTap: () {}
-                  //  ),
-                  Container(
+                  SizedBox(
                     width: AppSize.sizeWidth(context)/2.3,
                     child: CustomButton(
                       counter: Container(
@@ -149,7 +142,7 @@ class UserCaseDetailsScreen extends StatelessWidget {
                   //   fontColor: ColorManager.kWhiteColor,
                   //   onTap: () {}
                   //  ),
-                  Container(
+                  SizedBox(
                     width: AppSize.sizeWidth(context)/2.3,
                     child: CustomButton(
                       counter: Container(
@@ -215,10 +208,10 @@ class UserCaseDetailsScreen extends StatelessWidget {
     return Card(
       color: ColorManager.kWhiteColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       elevation: 3,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
@@ -257,7 +250,7 @@ class UserCaseDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Text(
               cdm.caseName,
               style: getsemiboldStyle(
@@ -287,7 +280,26 @@ class UserCaseDetailsScreen extends StatelessWidget {
                     color:  cdm.mileStoneStatus == "Milestone Pending" ? ColorManager.primary:ColorManager.kGreenColor,
                     //color:  ColorManager.kGreenColor,
                     fontColor: ColorManager.kWhiteColor,
-                    onTap: cdm.mileStoneStatus == "Milestone Pending" ? () {}:null,
+                    onTap: cdm.mileStoneStatus == "Milestone Pending" ? () {
+                      // Show case finalization popup
+                      CaseFinalizationPopup.show(
+                        iconPath: ImageAssets.kpopupIconIcon,
+                        context: context,
+                        title: "Closing the Case",
+                        message: "Are your sure your case has been \n completed from the lawyer side?",
+                        primaryButtonText: "No",
+                        secondaryButtonText: "Yes",
+                        onPrimaryButtonPressed: () {
+                          // Handle case completion confirmation
+                          Navigator.of(context).pop(); // Close the popup
+                          // Additional logic for case completion
+                        },
+                        onSecondaryButtonPressed: () {
+                          Navigator.of(context).pop(); // Close the popup
+                        },
+                        barrierDismissible: false,
+                      );
+                    }:null,
                   ),
                 ),
                  SizedBox(
@@ -320,7 +332,7 @@ class UserCaseDetailsScreen extends StatelessWidget {
      BorderRadius? borderRadius,
   }) {
     return CustomButton(
-      
+
       borderRadius:borderRadius?? BorderRadius.circular(12.r),
       color: color ?? ColorManager.primary,
       horizontalMargin: 0.0,
@@ -358,7 +370,7 @@ class UserCaseDetailsScreen extends StatelessWidget {
                 fontSize: ScreenUtil().setSp(AppSize.s12),
               ),
             ),
-            SizedBox(height: 5.0,)
+            const SizedBox(height: 5.0,)
           ],
         ),
       ),
