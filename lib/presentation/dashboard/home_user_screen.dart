@@ -80,28 +80,45 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
               SizedBox(height: 16.h),
 
               // Lawyer cards
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    _buildLawyerCard(
-                      name: "David Watson",
-                      experience: "08+ Experience",
-                      location: "Sydney, Australia",
-                      imagePath: ImageAssets.starUserImage5,
-                      rating: 4.5,
-                    ),
-                    SizedBox(width: 16.w),
-                    _buildLawyerCard(
-                      name: "Gretchen Arcand",
-                      experience: "10+ Experience",
-                      location: "Sydney, Australia",
-                      imagePath: ImageAssets.starUserImage5,
-                      rating: 4.5,
-                    ),
-                  ],
-                ),
+              Container(
+                height: 260,
+                child: ListView.separated(
+                  separatorBuilder: (context, i) => const SizedBox(width: 10.0),
+                  itemCount: 5,
+                  scrollDirection: Axis.horizontal,
+                  //shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                  return _buildLawyerCard(
+                    name: "David Watson",
+                    experience: "08+ Experience",
+                    location: "Sydney, Australia",
+                    imagePath: ImageAssets.starUserImage5,
+                    rating: 4.5,
+                  );
+                },),
               ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: [
+              //       _buildLawyerCard(
+              //         name: "David Watson",
+              //         experience: "08+ Experience",
+              //         location: "Sydney, Australia",
+              //         imagePath: ImageAssets.starUserImage5,
+              //         rating: 4.5,
+              //       ),
+              //       SizedBox(width: 16.w),
+              //       _buildLawyerCard(
+              //         name: "Gretchen Arcand",
+              //         experience: "10+ Experience",
+              //         location: "Sydney, Australia",
+              //         imagePath: ImageAssets.starUserImage5,
+              //         rating: 4.5,
+              //       ),
+              //     ],
+              //   ),
+              // ),
 
               SizedBox(height: 24.h),
 
