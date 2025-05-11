@@ -226,6 +226,10 @@ class AppStrings {
   static const String kUploadDocument= "Upload Document";
   static const String kCaseDiscussion= "Case Discussion";
   static const String kUploadedByLawyer= "Uploaded by Lawyer";
+  static const String kClosingTheCase= "Closing the Case";
+  static const String kCaseCompletionConfirmation= "Are your sure your case has been completed from the lawyer side?";
+  static const String kYes= "Yes";
+  static const String kNo= "No";
 
   ///Case Discussion
   static const String kTypeAMessage= "Type a message ...";
@@ -331,4 +335,7 @@ class AppStrings {
       "Please Select Terms and Condition, Privacy Policy";
   static const passwordValidator =
       "Contain at least 1 uppercase letter, 8 characters, 1 number";
+      //ratee and reviews
+       static const String kRateReview = "Rate & Review";
+      
 }

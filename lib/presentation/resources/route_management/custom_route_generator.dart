@@ -1,6 +1,7 @@
 import 'package:casekarao/presentation/case_details_screen/user_case_details_screen.dart';
 import 'package:casekarao/presentation/case_offer_screen/case_offer_screen.dart';
 import 'package:casekarao/presentation/lawyer_details_screen/lawyer_details_screen.dart';
+import 'package:casekarao/presentation/rate_reviews/rate_review.dart';
 import 'package:flutter/material.dart';
 import '../../../export_casekarao.dart';
 import '../export_resources.dart';
@@ -269,6 +270,12 @@ class CustomRouteGenerator {
         return MaterialPageRoute(
           builder: (context) {
             return const UserCaseDetailsScreen();
+          },
+        );
+        case CustomRouteNames.kRateReviewScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const RateReviewScreen();
           },
         );
 

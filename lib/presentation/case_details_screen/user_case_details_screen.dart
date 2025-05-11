@@ -75,7 +75,7 @@ class UserCaseDetailsScreen extends StatelessWidget {
                       horizontal: AppSize.sizeWidth(context) * 0.01,
                     ),
                     child: caseCard(
-                      context:context,
+                      context: context,
                       cdm: DataList.caseDetailsList[index],
                       onDocumentsTap: () {
                         Navigator.pushNamed(
@@ -100,31 +100,31 @@ class UserCaseDetailsScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                  SizedBox(
-                    width: AppSize.sizeWidth(context)/2.3,
-                    child: CustomButton(
-                      counter: Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorManager.secondary,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left:6.0),
-                          child: Text(
-                            "9",
-                            style: getmediumStyle(
-                              color: ColorManager.kWhiteColor,
-                              fontSize: AppSize.s12.sp,
+                    SizedBox(
+                      width: AppSize.sizeWidth(context) / 2.3,
+                      child: CustomButton(
+                        counter: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorManager.secondary,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 6.0),
+                            child: Text(
+                              "9",
+                              style: getmediumStyle(
+                                color: ColorManager.kWhiteColor,
+                                fontSize: AppSize.s12.sp,
+                              ),
                             ),
                           ),
                         ),
-                      ),
                         borderRadius: BorderRadius.circular(22.r),
-                        color:  ColorManager.kWhiteColor,
+                        color: ColorManager.kWhiteColor,
                         horizontalMargin: 0.0,
-                        iconPath:   ImageAssets.kDocumentsIcon,
+                        iconPath: ImageAssets.kDocumentsIcon,
                         isLeadingIcon: true,
                         //borderColor: ColorManager.kGreyColor,
                         text: "Documents",
@@ -132,41 +132,41 @@ class UserCaseDetailsScreen extends StatelessWidget {
                           color: ColorManager.primary,
                           fontSize: AppSize.s10.sp,
                         ),
-                        onTap: (){},
+                        onTap: () {},
                       ),
-                  ),
-                  //  button(
-                  //   text: AppStrings.kViewPaymentReceipt,
-                  //   color: ColorManager.primary,
-                  //   //color:  ColorManager.kGreenColor,
-                  //   fontColor: ColorManager.kWhiteColor,
-                  //   onTap: () {}
-                  //  ),
-                  SizedBox(
-                    width: AppSize.sizeWidth(context)/2.3,
-                    child: CustomButton(
-                      counter: Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorManager.secondary,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left:6.0),
-                          child: Text(
-                            "9",
-                            style: getmediumStyle(
-                              color: ColorManager.kWhiteColor,
-                              fontSize: AppSize.s12.sp,
+                    ),
+                    //  button(
+                    //   text: AppStrings.kViewPaymentReceipt,
+                    //   color: ColorManager.primary,
+                    //   //color:  ColorManager.kGreenColor,
+                    //   fontColor: ColorManager.kWhiteColor,
+                    //   onTap: () {}
+                    //  ),
+                    SizedBox(
+                      width: AppSize.sizeWidth(context) / 2.3,
+                      child: CustomButton(
+                        counter: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorManager.secondary,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 6.0),
+                            child: Text(
+                              "9",
+                              style: getmediumStyle(
+                                color: ColorManager.kWhiteColor,
+                                fontSize: AppSize.s12.sp,
+                              ),
                             ),
                           ),
                         ),
-                      ),
                         borderRadius: BorderRadius.circular(22.r),
-                        color:  ColorManager.kWhiteColor,
+                        color: ColorManager.kWhiteColor,
                         horizontalMargin: 0.0,
-                        iconPath:   ImageAssets.kdialogIcon,
+                        iconPath: ImageAssets.kdialogIcon,
                         isLeadingIcon: true,
                         //borderColor: ColorManager.kGreyColor,
                         text: "Case Discussion",
@@ -174,23 +174,22 @@ class UserCaseDetailsScreen extends StatelessWidget {
                           color: ColorManager.primary,
                           fontSize: AppSize.s10.sp,
                         ),
-                        onTap: (){},
+                        onTap: () {},
                       ),
-                  )
+                    )
                   ],
                 ),
                 SizedBox(
                   height: 70,
                   //color: ColorManager.kRedColor,
-                  child:  button(
-                    borderRadius: BorderRadius.circular(22.r),
-                    text: AppStrings.kViewPaymentReceipt,
-                    color: ColorManager.primary,
-                    //color:  ColorManager.kGreenColor,
-                    fontColor: ColorManager.kWhiteColor,
-                    onTap: () {}
-                   ),
-                  ),
+                  child: button(
+                      borderRadius: BorderRadius.circular(22.r),
+                      text: AppStrings.kViewPaymentReceipt,
+                      color: ColorManager.primary,
+                      //color:  ColorManager.kGreenColor,
+                      fontColor: ColorManager.kWhiteColor,
+                      onTap: () {}),
+                ),
               ],
             ),
           ],
@@ -234,7 +233,9 @@ class UserCaseDetailsScreen extends StatelessWidget {
                         height: 10,
                         width: 10,
                         decoration: BoxDecoration(
-                          color:  cdm.mileStoneStatus == "Milestone Pending" ? ColorManager.kOrangeColor:ColorManager.secondary,
+                          color: cdm.mileStoneStatus == "Milestone Pending"
+                              ? ColorManager.kOrangeColor
+                              : ColorManager.secondary,
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -242,7 +243,9 @@ class UserCaseDetailsScreen extends StatelessWidget {
                     Text(
                       cdm.mileStoneStatus,
                       style: getmediumStyle(
-                        color:  cdm.mileStoneStatus == "Milestone Pending" ? ColorManager.kOrangeColor:ColorManager.secondary,
+                        color: cdm.mileStoneStatus == "Milestone Pending"
+                            ? ColorManager.kOrangeColor
+                            : ColorManager.secondary,
                         fontSize: ScreenUtil().setSp(AppSize.s12),
                       ),
                     ),
@@ -271,54 +274,72 @@ class UserCaseDetailsScreen extends StatelessWidget {
             ///Buttons
             SizedBox(height: 6.h),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween  ,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: AppSize.sizeWidth(context)/2.5,
+                  width: AppSize.sizeWidth(context) / 2.5,
                   child: button(
-                    text: cdm.mileStoneStatus == "Milestone Pending" ?AppStrings.kMartkAsCompleted:AppStrings.kCompleted,
-                    color:  cdm.mileStoneStatus == "Milestone Pending" ? ColorManager.primary:ColorManager.kGreenColor,
+                    text: cdm.mileStoneStatus == "Milestone Pending"
+                        ? AppStrings.kMartkAsCompleted
+                        : AppStrings.kCompleted,
+                    color: cdm.mileStoneStatus == "Milestone Pending"
+                        ? ColorManager.primary
+                        : ColorManager.kGreenColor,
                     //color:  ColorManager.kGreenColor,
                     fontColor: ColorManager.kWhiteColor,
-                    onTap: cdm.mileStoneStatus == "Milestone Pending" ? () {
-                      // Show case finalization popup
-                      CaseFinalizationPopup.show(
-                        iconPath: ImageAssets.kpopupIconIcon,
-                        context: context,
-                        title: "Closing the Case",
-                        message: "Are your sure your case has been \n completed from the lawyer side?",
-                        primaryButtonText: "No",
-                        secondaryButtonText: "Yes",
-                        onPrimaryButtonPressed: () {
-                          // Handle case completion confirmation
-                          Navigator.of(context).pop(); // Close the popup
-                          // Additional logic for case completion
-                        },
-                        onSecondaryButtonPressed: () {
-                          Navigator.of(context).pop(); // Close the popup
-                        },
-                        barrierDismissible: false,
-                      );
-                    }:null,
+                    onTap: cdm.mileStoneStatus == "Milestone Pending"
+                        ? () {
+                            // Show case finalization popup
+                            openPopup(context);
+                          }
+                        : null,
                   ),
                 ),
-                 SizedBox(
-                  width: AppSize.sizeWidth(context)/2.5,
-                   child: button(
-                    borderColor: cdm.mileStoneStatus == "Milestone Pending" ? ColorManager.primary:null,
+                SizedBox(
+                  width: AppSize.sizeWidth(context) / 2.5,
+                  child: button(
+                    borderColor: cdm.mileStoneStatus == "Milestone Pending"
+                        ? ColorManager.primary
+                        : null,
                     text: AppStrings.kAddDispute,
                     color: Colors.transparent,
-                    fontColor: cdm.mileStoneStatus == "Milestone Pending" ?  ColorManager.primary:ColorManager.kGreyColor,
-                    onTap: cdm.mileStoneStatus == "Milestone Pending" ? () {
-                      Navigator.pushNamed(context, CustomRouteNames.kAddDisputeScreenRoute);
-                    }:null,
-  ),
-                 ),
+                    fontColor: cdm.mileStoneStatus == "Milestone Pending"
+                        ? ColorManager.primary
+                        : ColorManager.kGreyColor,
+                    onTap: cdm.mileStoneStatus == "Milestone Pending"
+                        ? () {
+                            Navigator.pushNamed(context,
+                                CustomRouteNames.kAddDisputeScreenRoute);
+                          }
+                        : null,
+                  ),
+                ),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  openPopup(context) {
+    CaseFinalizationPopup.show(
+      iconPath: ImageAssets.kpopupIconIcon,
+      context: context,
+      title: AppStrings.kClosingTheCase,
+      message: AppStrings.kCaseCompletionConfirmation,
+      primaryButtonText: AppStrings.kNo,
+      secondaryButtonText: AppStrings.kYes,
+      onPrimaryButtonPressed: () {
+        // Handle case completion confirmation
+        Navigator.of(context).pop(); // Close the popup
+        // Additional logic for case completion
+      },
+      onSecondaryButtonPressed: () {
+        //Navigator.of(context).pop(); // Close the popup
+        Navigator.pushNamed(context, CustomRouteNames.kRateReviewScreenRoute); // Navigate to Rate & Review screen
+      },
+      barrierDismissible: false,
     );
   }
 
@@ -329,18 +350,16 @@ class UserCaseDetailsScreen extends StatelessWidget {
     Color? fontColor,
     String? iconPath,
     Color? borderColor,
-     BorderRadius? borderRadius,
+    BorderRadius? borderRadius,
   }) {
     return CustomButton(
-
-      borderRadius:borderRadius?? BorderRadius.circular(12.r),
+      borderRadius: borderRadius ?? BorderRadius.circular(12.r),
       color: color ?? ColorManager.primary,
       horizontalMargin: 0.0,
       iconPath: iconPath,
       isLeadingIcon: false,
-      borderColor:borderColor ?? ColorManager.kGreyColor,
+      borderColor: borderColor ?? ColorManager.kGreyColor,
       text: text ?? "",
-
       style: getmediumStyle(
         color: fontColor ?? ColorManager.kWhiteColor,
         fontSize: AppSize.s12.sp,
@@ -370,7 +389,9 @@ class UserCaseDetailsScreen extends StatelessWidget {
                 fontSize: ScreenUtil().setSp(AppSize.s12),
               ),
             ),
-            const SizedBox(height: 5.0,)
+            const SizedBox(
+              height: 5.0,
+            )
           ],
         ),
       ),
