@@ -336,7 +336,7 @@ class UserCaseDetailsScreen extends StatelessWidget {
         // Additional logic for case completion
       },
       onSecondaryButtonPressed: () {
-        //Navigator.of(context).pop(); // Close the popup
+        Navigator.of(context).pop(); // Close the popup
         Navigator.pushNamed(context, CustomRouteNames.kRateReviewScreenRoute); // Navigate to Rate & Review screen
       },
       barrierDismissible: false,

@@ -12,13 +12,10 @@ class RateReviewScreen extends StatefulWidget {
 }
 
 class _RateReviewScreenState extends State<RateReviewScreen> {
-  FocusNode node = FocusNode();
   FocusNode node1 = FocusNode();
   final _formKey = GlobalKey<FormState>();
   final _desController = TextEditingController();
-  final _titleController = TextEditingController();
   double _rating = 4.0; // Default rating value
-  List<DocumentAttachment> _attachments = [];
 
   @override
   Widget build(BuildContext context) {
@@ -64,107 +61,112 @@ class _RateReviewScreenState extends State<RateReviewScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildProfileSection(),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: AppSize.s20.h,
-                    bottom: AppSize.s6.h,
+                SizedBox(height: 12.h),
+                Container(
+                  width: AppSize.sizeWidth(context),
+                  padding: EdgeInsets.symmetric(vertical: 10.h,horizontal: 10.w),
+                  decoration: BoxDecoration(
+                    color: ColorManager.kWhiteColor,
+                    borderRadius: BorderRadius.circular(8.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
-                  child: Text(
-                    AppStrings.kCaseTitle,
-                    style: getmediumStyle(
-                      color: ColorManager.kDarkGreyColor,
-                      fontSize: ScreenUtil().setSp(AppSize.s12),
-                    ),
+                  child: Column(
+                    children: [
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: AppSize.s10.h,
+                          bottom: AppSize.s10.h,
+                        ),
+                        child: Text(
+                          AppStrings.kHowWasYourExperience,
+                          style: getmediumStyle(
+                            color: ColorManager.primary,
+                            fontSize: ScreenUtil().setSp(AppSize.s20),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: AppSize.s20.h,
+                        ),
+                        child: Text(
+                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                          textAlign: TextAlign.center,
+                          style: getmediumStyle(
+                            color: ColorManager.primary,
+                            fontSize: ScreenUtil().setSp(AppSize.s10),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: StarRating(
+                          rating: _rating,
+                          size: 40,
+                          allowHalfRating: true,
+                          color: ColorManager.kLightYellowColor,
+                          borderColor: ColorManager.kLightYellowColor,
+                          onRatingChanged: (rating) {
+                            // Store rating value
+                            setState(() {
+                              _rating = rating;
+                            });
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: AppSize.s20.h,
+                          bottom: AppSize.s10.h,
+                        ),
+                        child: Text(
+                          AppStrings.kShareYourValuableComment,
+                          style: getmediumStyle(
+                            color: ColorManager.primary,
+                            fontSize: ScreenUtil().setSp(AppSize.s18),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: AppSize.s20.h,
+                        ),
+                        child: Text(
+                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                          textAlign: TextAlign.center,
+                          style: getmediumStyle(
+                            color: ColorManager.primary,
+                            fontSize: ScreenUtil().setSp(AppSize.s10),
+                          ),
+                        ),
+                      ),
+                      CustomTextFormField(
+                        hintText: AppStrings.kShareYourThoughts,
+                        controller: _desController,
+                        fillColor: ColorManager.kbuttonBgColor,
+                        maxLines: 6,
+                        focusNode: node1,
+                        horizontalMergin: 0.0,
+                        // validator: (String? val) {
+                        //   if (val == null || val.isEmpty) {
+                        //     return AppStrings.kShareYourThoughts;
+                        //   }
+                        //   return null;
+                        // },
+                      ),
+                    ],
                   ),
-                ),
-                CustomTextFormField(
-                  hintText: AppStrings.kCorporateIssue,
-                  controller: _titleController,
-                  fillColor: ColorManager.kWhiteColor,
-                  focusNode: node,
-                  horizontalMergin: 0.0,
-                  validator: (String? val) {
-                    if (val == null || val.isEmpty) {
-                      return "Enter Dispute Title";
-                    }
-                    return null;
-                  },
-                ),
-                //(height: AppSize.s8.h),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: AppSize.s10.h,
-                    bottom: AppSize.s6.h,
-                  ),
-                  child: Text(
-                    AppStrings.kCaseDescription,
-                    style: getmediumStyle(
-                      color: ColorManager.kDarkGreyColor,
-                      fontSize: ScreenUtil().setSp(AppSize.s12),
-                    ),
-                  ),
-                ),
-                CustomTextFormField(
-                  hintText: AppStrings.kCaseDetaildescription,
-                  controller: _desController,
-                  fillColor: ColorManager.kWhiteColor,
-                  maxLines: 6,
-                  focusNode: node1,
-                  horizontalMergin: 0.0,
-                  validator: (String? val) {
-                    if (val == null || val.isEmpty) {
-                      return "Enter Description";
-                    }
-                    return null;
-                  },
                 ),
 
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: AppSize.s20.h,
-                    bottom: AppSize.s10.h,
-                  ),
-                  child: Text(
-                    "Rate your experience",
-                    style: getmediumStyle(
-                      color: ColorManager.kDarkGreyColor,
-                      fontSize: ScreenUtil().setSp(AppSize.s12),
-                    ),
-                  ),
-                ),
-                // Rating stars
-                Center(
-                  child: StarRating(
-                    rating: _rating,
-                    size: 40,
-                    allowHalfRating: true,
-                    color: ColorManager.kLightYellowColor,
-                    borderColor: ColorManager.kLightYellowColor,
-                    onRatingChanged: (rating) {
-                      // Store rating value
-                      setState(() {
-                        _rating = rating;
-                      });
-                    },
-                  ),
-                ),
                 SizedBox(height: 20.h),
-
-                // Document attachment section
-                DocumentAttachmentSection(
-                  title: 'Attach Document',
-                  subtitle: 'Attach any relevant documents (optional)',
-                  maxAttachments: 5,
-                  onAttachmentsChanged: (attachments) {
-                    setState(() {
-                      _attachments = attachments;
-                    });
-                  },
-                ),
-
-                SizedBox(height: AppSize.sizeHeight(context) * 0.15),
                 button(
-                  text: AppStrings.kRateReview,
+                  text: AppStrings.submit,
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       // Submit rating and review
@@ -174,7 +176,7 @@ class _RateReviewScreenState extends State<RateReviewScreen> {
                       // Show success message
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: const Text("Thank you for your review!"),
+                          content: const Text(AppStrings.kThankYouForYourReview),
                           backgroundColor: ColorManager.kGreenColor,
                         ),
                       );
