@@ -23,6 +23,7 @@ class CustomRouteNames {
   static const String kCompletedScreenRoute = "/kCompletedScreenRoute";
   static const String klawyerDetailsScreen = "/kklawyerDetailsScreenDetailsScreen";
   static const String kConsultationRequestsDetailsScreenRoute = "/kConsultationRequestsDetailsScreenRoute";
+  static const String kConsultationRequestsDetailsUserScreenRoute = "/kConsultationRequestsDetailsUserScreenRoute";
   static const String kCreateMilestonesScreenRoute = "/kCreateMilestonesScreenRoute";
   static const String kCaseDetailsScreenRoute = "/kCaseDetailsScreenRoute";
   static const String kUserCaseDetailsScreenRoute = "/kUserCaseDetailsScreenRoute";
@@ -37,7 +38,7 @@ class CustomRouteNames {
   static const String kTermsConditionScreenRoute = "/kTermsConditionScreenRoute";
   static const String kChangePasswordScreenRoute = "/kChangePasswordScreenRoute";
   static const String kAccountInformationScreenRoute = "/kAccountInformationScreenRoute";
-  static const String kOfferScreenRoute = "/kOfferScreenRoute";
+  static const String kSendOfferScreenRoute = "/kSendOfferScreenRoute";
   static const String kRateReviewScreenRoute = "/kRateReviewScreenRoute";
 
 }

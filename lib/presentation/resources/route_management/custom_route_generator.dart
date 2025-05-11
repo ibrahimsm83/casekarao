@@ -167,6 +167,14 @@ class CustomRouteGenerator {
             return ConsultationRequestsDetailsScreen(data: argument,);
           },
         );
+
+        case CustomRouteNames.kConsultationRequestsDetailsUserScreenRoute:
+          final argument = settings.arguments as PendingStatusItemModel;
+        return MaterialPageRoute(
+          builder: (context) {
+            return ConsultationRequestsDetailsUserScreen(data: argument,);
+          },
+        );
          case CustomRouteNames.klawyerDetailsScreen:
           final argument = settings.arguments as PendingStatusItemModel;
         return MaterialPageRoute(
@@ -260,7 +268,7 @@ class CustomRouteGenerator {
             return AccountInformationScreen();
           },
         );
-        case CustomRouteNames.kOfferScreenRoute:
+        case CustomRouteNames.kSendOfferScreenRoute:
         return MaterialPageRoute(
           builder: (context) {
             return const SendOfferScreen();

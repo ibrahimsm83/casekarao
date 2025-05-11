@@ -15,6 +15,7 @@ class ColorManager {
   static Color kDarkYellowColor = const Color(0xffD88912);
   static Color kDarkBlueColor = const Color(0xff1E59BB);
   static Color kLightRedColor = const Color(0xffEA4335);
+  static Color kRed300Color = const Color(0xffE55A5A);
   static Color kDarkRedColor = const Color(0xffDE2E1F);
   static Color kLightGreenColor = const Color(0xff34A853);
   static Color kDarkGreenColor = const Color(0xff178033);

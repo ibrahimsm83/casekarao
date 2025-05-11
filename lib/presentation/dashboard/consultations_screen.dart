@@ -65,7 +65,7 @@ class _ConsultationsScreenState extends State<ConsultationsScreen> {
                     Navigator.pushNamed(
                     context,
                     CustomRouteNames
-                              .kConsultationRequestsDetailsScreenRoute,
+                              .kConsultationRequestsDetailsUserScreenRoute,
                               arguments: DataList.pendingList[index],
                   );
                 },

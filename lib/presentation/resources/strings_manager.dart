@@ -382,6 +382,12 @@ class AppStrings {
   static const String kRatingDescription =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
+  ///ConsultationRequestsDetailsUserScreen
+  static const String kDelete = "Delete";
+  static const String kEdit = "Edit";
+
+
+
   ///Validator
   static const String otpCode = "Otp Code";
   static const String otpValidator = "Please fill all Fields";

@@ -102,19 +102,35 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                     ),
                   ),
                 ),
-                CustomTextFormField(
-                  hintText: AppStrings.kCaseDetaildescription,
-                  controller: _desController,
-                  fillColor: ColorManager.kWhiteColor,
-                  maxLines: 6,
-                  focusNode: node1,
-                  horizontalMergin: 0.0,
-                  validator: (String? val) {
-                    if (val == null || val.isEmpty) {
-                      return "Enter Description";
-                    }
-                    return null;
-                  },
+                Stack(
+
+                  children: [
+                   CustomTextFormField(
+                    hintText: AppStrings.kCaseDetaildescription,
+                    controller: _desController,
+                    fillColor: ColorManager.kWhiteColor,
+                    maxLines: 6,
+                    focusNode: node1,
+                    horizontalMergin: 0.0,
+                    validator: (String? val) {
+                      if (val == null || val.isEmpty) {
+                        return "Enter Description";
+                      }
+                      return null;
+                    },
+                  ),
+                    Positioned(
+                      right: 15,
+                      bottom: 10,
+                      child: Text(
+                        "${_desController.text.length}/500",
+                        style: getRegularStyle(
+                          color: ColorManager.kGreyColor,
+                          fontSize: ScreenUtil().setSp(AppSize.s12),
+                        ),
+                      ),
+                    ),
+            ]
                 ),
 
                 Padding(

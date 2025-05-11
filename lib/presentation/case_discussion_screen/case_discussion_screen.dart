@@ -278,7 +278,7 @@ class CaseDiscussionScreen extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          CustomRouteNames.kOfferScreenRoute,
+          CustomRouteNames.kSendOfferScreenRoute,
         );
       },
       child: Padding(
