@@ -156,7 +156,7 @@ class OnGoingStatusCard extends StatelessWidget {
                                 AppStrings.kMessage,
                                 style: getRegularStyle(
                                   color: ColorManager.kWhiteColor,
-                                  fontSize: ScreenUtil().setSp(AppSize.s10),
+                                  fontSize: ScreenUtil().setSp(AppSize.s8.sp),
                                 ),
                               ),
                             ),
@@ -186,6 +186,7 @@ class OnGoingStatusCard extends StatelessWidget {
                               "View Details",
                               style: getRegularStyle(
                                 color: ColorManager.primary,
+                                fontSize: ScreenUtil().setSp(AppSize.s8.sp),
                               ),
                             ),
                           ),

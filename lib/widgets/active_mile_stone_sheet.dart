@@ -39,6 +39,7 @@ class ActivateMilestoneSheet extends StatelessWidget {
 
           // Upload Screenshot Box
           Container(
+            height: 70.h,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: Color(0xFF222222),
@@ -48,8 +49,8 @@ class ActivateMilestoneSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: 68.w,
-                  height: 68.h,
+                  width: 60.w,
+                  height: 60.h,
                   decoration: BoxDecoration(
                     color: ColorManager.kWhiteColor,
                     borderRadius: BorderRadius.circular(8.r),

@@ -200,6 +200,14 @@ class _LetsGetStartedViewState extends State<LetsGetStartedView> {
                       hintStyle: getRegularStyle(
                         color: ColorManager.kHintTextColor,
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorManager.kGreyColor,
+                      ),),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorManager.kGreyColor,
+                      ),)
                     ),
                     onChanged: (String? newValue) {
                       setState(() {

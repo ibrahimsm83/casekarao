@@ -81,7 +81,7 @@ class _HomeUserScreenState extends State<HomeUserScreen> {
 
               // Lawyer cards
               Container(
-                height: 260,
+                height: 230.h,
                 child: ListView.separated(
                   separatorBuilder: (context, i) => const SizedBox(width: 10.0),
                   itemCount: 5,
