@@ -255,25 +255,29 @@ class _PendingCaseDetailsUserScreenState extends State<PendingCaseDetailsUserScr
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  AppStrings.kPaymentPending,
-                  style: getsemiboldStyle(
-                    color: ColorManager.kOrangeColor,
-                    fontSize: ScreenUtil().setSp(AppSize.s12),
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              //padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    AppStrings.kPaymentPending,
+                    style: getsemiboldStyle(
+                      color: ColorManager.kOrangeColor,
+                      fontSize: ScreenUtil().setSp(AppSize.s12),
+                    ),
                   ),
-                ),
-                SizedBox(width: 5.0),
-                Text(
-                  'PKR 30000.0',
-                  style: getsemiboldStyle(
-                    color: ColorManager.primary,
-                    fontSize: ScreenUtil().setSp(AppSize.s14),
+                  SizedBox(width: 5.0),
+                  Text(
+                    'PKR 30000.0',
+                    style: getsemiboldStyle(
+                      color: ColorManager.primary,
+                      fontSize: ScreenUtil().setSp(AppSize.s14),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

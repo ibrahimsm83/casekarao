@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -89,7 +91,7 @@ class ViewBankDetailsScreen extends StatelessWidget {
         child: ListView(
           children: [
             _buildTitleWithSubtextWidget(),
-            SizedBox(height: 24),
+            SizedBox(height: 10),
             ...bankDetails.map((bank) {
               return Container(
                 margin: const EdgeInsets.only(bottom: 20),
@@ -134,13 +136,13 @@ class ViewBankDetailsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 16),
                     Container(
-              decoration: BoxDecoration(
-                // color: ColorManager.kBackgroundColor
-              ),
+                      decoration: BoxDecoration(
+                        // color: ColorManager.kBackgroundColor
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          infoRow("Account Title", bank['accountTitle']!),
+                          infoRow("Account Title", bank['accountTitle']!,padding: 7),
                           infoRowWithCopy(
                             context,
                             "Account number",
@@ -161,22 +163,23 @@ class ViewBankDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget infoRow(String title, String value) {
+  Widget infoRow(String title, String value, {double ? padding}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
-            color: ColorManager.kBackgroundColor
+          borderRadius: BorderRadius.circular(12.r),
+          color: ColorManager.kBackgroundColor,
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 8),
+          padding:EdgeInsets.all(padding ?? 0),
+              //const EdgeInsets.symmetric(horizontal:0.0,vertical: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("$title:", style: getRegularStyle(color: Colors.black45)),
-              SizedBox(height: 4),
+              //SizedBox(height: 4),
               Text(
                 value,
                 style: getsemiboldStyle(
@@ -192,54 +195,53 @@ class ViewBankDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildTitleWithSubtextWidget() {
-    return  Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 6.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Bank Details",
-              style: getsemiboldStyle(
-                color: ColorManager.primary,
-                fontSize: ScreenUtil().setSp(AppSize.s24),
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 6.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Bank Details",
+            style: getsemiboldStyle(
+              color: ColorManager.primary,
+              fontSize: ScreenUtil().setSp(AppSize.s24),
             ),
-            Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-              style: getsemiboldStyle(
-                color: ColorManager.primary,
-                fontSize: ScreenUtil().setSp(AppSize.s12),
-              ),
+          ),
+          Text(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            style: getsemiboldStyle(
+              color: ColorManager.primary,
+              fontSize: ScreenUtil().setSp(AppSize.s12),
             ),
-            const SizedBox(height: 5.0),
-          ],
-        ),
+          ),
+          const SizedBox(height: 5.0),
+        ],
+      ),
     );
   }
 
   Widget infoRowWithCopy(BuildContext context, String title, String value) {
-    return  Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6.0,),
-        child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                color: ColorManager.kBackgroundColor
-            ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child:  infoRow(title, value)),
-                IconButton(
-                  icon: Icon(Icons.copy, size: 20),
-                  onPressed: () => copyToClipboard(value, context),
-                ),
-              ],
-            ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.r),
+          color: ColorManager.kBackgroundColor,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(child: infoRow(title, value)),
+              IconButton(
+                icon: Icon(Icons.copy, size: 20),
+                onPressed: () => copyToClipboard(value, context),
+              ),
+            ],
           ),
         ),
-
+      ),
     );
   }
 }
