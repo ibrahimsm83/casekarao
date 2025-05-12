@@ -80,6 +80,7 @@ class ImageAssets {
   static const String kPrivacyPolicyIcon = "$ICON_PATH/privacyPolicy.svg";
   static const String kTermConditionIcon = "$ICON_PATH/termCondition.svg";
   static const String kpopupIconIcon = "$ICON_PATH/popup-icon.svg";
+  static const String kLockFilledIcon = "$ICON_PATH/lockFilled.svg";
 
   ///Live Chat
   static const String kTimerIcon = "$ICON_PATH/timer.svg";

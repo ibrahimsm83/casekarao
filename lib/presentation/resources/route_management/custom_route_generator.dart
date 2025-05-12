@@ -287,6 +287,15 @@ class CustomRouteGenerator {
           },
         );
 
+ case CustomRouteNames.kPendingCaseDetailsUserScreenRoute:
+   String  caseStatus =
+   settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) {
+            return PendingCaseDetailsUserScreen(status: caseStatus,);
+          },
+        );
+
       default:
         return null;
     }

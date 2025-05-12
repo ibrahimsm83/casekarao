@@ -148,14 +148,20 @@ class _MyCaseUserScreenState extends State<MyCaseUserScreen> {
           child: OnGoingStatusCard(
             status: DataList.onGoingList[index],
             onDetailsTap: () {
-              DataList.onGoingList[index].paymentStatus == "Paid" ?
-              Navigator.pushNamed(
-                context,
-                CustomRouteNames.kUserCaseDetailsScreenRoute,
-              ): Navigator.pushNamed(
-                context,
-                CustomRouteNames.kCaseDetailsScreenRoute,
-              );
+              if(DataList.onGoingList[index].paymentStatus =="Paid"){
+                Navigator.pushNamed(
+                  context,
+                  CustomRouteNames.kUserCaseDetailsScreenRoute,
+                );
+              }else{
+                if(DataList.onGoingList[index].paymentStatus =="Pending"){
+                  Navigator.pushNamed(
+                      context,
+                      CustomRouteNames.kPendingCaseDetailsUserScreenRoute,
+                      arguments: "pending",
+                    );
+                }
+              }
             },
             onMessageTap: () {
               Navigator.pushNamed(
@@ -183,11 +189,11 @@ class _MyCaseUserScreenState extends State<MyCaseUserScreen> {
           child: OnGoingStatusCard(
             status: DataList.onGoingList[index],
             onDetailsTap: () {
-              // DataList.onGoingList[index].paymentStatus == "Paid" ?
               Navigator.pushNamed(
                 context,
-                CustomRouteNames.kCaseDetailsScreenRoute,
+                CustomRouteNames.kUserCaseDetailsScreenRoute,
               );
+              // DataList.onGoingList[index].paymentStatus == "Paid" ?
             },
             onMessageTap: () {
               Navigator.pushNamed(

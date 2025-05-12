@@ -132,7 +132,7 @@ class OnGoingStatusCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                 status.paymentStatus == "Pending" ?
+                 status.paymentStatus == "Paid" ?
                 InkWell(
                   onTap: onMessageTap,
                   child: Padding(

@@ -218,6 +218,7 @@ class AppStrings {
   static const String kHitAndRunCase = "Hit and Run Case";
   static const String kPaymentStatus = "Payment Status:\t";
   static const String kPaymentVerified = "Payment Verified";
+  static const String kPaymentPending= "Payment Pending";
   static const String kMilestoneExpiry = "Milestone Expiry:\t";
   static const String kNewConsultationRequests = "New Consultation Requests";
   static const String kNewConsultation = "Consultations";

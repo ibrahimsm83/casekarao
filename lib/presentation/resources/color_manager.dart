@@ -10,6 +10,7 @@ class ColorManager {
   static Color kDarkGreyColor = const Color(0xff505050);
   static Color kLightBlueColor = const Color(0xff4285F4);
   static Color kHintTextColor = const Color(0xffa4a4a2);
+  static Color kGreyTextColor = const Color(0xff999999);
   static Color kBackgroundColor = const Color(0xffeff1f3);
   static Color kChatTextFiledColor = const Color(0xffEFF1F3);
   static Color kLightYellowColor = const Color(0xffFBBC05);
