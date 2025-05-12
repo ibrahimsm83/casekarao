@@ -41,5 +41,6 @@ class CustomRouteNames {
   static const String kSendOfferScreenRoute = "/kSendOfferScreenRoute";
   static const String kRateReviewScreenRoute = "/kRateReviewScreenRoute";
   static const String kPendingCaseDetailsUserScreenRoute = "/kPendingCaseDetailsUserScreenRoute";
+  static const String kViewBankDetailsScreenRoute = "/kViewBankDetailsScreenRoute";
 
 }

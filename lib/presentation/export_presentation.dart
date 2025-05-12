@@ -35,3 +35,4 @@ export 'change_password_screen/change_password_screen.dart';
 export 'account_information_screen/account_information_screen.dart';
 export 'consultation_request_details_user_screen/consultation_request_details_user-screen.dart';
 export 'pending_case_details_user_screen/pending_case_details_user_screen.dart';
+export 'view_bank_details/view_bank_details_screen.dart';

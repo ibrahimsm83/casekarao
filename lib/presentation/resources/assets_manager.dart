@@ -82,6 +82,11 @@ class ImageAssets {
   static const String kpopupIconIcon = "$ICON_PATH/popup-icon.svg";
   static const String kLockFilledIcon = "$ICON_PATH/lockFilled.svg";
 
+  ///Bank details
+  static const String kEasyPaisaImage = "$IMAGE_PATH/easypaisa.png";
+  static const String kHBL = "$IMAGE_PATH/hbl.png";
+  static const String kJazzCash = "$IMAGE_PATH/jazzcash.png";
+
   ///Live Chat
   static const String kTimerIcon = "$ICON_PATH/timer.svg";
   // static const String kLockIcon = "$ICON_PATH/lock.svg";

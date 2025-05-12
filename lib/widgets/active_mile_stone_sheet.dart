@@ -133,7 +133,10 @@ class ActivateMilestoneSheet extends StatelessWidget {
                   fontColor: ColorManager.kWhiteColor,
                   onTap: () {
                     // Show case finalization popup
-                    // openPopp(context);
+                    Navigator.pushNamed(
+                      context,
+                      CustomRouteNames.kViewBankDetailsScreenRoute,
+                    );
                   },
                 ),
               ),

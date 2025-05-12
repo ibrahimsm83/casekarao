@@ -296,6 +296,13 @@ class CustomRouteGenerator {
           },
         );
 
+ case CustomRouteNames.kViewBankDetailsScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return ViewBankDetailsScreen();
+          },
+        );
+
       default:
         return null;
     }
