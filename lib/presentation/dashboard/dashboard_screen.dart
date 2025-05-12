@@ -11,7 +11,8 @@ import 'home_user_screen.dart';
 import 'my_case_user-screen.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+  final int initialIndex;
+  const DashboardScreen({super.key,this.initialIndex = 0});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -19,11 +20,13 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   late PageController _pagecontroller;
-  var _currentIndex = 0;
+  late int _currentIndex;
+  // var _currentIndex = 0;
   final UserRoleController _userRoleController = Get.find<UserRoleController>();
 
   @override
   void initState() {
+    _currentIndex = widget.initialIndex;
     _pagecontroller = PageController(initialPage: _currentIndex);
     super.initState();
   }

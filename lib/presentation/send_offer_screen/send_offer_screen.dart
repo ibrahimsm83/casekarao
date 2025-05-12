@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import '../../export_casekarao.dart';
 
 class SendOfferScreen extends StatefulWidget {
@@ -165,31 +166,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                 ),
 
                 SizedBox(height: AppSize.s15.h),
-                // Text(
-                //   AppStrings.kAttachDocument,
-                //   style: getsemiboldStyle(
-                //     color: ColorManager.primary,
-                //     fontSize: ScreenUtil().setSp(AppSize.s16),
-                //   ),
-                // ),
 
-                // Padding(
-                //   padding: EdgeInsets.only(top: 5.h, bottom: AppSize.s15.h),
-                //   child: Text(
-                //     AppStrings.kPleaseUploadAttachmentsMax5,
-                //     style: getRegularStyle(
-                //       color: ColorManager.kDarkGreyColor,
-                //       fontSize: ScreenUtil().setSp(AppSize.s12),
-                //     ),
-                //   ),
-                // ),
-
-                // AddButton(
-                //   onTap: () {
-                //     print("Add button tapped");
-                //     // Add your functionality here
-                //   },
-                // ),
                 DocumentAttachmentSection(
                   title: 'Attach Document',
                   subtitle: '', //Please upload attachments (max 5)
@@ -205,9 +182,13 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                 button(
                   text: AppStrings.sendOffer,
                   onTap: () {
-                    print(_attachments[0].file);
                     if (!_formKey.currentState!.validate()) {
-                      //Navigator.pushNamed(context, CustomRouteNames.kAddPayoutScreenRoute);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const DashboardScreen(initialIndex: 1),
+                        ),
+                      );
                     }
                   },
                 ),
