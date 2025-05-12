@@ -17,6 +17,7 @@ class CustomButton extends StatelessWidget {
   bool isLeadingIcon;
   double horizontalMargin;
   String? iconPath;
+  String? rightIconPath;
   BorderRadius? borderRadius;
   Widget? counter;
 
@@ -33,6 +34,7 @@ class CustomButton extends StatelessWidget {
     this.color = Colors.black,
     this.borderRadius,
     this.counter,
+    this.rightIconPath,
   });
 
   @override
@@ -73,6 +75,15 @@ class CustomButton extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(left: 6.w),
                   child: counter ?? const SizedBox(),
+                ),
+              ),
+               Visibility(
+                visible: rightIconPath != null && rightIconPath!.isNotEmpty,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 6.w),
+                  child: rightIconPath != null && rightIconPath!.isNotEmpty
+                      ? SvgPicture.asset(rightIconPath!)
+                      : SizedBox(),
                 ),
               ),
             ],

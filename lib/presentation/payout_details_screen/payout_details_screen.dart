@@ -95,7 +95,7 @@ class _PayoutDetailsScreenState extends State<PayoutDetailsScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 10,bottom: 5.0),
+              padding: EdgeInsets.only(left: 5,bottom: 15.0,top: 10),
               child: Text(
                 AppStrings.kRecentPayoutDetails,
                 style: getsemiboldStyle(

@@ -84,7 +84,7 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20.0),
+              // SizedBox(height: 10.0),
               UserInfoWidget(isShowViewProfileButton: false),
               SizedBox(height: 20.0),
               Padding(

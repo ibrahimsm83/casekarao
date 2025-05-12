@@ -168,6 +168,7 @@ class _EarningsLawyerScreenState extends State<EarningsLawyerScreen> {
       ),
       trailing: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
             "PKR${data.receivedAmount}",

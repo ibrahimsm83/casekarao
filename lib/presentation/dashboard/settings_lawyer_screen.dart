@@ -80,7 +80,7 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppSize.sizeWidth(context!) * 0.02,
+          horizontal: AppSize.sizeWidth(context) * 0.03,
         ),
         child: SingleChildScrollView(
           child: Column(

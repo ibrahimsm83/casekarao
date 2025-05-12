@@ -125,13 +125,13 @@ class UserInfoWidget extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       color: ColorManager.kCardBgColor,
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(14.r),
+                                        Radius.circular(8.r),
                                       ),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                        horizontal: 12.0,
-                                        vertical: 4.0,
+                                        horizontal: 8.0,
+                                        vertical: 5.0,
                                       ),
                                       child: Row(
                                         mainAxisAlignment:
@@ -252,7 +252,7 @@ class UserInfoWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(14.r),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 15.0),
+        padding: const EdgeInsets.only(left: 15,top: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

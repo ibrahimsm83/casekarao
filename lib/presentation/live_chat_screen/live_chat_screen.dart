@@ -103,7 +103,7 @@ class LiveChatScreen extends StatelessWidget {
           // Start Live Chat Button
           button(
             text: AppStrings.kStartLiveChat,
-            iconPath: ImageAssets.kStartLiveChatIcon,
+            rightIconPath: ImageAssets.kStartLiveChatIcon,
             onTap: () {
               //Navigator.pushNamed(context, CustomRouteNames.kAddDisputeScreenRoute);
             },
@@ -118,7 +118,7 @@ class LiveChatScreen extends StatelessWidget {
                 AppStrings.kAllConversationsAreSafePrivate,
                 style: getRegularStyle(
                   color: ColorManager.kDarkGreyColor,
-                  fontSize: ScreenUtil().setSp(FontSize.s14.sp),
+                  fontSize: ScreenUtil().setSp(FontSize.s12.sp),
                 ),
               ),
             ],
@@ -164,14 +164,16 @@ class LiveChatScreen extends StatelessWidget {
     String? text,
     Color? color,
     Color? fontColor,
-    String? iconPath,
+    //String? iconPath,
+    String? rightIconPath,
   }) {
     return CustomButton(
       color: color ?? ColorManager.primary,
       horizontalMargin: 0.04,
-      iconPath: iconPath,
+      //iconPath: iconPath,
       isLeadingIcon: true,
       text: text ?? "",
+      rightIconPath: rightIconPath,
 
       style: getmediumStyle(
         color: fontColor ?? ColorManager.kWhiteColor,
