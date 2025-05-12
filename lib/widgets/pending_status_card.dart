@@ -65,7 +65,7 @@ class PendingStatusCard extends StatelessWidget {
                 ),
                 child: AmountBarWidget(
                   amount: 500.00,
-                  backGroundColor: ColorManager.kTitleBgColor,
+                  backGroundColor: ColorManager.kAmountBarBgColor,
                   fontSize: FontSize.s12,
                 ),
               ),

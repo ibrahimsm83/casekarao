@@ -151,44 +151,18 @@ class CanceledScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.h, bottom: 15.h),
                 child: Row(
                   children: [
-                    Flexible(
-                      child: Row(
-                        children: [
-                          Text(
-                            "Payment Status: ",
-                            style: getmediumStyle(
-                              fontSize: ScreenUtil().setSp(AppSize.s10),
-                              color: ColorManager.primary,
-                            ),
-                          ),
-                          Text(
-                            status.paymentStatus,
-                            style: getmediumStyle(
-                              fontSize: ScreenUtil().setSp(AppSize.s10),
-                              color: ColorManager.kRedColor,
-                            ),
-                          ),
-                        ],
+                    Text(
+                      "Payment Status: ",
+                      style: getmediumStyle(
+                        fontSize: ScreenUtil().setSp(AppSize.s10),
+                        color: ColorManager.primary,
                       ),
                     ),
-                    Flexible(
-                      child: Row(
-                        children: [
-                          Text(
-                            "Milestone Expiry: ",
-                            style: getmediumStyle(
-                              fontSize: ScreenUtil().setSp(AppSize.s10),
-                              color: ColorManager.primary,
-                            ),
-                          ),
-                          Text(
-                            status.mileStoneExpiry,
-                            style: getmediumStyle(
-                              fontSize: ScreenUtil().setSp(AppSize.s10),
-                              color: ColorManager.kRedColor,
-                            ),
-                          ),
-                        ],
+                    Text(
+                      status.paymentStatus,
+                      style: getmediumStyle(
+                        fontSize: ScreenUtil().setSp(AppSize.s10),
+                        color: ColorManager.kRedColor,
                       ),
                     ),
                   ],

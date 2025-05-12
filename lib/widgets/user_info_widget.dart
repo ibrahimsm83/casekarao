@@ -92,8 +92,8 @@ class UserInfoWidget extends StatelessWidget {
                                     bottom: 0.0,
                                     right: 0.0,
                                     child: Container(
-                                      height: 25,
-                                      width: 25,
+                                      height: 22,
+                                      width: 22,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: ColorManager.secondary,
@@ -117,7 +117,7 @@ class UserInfoWidget extends StatelessWidget {
                                     "David Watson",
                                     style: getboldStyle(
                                       color: ColorManager.primary,
-                                      fontSize: ScreenUtil().setSp(AppSize.s16),
+                                      fontSize: ScreenUtil().setSp(AppSize.s14),
                                     ),
                                   ),
                                   SizedBox(width: 10.0),
@@ -169,7 +169,7 @@ class UserInfoWidget extends StatelessWidget {
                                       style: getRegularStyle(
                                         color: ColorManager.primary,
                                         fontSize: ScreenUtil().setSp(
-                                          AppSize.s10,
+                                          AppSize.s8,
                                         ),
                                       ),
                                     ),
@@ -260,14 +260,14 @@ class UserInfoWidget extends StatelessWidget {
               heading,
               style: getsemiboldStyle(
                 color: headingColor,
-                fontSize: ScreenUtil().setSp(AppSize.s16),
+                fontSize: ScreenUtil().setSp(AppSize.s14),
               ),
             ),
             Text(
               status,
               style: getmediumStyle(
                 color: ColorManager.primary,
-                fontSize: ScreenUtil().setSp(AppSize.s10),
+                fontSize: ScreenUtil().setSp(AppSize.s8),
               ),
             ),
           ],

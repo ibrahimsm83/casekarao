@@ -36,7 +36,7 @@ class _CreateMilestonesScreenState extends State<CreateMilestonesScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: InkWell(
-          onTap: () => Navigator.pop(context),
+          onTap: () => Navigator.of(context).pop(),
           child: Padding(
             padding: const EdgeInsets.only(left: 5.0, bottom: 5.0),
             child: Container(
@@ -54,58 +54,73 @@ class _CreateMilestonesScreenState extends State<CreateMilestonesScreen> {
           ),
         ),
       ),
+      bottomSheet: button(
+        text: AppStrings.submit,
+        margin: 0.05,
+        onTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const DashboardScreen(initialIndex: 1),
+            ),
+          );
+        },
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppSize.sizeWidth(context!) * 0.03,
+          horizontal: AppSize.sizeWidth(context!) * 0.04,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: AppSize.sizeHeight(context) * 0.01),
-            Text(
-              AppStrings.kCreateMilestones,
-              style: getsemiboldStyle(
-                color: ColorManager.primary,
-                fontSize: ScreenUtil().setSp(AppSize.s24),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: AppSize.sizeHeight(context) * 0.01),
+              Padding(
+                padding: const EdgeInsets.only(left: 6.0),
+                child: Text(
+                  AppStrings.kCreateMilestones,
+                  style: getsemiboldStyle(
+                    color: ColorManager.primary,
+                    fontSize: ScreenUtil().setSp(AppSize.s24),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: AppSize.s8.h),
-            Text(
-              AppStrings.kUseMilestoneIsDeliver,
-              style: getmediumStyle(
-                color: ColorManager.kDarkGreyColor,
-                fontSize: ScreenUtil().setSp(AppSize.s12),
+              Padding(
+                padding: const EdgeInsets.only(left: 6.0, top: 3.0),
+                child: Text(
+                  AppStrings.kUseMilestoneIsDeliver,
+                  style: getmediumStyle(
+                    color: ColorManager.kDarkGreyColor,
+                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: AppSize.s12.h),
+              SizedBox(height: AppSize.s12.h),
 
-            Flexible(
-              child: ListView.separated(
+              ListView.separated(
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, i) => SizedBox(height: 10.0),
                 itemCount: mileStoneList.length,
                 itemBuilder: (context, i) {
                   return mileStoneList[i];
                 },
               ),
-            ),
 
-            SizedBox(height: AppSize.sizeHeight(context) * 0.01),
-            button(
-              text: AppStrings.kAddaMilestone,
-              onTap: () {
-                setState(() {
-                  count++;
-                });
-                mileStoneList.add(mileStoneCard(count));
-              },
-            ),
-            SizedBox(height: AppSize.sizeHeight(context) * 0.06),
-
-            button(text: AppStrings.submit, onTap: () {
-            }),
-            SizedBox(height: AppSize.s10.h),
-          ],
+              SizedBox(height: AppSize.sizeHeight(context) * 0.01),
+              button(
+                text: AppStrings.kAddaMilestone,
+                margin: 0.03,
+                onTap: () {
+                  setState(() {
+                    count++;
+                  });
+                  mileStoneList.add(mileStoneCard(count));
+                },
+              ),
+              SizedBox(height: AppSize.sizeHeight(context) * 0.12),
+            ],
+          ),
         ),
       ),
     );
@@ -124,7 +139,7 @@ class _CreateMilestonesScreenState extends State<CreateMilestonesScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "$mileStone MileStone",
+              "$mileStone${getOrdinalSuffix(mileStone)} Milestone",
               style: getmediumStyle(
                 color: ColorManager.primary,
                 fontSize: ScreenUtil().setSp(AppSize.s14),
@@ -145,28 +160,28 @@ class _CreateMilestonesScreenState extends State<CreateMilestonesScreen> {
               },
             ),
             SizedBox(height: AppSize.s8.h),
-            Row(
-              children: [
-                Flexible(child: jurisdiction()),
-                SizedBox(width: AppSize.s8.h),
-                Flexible(
-                  child: CustomTextFormField(
-                    hintText: AppStrings.kAmount + '\t' + AppStrings.kPKR,
-                    controller: _amountController,
-                    fillColor: ColorManager.kInputTexBgColor,
-                    // focusNode: node1,
-                    horizontalMergin: 0.0,
-                    validator: (String? val) {
-                      if (val == null || val.isEmpty) {
-                        return "Enter Amount";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: AppSize.s8.h),
+            // Row(
+            //   children: [
+            //     Flexible(child: jurisdiction()),
+            //     SizedBox(width: AppSize.s8.h),
+            //     Flexible(
+            //       child: CustomTextFormField(
+            //         hintText: AppStrings.kAmount + '\t' + AppStrings.kPKR,
+            //         controller: _amountController,
+            //         fillColor: ColorManager.kInputTexBgColor,
+            //         // focusNode: node1,
+            //         horizontalMergin: 0.0,
+            //         validator: (String? val) {
+            //           if (val == null || val.isEmpty) {
+            //             return "Enter Amount";
+            //           }
+            //           return null;
+            //         },
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(height: AppSize.s8.h),
             CustomTextFormField(
               hintText: AppStrings.kEnterDetailDescription,
               controller: _enterDetailsDesController,
@@ -196,16 +211,31 @@ class _CreateMilestonesScreenState extends State<CreateMilestonesScreen> {
     );
   }
 
+  String getOrdinalSuffix(int number) {
+    if (number >= 11 && number <= 13) return 'th'; // Handle 11th, 12th, 13th
+    switch (number % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  }
+
   Widget button({
     Function()? onTap,
     String? text,
     Color? color,
     Color? fontColor,
     String? iconPath,
+    double? margin,
   }) {
     return CustomButton(
       color: color ?? ColorManager.primary,
-      horizontalMargin: 0.0,
+      horizontalMargin: margin ?? 0.00,
       iconPath: iconPath,
       isLeadingIcon: true,
       text: text ?? "",

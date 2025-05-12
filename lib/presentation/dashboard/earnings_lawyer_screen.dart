@@ -79,20 +79,20 @@ class _EarningsLawyerScreenState extends State<EarningsLawyerScreen> {
                           AppStrings.kTotalEarning,
                           style: getmediumStyle(
                             color: ColorManager.kWhiteColor,
-                            fontSize: ScreenUtil().setSp(AppSize.s16),
+                            fontSize: ScreenUtil().setSp(AppSize.s14),
                           ),
                         ),
                         Text(
                           "${AppStrings.kPKR} 75000.84",
                           style: getboldStyle(
                             color: ColorManager.kWhiteColor,
-                            fontSize: ScreenUtil().setSp(AppSize.s24),
+                            fontSize: ScreenUtil().setSp(AppSize.s20),
                           ),
                         ),
                       ],
                     ),
 
-                    SizedBox(width: 150, child: dropDown()),
+                    SizedBox(width: 140, child: dropDown()),
                   ],
                 ),
               ),
@@ -191,7 +191,7 @@ class _EarningsLawyerScreenState extends State<EarningsLawyerScreen> {
 
   Widget dropDown() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0.0),
+      padding: const EdgeInsets.only(right: 8.0),
       child: SizedBox(
         height: 34,
         child: DropdownButtonFormField<String>(

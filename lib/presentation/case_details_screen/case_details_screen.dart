@@ -41,7 +41,7 @@ class CaseDetailsScreen extends StatelessWidget {
           children: [
             SizedBox(height: AppSize.sizeHeight(context) * 0.01),
             _buildAmountWidget(),
-            SizedBox(height: AppSize.s12.h),
+            SizedBox(height: AppSize.s20.h),
             Flexible(
               child: ListView.separated(
                 //shrinkWrap: true,
@@ -109,8 +109,8 @@ class CaseDetailsScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Container(
-                        height: 10,
-                        width: 10,
+                        height: 8,
+                        width: 8,
                         decoration: BoxDecoration(
                           color: ColorManager.kGreenColor,
                           shape: BoxShape.circle,
@@ -121,14 +121,14 @@ class CaseDetailsScreen extends StatelessWidget {
                       cdm.mileStoneStatus,
                       style: getmediumStyle(
                         color: ColorManager.kGreenColor,
-                        fontSize: ScreenUtil().setSp(AppSize.s12),
+                        fontSize: ScreenUtil().setSp(AppSize.s10),
                       ),
                     ),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 3.0),
             Text(
               cdm.caseName,
               style: getsemiboldStyle(
@@ -169,6 +169,7 @@ class CaseDetailsScreen extends StatelessWidget {
   }) {
     return CustomButton(
       color: color ?? ColorManager.primary,
+      borderRadius: BorderRadius.circular(12),
       horizontalMargin: 0.0,
       iconPath: iconPath,
       isLeadingIcon: false,
@@ -190,7 +191,7 @@ class CaseDetailsScreen extends StatelessWidget {
         color: ColorManager.kWhiteColor,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 6.0),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -208,7 +209,7 @@ class CaseDetailsScreen extends StatelessWidget {
                   AppStrings.kPaymentVerified,
                   style: getsemiboldStyle(
                     color: ColorManager.kGreenColor,
-                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                    fontSize: ScreenUtil().setSp(AppSize.s10),
                   ),
                 ),
                 SizedBox(width: 5.0),
@@ -216,7 +217,7 @@ class CaseDetailsScreen extends StatelessWidget {
                   'PKR 30000.0',
                   style: getsemiboldStyle(
                     color: ColorManager.primary,
-                    fontSize: ScreenUtil().setSp(AppSize.s14),
+                    fontSize: ScreenUtil().setSp(AppSize.s12),
                   ),
                 ),
               ],

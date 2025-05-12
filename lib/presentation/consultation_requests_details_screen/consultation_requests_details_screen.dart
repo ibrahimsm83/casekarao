@@ -66,7 +66,20 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: AppSize.s8.h),
+            SizedBox(height: AppSize.s10.h),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSize.sizeWidth(context!) * 0.04,
+              ),
+              child: Text(
+                "Case Description",
+                style: getsemiboldStyle(
+                  color: ColorManager.primary,
+                  fontSize: ScreenUtil().setSp(AppSize.s16),
+                ),
+              ),
+            ),
+            SizedBox(height: AppSize.s6.h),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: AppSize.sizeWidth(context!) * 0.04,
@@ -88,8 +101,7 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
               child: AmountBarWidget(
                 amount: 500.00,
                 backGroundColor: ColorManager.kWhiteColor,
-              )
-
+              ),
             ),
             //
             Padding(
@@ -128,7 +140,7 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
             ),
             SizedBox(height: AppSize.s20.h),
             Container(
-              height: 200,
+              height: 191.h,
               decoration: BoxDecoration(
                 color: ColorManager.kWhiteColor,
                 borderRadius: BorderRadius.only(
@@ -141,9 +153,7 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppSize.sizeWidth(context!) * 0.04,
-                    ),
+                    padding: EdgeInsets.only(left: 10.w, top: 10.h),
                     child: Text(
                       AppStrings.kCasefiledBy,
                       style: getsemiboldStyle(
@@ -163,7 +173,9 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               CircleAvatar(
-                                backgroundImage: AssetImage(ImageAssets.userImage),
+                                backgroundImage: AssetImage(
+                                  ImageAssets.userImage,
+                                ),
                                 radius: 20,
                               ),
                               Text(
@@ -186,7 +198,7 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                               Navigator.pushNamed(
                                 context,
                                 CustomRouteNames.kCaseDiscussionScreenRoute,
-                                arguments: true
+                                arguments: true,
                               );
                             },
                           ),
@@ -195,7 +207,7 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
                       children: [
                         Flexible(
@@ -245,7 +257,7 @@ class ConsultationRequestsDetailsScreen extends StatelessWidget {
   }) {
     return CustomButton(
       color: color ?? ColorManager.primary,
-      horizontalMargin:margin?? 0.0,
+      horizontalMargin: margin ?? 0.0,
       iconPath: iconPath,
       isLeadingIcon: true,
       text: text ?? "",

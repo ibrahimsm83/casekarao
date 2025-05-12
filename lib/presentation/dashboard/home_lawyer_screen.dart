@@ -52,7 +52,7 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 05),
+              SizedBox(height: 4.h),
               _buildStatusRow(
                 firstStatus: StatusItem(
                   title: AppStrings.kCanceled,
@@ -81,7 +81,7 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               rowText(
                 text1: AppStrings.kNewConsultationRequests,
                 text2: AppStrings.kViewAll,
@@ -92,7 +92,7 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   );
                 },
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 12.h),
               SizedBox(
                 height: 200,
                 child: ListView.separated(
@@ -115,7 +115,7 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 20.h),
               rowText(
                 text1: AppStrings.kOnGoingCases,
                 text2: AppStrings.kViewAll,
@@ -126,7 +126,7 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
                   );
                 },
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 12.h),
               OnGoingStatusCard(
                 status: DataList.onGoingList[0],
                 onDetailsTap: () {
@@ -227,52 +227,114 @@ class _HomeLawyerScreenState extends State<HomeLawyerScreen> {
     return Row(
       children: [
         Expanded(child: _buildStatusTile(firstStatus)),
-        const SizedBox(width: 10), // Space between tiles
+        const SizedBox(width: 4), // Space between tiles
         Expanded(child: _buildStatusTile(secondStatus)),
       ],
     );
   }
 
   /// Builds an individual status tile with a rounded card and ListTile
+  // Widget _buildStatusTile(StatusItem status) {
+  //   return Card(
+  //     color: ColorManager.kWhiteColor,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.circular(AppSize.s14.r),
+  //     ),
+  //     child:
+  //     ListTile(
+  //       contentPadding: EdgeInsets.only(left: 10.0),
+  //       onTap: status.onTap,
+  //       leading: Container(
+  //         height: 40.h,
+  //         width: 40.w,
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(8.r),
+  //           color: status.countBgColor.withOpacity(0.3),
+  //         ),
+  //         child: Center(
+  //           child: Text(
+  //             status.count,
+  //             textAlign: TextAlign.center,
+  //             style: getsemiboldStyle(
+  //               color: status.countTextColor,
+  //               fontSize: ScreenUtil().setSp(AppSize.s16),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //       title: Text(
+  //         status.title,
+  //         style: getsemiboldStyle(
+  //           color: ColorManager.primary,
+  //           fontSize: ScreenUtil().setSp(AppSize.s14),
+  //         ),
+  //       ),
+  //       subtitle: Text(
+  //         status.subtitle,
+  //         style: getRegularStyle(
+  //           color: ColorManager.kGreyColor,
+  //           fontSize: ScreenUtil().setSp(AppSize.s10),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _buildStatusTile(StatusItem status) {
-    return Card(
-      color: ColorManager.kWhiteColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSize.s14.r),
-      ),
-      child: ListTile(
-        contentPadding: EdgeInsets.only(left: 10.0),
-        onTap: status.onTap,
-        leading: Container(
-          height: 35.h,
-          width: 35.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
-            color: status.countBgColor.withOpacity(0.3),
-          ),
-          child: Center(
-            child: Text(
-              status.count,
-              textAlign: TextAlign.center,
-              style: getsemiboldStyle(
-                color: status.countTextColor,
-                fontSize: ScreenUtil().setSp(AppSize.s16),
+    return GestureDetector(
+      onTap: status.onTap,
+      child: Card(
+        color: ColorManager.kWhiteColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSize.s14.r),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 40.h,
+                width: 40.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: status.countBgColor.withOpacity(0.3),
+                ),
+                child: Center(
+                  child: Text(
+                    status.count,
+                    textAlign: TextAlign.center,
+                    style: getsemiboldStyle(
+                      color: status.countTextColor,
+                      fontSize: ScreenUtil().setSp(AppSize.s16),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-        title: Text(
-          status.title,
-          style: getsemiboldStyle(
-            color: ColorManager.primary,
-            fontSize: ScreenUtil().setSp(AppSize.s14),
-          ),
-        ),
-        subtitle: Text(
-          status.subtitle,
-          style: getRegularStyle(
-            color: ColorManager.kGreyColor,
-            fontSize: ScreenUtil().setSp(AppSize.s10),
+              SizedBox(width: 8.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      status.title,
+                      style: getsemiboldStyle(
+                        color: ColorManager.primary,
+                        fontSize: ScreenUtil().setSp(AppSize.s14),
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      status.subtitle,
+                      style: getRegularStyle(
+                        color: ColorManager.kGreyColor,
+                        fontSize: ScreenUtil().setSp(AppSize.s10),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
