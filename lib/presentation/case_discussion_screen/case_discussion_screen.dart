@@ -79,6 +79,47 @@ class CaseDiscussionScreen extends StatelessWidget {
                 ],
               ),
       ),
+      bottomSheet:  Container(
+        height: 60,
+
+        padding: EdgeInsets.symmetric(horizontal: 0.0),
+        decoration: BoxDecoration(
+          //color: Colors.red,
+          color: ColorManager.kWhiteColor
+
+        ),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0,right: 10),
+              child: SvgPicture.asset(ImageAssets.kPlusIcon),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: CustomTextFormField(
+                  hintText: AppStrings.kTypeAMessage,
+                  fillColor: ColorManager.kChatTextFiledColor,
+                  radius:24 ,
+                  //controller: _firstNameController,
+                  horizontalMergin: 0.0,
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(ImageAssets.kSmileCircleIcon),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: SvgPicture.asset(
+                ImageAssets.kAttachmentIcon,
+                //height: 18,
+              ),
+            ),
+          ],
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: AppSize.sizeWidth(context!) * 0.03,
@@ -111,43 +152,17 @@ class CaseDiscussionScreen extends StatelessWidget {
                   SizedBox(height: 10),
                   userChatBubble('Hi There'),
                   SizedBox(height: 20),
+                  otherUserChatBubble(
+                    'How are you?',
+                    ImageAssets.userImage,
+                  ),
+                  SizedBox(height: 80),
                 ],
               ),
             ),
 
             ///Input TextField
-            Container(
-              height: 60,
-              padding: EdgeInsets.symmetric(horizontal: 0.0),
-              decoration: BoxDecoration(color: ColorManager.kWhiteColor),
-              child: Row(
-                children: [
-                  SvgPicture.asset(ImageAssets.kPlusIcon),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: CustomTextFormField(
-                        hintText: AppStrings.kTypeAMessage,
-                        fillColor: ColorManager.kBackgroundColor,
-                        //controller: _firstNameController,
-                        horizontalMergin: 0.0,
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: SvgPicture.asset(ImageAssets.kSmileCircleIcon),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: SvgPicture.asset(
-                      ImageAssets.kAttachmentIcon,
-                      //height: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
           ],
         ),
       ),

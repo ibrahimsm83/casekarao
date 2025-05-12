@@ -178,7 +178,7 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
                   },
                 ),
 
-                SizedBox(height: AppSize.sizeHeight(context) * 0.15),
+                SizedBox(height: AppSize.sizeHeight(context) * 0.04),
                 button(
                   text: AppStrings.sendOffer,
                   onTap: () {

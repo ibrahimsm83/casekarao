@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import '../export_casekarao.dart';
@@ -15,6 +17,7 @@ class CustomTextFormField extends StatefulWidget {
   Widget? suffixIcon;
   FocusNode? focusNode;
   TextAlign textAlign;
+  double? radius;
   void Function(String)? onChanged;
   void Function(String)? onSubmitted;
   void Function()? onTextFiledTap;
@@ -31,6 +34,7 @@ class CustomTextFormField extends StatefulWidget {
     this.focusNode,
     this.onChanged,
     this.onSubmitted,
+    this.radius,
     this.maxLines = 1,
     this.suffixIcon,
     this.horizontalMergin = 0.05,
@@ -80,19 +84,19 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           hintStyle: getRegularStyle(color: ColorManager.kGreyColor),
           contentPadding: const EdgeInsets.fromLTRB(14, 14.0, 14.0, 14.0),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(widget.radius ??12.0),
             borderSide: BorderSide(color: ColorManager.kWhiteColor, width: 1.5),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(widget.radius ??12.0),
             borderSide: BorderSide(color: ColorManager.secondary, width: 1.5),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(widget.radius ??12.0),
             borderSide: BorderSide(color: ColorManager.kWhiteColor, width: 1.5),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(widget.radius ??12.0),
             borderSide: BorderSide(color: ColorManager.kRedColor, width: 1.5),
           ),
           suffixIcon:
