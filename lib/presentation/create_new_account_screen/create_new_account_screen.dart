@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../export_casekarao.dart';
 
@@ -13,51 +14,8 @@ class CreateNewAccountScreen extends StatefulWidget {
 }
 
 class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
-  final _formKey = GlobalKey<FormState>();
-  FocusNode node1 = FocusNode();
-  FocusNode node2 = FocusNode();
-  FocusNode node3 = FocusNode();
-  FocusNode node4 = FocusNode();
-  final _passwordController = TextEditingController();
-  final _phoneNumberController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _fullNameController = TextEditingController();
-
-  @override
-  void initState() {
-    node1.addListener(() {
-      if (!node1.hasFocus) {
-        formatPhoneNumber();
-      }
-    });
-    super.initState();
-  }
-
-  void formatPhoneNumber() {
-    _phoneNumberController.text = _phoneNumberController.text.replaceAll(
-      " ",
-      "",
-    );
-  }
-
-  double _strength = 0; // Strength value for the progress bar
-  String _password = "";
-
-  // Function to calculate password strength
-  void _checkPasswordStrength(String password) {
-    setState(() {
-      _password = password;
-      int strength = 0;
-
-      // Conditions to check password strength
-      if (password.length >= 8) strength++;
-      if (RegExp(r'(?=.*[A-Z])').hasMatch(password)) strength++;
-      if (RegExp(r'(?=.*\d)').hasMatch(password)) strength++;
-
-      // Convert strength to progress bar value (0.0 to 1.0)
-      _strength = strength / 3; // 3 is the max strength level
-    });
-  }
+  // Initialize the controller
+  final CreateNewAccountController controller = Get.put(CreateNewAccountController());
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +23,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
       backgroundColor: ColorManager.kBackgroundColor,
       body: SingleChildScrollView(
         child: Form(
-          key: _formKey,
+          key: controller.formKey,
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: AppSize.sizeWidth(context) * 0.05,
@@ -120,9 +78,9 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                 ),
                 CustomTextFormField(
                   hintText: AppStrings.fullNameHintText,
-                  controller: _fullNameController,
+                  controller: controller.fullNameController,
                   fillColor: ColorManager.kWhiteColor,
-                  focusNode: node1,
+                  focusNode: controller.fullNameFocusNode,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
@@ -146,9 +104,9 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                 ),
                 CustomTextFormField(
                   hintText: AppStrings.emailHintText,
-                  controller: _emailController,
+                  controller: controller.emailController,
                   fillColor: ColorManager.kWhiteColor,
-                  focusNode: node2,
+                  focusNode: controller.emailFocusNode,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
@@ -175,9 +133,9 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
 
                 CustomTextFormField(
                   hintText: AppStrings.phoneHintText,
-                  controller: _phoneNumberController,
+                  controller: controller.phoneNumberController,
                   fillColor: ColorManager.kWhiteColor,
-                  focusNode: node3,
+                  focusNode: controller.phoneFocusNode,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
@@ -201,10 +159,9 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                 ),
                 CustomTextFormField(
                   hintText: AppStrings.password,
-                  controller: _passwordController,
+                  controller: controller.passwordController,
                   fillColor: ColorManager.kWhiteColor,
-                  onChanged: _checkPasswordStrength,
-                  focusNode: node4,
+                  focusNode: controller.passwordFocusNode,
                   obscureText: true,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
@@ -230,55 +187,54 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                 ),
                 SizedBox(height: AppSize.s10.h),
                 // Progress Bar for Password Strength
-                LinearProgressIndicator(
+                Obx(() => LinearProgressIndicator(
                   borderRadius: BorderRadius.circular(10),
-                  value: _strength,
+                  value: controller.passwordStrength,
                   backgroundColor: Colors.grey[300],
                   color:
-                      _strength < 0.34
+                      controller.passwordStrength < 0.34
                           ? ColorManager.secondary
-                          : _strength < 0.67
+                          : controller.passwordStrength < 0.67
                           ? ColorManager.secondary
                           : ColorManager.secondary,
                   minHeight: 8,
-                ),
+                )),
                 SizedBox(height: AppSize.s10.h),
                 button(
                   text: AppStrings.register,
                   onTap: () {
-                    //if (_formKey.currentState!.validate()) {
-                    // print(_phoneNumberController.text);
-                    // print(_passwordController.text);
-                    // print(_emailController.text);
-                    // print(_fullNameController.text);
-                    if (_phoneNumberController.text.isNotEmpty) {
-                      Navigator.pushNamed(
-                        context,
-                        CustomRouteNames.kOtpVerificationScreenRoute,
-                        arguments: OtpScreenArgumentModel.required(
-                          phoneNumber: _phoneNumberController.text,
-                        ),
-                      );
-                    } else {
-                      CustomSnacksBar.showSnackBar(
-                        context,
-                        "Please Enter Phone Number ",
-                        icon: Icon(
-                          Icons.error,
-                          color: ColorManager.kWhiteColor,
-                        ),
-                      );
-                    }
+                    if (controller.formKey.currentState!.validate()) {
+                      if (controller.phoneNumberController.text.isNotEmpty) {
+                        controller.register();
+                        // You can add navigation logic here
+                        // Navigator.pushNamed(
+                        //   context,
+                        //   CustomRouteNames.kOtpVerificationScreenRoute,
+                        //   arguments: OtpScreenArgumentModel.required(
+                        //     phoneNumber: controller.phoneNumberController.text,
+                        //   ),
+                        // );
 
-                    // CustomSnacksBar.showSnackBar(
-                    //   context,
-                    //   "Registered Successfully",
-                    //   icon: Icon(
-                    //     Icons.check,
-                    //     color: ColorManager.kWhiteColor,
-                    //   ),
-                    // );
-                    // }
+                        // For now, just show a success message
+                        CustomSnacksBar.showSnackBar(
+                          context,
+                          "Registered Successfully",
+                          icon: Icon(
+                            Icons.check,
+                            color: ColorManager.kWhiteColor,
+                          ),
+                        );
+                      } else {
+                        CustomSnacksBar.showSnackBar(
+                          context,
+                          "Please Enter Phone Number ",
+                          icon: Icon(
+                            Icons.error,
+                            color: ColorManager.kWhiteColor,
+                          ),
+                        );
+                      }
+                    }
                   },
                 ),
                 CustomTextSpan(
@@ -318,10 +274,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
 
                 textSpan(
                   text1: AppStrings.byProceedingYouAgreeToThe,
-                  text2:
-                      AppStrings.termsAndConditions +
-                      ' and\t' +
-                      AppStrings.privacyPolicy,
+                  text2: "${AppStrings.termsAndConditions} and\t${AppStrings.privacyPolicy}",
                   onTap: () {
                     // Navigator.pushNamed(
                     //   context,
