@@ -10,3 +10,4 @@ export 'dispute_model.dart';
 export 'terms_conditions_args_model.dart';
 export 'review_model.dart';
 export 'review_data.dart';
+export 'auth_user_model.dart';

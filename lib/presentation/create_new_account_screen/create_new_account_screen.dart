@@ -200,43 +200,60 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                   minHeight: 8,
                 )),
                 SizedBox(height: AppSize.s10.h),
-                button(
-                  text: AppStrings.register,
-                  onTap: () {
-                    if (controller.formKey.currentState!.validate()) {
-                      if (controller.phoneNumberController.text.isNotEmpty) {
-                        controller.register();
-                        // You can add navigation logic here
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   CustomRouteNames.kOtpVerificationScreenRoute,
-                        //   arguments: OtpScreenArgumentModel.required(
-                        //     phoneNumber: controller.phoneNumberController.text,
-                        //   ),
-                        // );
+                // Register button with loading state
+                Obx(() {
+                  final registerStatus = controller.registerResponse.status;
 
-                        // For now, just show a success message
-                        CustomSnacksBar.showSnackBar(
-                          context,
-                          "Registered Successfully",
-                          icon: Icon(
-                            Icons.check,
-                            color: ColorManager.kWhiteColor,
-                          ),
-                        );
-                      } else {
-                        CustomSnacksBar.showSnackBar(
-                          context,
-                          "Please Enter Phone Number ",
-                          icon: Icon(
-                            Icons.error,
-                            color: ColorManager.kWhiteColor,
-                          ),
-                        );
-                      }
-                    }
-                  },
-                ),
+                  return button(
+                    text: registerStatus == Status.LOADING
+                        ? "Registering..."
+                        : AppStrings.register,
+                    onTap: registerStatus == Status.LOADING
+                        ? null
+                        : () {
+                            if (controller.formKey.currentState!.validate()) {
+                              if (controller.phoneNumberController.text.isNotEmpty) {
+                                // Call register with isLawyer=true for lawyer registration
+                                controller.register(isLawyer: true);
+                              } else {
+                                CustomSnacksBar.showSnackBar(
+                                  context,
+                                  "Please Enter Phone Number",
+                                  icon: Icon(
+                                    Icons.error,
+                                    color: ColorManager.kWhiteColor,
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                  );
+                }),
+
+                // Display registration status message
+                Obx(() {
+                  final response = controller.registerResponse;
+
+                  if (response.status == Status.COMPLETED) {
+                    // Registration successful - show nothing here as we already show a snackbar
+                    return SizedBox(height: 10.h);
+                  } else if (response.status == Status.ERROR) {
+                    // Show error message
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: Text(
+                        "Error: ${response.message}",
+                        style: getRegularStyle(
+                          color: Colors.red,
+                          fontSize: ScreenUtil().setSp(AppSize.s12),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    );
+                  } else {
+                    return SizedBox(height: 10.h);
+                  }
+                }),
                 CustomTextSpan(
                   text1: AppStrings.alreadyHaveAnAccount,
                   text2: AppStrings.login,
