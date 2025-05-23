@@ -3,6 +3,7 @@ import 'dart:io';
 import '../core/network/api_response.dart';
 import '../core/network/api_service.dart';
 import '../model/auth_user_model.dart';
+import '../model/user_object_model.dart';
 
 class AuthRepository {
   final ApiService _apiService = ApiService();
@@ -185,5 +186,29 @@ class AuthRepository {
       return AuthUserModel.fromJson(userData);
     }
     return null;
+  }
+
+  /// Verify token and get user data
+  Future<ApiResponse<UserObjectModel>> verifyToken(String token) async {
+    final response = await _apiService.post<UserObjectModel>(
+      '/verify-token',
+      data: {
+        'token': token,
+      },
+      fromJson: (json) {
+        return UserObjectModel.fromJson(json);
+      },
+    );
+
+    // If successful, save the token and user data
+    if (response.status == Status.completed) {
+      final userData = response.data;
+      if (userData != null) {
+        await _apiService.saveAuthToken(userData.apiToken);
+        await _apiService.saveUserData(userData.data.toJson());
+      }
+    }
+
+    return response;
   }
 }

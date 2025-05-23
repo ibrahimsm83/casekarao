@@ -1,3 +1,4 @@
+import 'package:casekarao/utils/loading_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -82,11 +83,11 @@ class CreateNewAccountController extends GetxController {
   }
 
   // Register user
-  Future<void> register({bool isLawyer = false}) async {
+  Future<void> register(context, {bool isLawyer = false}) async {
     if (formKey.currentState!.validate()) {
-      CustomLoadingBar.showLoading();
       // Set loading state
       _registerResponse.value = ApiResponse<AuthUserModel>.loading();
+      ShowLoading(context).startLoading();
 
       try {
         // Prepare request data
@@ -133,7 +134,6 @@ class CreateNewAccountController extends GetxController {
 
         // Handle successful registration
         if (response.status == Status.completed) {
-          CustomLoadingBar.hideLoading();
           Get.snackbar(
             'Success',
             'Registration successful!',
@@ -144,13 +144,12 @@ class CreateNewAccountController extends GetxController {
 
           // Navigate to OTP verification if needed
           // Get.toNamed('/otp-verification', arguments: {'phone': phoneNumberController.text});
-        }else{
-          Get.back();
-          //CustomLoadingBar.hideLoading();
+          ShowLoading(context).stopLoading();
+        } else {
+          ShowLoading(context).stopLoading();
         }
       } catch (e) {
-        Get.back();
-        //CustomLoadingBar.hideLoading();
+        ShowLoading(context).stopLoading();
         // Handle error
         _registerResponse.value = ApiResponse<AuthUserModel>.error(
           'An error occurred during registration: $e',
@@ -184,29 +183,30 @@ class CreateNewAccountController extends GetxController {
   }
 }
 
-class CustomLoadingBar {
-  static void showLoading({String message = 'Loading...'}) {
-    Get.dialog(
-      Dialog(
-        backgroundColor: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(height: 16),
-              Text(message),
-            ],
-          ),
-        ),
-      ),
-      barrierDismissible: false,
-    );
-  }
-  static void hideLoading() {
-    if (Get.isDialogOpen ?? false) {
-      Get.back();
-    }
-  }
-}
+// class CustomLoadingBar {
+//   static void showLoading({String message = 'Loading...'}) {
+//     Get.dialog(
+//       Dialog(
+//         backgroundColor: Colors.white,
+//         child: Padding(
+//           padding: const EdgeInsets.all(16.0),
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: [
+//               const CircularProgressIndicator(),
+//               const SizedBox(height: 16),
+//               Text(message),
+//             ],
+//           ),
+//         ),
+//       ),
+//       barrierDismissible: false,
+//     );
+//   }
+//   static void hideLoading() {
+//     if (Get.isDialogOpen ?? false) {
+//       Get.back();
+//     }
+//   }
+// }
+
