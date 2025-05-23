@@ -5,13 +5,13 @@ class ApiResponse<T> {
   String? message;
   int? statusCode;
 
-  ApiResponse.initial() : status = Status.INITIAL;
+  ApiResponse.initial() : status = Status.initial;
 
-  ApiResponse.loading() : status = Status.LOADING;
+  ApiResponse.loading() : status = Status.loading;
 
-  ApiResponse.completed(this.data) : status = Status.COMPLETED;
+  ApiResponse.completed(this.data) : status = Status.completed;
 
-  ApiResponse.error(this.message, {this.statusCode}) : status = Status.ERROR;
+  ApiResponse.error(this.message, {this.statusCode}) : status = Status.error;
 
   @override
   String toString() {
@@ -20,4 +20,4 @@ class ApiResponse<T> {
 }
 
 /// Status of the API response.
-enum Status { INITIAL, LOADING, COMPLETED, ERROR }
+enum Status { initial, loading, completed, error }

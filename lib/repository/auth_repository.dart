@@ -64,7 +64,7 @@ class AuthRepository {
       fromJson: (json) => true,
     );
 
-    if (response.status == Status.COMPLETED) {
+    if (response.status == Status.completed) {
       // Clear token and user data
       await _apiService.clearAuthToken();
       await _apiService.clearUserData();
@@ -107,10 +107,6 @@ class AuthRepository {
         // Update user data
         _apiService.saveUserData(userData);
         return AuthUserModel.fromJson(userData);
-      },
-      onSendProgress: (sent, total) {
-        final progress = (sent / total) * 100;
-        print('Upload progress: $progress%');
       },
     );
     return response;

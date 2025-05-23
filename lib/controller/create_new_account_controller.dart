@@ -25,10 +25,10 @@ class CreateNewAccountController extends GetxController {
   final FocusNode passwordFocusNode = FocusNode();
 
   // Text controllers
-  final TextEditingController fullNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController fullNameController = TextEditingController(text: "test user");
+  final TextEditingController emailController = TextEditingController(text: "test@gmail.com");
+  final TextEditingController phoneNumberController = TextEditingController(text: "12345678");
+  final TextEditingController passwordController = TextEditingController(text: "Abcd@12345");
 
   // Observable variables
   final RxDouble _passwordStrength = 0.0.obs;
@@ -123,7 +123,7 @@ class CreateNewAccountController extends GetxController {
         _registerResponse.value = response;
 
         // Handle successful registration
-        if (response.status == Status.COMPLETED) {
+        if (response.status == Status.completed) {
           Get.snackbar(
             'Success',
             'Registration successful!',

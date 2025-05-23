@@ -1,9 +1,5 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
-import 'package:http_parser/http_parser.dart';
-import 'package:path/path.dart';
-
 import 'api_response.dart';
 import 'network_manager.dart';
 
@@ -84,151 +80,20 @@ class ApiService {
     );
   }
 
-  /// Make a DELETE request
-  Future<ApiResponse<T>> delete<T>(
-    String endpoint, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-    T Function(dynamic)? fromJson,
-  }) async {
-    return _networkManager.delete<T>(
-      endpoint,
-      data: data,
-      queryParameters: queryParameters,
-      fromJson: fromJson,
-    );
-  }
-
-  /// Upload a single file with additional data
+  /// Upload a file with form data
   Future<ApiResponse<T>> uploadFile<T>(
     String endpoint, {
     required File file,
     required String fileField,
     Map<String, dynamic>? data,
     T Function(dynamic)? fromJson,
-    void Function(int, int)? onSendProgress,
   }) async {
-    // Create form data
-    final formData = FormData();
-    
-    // Add file
-    final fileName = basename(file.path);
-    final fileExtension = extension(file.path).replaceAll('.', '');
-    
-    // Determine MIME type based on file extension
-    String contentType;
-    switch (fileExtension.toLowerCase()) {
-      case 'jpg':
-      case 'jpeg':
-        contentType = 'image/jpeg';
-        break;
-      case 'png':
-        contentType = 'image/png';
-        break;
-      case 'pdf':
-        contentType = 'application/pdf';
-        break;
-      case 'doc':
-        contentType = 'application/msword';
-        break;
-      case 'docx':
-        contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-        break;
-      default:
-        contentType = 'application/octet-stream';
-    }
-    
-    formData.files.add(
-      MapEntry(
-        fileField,
-        await MultipartFile.fromFile(
-          file.path,
-          filename: fileName,
-          contentType: MediaType.parse(contentType),
-        ),
-      ),
-    );
-    
-    // Add additional data
-    if (data != null) {
-      data.forEach((key, value) {
-        formData.fields.add(MapEntry(key, value.toString()));
-      });
-    }
-    
-    return _networkManager.multipart<T>(
+    return _networkManager.uploadFile<T>(
       endpoint,
-      formData: formData,
+      file: file,
+      fileField: fileField,
+      data: data,
       fromJson: fromJson,
-      onSendProgress: onSendProgress,
-    );
-  }
-
-  /// Upload multiple files with additional data
-  Future<ApiResponse<T>> uploadMultipleFiles<T>(
-    String endpoint, {
-    required List<File> files,
-    required String fileField,
-    Map<String, dynamic>? data,
-    T Function(dynamic)? fromJson,
-    void Function(int, int)? onSendProgress,
-  }) async {
-    // Create form data
-    final formData = FormData();
-    
-    // Add files
-    for (var i = 0; i < files.length; i++) {
-      final file = files[i];
-      final fileName = basename(file.path);
-      final fileExtension = extension(file.path).replaceAll('.', '');
-      
-      // Determine MIME type based on file extension
-      String contentType;
-      switch (fileExtension.toLowerCase()) {
-        case 'jpg':
-        case 'jpeg':
-          contentType = 'image/jpeg';
-          break;
-        case 'png':
-          contentType = 'image/png';
-          break;
-        case 'pdf':
-          contentType = 'application/pdf';
-          break;
-        case 'doc':
-          contentType = 'application/msword';
-          break;
-        case 'docx':
-          contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-          break;
-        default:
-          contentType = 'application/octet-stream';
-      }
-      
-      formData.files.add(
-        MapEntry(
-          '$fileField[$i]',
-          await MultipartFile.fromFile(
-            file.path,
-            filename: fileName,
-            contentType: MediaType.parse(contentType),
-          ),
-        ),
-      );
-    }
-    
-    // Add additional data
-    if (data != null) {
-      data.forEach((key, value) {
-        formData.fields.add(MapEntry(key, value.toString()));
-      });
-    }
-    
-    return _networkManager.multipart<T>(
-      endpoint,
-      formData: formData,
-      fromJson: fromJson,
-      onSendProgress: onSendProgress,
     );
   }
 }

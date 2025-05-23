@@ -205,10 +205,10 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                   final registerStatus = controller.registerResponse.status;
 
                   return button(
-                    text: registerStatus == Status.LOADING
+                    text: registerStatus == Status.loading
                         ? "Registering..."
                         : AppStrings.register,
-                    onTap: registerStatus == Status.LOADING
+                    onTap: registerStatus == Status.loading
                         ? null
                         : () {
                             if (controller.formKey.currentState!.validate()) {
@@ -231,29 +231,29 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                 }),
 
                 // Display registration status message
-                Obx(() {
-                  final response = controller.registerResponse;
+                // Obx(() {
+                //   final response = controller.registerResponse;
 
-                  if (response.status == Status.COMPLETED) {
-                    // Registration successful - show nothing here as we already show a snackbar
-                    return SizedBox(height: 10.h);
-                  } else if (response.status == Status.ERROR) {
-                    // Show error message
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.h),
-                      child: Text(
-                        "Error: ${response.message}",
-                        style: getRegularStyle(
-                          color: Colors.red,
-                          fontSize: ScreenUtil().setSp(AppSize.s12),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  } else {
-                    return SizedBox(height: 10.h);
-                  }
-                }),
+                //   if (response.status == Status.COMPLETED) {
+                //     // Registration successful - show nothing here as we already show a snackbar
+                //     return SizedBox(height: 10.h);
+                //   } else if (response.status == Status.ERROR) {
+                //     // Show error message
+                //     return Padding(
+                //       padding: EdgeInsets.symmetric(vertical: 10.h),
+                //       child: Text(
+                //         "Error: ${response.message}",
+                //         style: getRegularStyle(
+                //           color: Colors.red,
+                //           fontSize: ScreenUtil().setSp(AppSize.s12),
+                //         ),
+                //         textAlign: TextAlign.center,
+                //       ),
+                //     );
+                //   } else {
+                //     return SizedBox(height: 10.h);
+                //   }
+                // }),
                 CustomTextSpan(
                   text1: AppStrings.alreadyHaveAnAccount,
                   text2: AppStrings.login,
