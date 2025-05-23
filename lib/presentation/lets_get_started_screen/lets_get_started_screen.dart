@@ -23,7 +23,21 @@ class _LetsGetStartedViewState extends State<LetsGetStartedView> {
     });
   }
 
-  void _showUserTypeSelectionDialog() {
+  void _showUserTypeSelectionDialog() async {
+    // Use AppHelper to check if we have internet connection
+    // final hasInternet = await AppHelper.hasInternetConnection();
+
+    // if (!mounted) return; // Check if widget is still mounted
+
+    // if (!hasInternet) {
+    //   // Show a snackbar if there's no internet connection
+    //   AppHelper.showSnackBar(
+    //     'No internet connection. Please check your network.',
+    //     isError: true,
+    //   );
+    // }
+
+    // Show the dialog regardless of internet connection
     showDialog(
       context: context,
       barrierDismissible: false, // User must select an option
@@ -231,16 +245,25 @@ class _LetsGetStartedViewState extends State<LetsGetStartedView> {
                   onTap: () {
                     if (selectedUserType != null) {
                       // Set the global user type
-                      _userRoleController.isUser = selectedUserType == "User";
+                      final isUserRole = selectedUserType == "User";
+
+                      // Update both the controller and AppHelper
+                      _userRoleController.isUser = isUserRole;
+                     // AppHelper.saveUserRole(isUserRole);
+
+                      // Show success message
+                      // AppHelper.showSnackBar(
+                      //   'User type set to $selectedUserType',
+                      //   isError: false,
+                      // );
+
                       Navigator.of(context).pop();
                     } else {
                       // Show error message if no selection is made
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Please select a user type'),
-                          backgroundColor: ColorManager.kRedColor,
-                        ),
-                      );
+                      // AppHelper.showSnackBar(
+                      //   'Please select a user type',
+                      //   isError: true,
+                      // );
                     }
                   },
                 ),

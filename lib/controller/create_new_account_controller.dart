@@ -25,10 +25,18 @@ class CreateNewAccountController extends GetxController {
   final FocusNode passwordFocusNode = FocusNode();
 
   // Text controllers
-  final TextEditingController fullNameController = TextEditingController(text: "test user");
-  final TextEditingController emailController = TextEditingController(text: "test@gmail.com");
-  final TextEditingController phoneNumberController = TextEditingController(text: "12345678");
-  final TextEditingController passwordController = TextEditingController(text: "Abcd@12345");
+  final TextEditingController fullNameController = TextEditingController(
+    text: "test user",
+  );
+  final TextEditingController emailController = TextEditingController(
+    text: "test@gmail.com",
+  );
+  final TextEditingController phoneNumberController = TextEditingController(
+    text: "12345678",
+  );
+  final TextEditingController passwordController = TextEditingController(
+    text: "Abcd@12345",
+  );
 
   // Observable variables
   final RxDouble _passwordStrength = 0.0.obs;
@@ -76,6 +84,7 @@ class CreateNewAccountController extends GetxController {
   // Register user
   Future<void> register({bool isLawyer = false}) async {
     if (formKey.currentState!.validate()) {
+      CustomLoadingBar.showLoading();
       // Set loading state
       _registerResponse.value = ApiResponse<AuthUserModel>.loading();
 
@@ -108,13 +117,13 @@ class CreateNewAccountController extends GetxController {
               return AuthUserModel.fromJson(json['data']);
             } else {
               Get.snackbar(
-            'Error',
-            json['message'],
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-          );
-            return AuthUserModel.fromJson(json['data']);
+                'Error',
+                json['message'],
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.green,
+                colorText: Colors.white,
+              );
+              return AuthUserModel.fromJson(json['data']);
             }
           },
         );
@@ -124,6 +133,7 @@ class CreateNewAccountController extends GetxController {
 
         // Handle successful registration
         if (response.status == Status.completed) {
+          CustomLoadingBar.hideLoading();
           Get.snackbar(
             'Success',
             'Registration successful!',
@@ -134,8 +144,13 @@ class CreateNewAccountController extends GetxController {
 
           // Navigate to OTP verification if needed
           // Get.toNamed('/otp-verification', arguments: {'phone': phoneNumberController.text});
+        }else{
+          Get.back();
+          //CustomLoadingBar.hideLoading();
         }
       } catch (e) {
+        Get.back();
+        //CustomLoadingBar.hideLoading();
         // Handle error
         _registerResponse.value = ApiResponse<AuthUserModel>.error(
           'An error occurred during registration: $e',
@@ -166,5 +181,32 @@ class CreateNewAccountController extends GetxController {
     passwordFocusNode.dispose();
 
     super.onClose();
+  }
+}
+
+class CustomLoadingBar {
+  static void showLoading({String message = 'Loading...'}) {
+    Get.dialog(
+      Dialog(
+        backgroundColor: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(height: 16),
+              Text(message),
+            ],
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
+  }
+  static void hideLoading() {
+    if (Get.isDialogOpen ?? false) {
+      Get.back();
+    }
   }
 }
