@@ -15,7 +15,9 @@ class CreateNewAccountScreen extends StatefulWidget {
 
 class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
   // Initialize the controller
-  final CreateNewAccountController controller = Get.put(CreateNewAccountController());
+  final CreateNewAccountController controller = Get.put(
+    CreateNewAccountController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +134,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                       ),
                     ),
                   ),
-          
+
                   CustomTextFormField(
                     hintText: AppStrings.phoneHintText,
                     controller: controller.phoneNumberController,
@@ -189,47 +191,48 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                   ),
                   SizedBox(height: AppSize.s10.h),
                   // Progress Bar for Password Strength
-                  Obx(() => LinearProgressIndicator(
-                    borderRadius: BorderRadius.circular(10),
-                    value: controller.passwordStrength,
-                    backgroundColor: Colors.grey[300],
-                    color:
-                        controller.passwordStrength < 0.34
-                            ? ColorManager.secondary
-                            : controller.passwordStrength < 0.67
-                            ? ColorManager.secondary
-                            : ColorManager.secondary,
-                    minHeight: 8,
-                  )),
-                  SizedBox(height: AppSize.s10.h),
-          
-                     button(
-                      text:  AppStrings.register,
-                      onTap: 
-                           () {
-                              if (controller.formKey.currentState!.validate()) {
-                                if (controller.phoneNumberController.text.isNotEmpty) {
-                                  // Call register with isLawyer=true for lawyer registration
-                                  controller.register(context, isLawyer: true);
-                                } else {
-                                  CustomSnacksBar.showSnackBar(
-                                    context,
-                                    "Please Enter Phone Number",
-                                    icon: Icon(
-                                      Icons.error,
-                                      color: ColorManager.kWhiteColor,
-                                    ),
-                                  );
-                                }
-                              }
-                            },
+                  Obx(
+                    () => LinearProgressIndicator(
+                      borderRadius: BorderRadius.circular(10),
+                      value: controller.passwordStrength,
+                      backgroundColor: Colors.grey[300],
+                      color:
+                          controller.passwordStrength < 0.34
+                              ? ColorManager.secondary
+                              : controller.passwordStrength < 0.67
+                              ? ColorManager.secondary
+                              : ColorManager.secondary,
+                      minHeight: 8,
                     ),
-                  
-          
+                  ),
+                  SizedBox(height: AppSize.s10.h),
+
+                  button(
+                    text: AppStrings.register,
+                    onTap: () {
+                      if (controller.formKey.currentState!.validate()) {
+                        if (controller.phoneNumberController.text.isNotEmpty) {
+                          // Call register with isLawyer=true for lawyer registration
+                          //controller.register(context, isLawyer: true);
+                          controller.createUser(context);
+                        } else {
+                          CustomSnacksBar.showSnackBar(
+                            context,
+                            "Please Enter Phone Number",
+                            icon: Icon(
+                              Icons.error,
+                              color: ColorManager.kWhiteColor,
+                            ),
+                          );
+                        }
+                      }
+                    },
+                  ),
+
                   // Display registration status message
                   // Obx(() {
                   //   final response = controller.registerResponse;
-          
+
                   //   if (response.status == Status.COMPLETED) {
                   //     // Registration successful - show nothing here as we already show a snackbar
                   //     return SizedBox(height: 10.h);
@@ -260,7 +263,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                       );
                     },
                   ),
-          
+
                   Row(
                     children: [
                       Flexible(
@@ -284,10 +287,11 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                       ),
                     ],
                   ),
-          
+
                   textSpan(
                     text1: AppStrings.byProceedingYouAgreeToThe,
-                    text2: "${AppStrings.termsAndConditions} and\t${AppStrings.privacyPolicy}",
+                    text2:
+                        "${AppStrings.termsAndConditions} and\t${AppStrings.privacyPolicy}",
                     onTap: () {
                       // Navigator.pushNamed(
                       //   context,

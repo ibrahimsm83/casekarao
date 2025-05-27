@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../presentation/resources/color_manager.dart';
@@ -8,21 +9,21 @@ import '../presentation/resources/export_resources.dart';
 class MyApp extends StatefulWidget {
   //const MyApp({Key? key}) : super(key: key); //default constractor
 
-//Private named constractor
-  const MyApp._internal();
+// //Private named constractor
+//   const MyApp._internal();
 
-//Single Instance--Singleton
-  static final MyApp instance = MyApp._internal();
+// //Single Instance--Singleton
+//   static final MyApp instance = MyApp._internal();
 
-//factory for the class instance
-  factory MyApp() => instance;
+// //factory for the class instance
+//   factory MyApp() => instance;
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
+
   @override
   Widget build(BuildContext context) {
     //Set the fit size (Find your UI design, look at the dimensions of the device screen and fill it in,unit in dp)
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
+            builder: EasyLoading.init(),
             debugShowCheckedModeBanner: false,
             title: 'CaseKarao',
             onGenerateRoute: CustomRouteGenerator.generateRoute,
