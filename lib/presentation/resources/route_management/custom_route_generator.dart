@@ -57,14 +57,14 @@ class CustomRouteGenerator {
           },
         );
       case CustomRouteNames.kOtpVerificationScreenRoute:
-        OtpScreenArgumentModel argumentModel =
-            settings.arguments as OtpScreenArgumentModel;
+        AuthUserModel argumentModel =
+            settings.arguments as AuthUserModel;
         // final String email = settings.arguments as String;
         // final bool isForgotPw = settings.arguments as bool;
         return MaterialPageRoute(
           builder: (context) {
             return OtpScreen(
-                phoneNumber: argumentModel.phoneNumber, //email,
+                data: argumentModel,//email,
                 );
           },
         );

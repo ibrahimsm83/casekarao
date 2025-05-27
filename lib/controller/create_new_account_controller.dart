@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../core/network/api_response.dart';
 import '../core/network/api_service.dart';
 import '../model/auth_user_model.dart';
+import '../presentation/resources/route_management/custom_route_name.dart';
 
 class CreateNewAccountController extends GetxController {
   // API service
@@ -85,8 +86,6 @@ class CreateNewAccountController extends GetxController {
   // Register user
   Future<void> register(context, {bool isLawyer = false}) async {
     if (formKey.currentState!.validate()) {
-      // Set loading state
-      _registerResponse.value = ApiResponse<AuthUserModel>.loading();
       ShowLoading(context).startLoading();
 
       try {
@@ -103,40 +102,21 @@ class CreateNewAccountController extends GetxController {
         final response = await _apiService.post<AuthUserModel>(
           isLawyer ? '/lawyer/register' : '/user/register',
           data: data,
-          fromJson: (json) {
-            if (json['status'] != false) {
-              // Save token
-              final apiToken = json['data']['api_token'] ?? json['api_token'];
-              if (apiToken != null) {
-                _apiService.saveAuthToken(apiToken.toString());
-              }
-
-              // Save user data
-              _apiService.saveUserData(json['data']);
-
-              // Return user model
-              return AuthUserModel.fromJson(json['data']);
-            } else {
-              Get.snackbar(
-                'Error',
-                json['message'],
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.green,
-                colorText: Colors.white,
-              );
-              return AuthUserModel.fromJson(json['data']);
-            }
-          },
+          fromJson: (json) => AuthUserModel.fromJson(json['data']),
         );
 
-        // Update response
-        _registerResponse.value = response;
+        ShowLoading(context).stopLoading();
 
-        // Handle successful registration
-        if (response.status == Status.completed) {
+        // Handle response
+        if (response.status == Status.completed && response.data != null) {
+          // Save token and user data
+          await _apiService.saveAuthToken(response.data!.token);
+          await _apiService.saveUserData(response.data!.toJson());
+
+          // Show success message
           Get.snackbar(
             'Success',
-            'Registration successful!',
+            response.message ?? '',
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green,
             colorText: Colors.white,
@@ -144,20 +124,35 @@ class CreateNewAccountController extends GetxController {
 
           // Navigate to OTP verification if needed
           // Get.toNamed('/otp-verification', arguments: {'phone': phoneNumberController.text});
-          ShowLoading(context).stopLoading();
+          Navigator.pushNamed(
+            context,
+            CustomRouteNames.kOtpVerificationScreenRoute,
+          );
+        }else if(response.status == Status.error){
+          Get.snackbar(
+            'Error',
+            response.message ?? '',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
         } else {
-          ShowLoading(context).stopLoading();
+          // Show error message
+          Get.snackbar(
+            'Error',
+            response.message ?? 'Registration failed',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+          );
         }
       } catch (e) {
         ShowLoading(context).stopLoading();
-        // Handle error
-        _registerResponse.value = ApiResponse<AuthUserModel>.error(
-          'An error occurred during registration: $e',
-        );
 
+        // Show error message
         Get.snackbar(
           'Error',
-          'Registration failed: ${_registerResponse.value.message}',
+          'Registration failed: $e',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white,

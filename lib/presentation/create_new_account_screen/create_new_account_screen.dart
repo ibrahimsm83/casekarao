@@ -202,17 +202,11 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                     minHeight: 8,
                   )),
                   SizedBox(height: AppSize.s10.h),
-                  // Register button with loading state
-                  Obx(() {
-                    final registerStatus = controller.registerResponse.status;
           
-                    return button(
-                      text: registerStatus == Status.loading
-                          ? "Registering..."
-                          : AppStrings.register,
-                      onTap: registerStatus == Status.loading
-                          ? null
-                          : () {
+                     button(
+                      text:  AppStrings.register,
+                      onTap: 
+                           () {
                               if (controller.formKey.currentState!.validate()) {
                                 if (controller.phoneNumberController.text.isNotEmpty) {
                                   // Call register with isLawyer=true for lawyer registration
@@ -229,8 +223,8 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                                 }
                               }
                             },
-                    );
-                  }),
+                    ),
+                  
           
                   // Display registration status message
                   // Obx(() {

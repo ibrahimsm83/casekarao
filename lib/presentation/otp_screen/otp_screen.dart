@@ -6,9 +6,9 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../export_casekarao.dart';
 
 class OtpScreen extends StatefulWidget {
-  String? phoneNumber;
+  AuthUserModel? data;
 
-  OtpScreen({super.key, this.phoneNumber});
+  OtpScreen({super.key, this.data});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -81,7 +81,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
                 SizedBox(height: AppSize.s8.h),
                 Text(
-                  "${AppStrings.pleaseEnterTheOTPCodeThatWeHaveSentTo}${widget.phoneNumber}",
+                  "${AppStrings.pleaseEnterTheOTPCodeThatWeHaveSentTo}${widget.data!.phone}",
                   style: getmediumStyle(
                     color: ColorManager.kDarkGreyColor,
                     fontSize: ScreenUtil().setSp(AppSize.s12),

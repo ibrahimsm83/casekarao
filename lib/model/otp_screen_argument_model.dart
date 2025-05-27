@@ -1,8 +1,8 @@
-class OtpScreenArgumentModel {
-  String phoneNumber = "";
+// class OtpScreenArgumentModel {
+//   String phoneNumber = "";
 
-  OtpScreenArgumentModel.isEmpty();
+//   OtpScreenArgumentModel.isEmpty();
 
-  OtpScreenArgumentModel.required({required this.phoneNumber});
-}
+//   OtpScreenArgumentModel.required({required this.phoneNumber});
+// }
 
