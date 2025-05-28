@@ -1,4 +1,4 @@
-import 'package:casekarao/model/new_user_model.dart';
+
 import 'package:casekarao/presentation/case_details_screen/user_case_details_screen.dart';
 import 'package:casekarao/presentation/lawyer_details_screen/lawyer_details_screen.dart';
 import 'package:casekarao/presentation/rate_reviews/rate_review.dart';
@@ -58,16 +58,11 @@ class CustomRouteGenerator {
           },
         );
       case CustomRouteNames.kOtpVerificationScreenRoute:
-        NewUser argumentModel =
-            settings.arguments as NewUser;
-        // final String email = settings.arguments as String;
-        // final bool isForgotPw = settings.arguments as bool;
         return MaterialPageRoute(
           builder: (context) {
-            return OtpScreen(
-                data: argumentModel,//email,
-                );
+            return  OtpScreen();
           },
+          settings: settings, // Pass settings to allow GetX to access arguments
         );
       case CustomRouteNames.kSetupProfileScreenRoute:
         final bool isCompleteAllRequiredFields = settings.arguments as bool;

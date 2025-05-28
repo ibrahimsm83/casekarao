@@ -1,189 +1,106 @@
-import 'dart:async';
-import 'package:casekarao/model/new_user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import '../../controller/otp_controller.dart';
 import '../../export_casekarao.dart';
-
-class OtpScreen extends StatefulWidget {
-  NewUser? data;
-
-  OtpScreen({super.key, this.data});
-
-  @override
-  State<OtpScreen> createState() => _OtpScreenState();
-}
-
-class _OtpScreenState extends State<OtpScreen> {
-  TextEditingController textEditingController = TextEditingController();
-  StreamController<ErrorAnimationType>? errorController;
-  bool hasError = false;
-  String currentText = "";
-  final formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    errorController = StreamController<ErrorAnimationType>();
-    print(widget.data!.toJson());
-    super.initState();
-  }
-
-  // snackBar Widget
-  snackBar(String? message) {
-    return ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message!), duration: const Duration(seconds: 2)),
-    );
-  }
-
-  @override
-  void dispose() {
-    errorController!.close();
-    super.dispose();
-  }
+// import 'package:get/get.dart';
+class OtpScreen extends StatelessWidget {
+    OtpScreen({super.key});
+  // OtpController get controller => Get.find();
+  final otpController = Get.put(OtpController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.kBackgroundColor,
-      body: Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSize.sizeWidth(context!) * 0.05,
-              //vertical: 5,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: AppSize.sizeHeight(context) * 0.05),
-                InkWell(
-                  onTap: () => Navigator.pop(context),
-                  child: Container(
-                    height: 44.h,
-                    width: 44.h,
-                    decoration: BoxDecoration(
-                      color: ColorManager.kWhiteColor,
-                      borderRadius: BorderRadius.all(Radius.circular(16.r)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(14.0),
-                      child: SvgPicture.asset(ImageAssets.backArrowIcon),
-                    ),
-                  ),
+          backgroundColor: ColorManager.kBackgroundColor,
+          body: Form(
+            key: otpController.formKey,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSize.sizeWidth(context) * 0.05,
                 ),
-                SizedBox(height: AppSize.sizeHeight(context) * 0.01),
-                Text(
-                  AppStrings.inputOTPCode,
-                  style: getsemiboldStyle(
-                    color: ColorManager.primary,
-                    fontSize: ScreenUtil().setSp(AppSize.s24),
-                  ),
-                ),
-                SizedBox(height: AppSize.s8.h),
-                Text(
-                  "${AppStrings.pleaseEnterTheOTPCodeThatWeHaveSentTo}${widget.data!.data.phone}",
-                  style: getmediumStyle(
-                    color: ColorManager.kDarkGreyColor,
-                    fontSize: ScreenUtil().setSp(AppSize.s12),
-                  ),
-                ),
-                SizedBox(height: AppSize.sizeHeight(context) * 0.06),
-                PinCodeTextField(
-                  appContext: context,
-                  length: 6,
-                  obscureText: true,
-                  animationType: AnimationType.fade,
-                  keyboardType: TextInputType.number,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  pinTheme: PinTheme(
-                    inactiveColor: ColorManager.kWhiteColor,
-                    inactiveFillColor: ColorManager.kWhiteColor,
-                    selectedFillColor: ColorManager.kWhiteColor,
-                    shape: PinCodeFieldShape.box,
-                    activeColor: ColorManager.kWhiteColor,
-                    errorBorderColor: ColorManager.kRedColor,
-                    borderRadius: BorderRadius.circular(12.r),
-                    fieldHeight: 50,
-                    fieldWidth: 50,
-                    activeFillColor: ColorManager.kWhiteColor,
-                  ),
-                  animationDuration: Duration(milliseconds: 300),
-                  enableActiveFill: true,
-                  errorAnimationController: errorController,
-                  controller: textEditingController,
-                  onCompleted: (v) {
-                    print("Completed");
-                  },
-                  onChanged: (value) {
-                    print(value);
-                    setState(() {
-                      currentText = value;
-                    });
-                  },
-                  // beforeTextPaste: (text) {
-                  //   print("Allowing to paste $text");
-                  //   //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                  //   //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                  //   return true;
-                  // },
-                ),
-
-                SizedBox(height: AppSize.sizeHeight(context) * 0.1),
-                button(
-                  text: AppStrings.continues,
-                  onTap: () {
-                    if (currentText.length != 6 || currentText != "000000") {
-                      errorController!.add(ErrorAnimationType.shake);
-                      // Triggering error shake animation
-                      setState(() => hasError = true);
-                      CustomSnacksBar.showSnackBar(
-                        context,
-                        "Enter OTP code  000000",
-                        icon: Icon(
-                          Icons.check,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: AppSize.sizeHeight(context) * 0.05),
+                    InkWell(
+                      onTap: otpController.goBack,
+                      child: Container(
+                        height: 44.h,
+                        width: 44.h,
+                        decoration: BoxDecoration(
                           color: ColorManager.kWhiteColor,
+                          borderRadius: BorderRadius.all(Radius.circular(16.r)),
                         ),
-                      );
-                    } else {
-                      setState(() {
-                        hasError = false;
-                        CustomSnacksBar.showSnackBar(
-                          context,
-                          "OTP Verified!!",
-                          icon: Icon(
-                            Icons.check,
-                            color: ColorManager.kWhiteColor,
-                          ),
-                        );
-                        Navigator.pushNamed(
-                          context,
-                          CustomRouteNames.kSetupProfileScreenRoute,
-                          arguments: false,
-                        );
-                      });
-                    }
-                  },
+                        child: Padding(
+                          padding: const EdgeInsets.all(14.0),
+                          child: SvgPicture.asset(ImageAssets.backArrowIcon),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: AppSize.sizeHeight(context) * 0.01),
+                    Text(
+                      AppStrings.inputOTPCode,
+                      style: getsemiboldStyle(
+                        color: ColorManager.primary,
+                        fontSize: ScreenUtil().setSp(AppSize.s24),
+                      ),
+                    ),
+                    SizedBox(height: AppSize.s8.h),
+                    Text(
+                      "${AppStrings.pleaseEnterTheOTPCodeThatWeHaveSentTo}${otpController.userData!.data.phone}",
+                      style: getmediumStyle(
+                        color: ColorManager.kDarkGreyColor,
+                        fontSize: ScreenUtil().setSp(AppSize.s12),
+                      ),
+                    ),
+                    SizedBox(height: AppSize.sizeHeight(context) * 0.06),
+                    PinCodeTextField(
+                      appContext: context,
+                      length: 6,
+                      obscureText: true,
+                      animationType: AnimationType.fade,
+                      keyboardType: TextInputType.number,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      pinTheme: PinTheme(
+                        inactiveColor: ColorManager.kWhiteColor,
+                        inactiveFillColor: ColorManager.kWhiteColor,
+                        selectedFillColor: ColorManager.kWhiteColor,
+                        shape: PinCodeFieldShape.box,
+                        activeColor: ColorManager.kWhiteColor,
+                        errorBorderColor: ColorManager.kWhiteColor,
+                        borderRadius: BorderRadius.circular(12.r),
+                        fieldHeight: 50,
+                        fieldWidth: 50,
+                        activeFillColor: ColorManager.kWhiteColor,
+                      ),
+                      animationDuration: const Duration(milliseconds: 300),
+                      enableActiveFill: true,
+                      errorAnimationController: otpController.errorController,
+                      controller: otpController.textEditingController,
+                      onCompleted: (v) => otpController.verifyOtp(),
+                      onChanged: otpController.onOtpChanged,
+                    ),
+                    SizedBox(height: AppSize.sizeHeight(context) * 0.1),
+                    button(
+                      text: AppStrings.continues,
+                      onTap: otpController.verifyOtp,
+                    ),
+                    button(
+                      text: AppStrings.resendCode,
+                      color: ColorManager.kWhiteColor,
+                      fontColor: ColorManager.primary,
+                      onTap: otpController.resendOtp,
+                    ),
+                  ],
                 ),
-                button(
-                  text: AppStrings.resendCode,
-                  color: ColorManager.kWhiteColor,
-                  fontColor: ColorManager.primary,
-                  onTap: () {
-                    CustomSnacksBar.showSnackBar(
-                      context,
-                      "OTP sent successfully",
-                      icon: Icon(Icons.check, color: ColorManager.kWhiteColor),
-                    );
-                  },
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        );
   }
 
   Widget button({
@@ -199,7 +116,6 @@ class _OtpScreenState extends State<OtpScreen> {
       iconPath: iconPath,
       isLeadingIcon: true,
       text: text ?? "",
-
       style: getmediumStyle(
         color: fontColor ?? ColorManager.kWhiteColor,
         fontSize: AppSize.s14.sp,
