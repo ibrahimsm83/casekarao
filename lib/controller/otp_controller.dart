@@ -21,7 +21,7 @@ class OtpController extends GetxController {
   StreamController<ErrorAnimationType>? errorController;
   
   // Form key (same as existing)
-  final formKey = GlobalKey<FormState>();
+  final otpFormKey = GlobalKey<FormState>();
   
   // Simple variables (same as existing)
   String currentText = "";
@@ -33,7 +33,7 @@ class OtpController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    errorController = StreamController<ErrorAnimationType>();
+      errorController = StreamController<ErrorAnimationType>.broadcast();
     
     // Get user data from arguments (same as widget.data)
     if (Get.arguments != null && Get.arguments is NewUser) {
@@ -99,18 +99,7 @@ class OtpController extends GetxController {
     } catch (e) {
       GetToast.show("Error", e: e,);
     }
-      // hasError = false;
-      // //update();
-      
-      // CustomSnacksBar.showSnackBar(
-      //   Get.context!,
-      //   "OTP Verified!!",
-      //   icon: Icon(
-      //     Icons.check,
-      //     color: Colors.white,
-      //   ),
-      // );
-      
+
       // Get.toNamed(
       //   CustomRouteNames.kSetupProfileScreenRoute,
       //   arguments: false,
@@ -119,12 +108,25 @@ class OtpController extends GetxController {
   }
   
   /// Resend OTP (same as existing resend button logic)
-  void resendOtp() {
-    // CustomSnacksBar.showSnackBar(
-    //   Get.context!,
-    //   "OTP sent successfully",
-    //   icon: Icon(Icons.check, color: Colors.white),
-    // );
+  Future<void> resendOtp() async {
+    final data = {
+      'api_token': userData!.apiToken,
+    };
+    try {
+      final response = await networkManager.postRequest(
+
+        isUserRoleController.isUser ? '/user/resend-otp-token' : '/lawyer/resend-otp-token',
+        data, // Convert model to JSON
+      );
+      if (response.data['status'] == true && response.data['data'] != null) {
+        GetToast.show('Success', responce: response);
+      } else {
+        // Handle API error response
+        GetToast.show("Error", responce: response);
+      }
+    } catch (e) {
+      GetToast.show("Error", e: e,);
+    }
   }
   
   /// Navigate back

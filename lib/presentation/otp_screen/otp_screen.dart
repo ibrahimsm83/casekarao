@@ -5,18 +5,19 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../controller/otp_controller.dart';
 import '../../export_casekarao.dart';
-// import 'package:get/get.dart';
+
 class OtpScreen extends StatelessWidget {
-    OtpScreen({super.key});
-  // OtpController get controller => Get.find();
-  final otpController = Get.put(OtpController());
+  const OtpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<OtpController>(
+      init: OtpController(),
+      builder: (controller) {
+        return Scaffold(
           backgroundColor: ColorManager.kBackgroundColor,
           body: Form(
-            key: otpController.formKey,
+            key: controller.otpFormKey,
             child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
@@ -27,7 +28,7 @@ class OtpScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: AppSize.sizeHeight(context) * 0.05),
                     InkWell(
-                      onTap: otpController.goBack,
+                      onTap: controller.goBack,
                       child: Container(
                         height: 44.h,
                         width: 44.h,
@@ -51,7 +52,7 @@ class OtpScreen extends StatelessWidget {
                     ),
                     SizedBox(height: AppSize.s8.h),
                     Text(
-                      "${AppStrings.pleaseEnterTheOTPCodeThatWeHaveSentTo}${otpController.userData!.data.phone}",
+                      "${AppStrings.pleaseEnterTheOTPCodeThatWeHaveSentTo}${controller.userData?.data.phone ?? ''}",
                       style: getmediumStyle(
                         color: ColorManager.kDarkGreyColor,
                         fontSize: ScreenUtil().setSp(AppSize.s12),
@@ -59,6 +60,7 @@ class OtpScreen extends StatelessWidget {
                     ),
                     SizedBox(height: AppSize.sizeHeight(context) * 0.06),
                     PinCodeTextField(
+                      autoDisposeControllers: false,
                       appContext: context,
                       length: 6,
                       obscureText: true,
@@ -71,7 +73,7 @@ class OtpScreen extends StatelessWidget {
                         selectedFillColor: ColorManager.kWhiteColor,
                         shape: PinCodeFieldShape.box,
                         activeColor: ColorManager.kWhiteColor,
-                        errorBorderColor: ColorManager.kWhiteColor,
+                        errorBorderColor: ColorManager.kRedColor,
                         borderRadius: BorderRadius.circular(12.r),
                         fieldHeight: 50,
                         fieldWidth: 50,
@@ -79,21 +81,21 @@ class OtpScreen extends StatelessWidget {
                       ),
                       animationDuration: const Duration(milliseconds: 300),
                       enableActiveFill: true,
-                      errorAnimationController: otpController.errorController,
-                      controller: otpController.textEditingController,
-                      onCompleted: (v) => otpController.verifyOtp(),
-                      onChanged: otpController.onOtpChanged,
+                      errorAnimationController: controller.errorController,
+                      controller: controller.textEditingController,
+                      onCompleted: (v) => controller.verifyOtp(),
+                      onChanged: controller.onOtpChanged,
                     ),
                     SizedBox(height: AppSize.sizeHeight(context) * 0.1),
-                    button(
+                    _button(
                       text: AppStrings.continues,
-                      onTap: otpController.verifyOtp,
+                      onTap: controller.verifyOtp,
                     ),
-                    button(
+                    _button(
                       text: AppStrings.resendCode,
                       color: ColorManager.kWhiteColor,
                       fontColor: ColorManager.primary,
-                      onTap: otpController.resendOtp,
+                      onTap: controller.resendOtp,
                     ),
                   ],
                 ),
@@ -101,9 +103,11 @@ class OtpScreen extends StatelessWidget {
             ),
           ),
         );
+      },
+    );
   }
 
-  Widget button({
+  Widget _button({
     Function()? onTap,
     String? text,
     Color? color,
