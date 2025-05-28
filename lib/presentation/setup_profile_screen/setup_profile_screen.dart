@@ -19,70 +19,72 @@ class SetupProfileScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal: AppSize.sizeWidth(context) * 0.05,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: AppSize.sizeHeight(context) * 0.05),
-                InkWell(
-                  onTap: controller.goBack,
-                  child: Container(
-                    height: 44.h,
-                    width: 44.h,
-                    decoration: BoxDecoration(
-                      color: ColorManager.kWhiteColor,
-                      borderRadius: BorderRadius.all(Radius.circular(16.r)),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: AppSize.sizeHeight(context) * 0.05),
+                  InkWell(
+                    onTap: controller.goBack,
+                    child: Container(
+                      height: 44.h,
+                      width: 44.h,
+                      decoration: BoxDecoration(
+                        color: ColorManager.kWhiteColor,
+                        borderRadius: BorderRadius.all(Radius.circular(16.r)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(14.0),
+                        child: SvgPicture.asset(ImageAssets.backArrowIcon),
+                      ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(14.0),
-                      child: SvgPicture.asset(ImageAssets.backArrowIcon),
+                  ),
+                  SizedBox(height: AppSize.sizeHeight(context) * 0.01),
+                  Text(
+                    AppStrings.setupProfile,
+                    style: getsemiboldStyle(
+                      color: ColorManager.primary,
+                      fontSize: ScreenUtil().setSp(AppSize.s24),
                     ),
                   ),
-                ),
-                SizedBox(height: AppSize.sizeHeight(context) * 0.01),
-                Text(
-                  AppStrings.setupProfile,
-                  style: getsemiboldStyle(
-                    color: ColorManager.primary,
-                    fontSize: ScreenUtil().setSp(AppSize.s24),
+                  SizedBox(height: AppSize.s8.h),
+                  Text(
+                    AppStrings
+                        .createYourLawyerProfileWithAccurateDetailsToHelpUsersFindYouEasily,
+                    style: getmediumStyle(
+                      color: ColorManager.kDarkGreyColor,
+                      fontSize: ScreenUtil().setSp(AppSize.s12),
+                    ),
                   ),
-                ),
-                SizedBox(height: AppSize.s8.h),
-                Text(
-                  AppStrings
-                      .createYourLawyerProfileWithAccurateDetailsToHelpUsersFindYouEasily,
-                  style: getmediumStyle(
-                    color: ColorManager.kDarkGreyColor,
-                    fontSize: ScreenUtil().setSp(AppSize.s12),
-                  ),
-                ),
-                Flexible(
-                  child: ListView(
+                  ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      listTile(onTap: () {controller.navigateToSection(AppStrings.personalInformation);}, title: AppStrings.personalInformation, data: controller.userData),
-                      listTile(onTap: () {  controller.navigateToSection(AppStrings.legalExperience);}, title: AppStrings.legalExperience, data: controller.userData),
-                      listTile(onTap: () {  controller.navigateToSection(AppStrings.educationAndCertifications);}, title: AppStrings.educationAndCertifications, data: controller.userData),
-                      listTile(onTap: () {  controller.navigateToSection(AppStrings.businessAndAvailability);}, title: AppStrings.businessAndAvailability, data: controller.userData),
-                      listTile(onTap: () {  controller.navigateToSection(AppStrings.governmentIssuedIDUpload);}, title: AppStrings.governmentIssuedIDUpload, data: controller.userData),
-                      listTile(onTap: () {  controller.navigateToSection(AppStrings.barIDCardUpload);}, title: AppStrings.barIDCardUpload, data: controller.userData),
-                      listTile(onTap: () {  controller.navigateToSection(AppStrings.selfieForIdentityVerification);}, title: AppStrings.selfieForIdentityVerification, data: controller.userData),
-                      listTile(onTap: () {  controller.navigateToSection(AppStrings.optionalDetails + AppStrings.enhancingProfile);}, title: AppStrings.optionalDetails + AppStrings.enhancingProfile, data: controller.userData),
+                      listTile(onTap: () {controller.navigateToSection(AppStrings.personalInformation);}, title: AppStrings.personalInformation, val: controller.userData!.data.isPersonalInfo),
+                      listTile(onTap: () {  controller.navigateToSection(AppStrings.legalExperience);}, title: AppStrings.legalExperience, val: controller.userData!.data.isLegalExperience),
+                      listTile(onTap: () {  controller.navigateToSection(AppStrings.educationAndCertifications);}, title: AppStrings.educationAndCertifications,  val: controller.userData!.data.isEducation),
+                      listTile(onTap: () {  controller.navigateToSection(AppStrings.businessAndAvailability);}, title: AppStrings.businessAndAvailability,  val: controller.userData!.data.isBusiness),
+                      listTile(onTap: () {  controller.navigateToSection(AppStrings.governmentIssuedIDUpload);}, title: AppStrings.governmentIssuedIDUpload,  val: controller.userData!.data.isGovIdUploaded),
+                      listTile(onTap: () {  controller.navigateToSection(AppStrings.barIDCardUpload);}, title: AppStrings.barIDCardUpload,  val: controller.userData!.data.isBaridUploaded),
+                      listTile(onTap: () {  controller.navigateToSection(AppStrings.selfieForIdentityVerification);}, title: AppStrings.selfieForIdentityVerification,  val: controller.userData!.data.isSelfie),
+                      listTile(onTap: () {  controller.navigateToSection(AppStrings.optionalDetails + AppStrings.enhancingProfile);}, title: AppStrings.optionalDetails + AppStrings.enhancingProfile,  val: controller.userData!.data.isOptionalDetails),
                     ],
                   ),
-                ),
-                SizedBox(height: AppSize.s8.h),
-                Text(
-                  AppStrings.noteCompleteAllRequired,
-                  style: getmediumStyle(
-                    color: ColorManager.kDarkGreyColor,
-                    fontSize: ScreenUtil().setSp(AppSize.s12),
+                  SizedBox(height: AppSize.s8.h),
+                  Text(
+                    AppStrings.noteCompleteAllRequired,
+                    style: getmediumStyle(
+                      color: ColorManager.kDarkGreyColor,
+                      fontSize: ScreenUtil().setSp(AppSize.s12),
+                    ),
                   ),
-                ),
-                _button(
-                  text: AppStrings.saveAndContinue,
-                  onTap: controller.saveAndContinue,
-                ),
-                SizedBox(height: AppSize.s8.h),
-              ],
+                  _button(
+                    text: AppStrings.saveAndContinue,
+                    onTap: controller.saveAndContinue,
+                  ),
+                  SizedBox(height: AppSize.s8.h),
+                ],
+              ),
             ),
           ),
         );
@@ -90,7 +92,7 @@ class SetupProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget listTile({Function()? onTap, String? title, UserModel? data}) {
+  Widget listTile({Function()? onTap, String? title, int? val}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       //padding: const EdgeInsets.all(8.0),
@@ -112,12 +114,12 @@ class SetupProfileScreen extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color:
-                true ? ColorManager.kGreenColor : ColorManager.kBackgroundColor,
+                val == 1 ? ColorManager.kGreenColor : ColorManager.kBackgroundColor,
           ),
           child: Icon(
             Icons.check,
             size: 20,
-            color: true ? ColorManager.kWhiteColor : ColorManager.kGreyColor,
+            color: val == 1  ? ColorManager.kWhiteColor : ColorManager.kGreyColor,
           ),
         ),
       ),
