@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:casekarao/model/new_user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,7 +7,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../export_casekarao.dart';
 
 class OtpScreen extends StatefulWidget {
-  AuthUserModel? data;
+  NewUser? data;
 
   OtpScreen({super.key, this.data});
 
@@ -24,6 +25,7 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   void initState() {
     errorController = StreamController<ErrorAnimationType>();
+    print(widget.data!.toJson());
     super.initState();
   }
 
@@ -81,7 +83,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
                 SizedBox(height: AppSize.s8.h),
                 Text(
-                  "${AppStrings.pleaseEnterTheOTPCodeThatWeHaveSentTo}${widget.data!.phone}",
+                  "${AppStrings.pleaseEnterTheOTPCodeThatWeHaveSentTo}${widget.data!.data.phone}",
                   style: getmediumStyle(
                     color: ColorManager.kDarkGreyColor,
                     fontSize: ScreenUtil().setSp(AppSize.s12),
