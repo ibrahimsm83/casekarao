@@ -1,15 +1,9 @@
-// import 'package:casekarao/core/network/network_manager.dart';
 import 'package:casekarao/core/network/network_managers.dart';
 import 'package:casekarao/model/new_user_model.dart';
-// import 'package:casekarao/model/user_object_model.dart';
-import 'package:casekarao/utils/loading_service.dart';
+import 'package:casekarao/utils/toast_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import '../core/network/api_response.dart';
 import '../core/network/api_service.dart';
-import '../model/auth_user_model.dart';
-import '../presentation/resources/route_management/custom_route_name.dart';
 import 'user_role_controller.dart';
 
 class CreateNewAccountController extends GetxController {
@@ -24,22 +18,12 @@ class CreateNewAccountController extends GetxController {
 
   // API service
   final ApiService _apiService = ApiService();
-
-  // // API response
-  // final Rx<ApiResponse<AuthUserModel>> _registerResponse =
-  //     ApiResponse<AuthUserModel>.initial().obs;
-
-  // // Getter for register response
-  // ApiResponse<AuthUserModel> get registerResponse => _registerResponse.value;
-  // Form key
   final formKey = GlobalKey<FormState>();
-
   // Focus nodes
   final FocusNode fullNameFocusNode = FocusNode();
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode phoneFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
-
   // Text controllers
   final TextEditingController fullNameController = TextEditingController(
     text: "test user",
@@ -53,20 +37,16 @@ class CreateNewAccountController extends GetxController {
   final TextEditingController passwordController = TextEditingController(
     text: "Abcd@12345",
   );
-
   // Observable variables
   final RxDouble _passwordStrength = 0.0.obs;
   final RxString _password = "".obs;
-
   // Getters
   double get passwordStrength => _passwordStrength.value;
   String get password => _password.value;
-
   // Format phone number
   void formatPhoneNumber() {
     phoneNumberController.text = phoneNumberController.text.replaceAll(" ", "");
   }
-
   // Check password strength
   void checkPasswordStrength(String password) {
     _password.value = password;
@@ -105,162 +85,119 @@ class CreateNewAccountController extends GetxController {
         //   response.data,
         // ); // Pass response.data, not response
 
-        // await _apiService.saveAuthToken(response.data!.token);
-        // await _apiService.saveUserData(response.data!.toJson());
+        await _apiService.saveAuthToken(response.data!.token);
+        await _apiService.saveUserData(response.data!.toJson());
 
         // Show success message
-        getSnacsackBar(response);
-        // Get.snackbar(
-        //   'Success',
-        //   user!.message, //'Registration successful!',
-        //   snackPosition: SnackPosition.BOTTOM,
-        //   backgroundColor: Colors.green,
-        //   colorText: Colors.white,
-        // );
-
-        // ShowLoading(context).stopLoading();
+        GetToast.show('Success', responce: response);
       } else {
         // Handle API error response
-        getSnacsackBar(response);
-        // Get.snackbar(
-        //   'Error',
-        //   response.data['message'] ?? 'Registration failed',
-        //   snackPosition: SnackPosition.BOTTOM,
-        //   backgroundColor: Colors.red,
-        //   colorText: Colors.white,
-        // );
-        //ShowLoading(context).stopLoading();
+        GetToast.show("Error", responce: response);
       }
     } catch (e) {
-      errorMessage.value = e.toString();
-      // Show error snackbar
-      getSnacsackBar('Error',);
-      // Get.snackbar(
-      //   'Error',
-      //   errorMessage.value,
-      //   snackPosition: SnackPosition.BOTTOM,
-      //   backgroundColor: Colors.red,
-      //   colorText: Colors.white,
-      // );
-    } finally {
-      //isLoading.value = false;
-      EasyLoading.dismiss();
+      GetToast.show("Error", e: e,);
     }
   }
 
   // Register user
-  Future<void> register(context, {bool isLawyer = false}) async {
-    if (formKey.currentState!.validate()) {
-      ShowLoading(context).startLoading();
+  // Future<void> register(context, {bool isLawyer = false}) async {
+  //   if (formKey.currentState!.validate()) {
+  //     ShowLoading(context).startLoading();
 
-      try {
-        // Prepare request data
-        final data = {
-          'name': fullNameController.text.trim(),
-          'email': emailController.text.trim(),
-          'phone': phoneNumberController.text.trim(),
-          'password': passwordController.text,
-          'user_type': isLawyer ? 2 : 1, // 2 for lawyer, 1 for regular user
-        };
+  //     try {
+  //       // Prepare request data
+  //       final data = {
+  //         'name': fullNameController.text.trim(),
+  //         'email': emailController.text.trim(),
+  //         'phone': phoneNumberController.text.trim(),
+  //         'password': passwordController.text,
+  //         'user_type': isLawyer ? 2 : 1, // 2 for lawyer, 1 for regular user
+  //       };
 
-        // Make API call
-        final response = await _apiService.post<AuthUserModel>(
-          isLawyer ? '/lawyer/register' : '/user/register',
-          data: data,
-          fromJson: (json) {
-            // Check if response is a Map
-            if (json is Map<String, dynamic>) {
-              final status = json['status'];
-              final message = json['message'] ?? '';
+  //       // Make API call
+  //       final response = await _apiService.post<AuthUserModel>(
+  //         isLawyer ? '/lawyer/register' : '/user/register',
+  //         data: data,
+  //         fromJson: (json) {
+  //           // Check if response is a Map
+  //           if (json is Map<String, dynamic>) {
+  //             final status = json['status'];
+  //             final message = json['message'] ?? '';
 
-              // If status is true/success and data exists
-              if (status == true && json['data'] != null) {
-                return AuthUserModel.fromJson(json['data']);
-              } else {
-                // Handle error response - throw exception to be caught by NetworkManager
-                throw Exception(
-                  message.isNotEmpty ? message : 'Registration failed',
-                );
-              }
-            } else {
-              // Handle unexpected response format (like List)
-              throw Exception(
-                'Unexpected response format: ${json.runtimeType}',
-              );
-            }
-          },
-        );
+  //             // If status is true/success and data exists
+  //             if (status == true && json['data'] != null) {
+  //               return AuthUserModel.fromJson(json['data']);
+  //             } else {
+  //               // Handle error response - throw exception to be caught by NetworkManager
+  //               throw Exception(
+  //                 message.isNotEmpty ? message : 'Registration failed',
+  //               );
+  //             }
+  //           } else {
+  //             // Handle unexpected response format (like List)
+  //             throw Exception(
+  //               'Unexpected response format: ${json.runtimeType}',
+  //             );
+  //           }
+  //         },
+  //       );
 
-        ShowLoading(context).stopLoading();
+  //       ShowLoading(context).stopLoading();
 
-        // Handle response
-        if (response.status == Status.completed && response.data != null) {
-          // Save token and user data
-          await _apiService.saveAuthToken(response.data!.token);
-          await _apiService.saveUserData(response.data!.toJson());
+  //       // Handle response
+  //       if (response.status == Status.completed && response.data != null) {
+  //         // Save token and user data
+  //         await _apiService.saveAuthToken(response.data!.token);
+  //         await _apiService.saveUserData(response.data!.toJson());
 
-          // Show success message
+  //         // Show success message
 
-          Get.snackbar(
-            'Success',
-            'Registration successful!',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-          );
+  //         Get.snackbar(
+  //           'Success',
+  //           'Registration successful!',
+  //           snackPosition: SnackPosition.BOTTOM,
+  //           backgroundColor: Colors.green,
+  //           colorText: Colors.white,
+  //         );
 
-          // Navigate to OTP verification if needed
-          // Get.toNamed('/otp-verification', arguments: {'phone': phoneNumberController.text});
-          Navigator.pushNamed(
-            context,
-            CustomRouteNames.kOtpVerificationScreenRoute,
-          );
-        } else if (response.status == Status.error) {
-          Get.snackbar(
-            'Error',
-            response.message ?? 'Registration failed',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-          );
-        } else {
-          // Show error message
-          Get.snackbar(
-            'Error',
-            response.message ?? 'Registration failed',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-          );
-        }
-      } catch (e) {
-        ShowLoading(context).stopLoading();
+  //         // Navigate to OTP verification if needed
+  //         // Get.toNamed('/otp-verification', arguments: {'phone': phoneNumberController.text});
+  //         Navigator.pushNamed(
+  //           context,
+  //           CustomRouteNames.kOtpVerificationScreenRoute,
+  //         );
+  //       } else if (response.status == Status.error) {
+  //         Get.snackbar(
+  //           'Error',
+  //           response.message ?? 'Registration failed',
+  //           snackPosition: SnackPosition.BOTTOM,
+  //           backgroundColor: Colors.red,
+  //           colorText: Colors.white,
+  //         );
+  //       } else {
+  //         // Show error message
+  //         Get.snackbar(
+  //           'Error',
+  //           response.message ?? 'Registration failed',
+  //           snackPosition: SnackPosition.BOTTOM,
+  //           backgroundColor: Colors.red,
+  //           colorText: Colors.white,
+  //         );
+  //       }
+  //     } catch (e) {
+  //       ShowLoading(context).stopLoading();
 
-        // Show error message
-        Get.snackbar(
-          'Error',
-          'Registration failed: $e',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
-      }
-    }
-  }
-
-  getSnacsackBar([dynamic response, String? text = '', dynamic e]) {
-    Get.snackbar(
-      text !='' ? text! :
-      (response.data['status']) == true ? 'Success' : 'Error',
-      e ??
-          response.data['message'] ??
-          'sonething went wrong', //'Registration successful!',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor:
-          response.data['status'] == true ? Colors.green : Colors.red,
-      colorText: Colors.white,
-    );
-  }
+  //       // Show error message
+  //       Get.snackbar(
+  //         'Error',
+  //         'Registration failed: $e',
+  //         snackPosition: SnackPosition.BOTTOM,
+  //         backgroundColor: Colors.red,
+  //         colorText: Colors.white,
+  //       );
+  //     }
+  //   }
+  // }
 
   @override
   void onClose() {
@@ -269,39 +206,10 @@ class CreateNewAccountController extends GetxController {
     emailController.dispose();
     phoneNumberController.dispose();
     passwordController.dispose();
-
     fullNameFocusNode.dispose();
     emailFocusNode.dispose();
     phoneFocusNode.dispose();
     passwordFocusNode.dispose();
-
     super.onClose();
   }
 }
-
-// class CustomLoadingBar {
-//   static void showLoading({String message = 'Loading...'}) {
-//     Get.dialog(
-//       Dialog(
-//         backgroundColor: Colors.white,
-//         child: Padding(
-//           padding: const EdgeInsets.all(16.0),
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               const CircularProgressIndicator(),
-//               const SizedBox(height: 16),
-//               Text(message),
-//             ],
-//           ),
-//         ),
-//       ),
-//       barrierDismissible: false,
-//     );
-//   }
-//   static void hideLoading() {
-//     if (Get.isDialogOpen ?? false) {
-//       Get.back();
-//     }
-//   }
-// }

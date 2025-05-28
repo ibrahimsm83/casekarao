@@ -1,8 +1,7 @@
+import 'package:casekarao/utils/share_preference.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 
 
 class NetworkManagers extends GetxService {
@@ -30,12 +29,16 @@ class NetworkManagers extends GetxService {
 
     // Add interceptors
     _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
+      onRequest: (options, handler) async {
         //isLoading.value = true;
          EasyLoading.show(status: 'Logging...');
         
         // Add authorization token if needed
         // options.headers['Authorization'] = 'Bearer your_token';
+          //  final token = await SharedPreferences.getAuthToken();
+          // if (token != null && token.isNotEmpty) {
+          //   options.headers['Authorization'] = 'Bearer $token';
+          // }
         return handler.next(options);
       },
       onResponse: (response, handler) {
