@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'package:casekarao/controller/user_role_controller.dart';
 import 'package:casekarao/export_casekarao.dart';
 import 'package:casekarao/utils/toast_service.dart';
-import 'package:casekarao/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import '../model/auth_user_model.dart';
 import '../model/new_user_model.dart';
 import 'package:casekarao/core/network/network_managers.dart';
 
@@ -41,18 +38,6 @@ class OtpController extends GetxController {
     if (Get.arguments != null && Get.arguments is NewUser) {
       userData = Get.arguments as NewUser;
     }
-  }
-  
-  @override
-  void onClose() {
-    //textEditingController.dispose();
-    errorController?.close();
-    super.onClose();
-  }
-  
-  /// Handle OTP input changes (same as existing onChanged)
-  void onOtpChanged(String value) {
-    currentText = value;
   }
   
   /// Verify OTP (same as existing continue button logic)
@@ -102,7 +87,7 @@ class OtpController extends GetxController {
         GetToast.show("Error", responce: response);
       }
     } catch (e) {
-      GetToast.show("Error", e: e,);
+      //GetToast.show("Error", e: e,);
     }
     }
   }
@@ -127,6 +112,18 @@ class OtpController extends GetxController {
     } catch (e) {
       GetToast.show("Error", e: e,);
     }
+  }
+
+    @override
+  void onClose() {
+    //textEditingController.dispose();
+    errorController?.close();
+    super.onClose();
+  }
+  
+  /// Handle OTP input changes (same as existing onChanged)
+  void onOtpChanged(String value) {
+    currentText = value;
   }
   
   /// Navigate back

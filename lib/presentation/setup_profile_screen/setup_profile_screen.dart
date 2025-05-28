@@ -4,8 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../export_casekarao.dart';
 
 class SetupProfileScreen extends StatefulWidget {
-  final bool? isCompleteAllRequiredField;
-  const SetupProfileScreen({super.key, this.isCompleteAllRequiredField});
+  const SetupProfileScreen({super.key});
 
   @override
   State<SetupProfileScreen> createState() => _SetupProfileScreenState();
@@ -34,14 +33,14 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
     });
   }
 
-  @override
-  void initState() {
-    if (widget.isCompleteAllRequiredField ?? false) {
-      selectedItems = items;
-    }
+  // @override
+  // void initState() {
+  //   if (widget.isCompleteAllRequiredField ?? false) {
+  //     selectedItems = items;
+  //   }
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -97,12 +96,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                   String item = items[index];
                   bool isSelected = selectedItems.contains(item);
                   return ListTile(
-                    onTap:
-                        widget.isCompleteAllRequiredField ?? false
-                            ? () {}
-                            : () {
-                              toggleSelection(item);
-                            },
+                    onTap:(){},
                     // minTileHeight parameter removed as it's not supported in this Flutter version
                     tileColor: ColorManager.kWhiteColor,
                     title: Text(
@@ -152,17 +146,17 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
             button(
               text: AppStrings.saveAndContinue,
               onTap: () {
-                if (widget.isCompleteAllRequiredField ?? false) {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kApplicationUnderReviewScreenRoute,
-                  );
-                } else {
-                  Navigator.pushNamed(
-                    context,
-                    CustomRouteNames.kPersonalInformationScreenRoute,
-                  );
-                }
+                // if (widget.isCompleteAllRequiredField ?? false) {
+                //   Navigator.pushNamed(
+                //     context,
+                //     CustomRouteNames.kApplicationUnderReviewScreenRoute,
+                //   );
+                // } else {
+                //   Navigator.pushNamed(
+                //     context,
+                //     CustomRouteNames.kPersonalInformationScreenRoute,
+                //   );
+                // }
               },
             ),
             SizedBox(height: AppSize.s8.h),

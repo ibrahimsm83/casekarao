@@ -65,11 +65,12 @@ class CustomRouteGenerator {
           settings: settings, // Pass settings to allow GetX to access arguments
         );
       case CustomRouteNames.kSetupProfileScreenRoute:
-        final bool isCompleteAllRequiredFields = settings.arguments as bool;
+        //final bool isCompleteAllRequiredFields = settings.arguments as bool;
         return MaterialPageRoute(
           builder: (context) {
-            return SetupProfileScreen(isCompleteAllRequiredField: isCompleteAllRequiredFields,);
+            return SetupProfileScreen();
           },
+          settings: settings,
         );
       case CustomRouteNames.kPersonalInformationScreenRoute:
         return MaterialPageRoute(
