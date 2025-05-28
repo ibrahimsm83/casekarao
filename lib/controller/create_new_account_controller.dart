@@ -71,9 +71,7 @@ class CreateNewAccountController extends GetxController {
       'phone': phoneNumberController.text.trim(),
       'password': passwordController.text,
       'user_type':
-          isUserRoleController.isUser
-              ? 1
-              : 2, // 2 for lawyer, 1 for regular user
+          isUserRoleController.isUser? 1: 2, // 2 for lawyer, 1 for regular user
     };
     try {
       final response = await networkManager.postRequest(
@@ -90,10 +88,6 @@ class CreateNewAccountController extends GetxController {
             CustomRouteNames.kOtpVerificationScreenRoute,
             arguments: user,
           );
-
-        // await _apiService.saveAuthToken(response.data!.token);
-        // await _apiService.saveUserData(response.data!.toJson());
-
         // Show success message
         GetToast.show('Success', responce: response);
       } else {

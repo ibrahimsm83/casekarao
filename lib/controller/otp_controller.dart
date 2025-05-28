@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:casekarao/controller/user_role_controller.dart';
+import 'package:casekarao/export_casekarao.dart';
 import 'package:casekarao/utils/toast_service.dart';
 import 'package:casekarao/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import '../model/auth_user_model.dart';
 import '../model/new_user_model.dart';
 import 'package:casekarao/core/network/network_managers.dart';
 
@@ -51,7 +53,6 @@ class OtpController extends GetxController {
   /// Handle OTP input changes (same as existing onChanged)
   void onOtpChanged(String value) {
     currentText = value;
-    //update(); // Update UI
   }
   
   /// Verify OTP (same as existing continue button logic)
@@ -78,14 +79,18 @@ class OtpController extends GetxController {
       );
 
       if (response.data['status'] == true && response.data['data'] != null) {
-        // user = NewUser.fromJson(
-        //   response.data,
-        // ); // Pass response.data, not response
+        UserModel user = UserModel.fromJson(
+          response.data,
+        ); // Pass response.data, not response
 
           // Navigator.pushNamed(context,
           //   CustomRouteNames.kOtpVerificationScreenRoute,
           //   arguments: user,
           // );
+          Get.toNamed(
+            CustomRouteNames.kSetupProfileScreenRoute,
+            arguments: user,
+          );
 
         // await _apiService.saveAuthToken(response.data!.token);
         // await _apiService.saveUserData(response.data!.toJson());
@@ -99,11 +104,6 @@ class OtpController extends GetxController {
     } catch (e) {
       GetToast.show("Error", e: e,);
     }
-
-      // Get.toNamed(
-      //   CustomRouteNames.kSetupProfileScreenRoute,
-      //   arguments: false,
-      // );
     }
   }
   
