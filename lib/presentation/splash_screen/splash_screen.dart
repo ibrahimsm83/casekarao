@@ -1,5 +1,7 @@
+import 'package:casekarao/utils/share_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'dart:async';
 import '../resources/export_resources.dart';
@@ -19,13 +21,24 @@ class _SplashScreenState extends State<SplashScreen> {
     _timer = Timer(Duration(seconds: 4), _goNext);
   }
 
-  _goNext() {
+  _goNext() async {
     print("Splash screen");
-    Navigator.pushNamedAndRemoveUntil(
+    final currentUser = await SharedPreferencesHelper.getUser();
+    if (currentUser != null) {
+      Get.toNamed(CustomRouteNames.kDashboardScreenRoute);  
+    //  Navigator.pushNamedAndRemoveUntil(
+    //   context,
+    //   CustomRouteNames.kDashboardScreenRoute,
+    //   (page) => false,
+    // );
+    } else {
+      Navigator.pushNamedAndRemoveUntil(
       context,
       CustomRouteNames.kLetsGetStartedScreenRouteRoute,
       (page) => false,
     );
+    }
+    
   }
 
   @override
@@ -57,9 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   left: AppSize.sizeWidth(context) * 0.2,
                   right: AppSize.sizeWidth(context) * 0.2,
                 ),
-                child: Image.asset(
-                  ImageAssets.appLogo,
-                ),
+                child: Image.asset(ImageAssets.appLogo),
               ),
             ),
           ],

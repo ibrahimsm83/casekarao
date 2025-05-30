@@ -1,3 +1,4 @@
+import 'package:casekarao/utils/share_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -41,7 +42,10 @@ class _SettingsLawyerScreenState extends State<SettingsLawyerScreen> {
         leadingWidth: 0.0,
         actions: [
           InkWell(
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              SharedPreferencesHelper.clearAll();
+              Get.offAllNamed(CustomRouteNames.kLetsGetStartedScreenRouteRoute);
+            } ,
             child: Padding(
               padding: const EdgeInsets.only(right: 10.0, bottom: 5.0),
               child: Container(
