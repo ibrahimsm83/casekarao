@@ -75,7 +75,7 @@ class CreateNewAccountController extends GetxController {
     };
     try {
       final response = await networkManager.postRequest(
-        isUserRoleController.isUser ? '/user/register' : '/lawyer/register',
+        isUserRoleController.isUser ? '/client/register' : '/lawyer/register',
         data, // Convert model to JSON
       );
 

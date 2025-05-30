@@ -21,7 +21,8 @@ class SetupProfileController extends GetxController {
   List<String> selectedItems = [];
 
   // User data passed from previous screen
-  UserModel? userData = Get.arguments as UserModel?;
+  //late UserModel userData;
+  Rx<UserModel?> profileData = Rx<UserModel?>(null);
 
   // Check if all required fields are completed
   bool isCompleteAllRequiredFields = false;
@@ -29,10 +30,13 @@ class SetupProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    
+
     // Get user data from arguments
     if (Get.arguments != null && Get.arguments is UserModel) {
-      userData = Get.arguments as UserModel;
+      profileData.value = Get.arguments as UserModel;
+      // UserModel data = Get.arguments.copyWith();
+      //profileData.value = userData;
+      // profileData.value = data;
     }
 
     // Check if coming from completed profile

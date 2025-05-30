@@ -59,7 +59,7 @@ class OtpController extends GetxController {
     };
     try {
       final response = await networkManager.postRequest(
-        isUserRoleController.isUser ? '/user/verify-token' : '/lawyer/verify-token',
+        isUserRoleController.isUser ? '/client/verify-token' : '/lawyer/verify-token',
         data, // Convert model to JSON
       );
 
