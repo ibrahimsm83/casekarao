@@ -26,6 +26,9 @@ class SetupProfileController extends GetxController {
 
   // Check if all required fields are completed
   bool isCompleteAllRequiredFields = false;
+  String type = '';
+  //Optional Details ScreenRoute variable here
+    
 
   @override
   void onInit() {
@@ -67,27 +70,35 @@ class SetupProfileController extends GetxController {
   void navigateToSection(String item) {
     switch (item) {
       case AppStrings.personalInformation:
+        type = 'profile';
         Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
         break;
       case AppStrings.legalExperience:
+        type = 'legal';
         Get.toNamed(CustomRouteNames.kLegalExperienceScreenRoute);
         break;
       case AppStrings.educationAndCertifications:
+        type = 'education';
         Get.toNamed(CustomRouteNames.kEducationAndCertificationScreenRoute);
         break;
       case AppStrings.businessAndAvailability:
+        type = 'availability';
         Get.toNamed(CustomRouteNames.kBusinessAndAvailabilityScreenRoute);
         break;
       case AppStrings.governmentIssuedIDUpload:
+        type = 'gov_id';
         Get.toNamed(CustomRouteNames.kCNICUploadScreenRoute);
         break;
       case AppStrings.barIDCardUpload:
+        type = 'bar_id';
         Get.toNamed(CustomRouteNames.kBarIdCardUploadScreenRoute);
         break;
       case AppStrings.selfieForIdentityVerification:
+        type = 'selfie';
         Get.toNamed(CustomRouteNames.kIdentityVerificationScreenRoute);
         break;
       default:
+        type = 'optional';
         Get.toNamed(CustomRouteNames.kOptionalDetailsScreenRoute);
         break;
     }

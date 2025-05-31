@@ -11,11 +11,11 @@ class CreateNewAccountController extends GetxController {
   final NetworkManagers networkManager = Get.find();
   final isUserRoleController = Get.put(UserRoleController());
   NewUser? user; // Make it nullable to avoid LateInitializationError
-  final RxString errorMessage = RxString('');
+  // final RxString errorMessage = RxString('');
   // Getter to safely access user data
-  bool get isUserLoggedIn => user != null;
-  String? get userToken => user?.data.apiToken;
-  String? get userName => user?.data.name;
+  // bool get isUserLoggedIn => user != null;
+  // String? get userToken => user?.data.apiToken;
+  // String? get userName => user?.data.name;
 
   // API service
   //final ApiService _apiService = ApiService();

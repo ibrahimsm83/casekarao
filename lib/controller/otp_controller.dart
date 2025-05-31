@@ -64,6 +64,7 @@ class OtpController extends GetxController {
         );
 
         if (response.data['status'] == true && response.data['data'] != null) {
+          response.data['data']['isUser'] = isUserRoleController.isUser;
           UserModel user = UserModel.fromJson(
             response.data,
           ); // Pass response.data, not response

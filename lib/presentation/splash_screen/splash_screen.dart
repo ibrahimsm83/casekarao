@@ -1,6 +1,7 @@
+import 'package:casekarao/controller/user_role_controller.dart';
 import 'package:casekarao/utils/share_preference.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'dart:async';
@@ -15,6 +16,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final GlobalKey<ScaffoldState> screenKey = GlobalKey<ScaffoldState>();
+  final isUserRoleController = Get.put(UserRoleController());
   Timer? _timer;
 
   _startDelay() {
@@ -25,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     print("Splash screen");
     final currentUser = await SharedPreferencesHelper.getUser();
     if (currentUser != null) {
+      isUserRoleController.isUser = currentUser.data.isUser;
       Get.toNamed(CustomRouteNames.kDashboardScreenRoute);  
     //  Navigator.pushNamedAndRemoveUntil(
     //   context,

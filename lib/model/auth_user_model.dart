@@ -79,6 +79,7 @@ class Data {
     final String createdAt;
     final String updatedAt;
     final dynamic deletedAt;
+    final bool isUser;
 
     Data({
         required this.id,
@@ -125,6 +126,7 @@ class Data {
         required this.createdAt,
         required this.updatedAt,
         required this.deletedAt,
+        required this.isUser,
     });
 
     factory Data.fromJson(Map<String, dynamic> json) {
@@ -173,6 +175,7 @@ class Data {
             createdAt: json['created_at'] ?? '',
             updatedAt: json['updated_at'] ?? '',
             deletedAt: json['deleted_at'],
+            isUser: json['isUser'] ?? false,
         );
     }
 
@@ -222,6 +225,7 @@ class Data {
             'created_at': createdAt,
             'updated_at': updatedAt,
             'deleted_at': deletedAt,
+            'isUser': isUser,
         };
     }
 }
