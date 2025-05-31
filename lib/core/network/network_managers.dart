@@ -3,12 +3,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
-
 class NetworkManagers extends GetxService {
   late Dio _dio;
   //final RxBool isLoading = false.obs;
   static const String baseUrl = 'https://staging.casekarao.com/api';
-  // static const String _baseUrl = 'https://staging.casekarao.com/api';
   static const int _timeout = 30000; // 30 seconds
   //  BuildContext? get safeContext => Get.context!.mounted 
   //     ? Get.context 
@@ -35,10 +33,10 @@ class NetworkManagers extends GetxService {
         
         // Add authorization token if needed
         // options.headers['Authorization'] = 'Bearer your_token';
-          //  final token = await SharedPreferences.getAuthToken();
-          // if (token != null && token.isNotEmpty) {
-          //   options.headers['Authorization'] = 'Bearer $token';
-          // }
+           final token = await SharedPreferencesHelper.getAuthToken();
+          if (token != null && token.isNotEmpty) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
         return handler.next(options);
       },
       onResponse: (response, handler) {
@@ -139,82 +137,3 @@ class NetworkManagers extends GetxService {
     super.onClose();
   }
 }
-
-
-
-// class LoaderWidget extends StatelessWidget {
-//   final String? message;
-//   final bool isCupertinoStyle;
-//   final Color? color;
-//   final double strokeWidth;
-
-//   const LoaderWidget({
-//     super.key,
-//     this.message,
-//     this.isCupertinoStyle = false,
-//     this.color,
-//     this.strokeWidth = 4.0,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Dialog(
-//       backgroundColor: Colors.transparent,
-//       elevation: 0,
-//       child: Center(
-//         child: Container(
-//           padding: const EdgeInsets.all(20),
-//           decoration: BoxDecoration(
-//             color: Colors.white,
-//             borderRadius: BorderRadius.circular(10),
-//           ),
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               isCupertinoStyle
-//                   ? const CupertinoActivityIndicator(radius: 16)
-//                   : CircularProgressIndicator(
-//                       strokeWidth: strokeWidth,
-//                       valueColor: AlwaysStoppedAnimation<Color>(
-//                         color ?? Get.theme.primaryColor,
-//                       ),
-//                     ),
-//               if (message != null)
-//                 Padding(
-//                   padding: const EdgeInsets.only(top: 16),
-//                   child: Text(
-//                     message!,
-//                     style: const TextStyle(fontSize: 16),
-//                   ),
-//                 ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class LoadingDialog {
-//   static void show({
-//     String? message,
-//     bool isCupertinoStyle = false,
-//     Color? color,
-//     double strokeWidth = 4.0,
-//   }) {
-//     Get.dialog(
-//       LoaderWidget(
-//         message: message,
-//         isCupertinoStyle: isCupertinoStyle,
-//         color: color,
-//         strokeWidth: strokeWidth,
-//       ),
-//       barrierDismissible: false,
-//       useSafeArea: true,
-//     );
-//   }
-
-//   static void dismiss() {
-//     if (Get.isDialogOpen == true) Get.back();
-//   }
-// }
