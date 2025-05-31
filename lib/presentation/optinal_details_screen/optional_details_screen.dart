@@ -1,6 +1,8 @@
+import 'package:casekarao/controller/setup_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import '../../export_casekarao.dart';
 
 class OptionalDetailsScreen extends StatefulWidget {
@@ -122,10 +124,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                   text: AppStrings.submit,
                   onTap: () {
                     if (!_formKey.currentState!.validate()) {
-                      Navigator.pushNamed(
-                        context,
-                        CustomRouteNames.kCNICUploadScreenRoute,
-                      );
+                      Get.find<SetupProfileController>().optionalDetails(_bioController.text, selectedType!);
                     }
                   },
                 ),

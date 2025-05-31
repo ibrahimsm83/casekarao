@@ -56,7 +56,7 @@ class LoginController extends GetxController {
         response.data['data']['isUser'] = isUserRoleController.isUser;
         UserModel user = UserModel.fromJson(response.data);
 
-        SharedPreferencesHelper.saveAuthToken(user.apiToken);
+        SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
         SharedPreferencesHelper.saveUser(user);
         SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 

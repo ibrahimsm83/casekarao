@@ -44,30 +44,8 @@ class SetupProfileController extends GetxController {
     // Get user data from arguments
     if (Get.arguments != null && Get.arguments is UserModel) {
       profileData.value = Get.arguments as UserModel;
-      // UserModel data = Get.arguments.copyWith();
-      //profileData.value = userData;
-      // profileData.value = data;
     }
-
-    // Check if coming from completed profile
-    // if (Get.arguments != null && Get.arguments is bool) {
-    //   isCompleteAllRequiredFields = Get.arguments as bool;
-    //   if (isCompleteAllRequiredFields) {
-    //     selectedItems = List.from(items); // Select all items
-    //   }
-    // }
   }
-
-  /// Toggle selection of profile setup item (same as existing)
-  // void toggleSelection(String item) {
-  //   if (selectedItems.contains(item)) {
-  //     selectedItems.remove(item);
-  //   } else {
-  //     selectedItems.add(item);
-  //   }
-  //   update(); // Update UI
-  // }
-
   /// Check if item is selected
   bool isSelected(String item) {
     return selectedItems.contains(item);
@@ -111,17 +89,13 @@ class SetupProfileController extends GetxController {
     }
   }
 
-  Future<void> optionalDetails() async {
+  Future<void> optionalDetails( String bio, String languages) async {
     final data = {
-        'bio': 'bio',
-        'languages': 'languages',
+        'bio':bio,
+        'languages':languages,
         'type': type,
-        'api_token': profileData.value!.apiToken,
+        // 'api_token': profileData.value!.apiToken,
       };
-      // final data = {
-      //   'otp_token': textEditingController.text.trim(),
-      //   'api_token': userData!.apiToken,
-      // };
       try {
         final response = await networkManager.postRequest(
           isUserRoleController.isUser
@@ -135,21 +109,22 @@ class SetupProfileController extends GetxController {
           UserModel user = UserModel.fromJson(
             response.data,
           ); // Pass response.data, not response
-
-          SharedPreferencesHelper.saveAuthToken(user.apiToken);
+          profileData.value = user;
+          SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
           SharedPreferencesHelper.saveUser(user);
           SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 
-          if (isUserRoleController.isUser) {
-            Get.toNamed(CustomRouteNames.kDashboardScreenRoute);
-          } else {
-            Get.toNamed(
-              CustomRouteNames.kSetupProfileScreenRoute,
-              arguments: user,
-            );
-          }
+          // if (isUserRoleController.isUser) {
+          //   Get.toNamed(CustomRouteNames.kDashboardScreenRoute);
+          // } else {
+          //   Get.toNamed(
+          //     CustomRouteNames.kSetupProfileScreenRoute,
+          //     arguments: user,
+          //   );
+          // }
           // Show success message
           GetToast.show('Success', responce: response);
+          update();
         } else {
           // Handle API error response
           GetToast.show("Error", responce: response);

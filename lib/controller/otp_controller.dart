@@ -69,7 +69,7 @@ class OtpController extends GetxController {
             response.data,
           ); // Pass response.data, not response
 
-          SharedPreferencesHelper.saveAuthToken(user.apiToken);
+          SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
           SharedPreferencesHelper.saveUser(user);
           SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 

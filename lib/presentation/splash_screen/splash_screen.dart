@@ -24,24 +24,28 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goNext() async {
-    print("Splash screen");
     final currentUser = await SharedPreferencesHelper.getUser();
     if (currentUser != null) {
       isUserRoleController.isUser = currentUser.data.isUser;
-      Get.toNamed(CustomRouteNames.kDashboardScreenRoute);  
-    //  Navigator.pushNamedAndRemoveUntil(
-    //   context,
-    //   CustomRouteNames.kDashboardScreenRoute,
-    //   (page) => false,
-    // );
+      if (currentUser.data.isUser) {
+        Get.toNamed(CustomRouteNames.kDashboardScreenRoute);
+      } else {
+        if (currentUser.data.isProfileCompleted == 0) {
+          Get.toNamed(
+            CustomRouteNames.kSetupProfileScreenRoute,
+            arguments: currentUser,
+          );
+        } else {
+          Get.toNamed(CustomRouteNames.kDashboardScreenRoute);
+        }
+      }
     } else {
       Navigator.pushNamedAndRemoveUntil(
-      context,
-      CustomRouteNames.kLetsGetStartedScreenRouteRoute,
-      (page) => false,
-    );
+        context,
+        CustomRouteNames.kLetsGetStartedScreenRouteRoute,
+        (page) => false,
+      );
     }
-    
   }
 
   @override

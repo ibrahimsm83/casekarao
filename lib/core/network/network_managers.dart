@@ -32,10 +32,10 @@ class NetworkManagers extends GetxService {
          EasyLoading.show(status: 'Logging...');
         
         // Add authorization token if needed
-        // options.headers['Authorization'] = 'Bearer your_token';
-           final token = await SharedPreferencesHelper.getAuthToken();
+        final token = await SharedPreferencesHelper.getAuthToken();
           if (token != null && token.isNotEmpty) {
             options.headers['Authorization'] = 'Bearer $token';
+            //print('Bearer $token'); 
           }
         return handler.next(options);
       },
