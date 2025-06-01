@@ -1,12 +1,13 @@
 import 'package:casekarao/utils/share_preference.dart';
 import 'package:casekarao/utils/toast_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../core/network/network_managers.dart';
 import '../export_casekarao.dart';
 
 class SetupProfileController extends GetxController {
-    final isUserRoleController = Get.put(UserRoleController());
-    final NetworkManagers networkManager = Get.find();
+  final isUserRoleController = Get.put(UserRoleController());
+  final NetworkManagers networkManager = Get.find();
   // Profile setup items (same as existing)
   List<String> items = [
     AppStrings.personalInformation,
@@ -30,17 +31,18 @@ class SetupProfileController extends GetxController {
   bool isCompleteAllRequiredFields = false;
   String type = '';
   //Optional Details ScreenRoute variable here
-    
+  final bioController = TextEditingController();
+  String? selectedType;
 
   @override
   void onInit() {
     super.onInit();
-
     // Get user data from arguments
     if (Get.arguments != null && Get.arguments is UserModel) {
       profileData.value = Get.arguments as UserModel;
     }
   }
+
   /// Check if item is selected
   bool isSelected(String item) {
     return selectedItems.contains(item);
@@ -79,54 +81,56 @@ class SetupProfileController extends GetxController {
         break;
       default:
         type = 'optional';
+        bioController.text = profileData.value!.data.bio;
+        selectedType =  profileData.value!.data.languages;
         Get.toNamed(CustomRouteNames.kOptionalDetailsScreenRoute);
         break;
     }
   }
 
-  Future<void> optionalDetails( String bio, String languages) async {
+  Future<void> optionalDetails() async {
     final data = {
-        'bio':bio,
-        'languages':languages,
-        'type': type,
-        // 'api_token': profileData.value!.apiToken,
-      };
-      try {
-        final response = await networkManager.postRequest(
-          isUserRoleController.isUser
-              ? '/client/setup-profile'
-              : '/lawyer/setup-profile',
-          data, // Convert model to JSON
-        );
+      'bio': bioController.text,
+      'languages': selectedType,
+      'type': type,
+      // 'api_token': profileData.value!.apiToken,
+    };
+    try {
+      final response = await networkManager.postRequest(
+        isUserRoleController.isUser
+            ? '/client/setup-profile'
+            : '/lawyer/setup-profile',
+        data, // Convert model to JSON
+      );
 
-        if (response.data['status'] == true && response.data['data'] != null) {
-          response.data['data']['isUser'] = isUserRoleController.isUser;
-          UserModel user = UserModel.fromJson(
-            response.data,
-          ); // Pass response.data, not response
-          profileData.value = user;
-          SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
-          SharedPreferencesHelper.saveUser(user);
-          SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
+      if (response.data['status'] == true && response.data['data'] != null) {
+        response.data['data']['isUser'] = isUserRoleController.isUser;
+        UserModel user = UserModel.fromJson(
+          response.data,
+        ); // Pass response.data, not response
+        profileData.value = user;
+        SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
+        SharedPreferencesHelper.saveUser(user);
+        SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 
-          // if (isUserRoleController.isUser) {
-          //   Get.toNamed(CustomRouteNames.kDashboardScreenRoute);
-          // } else {
-          //   Get.toNamed(
-          //     CustomRouteNames.kSetupProfileScreenRoute,
-          //     arguments: user,
-          //   );
-          // }
-          // Show success message
-          GetToast.show('Success', responce: response);
-          update();
-        } else {
-          // Handle API error response
-          GetToast.show("Error", responce: response);
-        }
-      } catch (e) {
-        GetToast.show("Error", e: e,);
+        // if (isUserRoleController.isUser) {
+        //   Get.toNamed(CustomRouteNames.kDashboardScreenRoute);
+        // } else {
+        //   Get.toNamed(
+        //     CustomRouteNames.kSetupProfileScreenRoute,
+        //     arguments: user,
+        //   );
+        // }
+        // Show success message
+        GetToast.show('Success', responce: response);
+        update();
+      } else {
+        // Handle API error response
+        GetToast.show("Error", responce: response);
       }
+    } catch (e) {
+      GetToast.show("Error", e: e);
+    }
   }
 
   /// Save and continue to next step

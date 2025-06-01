@@ -15,8 +15,6 @@ class OptionalDetailsScreen extends StatefulWidget {
 class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
   final _formKey = GlobalKey<FormState>();
   FocusNode node1 = FocusNode();
-  final _bioController = TextEditingController();
-  String? selectedType;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
           key: _formKey,
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: AppSize.sizeWidth(context!) * 0.05,
+              horizontal: AppSize.sizeWidth(context) * 0.05,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +81,8 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                   children: [
                     CustomTextFormField(
                       hintText: AppStrings.exTellUsMoreAboutYourself,
-                      controller: _bioController,
+                      controller:
+                          Get.find<SetupProfileController>().bioController,
                       fillColor: ColorManager.kWhiteColor,
                       maxLines: 6,
                       focusNode: node1,
@@ -97,7 +96,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                         if (val == null || val.isEmpty) {
                           return "Enter Bio";
                         }
-                        if (val.length < 501) {
+                        if (val.length > 500) {
                           return "Bio cannot exceed 500 characters";
                         }
                         return null;
@@ -107,7 +106,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                       right: 15,
                       bottom: 10,
                       child: Text(
-                        "${_bioController.text.length}/500",
+                        "${Get.find<SetupProfileController>().bioController.text.length}/500",
                         style: getRegularStyle(
                           color: ColorManager.kGreyColor,
                           fontSize: ScreenUtil().setSp(AppSize.s12),
@@ -123,8 +122,8 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                 button(
                   text: AppStrings.submit,
                   onTap: () {
-                    if (!_formKey.currentState!.validate()) {
-                      Get.find<SetupProfileController>().optionalDetails(_bioController.text, selectedType!);
+                    if (_formKey.currentState!.validate()) {
+                      Get.find<SetupProfileController>().optionalDetails();
                     }
                   },
                 ),
@@ -189,7 +188,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
       child: SizedBox(
         height: 45,
         child: DropdownButtonFormField<String>(
-          value: selectedType,
+          value: Get.find<SetupProfileController>().selectedType,
           style: getRegularStyle(color: ColorManager.primary),
           dropdownColor: ColorManager.kWhiteColor,
           icon: Padding(
@@ -209,7 +208,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
           ),
           onChanged: (String? newValue) {
             setState(() {
-              selectedType = newValue;
+                Get.find<SetupProfileController>().selectedType =newValue;
             });
           },
           items:
