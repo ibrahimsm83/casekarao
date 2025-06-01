@@ -1,6 +1,7 @@
 import 'package:casekarao/utils/share_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:get/get.dart';
 
 class NetworkManagers extends GetxService {
@@ -21,6 +22,18 @@ class NetworkManagers extends GetxService {
         'Accept': 'application/json',
       },
     ));
+
+      // Add logging interceptor
+    _dio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+      ),
+    );
 
     // Add interceptors
     _dio.interceptors.add(InterceptorsWrapper(
