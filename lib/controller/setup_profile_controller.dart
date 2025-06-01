@@ -62,6 +62,25 @@ class SetupProfileController extends GetxController {
   Rx<File?> profileImage = Rx<File?>(null);
   RxString profileImageUrl = RxString('');
 
+  // Legal Experience form controllers
+  final barLicenseNumberController = TextEditingController();
+  final organizationNameController = TextEditingController();
+  final yearsOfExpController = TextEditingController();
+  final practiceAreasController = TextEditingController();
+
+  // Legal Experience focus nodes
+  final barLicenseNumberFocusNode = FocusNode();
+  final organizationNameFocusNode = FocusNode();
+  final yearsOfExpFocusNode = FocusNode();
+  final practiceAreasFocusNode = FocusNode();
+
+  // Legal Experience form key
+  final legalExperienceFormKey = GlobalKey<FormState>();
+
+  // Legal Experience data
+  RxString selectedJurisdiction = RxString('');
+  RxList<String> practiceAreas = <String>["Criminal Law", "Family Law"].obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -70,18 +89,6 @@ class SetupProfileController extends GetxController {
       profileData.value = Get.arguments as UserModel;
       _populatePersonalInfoFields();
     }
-
-    // // Add phone number formatting listener
-    // phoneNumberFocusNode.addListener(() {
-    //   if (!phoneNumberFocusNode.hasFocus) {
-    //     formatPhoneNumber();
-    //   }
-    // });
-  }
-
-  /// Check if item is selected
-  bool isSelected(String item) {
-    return selectedItems.contains(item);
   }
 
   /// Navigate to specific profile section
@@ -93,6 +100,11 @@ class SetupProfileController extends GetxController {
         break;
       case AppStrings.legalExperience:
         type = 'legal';
+        //practiceAreas = "Criminal Law, Family Law".toList().obs;//profileData.value!.data.practices ?? "";
+        selectedJurisdiction.value = profileData.value!.data.practiceState;
+        barLicenseNumberController.text = profileData.value!.data.barLicenseNo;
+        organizationNameController.text = profileData.value!.data.organization;
+        yearsOfExpController.text = profileData.value!.data.experience;
         Get.toNamed(CustomRouteNames.kLegalExperienceScreenRoute);
         break;
       case AppStrings.educationAndCertifications:
@@ -311,6 +323,67 @@ class SetupProfileController extends GetxController {
     }
   }
 
+  /// Add practice area
+  void addPracticeArea(String area) {
+    final text = area.trim();
+    if (text.isNotEmpty && !practiceAreas.contains(text)) {
+      practiceAreas.add(text);
+      practiceAreasController.clear();
+      update();
+    }
+  }
+
+  /// Remove practice area
+  void removePracticeArea(String area) {
+    practiceAreas.removeWhere((item) => item == area);
+    update();
+  }
+
+  /// Submit legal experience
+  Future<void> submitLegalExperience() async {
+    if (!legalExperienceFormKey.currentState!.validate()) {
+      return;
+    }
+
+    final data = {
+      'practices': practiceAreas.join(', '),
+      'bar_license_no': barLicenseNumberController.text.trim(),
+      'practice_state': selectedJurisdiction.value,
+      'experience': yearsOfExpController.text.trim(),
+      'organization': organizationNameController.text.trim(),
+      'type': 'legal',
+    };
+
+    try {
+      final response = await networkManager.postRequest(
+        isUserRoleController.isUser
+            ? '/client/setup-profile'
+            : '/lawyer/setup-profile',
+        data,
+      );
+
+      if (response.data['status'] == true && response.data['data'] != null) {
+        response.data['data']['isUser'] = isUserRoleController.isUser;
+        UserModel user = UserModel.fromJson(response.data);
+        profileData.value = user;
+
+        SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
+        SharedPreferencesHelper.saveUser(user);
+        SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
+
+        GetToast.show('Success', responce: response);
+
+        // Navigate back to setup profile screen
+        Get.back();
+        update();
+      } else {
+        GetToast.show("Error", responce: response);
+      }
+    } catch (e) {
+      GetToast.show("Error", e: e);
+    }
+  }
+
   /// Navigate back
   void goBack() {
     Get.back();
@@ -327,6 +400,12 @@ class SetupProfileController extends GetxController {
     yearController.dispose();
     bioController.dispose();
 
+    // Dispose legal experience controllers
+    barLicenseNumberController.dispose();
+    organizationNameController.dispose();
+    yearsOfExpController.dispose();
+    practiceAreasController.dispose();
+
     // Dispose personal information focus nodes
     fullNameFocusNode.dispose();
     emailFocusNode.dispose();
@@ -334,6 +413,12 @@ class SetupProfileController extends GetxController {
     dateFocusNode.dispose();
     monthFocusNode.dispose();
     yearFocusNode.dispose();
+
+    // Dispose legal experience focus nodes
+    barLicenseNumberFocusNode.dispose();
+    organizationNameFocusNode.dispose();
+    yearsOfExpFocusNode.dispose();
+    practiceAreasFocusNode.dispose();
 
     super.onClose();
   }
