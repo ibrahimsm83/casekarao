@@ -12,7 +12,6 @@ import 'package:casekarao/core/network/network_managers.dart';
 //  import '../utils/custom_snacks_bar.dart';
 
 class OtpController extends GetxController {
-  // Text controller for OTP input (same as existing)
   final TextEditingController textEditingController = TextEditingController();
   final isUserRoleController = Get.put(UserRoleController());
   final NetworkManagers networkManager = Get.find();

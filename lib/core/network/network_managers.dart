@@ -5,12 +5,9 @@ import 'package:get/get.dart';
 
 class NetworkManagers extends GetxService {
   late Dio _dio;
-  //final RxBool isLoading = false.obs;
   static const String baseUrl = 'https://staging.casekarao.com/api';
   static const int _timeout = 30000; // 30 seconds
-  //  BuildContext? get safeContext => Get.context!.mounted 
-  //     ? Get.context 
-  //     : Get.overlayContext;
+
 
   void _initializeDio() {
     _dio = Dio(BaseOptions(
