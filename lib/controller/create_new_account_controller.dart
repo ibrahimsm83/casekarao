@@ -4,18 +4,11 @@ import 'package:casekarao/model/new_user_model.dart';
 import 'package:casekarao/utils/toast_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import '../core/network/api_service.dart';
-// import 'user_role_controller.dart';
 
 class CreateNewAccountController extends GetxController {
   final NetworkManagers networkManager = Get.find();
   final isUserRoleController = Get.put(UserRoleController());
-  NewUser? user; // Make it nullable to avoid LateInitializationError
-  // final RxString errorMessage = RxString('');
-  // Getter to safely access user data
-  // bool get isUserLoggedIn => user != null;
-  // String? get userToken => user?.data.apiToken;
-  // String? get userName => user?.data.name;
+  NewUser? user;
 
   // API service
   //final ApiService _apiService = ApiService();

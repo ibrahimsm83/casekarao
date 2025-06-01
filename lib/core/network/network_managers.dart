@@ -28,24 +28,20 @@ class NetworkManagers extends GetxService {
     // Add interceptors
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
-        //isLoading.value = true;
          EasyLoading.show(status: 'Logging...');
         
         // Add authorization token if needed
         final token = await SharedPreferencesHelper.getAuthToken();
           if (token != null && token.isNotEmpty) {
             options.headers['Authorization'] = 'Bearer $token';
-            //print('Bearer $token'); 
           }
         return handler.next(options);
       },
       onResponse: (response, handler) {
-        //isLoading.value = false;
         EasyLoading.dismiss();
         return handler.next(response);
       },
       onError: (DioException error, handler) {
-        //isLoading.value = false;
          EasyLoading.dismiss();
         return handler.next(error);
       },

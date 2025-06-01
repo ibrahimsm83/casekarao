@@ -1,12 +1,7 @@
-// import 'package:casekarao/core/network/network_managers.dart';  
-// import 'package:casekarao/controller/user_role_controller.dart';
 import 'package:casekarao/utils/share_preference.dart';
 import 'package:casekarao/utils/toast_service.dart';
 import 'package:get/get.dart';
 import '../core/network/network_managers.dart';
-// import 'create_new_account_controller.dart';
-// import '../model/auth_user_model.dart';
-// import '../presentation/resources/route_management/custom_route_name.dart';
 import '../export_casekarao.dart';
 
 class SetupProfileController extends GetxController {
