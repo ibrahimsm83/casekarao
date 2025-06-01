@@ -30,9 +30,29 @@ class SetupProfileController extends GetxController {
   // Check if all required fields are completed
   bool isCompleteAllRequiredFields = false;
   String type = '';
+
   //Optional Details ScreenRoute variable here
   final bioController = TextEditingController();
   String? selectedType;
+
+  // Personal Information form controllers
+  final fullNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final dateController = TextEditingController();
+  final monthController = TextEditingController();
+  final yearController = TextEditingController();
+
+  // Personal Information focus nodes
+  final fullNameFocusNode = FocusNode();
+  final emailFocusNode = FocusNode();
+  final phoneNumberFocusNode = FocusNode();
+  final dateFocusNode = FocusNode();
+  final monthFocusNode = FocusNode();
+  final yearFocusNode = FocusNode();
+
+  // Personal Information form key
+  final personalInfoFormKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
@@ -52,6 +72,7 @@ class SetupProfileController extends GetxController {
   void navigateToSection(String item) {
     switch (item) {
       case AppStrings.personalInformation:
+        _populatePersonalInfoFields();
         type = 'profile';
         Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
         break;
@@ -88,12 +109,63 @@ class SetupProfileController extends GetxController {
     }
   }
 
+  /// Submit personal information
+  Future<void> submitPersonalInfo() async {
+    if (!personalInfoFormKey.currentState!.validate()) {
+      return;
+    }
+
+    // Format date of birth
+    String dob = '';
+    if (dateController.text.isNotEmpty &&
+        monthController.text.isNotEmpty &&
+        yearController.text.isNotEmpty) {
+      dob = '${yearController.text}-${monthController.text.padLeft(2, '0')}-${dateController.text.padLeft(2, '0')}';
+    }
+
+    final data = {
+      'name': fullNameController.text.trim(),
+      'email': emailController.text.trim(),
+      'phone': phoneNumberController.text.trim(),
+      'dob': dob,
+      'type': 'profile',
+    };
+
+    try {
+      final response = await networkManager.postRequest(
+        isUserRoleController.isUser
+            ? '/client/setup-profile'
+            : '/lawyer/setup-profile',
+        data,
+      );
+
+      if (response.data['status'] == true && response.data['data'] != null) {
+        response.data['data']['isUser'] = isUserRoleController.isUser;
+        UserModel user = UserModel.fromJson(response.data);
+        profileData.value = user;
+
+        SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
+        SharedPreferencesHelper.saveUser(user);
+        SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
+
+        GetToast.show('Success', responce: response);
+
+        // Navigate back to setup profile screen
+        Get.back();
+        update();
+      } else {
+        GetToast.show("Error", responce: response);
+      }
+    } catch (e) {
+      GetToast.show("Error", e: e);
+    }
+  }
+
   Future<void> optionalDetails() async {
     final data = {
       'bio': bioController.text,
       'languages': selectedType,
       'type': type,
-      // 'api_token': profileData.value!.apiToken,
     };
     try {
       final response = await networkManager.postRequest(
@@ -113,14 +185,6 @@ class SetupProfileController extends GetxController {
         SharedPreferencesHelper.saveUser(user);
         SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 
-        // if (isUserRoleController.isUser) {
-        //   Get.toNamed(CustomRouteNames.kDashboardScreenRoute);
-        // } else {
-        //   Get.toNamed(
-        //     CustomRouteNames.kSetupProfileScreenRoute,
-        //     arguments: user,
-        //   );
-        // }
         // Show success message
         GetToast.show('Success', responce: response);
         update();
@@ -144,34 +208,49 @@ class SetupProfileController extends GetxController {
     }
   }
 
+  /// Populate personal information fields from user data
+  void _populatePersonalInfoFields() {
+    if (profileData.value != null) {
+      fullNameController.text = profileData.value!.data.name;
+      emailController.text = profileData.value!.data.email;
+      phoneNumberController.text = profileData.value!.data.phone;
+
+      // Parse date of birth if available
+      if (profileData.value!.data.dob != null && profileData.value!.data.dob.toString().isNotEmpty) {
+        final dobParts = profileData.value!.data.dob.toString().split('-');
+        if (dobParts.length == 3) {
+          yearController.text = dobParts[0];
+          monthController.text = dobParts[1];
+          dateController.text = dobParts[2];
+        }
+      }
+    }
+  }
+
   /// Navigate back
   void goBack() {
     Get.back();
   }
 
-  /// Get completion status message
-  // String get completionMessage {
-  //   if (selectedItems.isEmpty) {
-  //     return "Select profile sections to complete";
-  //   } else if (selectedItems.length == items.length) {
-  //     return "All sections completed! Ready for review.";
-  //   } else {
-  //     return "${selectedItems.length}/${items.length} sections completed";
-  //   }
-  // }
+  @override
+  void onClose() {
+    // Dispose personal information controllers
+    fullNameController.dispose();
+    emailController.dispose();
+    phoneNumberController.dispose();
+    dateController.dispose();
+    monthController.dispose();
+    yearController.dispose();
+    bioController.dispose();
 
-  // /// Check if user can proceed
-  // bool get canProceed {
-  //   return selectedItems.isNotEmpty;
-  // }
+    // Dispose personal information focus nodes
+    fullNameFocusNode.dispose();
+    emailFocusNode.dispose();
+    phoneNumberFocusNode.dispose();
+    dateFocusNode.dispose();
+    monthFocusNode.dispose();
+    yearFocusNode.dispose();
 
-  // /// Get user name for display
-  // String get userName {
-  //   return userData?.data.name ?? 'User';
-  // }
-
-  // /// Get user email for display
-  // String get userEmail {
-  //   return userData?.data.email ?? '';
-  // }
+    super.onClose();
+  }
 }

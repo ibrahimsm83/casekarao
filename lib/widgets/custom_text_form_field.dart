@@ -1,7 +1,5 @@
-import 'dart:ffi';
-
+// import 'dart:ffi';
 import 'package:flutter/material.dart';
-
 import '../export_casekarao.dart';
 
 // ignore: must_be_immutable
@@ -22,6 +20,7 @@ class CustomTextFormField extends StatefulWidget {
   void Function(String)? onSubmitted;
   void Function()? onTextFiledTap;
   String? Function(String?)? validator;
+  bool? enabled;
 
   CustomTextFormField({
     Key? key,
@@ -40,7 +39,7 @@ class CustomTextFormField extends StatefulWidget {
     this.horizontalMergin = 0.05,
     this.textAlign = TextAlign.start,
     this.controller,
-    this.obscureText = false,
+    this.obscureText = false, bool enabled =true,
   }) : super(key: key);
 
   @override
@@ -63,6 +62,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         horizontal: AppSize.sizeWidth(context) * widget.horizontalMergin,
       ),
       child: TextFormField(
+        enabled: widget.enabled,
         textAlign: widget.textAlign,
         readOnly: widget.readOnly,
         onTap: widget.onTextFiledTap,
