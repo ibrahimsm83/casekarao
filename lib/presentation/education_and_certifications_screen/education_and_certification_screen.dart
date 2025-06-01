@@ -1,44 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import '../../export_casekarao.dart';
+import '../../controller/setup_profile_controller.dart';
 
-class EducationAndCertificationScreen extends StatefulWidget {
+class EducationAndCertificationScreen extends StatelessWidget {
   const EducationAndCertificationScreen({super.key});
 
   @override
-  State<EducationAndCertificationScreen> createState() => _EducationAndCertificationScreenState();
-}
-
-class _EducationAndCertificationScreenState extends State<EducationAndCertificationScreen> {
-  final _formKey = GlobalKey<FormState>();
-  FocusNode node1 = FocusNode();
-  FocusNode node2 = FocusNode();
-  FocusNode node3 = FocusNode();
-  FocusNode node4 = FocusNode();
-
-  final _lawSchoolAttendedController = TextEditingController();
-  final _degreeController = TextEditingController();
-  final _yearsOfGraduationController = TextEditingController();
-  final _additionalCertificateController = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.kBackgroundColor,
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSize.sizeWidth(context!) * 0.05,
-            ),
+    return GetBuilder<SetupProfileController>(
+      init: SetupProfileController(),
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: ColorManager.kBackgroundColor,
+          body: SingleChildScrollView(
+            child: Form(
+              key: controller.educationFormKey,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSize.sizeWidth(context) * 0.05,
+                ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: AppSize.sizeHeight(context) * 0.05),
                 InkWell(
-                  onTap: () => Navigator.pop(context),
+                  onTap: controller.goBack,
                   child: Container(
                     height: 44.h,
                     width: 44.h,
@@ -85,9 +74,9 @@ class _EducationAndCertificationScreenState extends State<EducationAndCertificat
                 ),
                 CustomTextFormField(
                   hintText: AppStrings.exLawSchool,
-                  controller: _lawSchoolAttendedController,
+                  controller: controller.lawSchoolController,
                   fillColor: ColorManager.kWhiteColor,
-                  focusNode: node1,
+                  focusNode: controller.lawSchoolFocusNode,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
@@ -112,9 +101,9 @@ class _EducationAndCertificationScreenState extends State<EducationAndCertificat
 
                 CustomTextFormField(
                   hintText: AppStrings.exLaw,
-                  controller: _degreeController,
+                  controller: controller.degreeController,
                   fillColor: ColorManager.kWhiteColor,
-                  focusNode: node2,
+                  focusNode: controller.degreeFocusNode,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
@@ -140,9 +129,9 @@ class _EducationAndCertificationScreenState extends State<EducationAndCertificat
 
                 CustomTextFormField(
                   hintText: AppStrings.ex2012,
-                  controller: _yearsOfGraduationController,
+                  controller: controller.graduationYearController,
                   fillColor: ColorManager.kWhiteColor,
-                  focusNode: node3,
+                  focusNode: controller.graduationYearFocusNode,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
@@ -168,9 +157,9 @@ class _EducationAndCertificationScreenState extends State<EducationAndCertificat
 
                 CustomTextFormField(
                   hintText: AppStrings.exCertificateName,
-                  controller: _additionalCertificateController,
+                  controller: controller.certificationsController,
                   fillColor: ColorManager.kWhiteColor,
-                  focusNode: node4,
+                  focusNode: controller.certificationsFocusNode,
                   horizontalMergin: 0.0,
                   validator: (String? val) {
                     if (val == null || val.isEmpty) {
@@ -181,26 +170,22 @@ class _EducationAndCertificationScreenState extends State<EducationAndCertificat
                 ),
                 SizedBox(height: AppSize.s20.h),
 
-                button(text: AppStrings.submit, onTap: () {
-
-                  if (!_formKey.currentState!.validate()) {
-                    Navigator.pushNamed(
-                      context,
-                      CustomRouteNames.kBusinessAndAvailabilityScreenRoute,
-                    );
-                  }
-                }),
+                _buildButton(
+                  text: AppStrings.submit,
+                  onTap: controller.submitEducationAndCertification,
+                ),
 
                 SizedBox(height: 5.h),
               ],
             ),
           ),
         ),
-      ),
+      ));
+      },
     );
   }
 
-  Widget button({
+  Widget _buildButton({
     Function()? onTap,
     String? text,
     Color? color,
@@ -219,32 +204,5 @@ class _EducationAndCertificationScreenState extends State<EducationAndCertificat
       ),
       onTap: onTap,
     );
-  }
-  Widget heading(String text1,String text2){
-    return
-      Padding(
-        padding: EdgeInsets.only(
-          top: AppSize.s20.h,
-          bottom: AppSize.s6.h,
-        ),
-        child: Row(
-          children: [
-            Text(
-              text1,
-              style: getmediumStyle(
-                color: ColorManager.kDarkGreyColor,
-                fontSize: ScreenUtil().setSp(AppSize.s12),
-              ),
-            ),
-            Text(
-              text2,
-              style: getmediumStyle(
-                color: ColorManager.secondary,
-                fontSize: ScreenUtil().setSp(AppSize.s12),
-              ),
-            ),
-          ],
-        ),
-      );
   }
 }

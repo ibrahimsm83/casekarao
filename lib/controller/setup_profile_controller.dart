@@ -81,6 +81,21 @@ class SetupProfileController extends GetxController {
   RxString selectedJurisdiction = RxString('');
   RxList<String> practiceAreas = <String>["Criminal Law", "Family Law"].obs;
 
+  // Education and Certification form controllers
+  final lawSchoolController = TextEditingController();
+  final degreeController = TextEditingController();
+  final graduationYearController = TextEditingController();
+  final certificationsController = TextEditingController();
+
+  // Education and Certification focus nodes
+  final lawSchoolFocusNode = FocusNode();
+  final degreeFocusNode = FocusNode();
+  final graduationYearFocusNode = FocusNode();
+  final certificationsFocusNode = FocusNode();
+
+  // Education and Certification form key
+  final educationFormKey = GlobalKey<FormState>();
+
   @override
   void onInit() {
     super.onInit();
@@ -388,6 +403,50 @@ class SetupProfileController extends GetxController {
     }
   }
 
+  /// Submit education and certification
+  Future<void> submitEducationAndCertification() async {
+    if (!educationFormKey.currentState!.validate()) {
+      return;
+    }
+
+    final data = {
+      'law_school': lawSchoolController.text.trim(),
+      'degree': degreeController.text.trim(),
+      'graduation_year': graduationYearController.text.trim(),
+      'certifications': certificationsController.text.trim(),
+      'type': 'education',
+    };
+
+    try {
+      final response = await networkManager.postRequest(
+        isUserRoleController.isUser
+            ? '/client/setup-profile'
+            : '/lawyer/setup-profile',
+        data,
+      );
+
+      if (response.data['status'] == true && response.data['data'] != null) {
+        response.data['data']['isUser'] = isUserRoleController.isUser;
+        UserModel user = UserModel.fromJson(response.data);
+        profileData.value = user;
+
+        SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
+        SharedPreferencesHelper.saveUser(user);
+        SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
+
+        GetToast.show('Success', responce: response);
+
+        // Navigate back to setup profile screen
+        Get.back();
+        update();
+      } else {
+        GetToast.show("Error", responce: response);
+      }
+    } catch (e) {
+      GetToast.show("Error", e: e);
+    }
+  }
+
   /// Navigate back
   void goBack() {
     Get.back();
@@ -410,6 +469,12 @@ class SetupProfileController extends GetxController {
     yearsOfExpController.dispose();
     practiceAreasController.dispose();
 
+    // Dispose education and certification controllers
+    lawSchoolController.dispose();
+    degreeController.dispose();
+    graduationYearController.dispose();
+    certificationsController.dispose();
+
     // Dispose personal information focus nodes
     fullNameFocusNode.dispose();
     emailFocusNode.dispose();
@@ -423,6 +488,12 @@ class SetupProfileController extends GetxController {
     organizationNameFocusNode.dispose();
     yearsOfExpFocusNode.dispose();
     practiceAreasFocusNode.dispose();
+
+    // Dispose education and certification focus nodes
+    lawSchoolFocusNode.dispose();
+    degreeFocusNode.dispose();
+    graduationYearFocusNode.dispose();
+    certificationsFocusNode.dispose();
 
     super.onClose();
   }
