@@ -91,51 +91,6 @@ class SetupProfileController extends GetxController {
     }
   }
 
-  /// Navigate to specific profile section
-  void navigateToSection(String item) {
-    switch (item) {
-      case AppStrings.personalInformation:
-        type = 'profile';
-        Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
-        break;
-      case AppStrings.legalExperience:
-        type = 'legal';
-        //practiceAreas = "Criminal Law, Family Law".toList().obs;//profileData.value!.data.practices ?? "";
-        selectedJurisdiction.value = profileData.value!.data.practiceState;
-        barLicenseNumberController.text = profileData.value!.data.barLicenseNo;
-        organizationNameController.text = profileData.value!.data.organization;
-        yearsOfExpController.text = profileData.value!.data.experience;
-        Get.toNamed(CustomRouteNames.kLegalExperienceScreenRoute);
-        break;
-      case AppStrings.educationAndCertifications:
-        type = 'education';
-        Get.toNamed(CustomRouteNames.kEducationAndCertificationScreenRoute);
-        break;
-      case AppStrings.businessAndAvailability:
-        type = 'availability';
-        Get.toNamed(CustomRouteNames.kBusinessAndAvailabilityScreenRoute);
-        break;
-      case AppStrings.governmentIssuedIDUpload:
-        type = 'gov_id';
-        Get.toNamed(CustomRouteNames.kCNICUploadScreenRoute);
-        break;
-      case AppStrings.barIDCardUpload:
-        type = 'bar_id';
-        Get.toNamed(CustomRouteNames.kBarIdCardUploadScreenRoute);
-        break;
-      case AppStrings.selfieForIdentityVerification:
-        type = 'selfie';
-        Get.toNamed(CustomRouteNames.kIdentityVerificationScreenRoute);
-        break;
-      default:
-        type = 'optional';
-        bioController.text = profileData.value!.data.bio;
-        selectedType =  profileData.value!.data.languages;
-        Get.toNamed(CustomRouteNames.kOptionalDetailsScreenRoute);
-        break;
-    }
-  }
-
   /// Submit personal information
   Future<void> submitPersonalInfo() async {
     if (!personalInfoFormKey.currentState!.validate()) {
@@ -147,7 +102,8 @@ class SetupProfileController extends GetxController {
     if (dateController.text.isNotEmpty &&
         monthController.text.isNotEmpty &&
         yearController.text.isNotEmpty) {
-      dob = '${yearController.text}-${monthController.text.padLeft(2, '0')}-${dateController.text.padLeft(2, '0')}';
+      dob =
+          '${yearController.text}-${monthController.text.padLeft(2, '0')}-${dateController.text.padLeft(2, '0')}';
     }
 
     try {
@@ -217,7 +173,6 @@ class SetupProfileController extends GetxController {
         // NavigationBar.of(context).pop();
         Get.back();
         //Get.toNamed(CustomRouteNames.kSetupProfileScreenRoute);
-        
       } else {
         GetToast.show("Error", responce: response);
       }
@@ -281,12 +236,14 @@ class SetupProfileController extends GetxController {
       phoneNumberController.text = profileData.value!.data.phone;
 
       // Set profile image URL if available
-      if (profileData.value!.data.image != null && profileData.value!.data.image.toString().isNotEmpty) {
+      if (profileData.value!.data.image != null &&
+          profileData.value!.data.image.toString().isNotEmpty) {
         profileImageUrl.value = profileData.value!.data.image.toString();
       }
 
       // Parse date of birth if available
-      if (profileData.value!.data.dob != null && profileData.value!.data.dob.toString().isNotEmpty) {
+      if (profileData.value!.data.dob != null &&
+          profileData.value!.data.dob.toString().isNotEmpty) {
         final dobParts = profileData.value!.data.dob.toString().split('-');
         if (dobParts.length == 3) {
           yearController.text = dobParts[0];
@@ -298,9 +255,9 @@ class SetupProfileController extends GetxController {
   }
 
   /// Format phone number by removing spaces
-  void formatPhoneNumber() {
-    phoneNumberController.text = phoneNumberController.text.replaceAll(" ", "");
-  }
+  // void formatPhoneNumber() {
+  //   phoneNumberController.text = phoneNumberController.text.replaceAll(" ", "");
+  // }
 
   /// Pick image from gallery
   Future<void> pickProfileImage() async {
@@ -337,6 +294,53 @@ class SetupProfileController extends GetxController {
   void removePracticeArea(String area) {
     practiceAreas.removeWhere((item) => item == area);
     update();
+  }
+
+   /// Navigate to specific profile section
+  void navigateToSection(String item) {
+    switch (item) {
+      case AppStrings.personalInformation:
+        type = 'profile';
+        Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
+        break;
+      case AppStrings.legalExperience:
+        List<String> practiceAreasList = profileData.value!.data.practices.split(', ',);
+        practiceAreas = practiceAreasList.obs;
+        type = 'legal';
+        //"Criminal Law, Family Law".toList().obs;//profileData.value!.data.practices ?? "";
+        selectedJurisdiction.value = profileData.value!.data.practiceState;
+        barLicenseNumberController.text = profileData.value!.data.barLicenseNo;
+        organizationNameController.text = profileData.value!.data.organization;
+        yearsOfExpController.text = profileData.value!.data.experience;
+        Get.toNamed(CustomRouteNames.kLegalExperienceScreenRoute);
+        break;
+      case AppStrings.educationAndCertifications:
+        type = 'education';
+        Get.toNamed(CustomRouteNames.kEducationAndCertificationScreenRoute);
+        break;
+      case AppStrings.businessAndAvailability:
+        type = 'availability';
+        Get.toNamed(CustomRouteNames.kBusinessAndAvailabilityScreenRoute);
+        break;
+      case AppStrings.governmentIssuedIDUpload:
+        type = 'gov_id';
+        Get.toNamed(CustomRouteNames.kCNICUploadScreenRoute);
+        break;
+      case AppStrings.barIDCardUpload:
+        type = 'bar_id';
+        Get.toNamed(CustomRouteNames.kBarIdCardUploadScreenRoute);
+        break;
+      case AppStrings.selfieForIdentityVerification:
+        type = 'selfie';
+        Get.toNamed(CustomRouteNames.kIdentityVerificationScreenRoute);
+        break;
+      default:
+        type = 'optional';
+        bioController.text = profileData.value!.data.bio;
+        selectedType = profileData.value!.data.languages;
+        Get.toNamed(CustomRouteNames.kOptionalDetailsScreenRoute);
+        break;
+    }
   }
 
   /// Submit legal experience
