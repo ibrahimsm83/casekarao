@@ -1,7 +1,10 @@
+import 'dart:io';
 import 'package:casekarao/utils/share_preference.dart';
 import 'package:casekarao/utils/toast_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:dio/dio.dart' as dio;
 import '../core/network/network_managers.dart';
 import '../export_casekarao.dart';
 
@@ -54,13 +57,26 @@ class SetupProfileController extends GetxController {
   // Personal Information form key
   final personalInfoFormKey = GlobalKey<FormState>();
 
+  // Image picker and profile image
+  final ImagePicker _imagePicker = ImagePicker();
+  Rx<File?> profileImage = Rx<File?>(null);
+  RxString profileImageUrl = RxString('');
+
   @override
   void onInit() {
     super.onInit();
     // Get user data from arguments
     if (Get.arguments != null && Get.arguments is UserModel) {
       profileData.value = Get.arguments as UserModel;
+      _populatePersonalInfoFields();
     }
+
+    // // Add phone number formatting listener
+    // phoneNumberFocusNode.addListener(() {
+    //   if (!phoneNumberFocusNode.hasFocus) {
+    //     formatPhoneNumber();
+    //   }
+    // });
   }
 
   /// Check if item is selected
@@ -72,7 +88,6 @@ class SetupProfileController extends GetxController {
   void navigateToSection(String item) {
     switch (item) {
       case AppStrings.personalInformation:
-        _populatePersonalInfoFields();
         type = 'profile';
         Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
         break;
@@ -123,21 +138,57 @@ class SetupProfileController extends GetxController {
       dob = '${yearController.text}-${monthController.text.padLeft(2, '0')}-${dateController.text.padLeft(2, '0')}';
     }
 
-    final data = {
-      'name': fullNameController.text.trim(),
-      'email': emailController.text.trim(),
-      'phone': phoneNumberController.text.trim(),
-      'dob': dob,
-      'type': 'profile',
-    };
-
     try {
-      final response = await networkManager.postRequest(
-        isUserRoleController.isUser
-            ? '/client/setup-profile'
-            : '/lawyer/setup-profile',
-        data,
-      );
+      dynamic response;
+
+      if (profileImage.value != null) {
+        // Create multipart form data when image is selected
+        final formData = dio.FormData();
+
+        // Add text fields
+        formData.fields.addAll([
+          MapEntry('name', fullNameController.text.trim()),
+          MapEntry('email', emailController.text.trim()),
+          MapEntry('phone', phoneNumberController.text.trim()),
+          MapEntry('dob', dob),
+          MapEntry('type', 'profile'),
+        ]);
+
+        // Add image file
+        final fileName = profileImage.value!.path.split('/').last;
+        formData.files.add(
+          MapEntry(
+            'image',
+            await dio.MultipartFile.fromFile(
+              profileImage.value!.path,
+              filename: fileName,
+            ),
+          ),
+        );
+
+        response = await networkManager.postRequest(
+          isUserRoleController.isUser
+              ? '/client/setup-profile'
+              : '/lawyer/setup-profile',
+          formData,
+        );
+      } else {
+        // Regular JSON request when no image
+        final data = {
+          'name': fullNameController.text.trim(),
+          'email': emailController.text.trim(),
+          'phone': phoneNumberController.text.trim(),
+          'dob': dob,
+          'type': 'profile',
+        };
+
+        response = await networkManager.postRequest(
+          isUserRoleController.isUser
+              ? '/client/setup-profile'
+              : '/lawyer/setup-profile',
+          data,
+        );
+      }
 
       if (response.data['status'] == true && response.data['data'] != null) {
         response.data['data']['isUser'] = isUserRoleController.isUser;
@@ -149,10 +200,12 @@ class SetupProfileController extends GetxController {
         SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 
         GetToast.show('Success', responce: response);
-
-        // Navigate back to setup profile screen
-        Get.back();
         update();
+        // Navigate back to setup profile screen
+        // NavigationBar.of(context).pop();
+        Get.back();
+        //Get.toNamed(CustomRouteNames.kSetupProfileScreenRoute);
+        
       } else {
         GetToast.show("Error", responce: response);
       }
@@ -215,6 +268,11 @@ class SetupProfileController extends GetxController {
       emailController.text = profileData.value!.data.email;
       phoneNumberController.text = profileData.value!.data.phone;
 
+      // Set profile image URL if available
+      if (profileData.value!.data.image != null && profileData.value!.data.image.toString().isNotEmpty) {
+        profileImageUrl.value = profileData.value!.data.image.toString();
+      }
+
       // Parse date of birth if available
       if (profileData.value!.data.dob != null && profileData.value!.data.dob.toString().isNotEmpty) {
         final dobParts = profileData.value!.data.dob.toString().split('-');
@@ -224,6 +282,32 @@ class SetupProfileController extends GetxController {
           dateController.text = dobParts[2];
         }
       }
+    }
+  }
+
+  /// Format phone number by removing spaces
+  void formatPhoneNumber() {
+    phoneNumberController.text = phoneNumberController.text.replaceAll(" ", "");
+  }
+
+  /// Pick image from gallery
+  Future<void> pickProfileImage() async {
+    try {
+      final XFile? pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 80,
+        maxWidth: 800,
+        maxHeight: 800,
+      );
+
+      if (pickedFile != null) {
+        profileImage.value = File(pickedFile.path);
+        // Clear the URL when a new local image is selected
+        profileImageUrl.value = '';
+        update();
+      }
+    } catch (e) {
+      GetToast.show("Error", e: e);
     }
   }
 

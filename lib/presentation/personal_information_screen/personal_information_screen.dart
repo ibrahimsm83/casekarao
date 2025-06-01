@@ -64,12 +64,10 @@ class PersonalInformationScreen extends StatelessWidget {
                   SizedBox(height: AppSize.s8.h),
                   Align(
                     alignment: Alignment.center,
-                    child: CircleAvatar(
+                    child: Obx(() => CircleAvatar(
                       radius: 50,
-                      backgroundImage: AssetImage(
-                        ImageAssets.userImage,
-                      ), // Local image
-                    ),
+                      backgroundImage: _getProfileImage(controller),
+                    )),
                   ),
                   SizedBox(height: AppSize.s8.h),
                   Align(
@@ -85,31 +83,34 @@ class PersonalInformationScreen extends StatelessWidget {
                   SizedBox(height: AppSize.s8.h),
                   Align(
                     alignment: Alignment.center,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: ColorManager.kLightBlueColor.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
+                    child: InkWell(
+                      onTap: controller.pickProfileImage,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: ColorManager.kLightBlueColor.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                ),
+                                child: SvgPicture.asset(ImageAssets.cameraIcon),
                               ),
-                              child: SvgPicture.asset(ImageAssets.cameraIcon),
-                            ),
-                            Text(
-                              AppStrings.uploadImage,
-                              style: getRegularStyle(
-                                color: ColorManager.secondary,
-                                fontSize: ScreenUtil().setSp(AppSize.s16),
+                              Text(
+                                AppStrings.uploadImage,
+                                style: getRegularStyle(
+                                  color: ColorManager.secondary,
+                                  fontSize: ScreenUtil().setSp(AppSize.s16),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -185,7 +186,7 @@ class PersonalInformationScreen extends StatelessWidget {
           
                   CustomTextFormField(
                     keyboardType: TextInputType.number,
-                    enabled: false,
+                    readOnly: true,
                     hintText: AppStrings.phoneHintText,
                     controller: controller.phoneNumberController,
                     fillColor: ColorManager.kWhiteColor,
@@ -307,6 +308,18 @@ class PersonalInformationScreen extends StatelessWidget {
       ),
       onTap: onTap,
     );
+  }
+
+  /// Get profile image provider based on available image sources
+  ImageProvider _getProfileImage(SetupProfileController controller) {
+    // Priority: Local file > Network URL > Placeholder
+    if (controller.profileImage.value != null) {
+      return FileImage(controller.profileImage.value!);
+    } else if (controller.profileImageUrl.value.isNotEmpty) {
+      return NetworkImage(controller.profileImageUrl.value);
+    } else {
+      return AssetImage(ImageAssets.userImage);
+    }
   }
 
 }
