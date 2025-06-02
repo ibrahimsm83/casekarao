@@ -4,6 +4,7 @@ export 'custom_snackbar.dart';
 export 'custom_text_span.dart';
 export 'ontap_selectable_list.dart';
 export 'toggle_buttons_list.dart';
+export 'multiple_selection_toggle_list.dart';
 export 'pending_status_card.dart';
 export 'on_going_status_card.dart';
 export 'user_info_widget.dart';

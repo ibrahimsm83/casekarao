@@ -447,6 +447,45 @@ class SetupProfileController extends GetxController {
     }
   }
 
+  /// Submit business and availability
+  Future<void> submitBusinessAvailability({
+    required String address,
+    required List<String> availableDays,
+  }) async {
+    try {
+      final data = {
+        'address': address,
+        'available_days': availableDays.join(", "),
+        'type': 'availability',
+      };
+
+      final response = await networkManager.postRequest(
+        isUserRoleController.isUser
+            ? '/client/setup-profile'
+            : '/lawyer/setup-profile',
+        data,
+      );
+
+      if (response.data['status'] == true && response.data['data'] != null) {
+        response.data['data']['isUser'] = isUserRoleController.isUser;
+        UserModel user = UserModel.fromJson(response.data);
+        profileData.value = user;
+
+        SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
+        SharedPreferencesHelper.saveUser(user);
+        SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
+
+        GetToast.show('Success', responce: response);
+        Get.back();
+        update();
+      } else {
+        GetToast.show("Error", responce: response);
+      }
+    } catch (e) {
+      GetToast.show("Error", e: e);
+    }
+  }
+
   /// Navigate back
   void goBack() {
     Get.back();
