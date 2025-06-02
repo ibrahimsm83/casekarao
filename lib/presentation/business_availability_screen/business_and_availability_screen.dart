@@ -129,45 +129,6 @@ class _BusinessAndAvailabilityScreenState
                   ),
                 ),
                 availabilitySchedule(),
-
-                // // Display selected days
-                // if (selectedDays.isNotEmpty)
-                //   Padding(
-                //     padding: EdgeInsets.symmetric(
-                //       horizontal: AppSize.sizeWidth(context) * 0.05,
-                //       vertical: AppSize.s10.h,
-                //     ),
-                //     child: Container(
-                //       padding: EdgeInsets.all(12.0),
-                //       decoration: BoxDecoration(
-                //         color: ColorManager.kLightBlueColor.withValues(alpha: 0.1),
-                //         borderRadius: BorderRadius.circular(8.0),
-                //         border: Border.all(
-                //           color: ColorManager.secondary.withValues(alpha: 0.3),
-                //         ),
-                //       ),
-                //       child: Column(
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: [
-                //           Text(
-                //             'Selected Days:',
-                //             style: getmediumStyle(
-                //               color: ColorManager.kDarkGreyColor,
-                //               fontSize: ScreenUtil().setSp(AppSize.s12),
-                //             ),
-                //           ),
-                //           SizedBox(height: 4.0),
-                //           Text(
-                //             selectedDays.join(', '),
-                //             style: getsemiboldStyle(
-                //               color: ColorManager.secondary,
-                //               fontSize: ScreenUtil().setSp(AppSize.s14),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
                 SizedBox(height: AppSize.s10.h),
 
                 Padding(

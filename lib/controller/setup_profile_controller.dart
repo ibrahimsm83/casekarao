@@ -79,7 +79,7 @@ class SetupProfileController extends GetxController {
 
   // Legal Experience data
   RxString selectedJurisdiction = RxString('');
-  RxList<String> practiceAreas = <String>["Criminal Law", "Family Law"].obs;
+  RxList<String> practiceAreas = <String>[""].obs;
 
   // Education and Certification form controllers
   final lawSchoolController = TextEditingController();
@@ -102,7 +102,6 @@ class SetupProfileController extends GetxController {
     // Get user data from arguments
     if (Get.arguments != null && Get.arguments is UserModel) {
       profileData.value = Get.arguments as UserModel;
-      _populatePersonalInfoFields();
     }
   }
 
@@ -311,26 +310,22 @@ class SetupProfileController extends GetxController {
     update();
   }
 
-   /// Navigate to specific profile section
+  /// Navigate to specific profile section
   void navigateToSection(String item) {
     switch (item) {
       case AppStrings.personalInformation:
+        _populatePersonalInfoFields();
         type = 'profile';
         Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
         break;
       case AppStrings.legalExperience:
-        List<String> practiceAreasList = profileData.value!.data.practices.split(', ',);
-        practiceAreas = practiceAreasList.obs;
         type = 'legal';
-        //"Criminal Law, Family Law".toList().obs;//profileData.value!.data.practices ?? "";
-        selectedJurisdiction.value = profileData.value!.data.practiceState;
-        barLicenseNumberController.text = profileData.value!.data.barLicenseNo;
-        organizationNameController.text = profileData.value!.data.organization;
-        yearsOfExpController.text = profileData.value!.data.experience;
+        legalExperienceUpdateValues();
         Get.toNamed(CustomRouteNames.kLegalExperienceScreenRoute);
         break;
       case AppStrings.educationAndCertifications:
         type = 'education';
+        educationCertificateUpdateValues();
         Get.toNamed(CustomRouteNames.kEducationAndCertificationScreenRoute);
         break;
       case AppStrings.businessAndAvailability:
@@ -487,6 +482,26 @@ class SetupProfileController extends GetxController {
       GetToast.show("Error", e: e);
     }
   }
+
+  educationCertificateUpdateValues() {
+    lawSchoolController.text = profileData.value!.data.lawSchool ?? '';
+    degreeController.text = profileData.value!.data.degree ?? '';
+    graduationYearController.text = profileData.value!.data.graduationYear ?? '';
+    certificationsController.text = profileData.value!.data.certifications ?? '';
+  }
+
+  legalExperienceUpdateValues() {
+        if (profileData.value!.data.practices.isNotEmpty) {
+          List<String> practiceAreasList = profileData.value!.data.practices
+                .split(', ');
+            practiceAreas = practiceAreasList.obs;
+        }
+        selectedJurisdiction.value = profileData.value!.data.practiceState;
+        barLicenseNumberController.text = profileData.value!.data.barLicenseNo;
+        organizationNameController.text = profileData.value!.data.organization;
+        yearsOfExpController.text = profileData.value!.data.experience;
+  }
+
 
   /// Navigate back
   void goBack() {
