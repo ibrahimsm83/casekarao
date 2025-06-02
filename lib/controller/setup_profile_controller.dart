@@ -451,11 +451,13 @@ class SetupProfileController extends GetxController {
   Future<void> submitBusinessAvailability({
     required String address,
     required List<String> availableDays,
+    required Map<String, Map<String, String>> schedules,
   }) async {
     try {
       final data = {
         'address': address,
         'available_days': availableDays.join(", "),
+        'schedules': schedules,
         'type': 'availability',
       };
 
