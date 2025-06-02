@@ -246,8 +246,8 @@ class _BusinessAndAvailabilityScreenState
           for (String day in newSelection) {
             if (!daySchedules.containsKey(day)) {
               daySchedules[day] = {
-                'from': '09:00',
-                'to': '17:00',
+                'from': '09:00 AM',
+                'to': '05:00 PM',
               };
             }
           }
@@ -315,7 +315,7 @@ class _BusinessAndAvailabilityScreenState
 
   // Build time picker box for specific day and time type
   Widget buildTimeBox(String day, String timeType, String title) {
-    String currentTime = daySchedules[day]?[timeType] ?? '09:00';
+    String currentTime = daySchedules[day]?[timeType] ?? '09:00 AM';
 
     return GestureDetector(
       onTap: () => _selectTime(day, timeType),
@@ -364,13 +364,8 @@ class _BusinessAndAvailabilityScreenState
 
   // Time picker method
   Future<void> _selectTime(String day, String timeType) async {
-    String currentTime = daySchedules[day]?[timeType] ?? '09:00';
-    List<String> timeParts = currentTime.split(':');
-
-    TimeOfDay initialTime = TimeOfDay(
-      hour: int.parse(timeParts[0]),
-      minute: int.parse(timeParts[1]),
-    );
+    String currentTime = daySchedules[day]?[timeType] ?? '09:00 AM';
+    TimeOfDay initialTime = _parseTimeString(currentTime);
 
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -392,10 +387,60 @@ class _BusinessAndAvailabilityScreenState
 
     if (picked != null) {
       setState(() {
-        String formattedTime = '${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}';
+        String formattedTime = _formatTimeToAMPM(picked);
         daySchedules[day]![timeType] = formattedTime;
       });
     }
+  }
+
+  // Parse time string (AM/PM format) to TimeOfDay
+  TimeOfDay _parseTimeString(String timeString) {
+    try {
+      // Handle AM/PM format like "09:00 AM" or "02:30 PM"
+      if (timeString.contains('AM') || timeString.contains('PM')) {
+        String timePart = timeString.split(' ')[0];
+        String period = timeString.split(' ')[1];
+        List<String> timeParts = timePart.split(':');
+
+        int hour = int.parse(timeParts[0]);
+        int minute = int.parse(timeParts[1]);
+
+        if (period == 'PM' && hour != 12) {
+          hour += 12;
+        } else if (period == 'AM' && hour == 12) {
+          hour = 0;
+        }
+
+        return TimeOfDay(hour: hour, minute: minute);
+      } else {
+        // Fallback for 24-hour format
+        List<String> timeParts = timeString.split(':');
+        return TimeOfDay(
+          hour: int.parse(timeParts[0]),
+          minute: int.parse(timeParts[1]),
+        );
+      }
+    } catch (e) {
+      // Default fallback
+      return TimeOfDay(hour: 9, minute: 0);
+    }
+  }
+
+  // Format TimeOfDay to AM/PM format
+  String _formatTimeToAMPM(TimeOfDay time) {
+    int hour = time.hour;
+    String period = hour >= 12 ? 'PM' : 'AM';
+
+    if (hour > 12) {
+      hour -= 12;
+    } else if (hour == 0) {
+      hour = 12;
+    }
+
+    String formattedHour = hour.toString().padLeft(2, '0');
+    String formattedMinute = time.minute.toString().padLeft(2, '0');
+
+    return '$formattedHour:$formattedMinute $period';
   }
 
   Widget button({
@@ -419,43 +464,3 @@ class _BusinessAndAvailabilityScreenState
     );
   }
 }
-
-//  fromTo(),
-//                 Padding(
-//                   padding: EdgeInsets.only(
-//                     top: AppSize.s10.h,
-//                     bottom: AppSize.s6.h,
-//                     left: AppSize.sizeWidth(context) * 0.05,
-//                   ),
-//                   child: Text(
-//                     AppStrings.friday,
-//                     style: getmediumStyle(
-//                       color: ColorManager.kDarkGreyColor,
-//                       fontSize: ScreenUtil().setSp(AppSize.s14),
-//                     ),
-//                   ),
-//                 ),
-//                 fromTo(),
-//                 SizedBox(height: AppSize.s20.h),
-//                 Padding(
-//                   padding: EdgeInsets.symmetric(
-//                     horizontal: AppSize.sizeWidth(context) * 0.05,
-//                   ),
-//                   child: button(
-//                     text: AppStrings.submit,
-//                     onTap: () {
-//                       bool isValid = _formKey.currentState!.validate();
-
-//                       if (isValid) {
-//                         // Debug: Print selected days
-//                         print('Selected Days: $selectedDays');
-
-//                         // Call API with form data
-//                         Get.find<SetupProfileController>().submitBusinessAvailability(
-//                           address: _officeAddressController.text.trim(),
-//                           availableDays: selectedDays,
-//                         );
-//                       }
-//                     },
-//                   ),
-//                 ),
