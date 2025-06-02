@@ -145,8 +145,9 @@ class AppStrings {
   ///GovernmentIssuedIDUpload
   static const String holdStill = "Hold Still";
   static const String govtIssuedCNICUpload = "Govt-issued CNIC Upload";
-  static const String scanBackSideOfYourCNIC = "Scan Back side of your CNIC";
-  static const String scanFrontSideOfYourCNIC = "Scan Front side of your CNIC";
+  // static const String scanBackSideOfYourCNIC = "Scan Back side of your CNIC";
+  // static const String scanFrontSideOfYourCNIC = "Scan Front side of your CNIC";
+  static const String uploadYourCNIC = "Upload your CNIC";
   static const String
   alignYourGovernmentIssuedCNICWithinTheMarkersForAutomaticScanning =
       "Align your government-issued CNIC within the markers for automatic scanning.";

@@ -11,8 +11,6 @@ class CNICUploadScreen extends StatefulWidget {
 }
 
 class _CNICUploadScreenState extends State<CNICUploadScreen> {
-  bool isFrontSide = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,69 +56,34 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
               ),
             ),
             SizedBox(height: AppSize.sizeHeight(context) * 0.05),
+            // upload fron Id card
             InkWell(
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  CustomRouteNames.kBarIdCardUploadScreenRoute,
-                );
-              },
-              child: Container(
-                width: AppSize.sizeWidth(context),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(13.r),
-                  color: ColorManager.secondary,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Center(
-                    child: Text(
-                      isFrontSide
-                          ? AppStrings.scanFrontSideOfYourCNIC
-                          : AppStrings.scanBackSideOfYourCNIC,
-                      style: getmediumStyle(color: ColorManager.kWhiteColor),
+              onTap: () {},
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: AppSize.sizeWidth(context),
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(13.r),
+                        color: ColorManager.kWhiteColor,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(ImageAssets.scanIcon),
+                          Text(
+                            AppStrings.holdStill,
+                            style: getmediumStyle(color: ColorManager.primary),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
 
-            SizedBox(height: AppSize.sizeHeight(context) * 0.05),
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: AppSize.sizeWidth(context),
-                    height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13.r),
-                      color: ColorManager.kWhiteColor,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(ImageAssets.scanIcon),
-                        Text(
-                          AppStrings.holdStill,
-                          style: getmediumStyle(color: ColorManager.primary),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      if (isFrontSide) {
-                        isFrontSide = false;
-                      } else {
-                        isFrontSide = true;
-                      }
-                    });
-                  },
-                  child: Container(
+                  Container(
                     width: AppSize.sizeWidth(context),
                     height: 165,
                     decoration: BoxDecoration(
@@ -147,9 +110,68 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+            SizedBox(height: AppSize.sizeHeight(context) * 0.05),
+            // upload back Id card
+            InkWell(
+              onTap: () {},
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: AppSize.sizeWidth(context),
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(13.r),
+                        color: ColorManager.kWhiteColor,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(ImageAssets.scanIcon),
+                          Text(
+                            AppStrings.holdStill,
+                            style: getmediumStyle(color: ColorManager.primary),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    width: AppSize.sizeWidth(context),
+                    height: 165,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13.r),
+                      color: Colors.transparent,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SvgPicture.asset(ImageAssets.leftTopCornerIcon),
+                            SvgPicture.asset(ImageAssets.rightTopCornerIcon),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SvgPicture.asset(ImageAssets.leftBottomCornerIcon),
+                            SvgPicture.asset(ImageAssets.rightBottomCornerIcon),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             SizedBox(height: AppSize.s18.h),
             Text(
               AppStrings
@@ -161,6 +183,25 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
               ),
             ),
             SizedBox(height: 5.h),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                width: AppSize.sizeWidth(context),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13.r),
+                  color: ColorManager.primary,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Center(
+                    child: Text(
+                      AppStrings.uploadYourCNIC,
+                      style: getmediumStyle(color: ColorManager.kWhiteColor),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
