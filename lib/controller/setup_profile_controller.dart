@@ -499,7 +499,7 @@ class SetupProfileController extends GetxController {
         final frontFileName = frontImage.path.split('/').last;
         formData.files.add(
           MapEntry(
-            'front_image',
+            'cnic_front',
             await dio.MultipartFile.fromFile(
               frontImage.path,
               filename: frontFileName,
@@ -513,7 +513,7 @@ class SetupProfileController extends GetxController {
         final backFileName = backImage.path.split('/').last;
         formData.files.add(
           MapEntry(
-            'back_image',
+            'cnic_back',
             await dio.MultipartFile.fromFile(
               backImage.path,
               filename: backFileName,
