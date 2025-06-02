@@ -152,15 +152,19 @@ class _BusinessAndAvailabilityScreenState
                       bool isValid = _formKey.currentState!.validate();
 
                       if (isValid) {
-                        // Debug: Print selected days and schedules
+                        // Convert daySchedules to slots format
+                        List<Map<String, String>> slots = _convertToSlotsFormat(daySchedules);
+
+                        // Debug: Print selected days and slots
                         print('Selected Days: $selectedDays');
                         print('Day Schedules: $daySchedules');
+                        print('Converted Slots: $slots');
 
                         // Call API with form data
                         Get.find<SetupProfileController>().submitBusinessAvailability(
                           address: _officeAddressController.text.trim(),
                           availableDays: selectedDays,
-                          schedules: daySchedules,
+                          slots: slots,
                         );
                       }
                     },
@@ -441,6 +445,33 @@ class _BusinessAndAvailabilityScreenState
     String formattedMinute = time.minute.toString().padLeft(2, '0');
 
     return '$formattedHour:$formattedMinute $period';
+  }
+
+  // Convert daySchedules to slots format
+  List<Map<String, String>> _convertToSlotsFormat(Map<String, Map<String, String>> daySchedules) {
+    List<Map<String, String>> slots = [];
+
+    // Map short day names to full day names
+    Map<String, String> dayNameMap = {
+      'Mon': 'Monday',
+      'Tue': 'Tuesday',
+      'Wed': 'Wednesday',
+      'Thu': 'Thursday',
+      'Fri': 'Friday',
+      'Sat': 'Saturday',
+      'Sun': 'Sunday',
+    };
+
+    daySchedules.forEach((shortDay, times) {
+      String fullDayName = dayNameMap[shortDay] ?? shortDay;
+      slots.add({
+        'day': fullDayName,
+        'start_time': times['from'] ?? '',
+        'end_time': times['to'] ?? '',
+      });
+    });
+
+    return slots;
   }
 
   Widget button({
