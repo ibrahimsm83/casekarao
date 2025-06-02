@@ -148,6 +148,7 @@ class AppStrings {
   // static const String scanBackSideOfYourCNIC = "Scan Back side of your CNIC";
   // static const String scanFrontSideOfYourCNIC = "Scan Front side of your CNIC";
   static const String uploadYourCNIC = "Upload your CNIC";
+  static const String uploadYourSelfie = "Upload your Selfie";
   static const String
   alignYourGovernmentIssuedCNICWithinTheMarkersForAutomaticScanning =
       "Align your government-issued CNIC within the markers for automatic scanning.";

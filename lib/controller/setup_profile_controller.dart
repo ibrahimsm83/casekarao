@@ -615,6 +615,55 @@ class SetupProfileController extends GetxController {
     }
   }
 
+  /// Submit selfie image
+  Future<void> submitSelfie({
+    required File selfieImage,
+  }) async {
+    try {
+      final formData = dio.FormData();
+
+      // Add type field
+      formData.fields.add(MapEntry('type', 'selfie'));
+
+      // Add selfie image
+      final selfieFileName = selfieImage.path.split('/').last;
+      formData.files.add(
+        MapEntry(
+          'selfie',
+          await dio.MultipartFile.fromFile(
+            selfieImage.path,
+            filename: selfieFileName,
+          ),
+        ),
+      );
+
+      final response = await networkManager.postRequest(
+        isUserRoleController.isUser
+            ? '/client/setup-profile'
+            : '/lawyer/setup-profile',
+        formData,
+      );
+
+      if (response.data['status'] == true && response.data['data'] != null) {
+        response.data['data']['isUser'] = isUserRoleController.isUser;
+        UserModel user = UserModel.fromJson(response.data);
+        profileData.value = user;
+
+        SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
+        SharedPreferencesHelper.saveUser(user);
+        SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
+        Get.back();
+        //GetToast.show('Success', responce: response);
+        //Get.back();
+        update();
+      } else {
+        GetToast.show("Error", responce: response);
+      }
+    } catch (e) {
+      GetToast.show("Error", e: e);
+    }
+  }
+
   educationCertificateUpdateValues() {
     lawSchoolController.text = profileData.value!.data.lawSchool ?? '';
     degreeController.text = profileData.value!.data.degree ?? '';
