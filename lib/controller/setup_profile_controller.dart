@@ -549,6 +549,72 @@ class SetupProfileController extends GetxController {
     }
   }
 
+  /// Submit Bar ID card images
+  Future<void> submitBarIdCards({
+    required File? frontImage,
+    required File? backImage,
+  }) async {
+    try {
+      final formData = dio.FormData();
+
+      // Add type field
+      formData.fields.add(MapEntry('type', 'bar_id'));
+
+      // Add front image if available
+      if (frontImage != null) {
+        final frontFileName = frontImage.path.split('/').last;
+        formData.files.add(
+          MapEntry(
+            'barId_front',
+            await dio.MultipartFile.fromFile(
+              frontImage.path,
+              filename: frontFileName,
+            ),
+          ),
+        );
+      }
+
+      // Add back image if available
+      if (backImage != null) {
+        final backFileName = backImage.path.split('/').last;
+        formData.files.add(
+          MapEntry(
+            'barId_back',
+            await dio.MultipartFile.fromFile(
+              backImage.path,
+              filename: backFileName,
+            ),
+          ),
+        );
+      }
+
+      final response = await networkManager.postRequest(
+        isUserRoleController.isUser
+            ? '/client/setup-profile'
+            : '/lawyer/setup-profile',
+        formData,
+      );
+
+      if (response.data['status'] == true && response.data['data'] != null) {
+        response.data['data']['isUser'] = isUserRoleController.isUser;
+        UserModel user = UserModel.fromJson(response.data);
+        profileData.value = user;
+
+        SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
+        SharedPreferencesHelper.saveUser(user);
+        SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
+
+        GetToast.show('Success', responce: response);
+        Get.back();
+        update();
+      } else {
+        GetToast.show("Error", responce: response);
+      }
+    } catch (e) {
+      GetToast.show("Error", e: e);
+    }
+  }
+
   educationCertificateUpdateValues() {
     lawSchoolController.text = profileData.value!.data.lawSchool ?? '';
     degreeController.text = profileData.value!.data.degree ?? '';

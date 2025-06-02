@@ -153,8 +153,9 @@ class AppStrings {
       "Align your government-issued CNIC within the markers for automatic scanning.";
 
   ///Bar ID Card Upload
-  static const String scanBackSideOfYourID = "Scan Back side of your ID";
-  static const String scanFrontSideOfYourID = "Scan Front side of your ID";
+  // static const String scanBackSideOfYourID = "Scan Back side of your ID";
+  // static const String scanFrontSideOfYourID = "Scan Front side of your ID";
+  static const String uploadYourID = "Upload your ID";
   static const String alignYourCertificateWithinTheMarkersForAutomaticScanning =
       "Align your certificate within the markers for automatic scanning.";
 
