@@ -1,6 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:get/get.dart';
 import '../../export_casekarao.dart';
 
 class CNICUploadScreen extends StatefulWidget {
@@ -11,13 +15,17 @@ class CNICUploadScreen extends StatefulWidget {
 }
 
 class _CNICUploadScreenState extends State<CNICUploadScreen> {
+  File? frontImage;
+  File? backImage;
+  final ImagePicker _picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.kBackgroundColor,
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppSize.sizeWidth(context!) * 0.05,
+          horizontal: AppSize.sizeWidth(context) * 0.05,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,9 +64,9 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
               ),
             ),
             SizedBox(height: AppSize.sizeHeight(context) * 0.05),
-            // upload fron Id card
+            // upload front Id card
             InkWell(
-              onTap: () {},
+              onTap: () => _captureAndCropImage(true),
               child: Stack(
                 children: [
                   Padding(
@@ -70,16 +78,26 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
                         borderRadius: BorderRadius.circular(13.r),
                         color: ColorManager.kWhiteColor,
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(ImageAssets.scanIcon),
-                          Text(
-                            AppStrings.holdStill,
-                            style: getmediumStyle(color: ColorManager.primary),
-                          ),
-                        ],
-                      ),
+                      child: frontImage != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(13.r),
+                              child: Image.file(
+                                frontImage!,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+                            )
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(ImageAssets.scanIcon),
+                                Text(
+                                  AppStrings.holdStill,
+                                  style: getmediumStyle(color: ColorManager.primary),
+                                ),
+                              ],
+                            ),
                     ),
                   ),
 
@@ -116,7 +134,7 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
             SizedBox(height: AppSize.sizeHeight(context) * 0.05),
             // upload back Id card
             InkWell(
-              onTap: () {},
+              onTap: () => _captureAndCropImage(false),
               child: Stack(
                 children: [
                   Padding(
@@ -128,16 +146,26 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
                         borderRadius: BorderRadius.circular(13.r),
                         color: ColorManager.kWhiteColor,
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(ImageAssets.scanIcon),
-                          Text(
-                            AppStrings.holdStill,
-                            style: getmediumStyle(color: ColorManager.primary),
-                          ),
-                        ],
-                      ),
+                      child: backImage != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(13.r),
+                              child: Image.file(
+                                backImage!,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+                            )
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(ImageAssets.scanIcon),
+                                Text(
+                                  AppStrings.holdStill,
+                                  style: getmediumStyle(color: ColorManager.primary),
+                                ),
+                              ],
+                            ),
                     ),
                   ),
 
@@ -173,6 +201,39 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
             ),
 
             SizedBox(height: AppSize.s18.h),
+
+            // Status indicator
+            if (frontImage != null || backImage != null)
+              Container(
+                margin: EdgeInsets.only(bottom: AppSize.s10.h),
+                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                decoration: BoxDecoration(
+                  color: ColorManager.secondary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: ColorManager.secondary.withValues(alpha: 0.3),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.check_circle,
+                      color: ColorManager.secondary,
+                      size: 16.0,
+                    ),
+                    SizedBox(width: 8.0),
+                    Text(
+                      'Images captured: ${frontImage != null ? "Front" : ""}${frontImage != null && backImage != null ? " & " : ""}${backImage != null ? "Back" : ""}',
+                      style: getmediumStyle(
+                        color: ColorManager.secondary,
+                        fontSize: ScreenUtil().setSp(AppSize.s12),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
             Text(
               AppStrings
                   .alignYourGovernmentIssuedCNICWithinTheMarkersForAutomaticScanning,
@@ -184,18 +245,37 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
             ),
             SizedBox(height: 5.h),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                // Submit ID cards if at least one image is captured
+                if (frontImage != null || backImage != null) {
+                  Get.find<SetupProfileController>().submitIdCards(
+                    frontImage: frontImage,
+                    backImage: backImage,
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Please capture at least one ID card image'),
+                      backgroundColor: ColorManager.kRedColor,
+                    ),
+                  );
+                }
+              },
               child: Container(
                 width: AppSize.sizeWidth(context),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13.r),
-                  color: ColorManager.primary,
+                  color: (frontImage != null || backImage != null)
+                      ? ColorManager.primary
+                      : ColorManager.kGreyColor,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Center(
                     child: Text(
-                      AppStrings.uploadYourCNIC,
+                      (frontImage != null || backImage != null)
+                          ? AppStrings.submit
+                          : AppStrings.uploadYourCNIC,
                       style: getmediumStyle(color: ColorManager.kWhiteColor),
                     ),
                   ),
@@ -206,5 +286,53 @@ class _CNICUploadScreenState extends State<CNICUploadScreen> {
         ),
       ),
     );
+  }
+
+  // Simple image capture and crop method
+  Future<void> _captureAndCropImage(bool isFront) async {
+    try {
+      // Pick image from camera
+      final XFile? pickedFile = await _picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 80,
+      );
+
+      if (pickedFile != null) {
+        // Crop the image
+        final CroppedFile? croppedFile = await ImageCropper().cropImage(
+          sourcePath: pickedFile.path,
+          aspectRatio: CropAspectRatio(ratioX: 16, ratioY: 10), // ID card ratio
+          uiSettings: [
+            AndroidUiSettings(
+              toolbarTitle: isFront ? 'Crop Front ID' : 'Crop Back ID',
+              toolbarColor: ColorManager.primary,
+              toolbarWidgetColor: ColorManager.kWhiteColor,
+              backgroundColor: ColorManager.kBackgroundColor,
+              activeControlsWidgetColor: ColorManager.primary,
+            ),
+            IOSUiSettings(
+              title: isFront ? 'Crop Front ID' : 'Crop Back ID',
+            ),
+          ],
+        );
+
+        if (croppedFile != null) {
+          setState(() {
+            if (isFront) {
+              frontImage = File(croppedFile.path);
+            } else {
+              backImage = File(croppedFile.path);
+            }
+          });
+        }
+      }
+    } catch (e) {
+      // Handle error
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error capturing image: $e')),
+        );
+      }
+    }
   }
 }
