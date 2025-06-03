@@ -81,12 +81,13 @@ class Data {
   final dynamic deletedAt;
   final bool isUser;
   final String practices;
-  final dynamic certifications;
+  final dynamic certificates;
   final dynamic cnic_front;
-  final dynamic cnic_back; 
+  final dynamic cnic_back;
   final dynamic barId_front;
   final dynamic barId_back;
   final dynamic selfie;
+  // final dynamic slots;
 
   Data({
     required this.id,
@@ -135,7 +136,7 @@ class Data {
     required this.deletedAt,
     required this.isUser,
     required this.practices,
-    required this.certifications,
+    required this.certificates,
     required this.cnic_front,
     required this.cnic_back,
     required this.barId_front,
@@ -191,7 +192,7 @@ class Data {
       deletedAt: json['deleted_at'],
       isUser: json['isUser'] ?? false,
       practices: json['practices'] ?? '',
-      certifications: json['certifications'],
+      certificates: json['certificates'],
       cnic_front: json['cnic_front'],
       cnic_back: json['cnic_back'],
       barId_front: json['bar_id_front'],
@@ -248,7 +249,7 @@ class Data {
       'deleted_at': deletedAt,
       'isUser': isUser,
       'practices': practices,
-      'certifications': certifications,
+      'certificates': certificates,
       'cnic_front': cnic_front,
       'cnic_back': cnic_back,
       'bar_id_front': barId_front,

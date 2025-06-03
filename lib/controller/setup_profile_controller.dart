@@ -408,7 +408,7 @@ class SetupProfileController extends GetxController {
       'law_school': lawSchoolController.text.trim(),
       'degree': degreeController.text.trim(),
       'graduation_year': graduationYearController.text.trim(),
-      'certifications': certificationsController.text.trim(),
+      'certificates': certificationsController.text.trim(),
       'type': 'education',
     };
 
@@ -667,7 +667,7 @@ class SetupProfileController extends GetxController {
     lawSchoolController.text = profileData.value!.data.lawSchool ?? '';
     degreeController.text = profileData.value!.data.degree ?? '';
     graduationYearController.text = profileData.value!.data.graduationYear ?? '';
-    certificationsController.text = profileData.value!.data.certifications ?? '';
+    certificationsController.text = profileData.value!.data.certificates ?? '';
   }
 
   legalExperienceUpdateValues() {
