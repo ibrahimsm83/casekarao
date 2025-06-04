@@ -25,6 +25,66 @@ class _BusinessAndAvailabilityScreenState
   // Dynamic time schedules for each selected day
   Map<String, Map<String, String>> daySchedules = {};
 
+  late SetupProfileController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<SetupProfileController>();
+    _bindBusinessAvailabilityData();
+  }
+
+  // Bind existing business availability data to form fields
+  void _bindBusinessAvailabilityData() {
+    if (controller.profileData.value != null) {
+      // Bind office address
+      if (controller.profileData.value!.data.address != null &&
+          controller.profileData.value!.data.address.toString().isNotEmpty) {
+        _officeAddressController.text = controller.profileData.value!.data.address.toString();
+      }
+
+      // Bind slots data
+      if (controller.profileData.value!.data.slots.isNotEmpty) {
+        _bindSlotsData(controller.profileData.value!.data.slots);
+      }
+    }
+  }
+
+  // Convert slots data to screen format
+  void _bindSlotsData(List<Slot> slots) {
+    // Map full day names to short day names
+    Map<String, String> dayNameMap = {
+      'Monday': 'Mon',
+      'Tuesday': 'Tue',
+      'Wednesday': 'Wed',
+      'Thursday': 'Thu',
+      'Friday': 'Fri',
+      'Saturday': 'Sat',
+      'Sunday': 'Sun',
+    };
+
+    List<String> newSelectedDays = [];
+    Map<String, Map<String, String>> newDaySchedules = {};
+
+    for (Slot slot in slots) {
+      String shortDay = dayNameMap[slot.day] ?? slot.day;
+
+      if (!newSelectedDays.contains(shortDay)) {
+        newSelectedDays.add(shortDay);
+      }
+
+      newDaySchedules[shortDay] = {
+        'from': slot.startTime,
+        'to': slot.endTime,
+      };
+    }
+
+    setState(() {
+      selectedDays = newSelectedDays;
+      daySchedules = newDaySchedules;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

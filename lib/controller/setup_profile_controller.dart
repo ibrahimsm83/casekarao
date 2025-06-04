@@ -330,6 +330,7 @@ class SetupProfileController extends GetxController {
         break;
       case AppStrings.businessAndAvailability:
         type = 'availability';
+        businessAvailabilityUpdateValues();
         Get.toNamed(CustomRouteNames.kBusinessAndAvailabilityScreenRoute);
         break;
       case AppStrings.governmentIssuedIDUpload:
@@ -682,6 +683,12 @@ class SetupProfileController extends GetxController {
         yearsOfExpController.text = profileData.value!.data.experience  ?? '';
   }
 
+  businessAvailabilityUpdateValues() {
+    // This method is called when navigating to business availability screen
+    // The profileData is already available in the controller
+    // The screen will bind the data directly from controller.profileData.value
+    update();
+  }
 
   /// Navigate back
   void goBack() {
