@@ -72,23 +72,42 @@ class _IdentityVerificationScreenState extends State<IdentityVerificationScreen>
                 alignment: Alignment.center,
                 child: selfieImage != null
                     ? Container(
-                        width: 200,
-                        height: 260,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(130),
-                          border: Border.all(
-                            color: ColorManager.secondary,
-                            width: 3,
-                          ),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(127),
-                          child: Image.file(
-                            selfieImage!,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
+                        width: 210,
+                        height: 290,
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.circular(130),
+                        //   border: Border.all(
+                        //     color: ColorManager.secondary,
+                        //     width: 3,
+                        //   ),
+                        // ),
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: 210,
+                              height: 290,
+                              child: ClipRRect(
+                                //borderRadius: BorderRadius.circular(127),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                                  child: Image.file(
+                                    selfieImage!,
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(child: SvgPicture.asset(
+                        ImageAssets.faceIcon,
+                        fit: BoxFit.cover,
+                          width: 200,
+                        height: 290,
+                        //colorFilter: ColorFilter.mode(Colors.kg, BlendMode.srcIn),
+                      ),
+                            )
+                          ],
                         ),
                       )
                     : SvgPicture.asset(
