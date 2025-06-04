@@ -67,6 +67,7 @@ class LegalExperienceScreen extends StatelessWidget {
                     AppStrings.required,
                   ),
                   CustomTextFormField(
+                    keyboardType: TextInputType.number,
                     hintText: AppStrings.phoneNumberHintText,
                     controller: controller.barLicenseNumberController,
                     fillColor: ColorManager.kWhiteColor,
@@ -154,13 +155,14 @@ class LegalExperienceScreen extends StatelessWidget {
                   SizedBox(height: 10.h),
 
                   // Display practice area chips
+                  if (controller.practiceAreas.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Obx(() => Wrap(
                       spacing: 8.0,
                       runSpacing: 8.0,
                       children: controller.practiceAreas
-                          .map((area) => _buildChip(area, controller))
+                          .map((area) => _buildChip(area, controller)) 
                           .toList(),
                     )),
                   ),
@@ -284,6 +286,7 @@ class LegalExperienceScreen extends StatelessWidget {
   }
 
   Widget _buildChip(String label, SetupProfileController controller) {
+    if (label.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
       child: Container(

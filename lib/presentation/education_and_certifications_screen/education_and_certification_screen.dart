@@ -128,6 +128,7 @@ class EducationAndCertificationScreen extends StatelessWidget {
                 ),
 
                 CustomTextFormField(
+                  keyboardType: TextInputType.number,
                   hintText: AppStrings.ex2012,
                   controller: controller.graduationYearController,
                   fillColor: ColorManager.kWhiteColor,

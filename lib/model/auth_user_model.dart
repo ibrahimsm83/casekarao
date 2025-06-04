@@ -1,3 +1,51 @@
+class Slot {
+  final int id;
+  final int lawyerId;
+  final String day;
+  final String slot;
+  final String startTime;
+  final String endTime;
+  final String createdAt;
+  final String updatedAt;
+
+  Slot({
+    required this.id,
+    required this.lawyerId,
+    required this.day,
+    required this.slot,
+    required this.startTime,
+    required this.endTime,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory Slot.fromJson(Map<String, dynamic> json) {
+    return Slot(
+      id: json['id'] ?? 0,
+      lawyerId: json['lawyer_id'] ?? 0,
+      day: json['day'] ?? '',
+      slot: json['slot'] ?? '',
+      startTime: json['start_time'] ?? '',
+      endTime: json['end_time'] ?? '',
+      createdAt: json['created_at'] ?? '',
+      updatedAt: json['updated_at'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'lawyer_id': lawyerId,
+      'day': day,
+      'slot': slot,
+      'start_time': startTime,
+      'end_time': endTime,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+    };
+  }
+}
+
 class UserModel {
   final bool status;
   final String message;
@@ -87,7 +135,7 @@ class Data {
   final dynamic barId_front;
   final dynamic barId_back;
   final dynamic selfie;
-  // final dynamic slots;
+  final List<Slot> slots;
 
   Data({
     required this.id,
@@ -142,6 +190,7 @@ class Data {
     required this.barId_front,
     required this.barId_back,
     required this.selfie,
+    required this.slots,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) {
@@ -198,6 +247,9 @@ class Data {
       barId_front: json['bar_id_front'],
       barId_back: json['bar_id_back'],
       selfie: json['selfie'],
+      slots: (json['slots'] as List<dynamic>?)
+          ?.map((slot) => Slot.fromJson(slot as Map<String, dynamic>))
+          .toList() ?? [],
     );
   }
 
@@ -255,6 +307,7 @@ class Data {
       'bar_id_front': barId_front,
       'bar_id_back': barId_back,
       'selfie': selfie,
+      'slots': slots.map((slot) => slot.toJson()).toList(),
     };
   }
 }

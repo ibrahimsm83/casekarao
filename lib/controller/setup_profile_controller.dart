@@ -676,10 +676,10 @@ class SetupProfileController extends GetxController {
                 .split(', ');
             practiceAreas = practiceAreasList.obs;
         }
-        selectedJurisdiction.value = profileData.value!.data.practiceState;
-        barLicenseNumberController.text = profileData.value!.data.barLicenseNo;
-        organizationNameController.text = profileData.value!.data.organization;
-        yearsOfExpController.text = profileData.value!.data.experience;
+        selectedJurisdiction.value = profileData.value!.data.practiceState ?? '';
+        barLicenseNumberController.text = profileData.value!.data.barLicenseNo  ?? '';
+        organizationNameController.text = profileData.value!.data.organization ?? '';
+        yearsOfExpController.text = profileData.value!.data.experience  ?? '';
   }
 
 
