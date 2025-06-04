@@ -20,6 +20,13 @@ class IdentityVerificationScreen extends StatefulWidget {
 class _IdentityVerificationScreenState extends State<IdentityVerificationScreen> {
   File? selfieImage;
   final ImagePicker _picker = ImagePicker();
+  late SetupProfileController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<SetupProfileController>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,24 +77,19 @@ class _IdentityVerificationScreenState extends State<IdentityVerificationScreen>
               onTap: () => _captureAndCropSelfie(),
               child: Align(
                 alignment: Alignment.center,
-                child: selfieImage != null
-                    ? Container(
+                child: GetBuilder<SetupProfileController>(
+                  builder: (controller) {
+                    // Show local image first if available
+                    if (selfieImage != null) {
+                      return Container(
                         width: 210,
                         height: 290,
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.circular(130),
-                        //   border: Border.all(
-                        //     color: ColorManager.secondary,
-                        //     width: 3,
-                        //   ),
-                        // ),
                         child: Stack(
                           children: [
                             Container(
                               width: 210,
                               height: 290,
                               child: ClipRRect(
-                                //borderRadius: BorderRadius.circular(127),
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                                   child: Image.file(
@@ -99,76 +101,123 @@ class _IdentityVerificationScreenState extends State<IdentityVerificationScreen>
                                 ),
                               ),
                             ),
-                            Positioned(child: SvgPicture.asset(
-                        ImageAssets.faceIcon,
-                        fit: BoxFit.cover,
-                          width: 200,
-                        height: 290,
-                        //colorFilter: ColorFilter.mode(Colors.kg, BlendMode.srcIn),
-                      ),
+                            Positioned(
+                              child: SvgPicture.asset(
+                                ImageAssets.faceIcon,
+                                fit: BoxFit.cover,
+                                width: 200,
+                                height: 290,
+                              ),
                             )
                           ],
                         ),
-                      )
-                    : SvgPicture.asset(
+                      );
+                    }
+                    // Show existing image from profileData if available
+                    else if (controller.profileData.value != null &&
+                        controller.profileData.value!.data.selfie != null &&
+                        controller.profileData.value!.data.selfie.toString().isNotEmpty) {
+                      return Container(
+                        width: 210,
+                        height: 290,
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: 210,
+                              height: 290,
+                              child: ClipRRect(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                                  child: Image.network(
+                                    controller.profileData.value!.data.selfie.toString(),
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    loadingBuilder: (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Center(
+                                        child: CircularProgressIndicator(
+                                          color: ColorManager.primary,
+                                        ),
+                                      );
+                                    },
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return SvgPicture.asset(
+                                        ImageAssets.faceIcon,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              child: SvgPicture.asset(
+                                ImageAssets.faceIcon,
+                                fit: BoxFit.cover,
+                                width: 200,
+                                height: 290,
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    }
+                    // Show placeholder if no image available
+                    else {
+                      return SvgPicture.asset(
                         ImageAssets.faceIcon,
-                        //colorFilter: ColorFilter.mode(Colors.kg, BlendMode.srcIn),
-                      ),
+                      );
+                    }
+                  },
+                ),
               ),
             ),
-            // Stack(
-            //   alignment: Alignment.center,
-            //   children: [
-            //     // White Inner Filled Oval
-            //     Container(
-            //       width: 200,
-            //       height: 260,
-            //       decoration: BoxDecoration(
-            //         color: Colors.white, // White fill color
-            //         shape: BoxShape.rectangle,
-            //         borderRadius: BorderRadius.circular(130), // Makes it oval
-            //       ),
-            //     ),
-            //     // Dashed Border Oval
-            //     CustomPaint(
-            //       size: Size(200, 260), // Size of the oval
-            //       painter: DashedOvalPainter(),
-            //     ),
-            //   ],
-            // ),
+           
             SizedBox(height: 20),
 
             // Status indicator
-            if (selfieImage != null)
-              Container(
-                margin: EdgeInsets.only(bottom: AppSize.s10.h),
-                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-                decoration: BoxDecoration(
-                  color: ColorManager.secondary.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: ColorManager.secondary.withValues(alpha: 0.3),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.check_circle,
-                      color: ColorManager.secondary,
-                      size: 16.0,
-                    ),
-                    SizedBox(width: 8.0),
-                    Text(
-                      'Selfie captured successfully!',
-                      style: getmediumStyle(
-                        color: ColorManager.secondary,
-                        fontSize: ScreenUtil().setSp(AppSize.s12),
+            GetBuilder<SetupProfileController>(
+              builder: (controller) {
+                bool hasSelfieImage = selfieImage != null ||
+                    (controller.profileData.value != null &&
+                     controller.profileData.value!.data.selfie != null &&
+                     controller.profileData.value!.data.selfie.toString().isNotEmpty);
+
+                if (hasSelfieImage) {
+                  return Container(
+                    margin: EdgeInsets.only(bottom: AppSize.s10.h),
+                    padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                    decoration: BoxDecoration(
+                      color: ColorManager.secondary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(
+                        color: ColorManager.secondary.withValues(alpha: 0.3),
                       ),
                     ),
-                  ],
-                ),
-              ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          color: ColorManager.secondary,
+                          size: 16.0,
+                        ),
+                        SizedBox(width: 8.0),
+                        Text(
+                          'Selfie available!',
+                          style: getmediumStyle(
+                            color: ColorManager.secondary,
+                            fontSize: ScreenUtil().setSp(AppSize.s12),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return SizedBox.shrink();
+                }
+              },
+            ),
 
             Align(
               alignment: Alignment.center,
@@ -181,42 +230,54 @@ class _IdentityVerificationScreenState extends State<IdentityVerificationScreen>
               ),
             ),
             SizedBox(height: AppSize.s8.h),
-            InkWell(
-              onTap: () {
-                // Submit selfie if captured
-                if (selfieImage != null) {
-                  Get.find<SetupProfileController>().submitSelfie(
-                    selfieImage: selfieImage!,
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Please capture your selfie first'),
-                      backgroundColor: ColorManager.kRedColor,
+            GetBuilder<SetupProfileController>(
+              builder: (controller) {
+                bool hasSelfieImage = selfieImage != null ||
+                    (controller.profileData.value != null &&
+                     controller.profileData.value!.data.selfie != null &&
+                     controller.profileData.value!.data.selfie.toString().isNotEmpty);
+
+                return InkWell(
+                  onTap: () {
+                    // Submit selfie if available
+                    if (selfieImage != null) {
+                      Get.find<SetupProfileController>().submitSelfie(
+                        selfieImage: selfieImage!,
+                      );
+                    } else if (hasSelfieImage) {
+                      // If existing selfie exists but no new local image, just navigate back
+                      Get.back();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Please capture your selfie first'),
+                          backgroundColor: ColorManager.kRedColor,
+                        ),
+                      );
+                    }
+                  },
+                  child: Container(
+                    width: AppSize.sizeWidth(context),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13.r),
+                      color: hasSelfieImage
+                          ? ColorManager.primary
+                          : ColorManager.kGreyColor,
                     ),
-                  );
-                }
-              },
-              child: Container(
-                width: AppSize.sizeWidth(context),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(13.r),
-                  color: selfieImage != null
-                      ? ColorManager.primary
-                      : ColorManager.kGreyColor,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Center(
-                    child: Text(
-                      selfieImage != null
-                          ? AppStrings.submit
-                          : AppStrings.uploadYourSelfie,
-                      style: getmediumStyle(color: ColorManager.kWhiteColor),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Center(
+                        child: Text(
+                          hasSelfieImage
+                              ? AppStrings.submit
+                              : AppStrings.uploadYourSelfie,
+                          style: getmediumStyle(color: ColorManager.kWhiteColor),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),
