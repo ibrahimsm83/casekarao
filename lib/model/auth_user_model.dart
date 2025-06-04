@@ -244,8 +244,8 @@ class Data {
       certificates: json['certificates'],
       cnic_front: json['cnic_front'],
       cnic_back: json['cnic_back'],
-      barId_front: json['bar_id_front'],
-      barId_back: json['bar_id_back'],
+      barId_front: json['barId_front'],
+      barId_back: json['barId_back'],
       selfie: json['selfie'],
       slots: (json['slots'] as List<dynamic>?)
           ?.map((slot) => Slot.fromJson(slot as Map<String, dynamic>))

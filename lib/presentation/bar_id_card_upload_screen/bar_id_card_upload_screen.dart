@@ -18,6 +18,13 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
   File? frontImage;
   File? backImage;
   final ImagePicker _picker = ImagePicker();
+  late SetupProfileController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<SetupProfileController>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +86,11 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
                           borderRadius: BorderRadius.circular(13.r),
                           color: ColorManager.kWhiteColor,
                         ),
-                        child: frontImage != null
-                            ? ClipRRect(
+                        child: GetBuilder<SetupProfileController>(
+                          builder: (controller) {
+                            // Show local image first if available
+                            if (frontImage != null) {
+                              return ClipRRect(
                                 borderRadius: BorderRadius.circular(13.r),
                                 child: Image.file(
                                   frontImage!,
@@ -88,8 +98,45 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
                                   width: double.infinity,
                                   height: double.infinity,
                                 ),
-                              )
-                            : Column(
+                              );
+                            }
+                            // Show existing image from profileData if available
+                            else if (controller.profileData.value != null &&
+                                controller.profileData.value!.data.barId_front != null &&
+                                controller.profileData.value!.data.barId_front.toString().isNotEmpty) {
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(13.r),
+                                child: Image.network(
+                                  controller.profileData.value!.data.barId_front.toString(),
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  loadingBuilder: (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: ColorManager.primary,
+                                      ),
+                                    );
+                                  },
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(ImageAssets.scanIcon),
+                                        Text(
+                                          AppStrings.holdStill,
+                                          style: getmediumStyle(color: ColorManager.primary),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              );
+                            }
+                            // Show placeholder if no image available
+                            else {
+                              return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SvgPicture.asset(ImageAssets.scanIcon),
@@ -98,7 +145,10 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
                                     style: getmediumStyle(color: ColorManager.primary),
                                   ),
                                 ],
-                              ),
+                              );
+                            }
+                          },
+                        ),
                       ),
                     ),
                 
@@ -147,8 +197,11 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
                           borderRadius: BorderRadius.circular(13.r),
                           color: ColorManager.kWhiteColor,
                         ),
-                        child: backImage != null
-                            ? ClipRRect(
+                        child: GetBuilder<SetupProfileController>(
+                          builder: (controller) {
+                            // Show local image first if available
+                            if (backImage != null) {
+                              return ClipRRect(
                                 borderRadius: BorderRadius.circular(13.r),
                                 child: Image.file(
                                   backImage!,
@@ -156,8 +209,45 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
                                   width: double.infinity,
                                   height: double.infinity,
                                 ),
-                              )
-                            : Column(
+                              );
+                            }
+                            // Show existing image from profileData if available
+                            else if (controller.profileData.value != null &&
+                                controller.profileData.value!.data.barId_back != null &&
+                                controller.profileData.value!.data.barId_back.toString().isNotEmpty) {
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(13.r),
+                                child: Image.network(
+                                  controller.profileData.value!.data.barId_back.toString(),
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  loadingBuilder: (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: ColorManager.primary,
+                                      ),
+                                    );
+                                  },
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(ImageAssets.scanIcon),
+                                        Text(
+                                          AppStrings.holdStill,
+                                          style: getmediumStyle(color: ColorManager.primary),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              );
+                            }
+                            // Show placeholder if no image available
+                            else {
+                              return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SvgPicture.asset(ImageAssets.scanIcon),
@@ -166,7 +256,10 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
                                     style: getmediumStyle(color: ColorManager.primary),
                                   ),
                                 ],
-                              ),
+                              );
+                            }
+                          },
+                        ),
                       ),
                     ),
                 
@@ -212,74 +305,107 @@ class _BarIdCardUploadScreenState extends State<BarIdCardUploadScreen> {
               ),
               SizedBox(height: 5.h),
               // Status indicator
-              if (frontImage != null || backImage != null)
-                Container(
-                  margin: EdgeInsets.only(bottom: AppSize.s10.h),
-                  padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-                  decoration: BoxDecoration(
-                    color: ColorManager.secondary.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(8.0),
-                    border: Border.all(
-                      color: ColorManager.secondary.withValues(alpha: 0.3),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.check_circle,
-                        color: ColorManager.secondary,
-                        size: 16.0,
-                      ),
-                      SizedBox(width: 8.0),
-                      Text(
-                        'Images captured: ${frontImage != null ? "Front" : ""}${frontImage != null && backImage != null ? " & " : ""}${backImage != null ? "Back" : ""}',
-                        style: getmediumStyle(
-                          color: ColorManager.secondary,
-                          fontSize: ScreenUtil().setSp(AppSize.s12),
+              GetBuilder<SetupProfileController>(
+                builder: (controller) {
+                  bool hasFrontImage = frontImage != null ||
+                      (controller.profileData.value != null &&
+                       controller.profileData.value!.data.barId_front != null &&
+                       controller.profileData.value!.data.barId_front.toString().isNotEmpty);
+
+                  bool hasBackImage = backImage != null ||
+                      (controller.profileData.value != null &&
+                       controller.profileData.value!.data.barId_back != null &&
+                       controller.profileData.value!.data.barId_back.toString().isNotEmpty);
+
+                  if (hasFrontImage || hasBackImage) {
+                    return Container(
+                      margin: EdgeInsets.only(bottom: AppSize.s10.h),
+                      padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                      decoration: BoxDecoration(
+                        color: ColorManager.secondary.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(8.0),
+                        border: Border.all(
+                          color: ColorManager.secondary.withValues(alpha: 0.3),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-
-              InkWell(
-                onTap: () {
-                  // Submit Bar ID cards if at least one image is captured
-                  if (frontImage != null || backImage != null) {
-                    Get.find<SetupProfileController>().submitBarIdCards(
-                      frontImage: frontImage,
-                      backImage: backImage,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            color: ColorManager.secondary,
+                            size: 16.0,
+                          ),
+                          SizedBox(width: 8.0),
+                          Text(
+                            'Images available: ${hasFrontImage ? "Front" : ""}${hasFrontImage && hasBackImage ? " & " : ""}${hasBackImage ? "Back" : ""}',
+                            style: getmediumStyle(
+                              color: ColorManager.secondary,
+                              fontSize: ScreenUtil().setSp(AppSize.s12),
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Please capture at least one Bar ID card image'),
-                        backgroundColor: ColorManager.kRedColor,
-                      ),
-                    );
+                    return SizedBox.shrink();
                   }
                 },
-                child: Container(
-                  width: AppSize.sizeWidth(context),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(13.r),
-                    color: (frontImage != null || backImage != null)
-                        ? ColorManager.primary
-                        : ColorManager.kGreyColor,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Center(
-                      child: Text(
-                        (frontImage != null || backImage != null)
-                            ? AppStrings.submit
-                            : AppStrings.uploadYourID,
-                        style: getmediumStyle(color: ColorManager.kWhiteColor),
+              ),
+
+              GetBuilder<SetupProfileController>(
+                builder: (controller) {
+                  bool hasFrontImage = frontImage != null ||
+                      (controller.profileData.value != null &&
+                       controller.profileData.value!.data.barId_front != null &&
+                       controller.profileData.value!.data.barId_front.toString().isNotEmpty);
+
+                  bool hasBackImage = backImage != null ||
+                      (controller.profileData.value != null &&
+                       controller.profileData.value!.data.barId_back != null &&
+                       controller.profileData.value!.data.barId_back.toString().isNotEmpty);
+
+                  bool hasAnyImage = hasFrontImage || hasBackImage;
+
+                  return InkWell(
+                    onTap: () {
+                      // Submit Bar ID cards if at least one image is available
+                      if (hasAnyImage) {
+                        Get.find<SetupProfileController>().submitBarIdCards(
+                          frontImage: frontImage,
+                          backImage: backImage,
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Please capture at least one Bar ID card image'),
+                            backgroundColor: ColorManager.kRedColor,
+                          ),
+                        );
+                      }
+                    },
+                    child: Container(
+                      width: AppSize.sizeWidth(context),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(13.r),
+                        color: hasAnyImage
+                            ? ColorManager.primary
+                            : ColorManager.kGreyColor,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Center(
+                          child: Text(
+                            hasAnyImage
+                                ? AppStrings.submit
+                                : AppStrings.uploadYourID,
+                            style: getmediumStyle(color: ColorManager.kWhiteColor),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
               SizedBox(height: 5.h),
             ],
