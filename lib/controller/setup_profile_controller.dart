@@ -346,7 +346,7 @@ class SetupProfileController extends GetxController {
         break;
       default:
         type = 'optional';
-        bioController.text = profileData.value!.data.bio;
+        bioController.text = profileData.value!.data.bio ?? '';
         selectedType = profileData.value!.data.languages;
         Get.toNamed(CustomRouteNames.kOptionalDetailsScreenRoute);
         break;
