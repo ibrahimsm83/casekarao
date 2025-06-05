@@ -30,11 +30,19 @@ class _SplashScreenState extends State<SplashScreen> {
       if (currentUser.data.isUser) {
         Get.toNamed(CustomRouteNames.kDashboardScreenRoute);
       } else {
+
         if (currentUser.data.isProfileCompleted == 0) {
           Get.toNamed(
             CustomRouteNames.kSetupProfileScreenRoute,
             arguments: currentUser,
           );
+        }else if( currentUser.data.isVerified == 0){
+          Navigator.pushNamedAndRemoveUntil(
+        context,
+        CustomRouteNames.kLoginScreenRoute,
+        (page) => false,
+      );
+          Get.toNamed(CustomRouteNames.kApplicationUnderReviewScreenRoute);
         } else {
           Get.toNamed(CustomRouteNames.kDashboardScreenRoute);
         }

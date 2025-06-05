@@ -1,3 +1,4 @@
+import 'package:casekarao/utils/share_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -170,6 +171,7 @@ class ApplicationUnderReviewScreen extends StatelessWidget {
               button(
                 text: AppStrings.contactSupportTeam,
                 onTap: () {
+                  SharedPreferencesHelper.clearAll();
                   Navigator.pushNamed(
                     context,
                     CustomRouteNames.kLetsGetStartedScreenRouteRoute,

@@ -11,6 +11,16 @@ import '../export_casekarao.dart';
 class SetupProfileController extends GetxController {
   final isUserRoleController = Get.put(UserRoleController());
   final NetworkManagers networkManager = Get.find();
+
+  /// Observe profileData.value!.data.isVerified and navigate when it equals 1
+  void _observeProfileVerification() {
+    ever(profileData, (UserModel? user) {
+      if (user != null && user.data.isProfileCompleted == 1) {
+        // Navigate to application under review screen
+        Get.toNamed(CustomRouteNames.kApplicationUnderReviewScreenRoute);
+      }
+    });
+  }
   // Profile setup items (same as existing)
   List<String> items = [
     AppStrings.personalInformation,
@@ -103,6 +113,8 @@ class SetupProfileController extends GetxController {
     if (Get.arguments != null && Get.arguments is UserModel) {
       profileData.value = Get.arguments as UserModel;
     }
+    // Start observing profile verification status
+    _observeProfileVerification();
   }
 
   /// Submit personal information
@@ -230,119 +242,8 @@ class SetupProfileController extends GetxController {
 
   /// Save and continue to next step
   void saveAndContinue() {
-    if (profileData.value!.data.isVerified == 0) {
-      // If all fields are completed, go to application review
-      Get.toNamed(CustomRouteNames.kApplicationUnderReviewScreenRoute);
-    } else if (profileData.value!.data.isVerified == 1){
-      // Start with personal information
-      //Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
-    }
-  }
-
-  /// Populate personal information fields from user data
-  void _populatePersonalInfoFields() {
-    if (profileData.value != null) {
-      fullNameController.text = profileData.value!.data.name;
-      emailController.text = profileData.value!.data.email;
-      phoneNumberController.text = profileData.value!.data.phone;
-
-      // Set profile image URL if available
-      if (profileData.value!.data.image != null &&
-          profileData.value!.data.image.toString().isNotEmpty) {
-        profileImageUrl.value = profileData.value!.data.image.toString();
-      }
-
-      // Parse date of birth if available
-      if (profileData.value!.data.dob != null &&
-          profileData.value!.data.dob.toString().isNotEmpty) {
-        final dobParts = profileData.value!.data.dob.toString().split('-');
-        if (dobParts.length == 3) {
-          yearController.text = dobParts[0];
-          monthController.text = dobParts[1];
-          dateController.text = dobParts[2];
-        }
-      }
-    }
-  }
-  /// Pick image from gallery
-  Future<void> pickProfileImage() async {
-    try {
-      final XFile? pickedFile = await _imagePicker.pickImage(
-        source: ImageSource.gallery,
-        imageQuality: 80,
-        maxWidth: 800,
-        maxHeight: 800,
-      );
-
-      if (pickedFile != null) {
-        profileImage.value = File(pickedFile.path);
-        // Clear the URL when a new local image is selected
-        profileImageUrl.value = '';
-        update();
-      }
-    } catch (e) {
-      GetToast.show("Error", e: e);
-    }
-  }
-
-  /// Add practice area
-  void addPracticeArea(String area) {
-    final text = area.trim();
-    if (text.isNotEmpty && !practiceAreas.contains(text)) {
-      practiceAreas.add(text);
-      practiceAreasController.clear();
-      update();
-    }
-  }
-
-  /// Remove practice area
-  void removePracticeArea(String area) {
-    practiceAreas.removeWhere((item) => item == area);
-    update();
-  }
-
-  /// Navigate to specific profile section
-  void navigateToSection(String item) {
-    switch (item) {
-      case AppStrings.personalInformation:
-        _populatePersonalInfoFields();
-        type = 'profile';
-        Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
-        break;
-      case AppStrings.legalExperience:
-        type = 'legal';
-        legalExperienceUpdateValues();
-        Get.toNamed(CustomRouteNames.kLegalExperienceScreenRoute);
-        break;
-      case AppStrings.educationAndCertifications:
-        type = 'education';
-        educationCertificateUpdateValues();
-        Get.toNamed(CustomRouteNames.kEducationAndCertificationScreenRoute);
-        break;
-      case AppStrings.businessAndAvailability:
-        type = 'availability';
-        businessAvailabilityUpdateValues();
-        Get.toNamed(CustomRouteNames.kBusinessAndAvailabilityScreenRoute);
-        break;
-      case AppStrings.governmentIssuedIDUpload:
-        type = 'gov_id';
-        Get.toNamed(CustomRouteNames.kCNICUploadScreenRoute);
-        break;
-      case AppStrings.barIDCardUpload:
-        type = 'bar_id';
-        Get.toNamed(CustomRouteNames.kBarIdCardUploadScreenRoute);
-        break;
-      case AppStrings.selfieForIdentityVerification:
-        type = 'selfie';
-        Get.toNamed(CustomRouteNames.kIdentityVerificationScreenRoute);
-        break;
-      default:
-        type = 'optional';
-        bioController.text = profileData.value!.data.bio ?? '';
-        selectedType = profileData.value!.data.languages;
-        Get.toNamed(CustomRouteNames.kOptionalDetailsScreenRoute);
-        break;
-    }
+    // Navigation to application under review screen is handled automatically
+    // by _observeProfileVerification() when profileData.value!.data.isVerified == 1
   }
 
   /// Submit legal experience
@@ -654,6 +555,113 @@ class SetupProfileController extends GetxController {
     }
   }
 
+    /// Populate personal information fields from user data
+  void _populatePersonalInfoFields() {
+    if (profileData.value != null) {
+      fullNameController.text = profileData.value!.data.name;
+      emailController.text = profileData.value!.data.email;
+      phoneNumberController.text = profileData.value!.data.phone;
+
+      // Set profile image URL if available
+      if (profileData.value!.data.image != null &&
+          profileData.value!.data.image.toString().isNotEmpty) {
+        profileImageUrl.value = profileData.value!.data.image.toString();
+      }
+
+      // Parse date of birth if available
+      if (profileData.value!.data.dob != null &&
+          profileData.value!.data.dob.toString().isNotEmpty) {
+        final dobParts = profileData.value!.data.dob.toString().split('-');
+        if (dobParts.length == 3) {
+          yearController.text = dobParts[0];
+          monthController.text = dobParts[1];
+          dateController.text = dobParts[2];
+        }
+      }
+    }
+  }
+  
+  /// Pick image from gallery
+  Future<void> pickProfileImage() async {
+    try {
+      final XFile? pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 80,
+        maxWidth: 800,
+        maxHeight: 800,
+      );
+
+      if (pickedFile != null) {
+        profileImage.value = File(pickedFile.path);
+        // Clear the URL when a new local image is selected
+        profileImageUrl.value = '';
+        update();
+      }
+    } catch (e) {
+      GetToast.show("Error", e: e);
+    }
+  }
+
+  /// Add practice area
+  void addPracticeArea(String area) {
+    final text = area.trim();
+    if (text.isNotEmpty && !practiceAreas.contains(text)) {
+      practiceAreas.add(text);
+      practiceAreasController.clear();
+      update();
+    }
+  }
+
+  /// Remove practice area
+  void removePracticeArea(String area) {
+    practiceAreas.removeWhere((item) => item == area);
+    update();
+  }
+
+  /// Navigate to specific profile section
+  void navigateToSection(String item) {
+    switch (item) {
+      case AppStrings.personalInformation:
+        _populatePersonalInfoFields();
+        type = 'profile';
+        Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
+        break;
+      case AppStrings.legalExperience:
+        type = 'legal';
+        legalExperienceUpdateValues();
+        Get.toNamed(CustomRouteNames.kLegalExperienceScreenRoute);
+        break;
+      case AppStrings.educationAndCertifications:
+        type = 'education';
+        educationCertificateUpdateValues();
+        Get.toNamed(CustomRouteNames.kEducationAndCertificationScreenRoute);
+        break;
+      case AppStrings.businessAndAvailability:
+        type = 'availability';
+        businessAvailabilityUpdateValues();
+        Get.toNamed(CustomRouteNames.kBusinessAndAvailabilityScreenRoute);
+        break;
+      case AppStrings.governmentIssuedIDUpload:
+        type = 'gov_id';
+        Get.toNamed(CustomRouteNames.kCNICUploadScreenRoute);
+        break;
+      case AppStrings.barIDCardUpload:
+        type = 'bar_id';
+        Get.toNamed(CustomRouteNames.kBarIdCardUploadScreenRoute);
+        break;
+      case AppStrings.selfieForIdentityVerification:
+        type = 'selfie';
+        Get.toNamed(CustomRouteNames.kIdentityVerificationScreenRoute);
+        break;
+      default:
+        type = 'optional';
+        bioController.text = profileData.value!.data.bio ?? '';
+        selectedType = profileData.value!.data.languages;
+        Get.toNamed(CustomRouteNames.kOptionalDetailsScreenRoute);
+        break;
+    }
+  }
+  
   educationCertificateUpdateValues() {
     lawSchoolController.text = profileData.value!.data.lawSchool ?? '';
     degreeController.text = profileData.value!.data.degree ?? '';
