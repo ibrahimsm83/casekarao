@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../controller/setup_profile_controller.dart';
+// import '../../controller/setup_profile_controller.dart';
 import '../../export_casekarao.dart';
 
 class SetupProfileScreen extends StatelessWidget {
@@ -15,6 +15,18 @@ class SetupProfileScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: ColorManager.kBackgroundColor,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // Show Alice HTTP inspector
+              //AliceHelper.showInspector();
+            },
+            backgroundColor: ColorManager.secondary,
+            tooltip: 'Show Network Inspector',
+            child: Icon(
+              Icons.network_check,
+              color: ColorManager.kWhiteColor,
+            ),
+          ),
           body: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: AppSize.sizeWidth(context) * 0.05,
@@ -80,7 +92,9 @@ class SetupProfileScreen extends StatelessWidget {
                   ),
                   _button(
                     text: AppStrings.saveAndContinue,
-                    onTap: controller.saveAndContinue,
+                    onTap: 
+                    controller.profileData.value!.data.isProfileCompleted == 1?
+                    controller.saveAndContinue:null,
                   ),
                   SizedBox(height: AppSize.s8.h),
                 ],

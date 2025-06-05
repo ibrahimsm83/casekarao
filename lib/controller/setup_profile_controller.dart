@@ -233,12 +233,12 @@ class SetupProfileController extends GetxController {
 
   /// Save and continue to next step
   void saveAndContinue() {
-    if (isCompleteAllRequiredFields) {
+    if (profileData.value!.data.isVerified == 0) {
       // If all fields are completed, go to application review
       Get.toNamed(CustomRouteNames.kApplicationUnderReviewScreenRoute);
-    } else {
+    } else if (profileData.value!.data.isVerified == 1){
       // Start with personal information
-      Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
+      //Get.toNamed(CustomRouteNames.kPersonalInformationScreenRoute);
     }
   }
 
