@@ -180,13 +180,9 @@ class SetupProfileController extends GetxController {
         SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
         SharedPreferencesHelper.saveUser(user);
         SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
-
-        GetToast.show('Success', responce: response);
         update();
-        // Navigate back to setup profile screen
-        // NavigationBar.of(context).pop();
-        Get.back();
-        //Get.toNamed(CustomRouteNames.kSetupProfileScreenRoute);
+        //Get.back();
+        GetToast.show('Success', responce: response);
       } else {
         GetToast.show("Error", responce: response);
       }
@@ -220,8 +216,9 @@ class SetupProfileController extends GetxController {
         SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 
         // Show success message
-        GetToast.show('Success', responce: response);
         update();
+        //Get.back();
+        GetToast.show('Success', responce: response);
       } else {
         // Handle API error response
         GetToast.show("Error", responce: response);
@@ -267,12 +264,6 @@ class SetupProfileController extends GetxController {
       }
     }
   }
-
-  /// Format phone number by removing spaces
-  // void formatPhoneNumber() {
-  //   phoneNumberController.text = phoneNumberController.text.replaceAll(" ", "");
-  // }
-
   /// Pick image from gallery
   Future<void> pickProfileImage() async {
     try {
@@ -389,7 +380,7 @@ class SetupProfileController extends GetxController {
         GetToast.show('Success', responce: response);
 
         // Navigate back to setup profile screen
-        Get.back();
+        //Get.back();
         update();
       } else {
         GetToast.show("Error", responce: response);
@@ -433,7 +424,7 @@ class SetupProfileController extends GetxController {
         GetToast.show('Success', responce: response);
 
         // Navigate back to setup profile screen
-        Get.back();
+        //Get.back();
         update();
       } else {
         GetToast.show("Error", responce: response);
@@ -473,7 +464,7 @@ class SetupProfileController extends GetxController {
         SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 
         GetToast.show('Success', responce: response);
-        Get.back();
+        //Get.back();
         update();
       } else {
         GetToast.show("Error", responce: response);
@@ -539,7 +530,7 @@ class SetupProfileController extends GetxController {
         SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 
         GetToast.show('Success', responce: response);
-        Get.back();
+        //Get.back();
         update();
       } else {
         GetToast.show("Error", responce: response);
@@ -605,7 +596,7 @@ class SetupProfileController extends GetxController {
         SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
 
         GetToast.show('Success', responce: response);
-        Get.back();
+        //Get.back();
         update();
       } else {
         GetToast.show("Error", responce: response);
@@ -652,9 +643,8 @@ class SetupProfileController extends GetxController {
         SharedPreferencesHelper.saveAuthToken(user.data.apiToken);
         SharedPreferencesHelper.saveUser(user);
         SharedPreferencesHelper.saveUserRole(isUserRoleController.isUser);
-        Get.back();
-        //GetToast.show('Success', responce: response);
         //Get.back();
+        GetToast.show('Success', responce: response);
         update();
       } else {
         GetToast.show("Error", responce: response);

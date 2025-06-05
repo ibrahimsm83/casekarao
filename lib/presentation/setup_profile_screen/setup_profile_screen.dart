@@ -15,18 +15,18 @@ class SetupProfileScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: ColorManager.kBackgroundColor,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              // Show Alice HTTP inspector
-              //AliceHelper.showInspector();
-            },
-            backgroundColor: ColorManager.secondary,
-            tooltip: 'Show Network Inspector',
-            child: Icon(
-              Icons.network_check,
-              color: ColorManager.kWhiteColor,
-            ),
-          ),
+          // floatingActionButton: FloatingActionButton(
+          //   onPressed: () {
+          //     // Show Alice HTTP inspector
+          //     AliceHelper.showInspector();
+          //   },
+          //   backgroundColor: ColorManager.secondary,
+          //   tooltip: 'Show Network Inspector',
+          //   child: Icon(
+          //     Icons.network_check,
+          //     color: ColorManager.kWhiteColor,
+          //   ),
+          // ),
           body: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: AppSize.sizeWidth(context) * 0.05,
@@ -95,6 +95,9 @@ class SetupProfileScreen extends StatelessWidget {
                     onTap: 
                     controller.profileData.value!.data.isProfileCompleted == 1?
                     controller.saveAndContinue:null,
+                    color: controller.profileData.value!.data.isProfileCompleted == 1
+                            ? ColorManager.primary
+                            : ColorManager.kGreyColor,
                   ),
                   SizedBox(height: AppSize.s8.h),
                 ],

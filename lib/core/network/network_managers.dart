@@ -3,21 +3,21 @@ import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:get/get.dart';
-// import 'package:alice/alice.dart';
+import 'package:alice/alice.dart';
 
 class NetworkManagers extends GetxService {
   late Dio _dio;
-  //late Alice alice;
+  late Alice alice;
   static const String baseUrl = 'https://staging.casekarao.com/api';
   static const int _timeout = 30000; // 30 seconds
 
 
   void _initializeDio() {
     // Initialize Alice for HTTP inspection
-    // alice = Alice(
-    //   showNotification: true,
-    //   showInspectorOnShake: true,
-    // );
+    alice = Alice(
+      showNotification: false,
+      showInspectorOnShake: true,
+    );
 
     _dio = Dio(BaseOptions(
       baseUrl: baseUrl,
@@ -32,7 +32,7 @@ class NetworkManagers extends GetxService {
     ));
 
     // Add Alice interceptor first (for HTTP inspection)
-   // _dio.interceptors.add(alice.getDioInterceptor());
+   _dio.interceptors.add(alice.getDioInterceptor());
 
     // Add logging interceptor
     _dio.interceptors.add(
@@ -142,12 +142,12 @@ class NetworkManagers extends GetxService {
   // Add other methods as needed (DELETE, PATCH, etc.)
 
   /// Get Alice instance for manual inspection
-  // Alice getAlice() => alice;
+  Alice getAlice() => alice;
 
-  // /// Show Alice inspector manually
-  // void showAliceInspector() {
-  //   alice.showInspector();
-  // }
+  /// Show Alice inspector manually
+  void showAliceInspector() {
+    alice.showInspector();
+  }
 
   @override
   void onInit() {
