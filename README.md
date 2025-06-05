@@ -104,3 +104,8 @@ Finally, let's create a simple example of how to use this controller in a screen
 Now, let's update the `export_casekarao.dart` file to include our network module:
 
 Let's also update the model export file to include our new auth user model:
+
+remove prefilled value
+signin with phone
+pop border fix
+phone validation

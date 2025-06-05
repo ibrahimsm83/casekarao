@@ -23,7 +23,14 @@ class ApplicationUnderReviewScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: InkWell(
-                  onTap: () => Navigator.pop(context),
+                  onTap: (){
+                    SharedPreferencesHelper.clearAll();
+                    Navigator.pushNamed(
+                      context,
+                      CustomRouteNames.kLetsGetStartedScreenRouteRoute,
+                    );
+                    // Navigator.pop(context);
+                  }, 
                   child: Container(
                     height: 44.h,
                     width: 44.h,

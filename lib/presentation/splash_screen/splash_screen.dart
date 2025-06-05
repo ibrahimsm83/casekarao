@@ -38,10 +38,10 @@ class _SplashScreenState extends State<SplashScreen> {
           );
         }else if( currentUser.data.isVerified == 0){
           Navigator.pushNamedAndRemoveUntil(
-        context,
-        CustomRouteNames.kLoginScreenRoute,
-        (page) => false,
-      );
+          context,
+          CustomRouteNames.kLoginScreenRoute,
+            (page) => false,
+          );
           Get.toNamed(CustomRouteNames.kApplicationUnderReviewScreenRoute);
         } else {
           Get.toNamed(CustomRouteNames.kDashboardScreenRoute);

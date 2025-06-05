@@ -15,7 +15,7 @@ class SetupProfileController extends GetxController {
   /// Observe profileData.value!.data.isVerified and navigate when it equals 1
   void _observeProfileVerification() {
     ever(profileData, (UserModel? user) {
-      if (user != null && user.data.isProfileCompleted == 1) {
+      if (profileData.value!.data.isProfileCompleted == 1) {
         // Navigate to application under review screen
         Get.toNamed(CustomRouteNames.kApplicationUnderReviewScreenRoute);
       }
