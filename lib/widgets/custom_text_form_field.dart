@@ -9,6 +9,7 @@ class CustomTextFormField extends StatefulWidget {
   bool readOnly;
   double horizontalMergin;
   int maxLines;
+  int? maxLength;
   Color fillColor;
   TextInputType? keyboardType;
   TextEditingController? controller;
@@ -35,6 +36,7 @@ class CustomTextFormField extends StatefulWidget {
     this.onSubmitted,
     this.radius,
     this.maxLines = 1,
+    this.maxLength,
     this.suffixIcon,
     this.horizontalMergin = 0.05,
     this.textAlign = TextAlign.start,
@@ -72,6 +74,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusNode: widget.focusNode,
         controller: widget.controller,
         maxLines: widget.maxLines,
+        maxLength: widget.maxLength,
         onChanged: widget.onChanged,
         onFieldSubmitted: widget.onSubmitted,
         style: getRegularStyle(color: ColorManager.primary),

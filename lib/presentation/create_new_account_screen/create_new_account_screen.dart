@@ -151,6 +151,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
 
                   CustomTextFormField(
                     keyboardType: TextInputType.number,
+                    maxLength: 11,
                     hintText: AppStrings.phoneHintText,
                     controller: controller.phoneNumberController,
                     fillColor: ColorManager.kWhiteColor,
@@ -159,6 +160,10 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                     validator: (String? val) {
                       if (val == null || val.isEmpty) {
                         return "Enter phone number";
+                      }
+                      // Check if phone number matches Pakistani format (11 digits starting with 03)
+                      if (!RegExp(r'^03\d{9}$').hasMatch(val)) {
+                        return "Enter valid phone number (e.g., 03132760360)";
                       }
                       return null;
                     },
@@ -251,43 +256,46 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                       Navigator.pop(context);
                     },
                   ),
-                   if (!isPhoneOnly) ...[
-                  Row(
-                    children: [
-                      Flexible(
-                        child: button(
-                          text: AppStrings.apple,
-                          iconPath: ImageAssets.appleIcon,
-                          onTap: () {},
-                          color: ColorManager.kWhiteColor,
-                          fontColor: ColorManager.primary,
-                        ),
-                      ),
-                      SizedBox(width: AppSize.s10.w),
-                      Flexible(
-                        child: button(
-                          text: AppStrings.google,
-                          iconPath: ImageAssets.googleIcon,
-                          onTap: () {},
-                          color: ColorManager.kWhiteColor,
-                          fontColor: ColorManager.primary,
-                        ),
-                      ),
-                    ],
-                  ),
 
-                  textSpan(
-                    text1: AppStrings.byProceedingYouAgreeToThe,
-                    text2:
-                        "${AppStrings.termsAndConditions} and\t${AppStrings.privacyPolicy}",
-                    onTap: () {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   CustomRouteNames.kLoginScreenRoute,
-                      // );
-                    },
-                  ),
-                  SizedBox(height: 5.h),]
+                  // Only show Apple/Google buttons and terms if not phone-only registration
+                  if (!isPhoneOnly) ...[
+                    Row(
+                      children: [
+                        Flexible(
+                          child: button(
+                            text: AppStrings.apple,
+                            iconPath: ImageAssets.appleIcon,
+                            onTap: () {},
+                            color: ColorManager.kWhiteColor,
+                            fontColor: ColorManager.primary,
+                          ),
+                        ),
+                        SizedBox(width: AppSize.s10.w),
+                        Flexible(
+                          child: button(
+                            text: AppStrings.google,
+                            iconPath: ImageAssets.googleIcon,
+                            onTap: () {},
+                            color: ColorManager.kWhiteColor,
+                            fontColor: ColorManager.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    textSpan(
+                      text1: AppStrings.byProceedingYouAgreeToThe,
+                      text2:
+                          "${AppStrings.termsAndConditions} and\t${AppStrings.privacyPolicy}",
+                      onTap: () {
+                        // Navigator.pushNamed(
+                        //   context,
+                        //   CustomRouteNames.kLoginScreenRoute,
+                        // );
+                      },
+                    ),
+                    SizedBox(height: 5.h),
+                  ],
                 ],
               ),
             ),

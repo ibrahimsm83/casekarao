@@ -109,6 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   CustomTextFormField(
+                    keyboardType: TextInputType.number,
+                    maxLength: 11,
                     hintText: AppStrings.phoneNumberHintText,
                     controller: controller.phoneNumberController,
                     fillColor: ColorManager.kWhiteColor,
@@ -117,6 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: (String? val) {
                       if (val == null || val.isEmpty) {
                         return "Enter Phone Number";
+                      }
+                      // Check if phone number matches Pakistani format (11 digits starting with 03)
+                      if (!RegExp(r'^03\d{9}$').hasMatch(val)) {
+                        return "Enter valid phone number (e.g., 03132760036)";
                       }
                       return null;
                     },

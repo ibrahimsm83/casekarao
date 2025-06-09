@@ -10,8 +10,8 @@ class LoginController extends GetxController {
   final isUserRoleController = Get.find<UserRoleController>();
 
   // Text controllers for form fields
-  final TextEditingController phoneNumberController = TextEditingController(text: "12345678",);
-  final TextEditingController passwordController = TextEditingController(text: "Abcd@12345",);
+  final TextEditingController phoneNumberController = TextEditingController(text: "",);
+  final TextEditingController passwordController = TextEditingController(text: "",);
 
   // Focus nodes
   final FocusNode phoneNumberFocusNode = FocusNode();
