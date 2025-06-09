@@ -150,6 +150,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                   ),
 
                   CustomTextFormField(
+                    keyboardType: TextInputType.number,
                     hintText: AppStrings.phoneHintText,
                     controller: controller.phoneNumberController,
                     fillColor: ColorManager.kWhiteColor,

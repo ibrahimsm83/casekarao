@@ -42,18 +42,18 @@ class CreateNewAccountController extends GetxController {
     phoneNumberController.text = phoneNumberController.text.replaceAll(" ", "");
   }
   // Check password strength
-  void checkPasswordStrength(String password) {
-    _password.value = password;
-    int strength = 0;
+  // void checkPasswordStrength(String password) {
+  //   _password.value = password;
+  //   int strength = 0;
 
-    // Conditions to check password strength
-    if (password.length >= 8) strength++;
-    if (RegExp(r'(?=.*[A-Z])').hasMatch(password)) strength++;
-    if (RegExp(r'(?=.*\d)').hasMatch(password)) strength++;
+  //   // Conditions to check password strength
+  //   if (password.length >= 8) strength++;
+  //   if (RegExp(r'(?=.*[A-Z])').hasMatch(password)) strength++;
+  //   if (RegExp(r'(?=.*\d)').hasMatch(password)) strength++;
 
-    // Convert strength to progress bar value (0.0 to 1.0)
-    _passwordStrength.value = strength / 3; // 3 is the max strength level
-  }
+  //   // Convert strength to progress bar value (0.0 to 1.0)
+  //   _passwordStrength.value = strength / 3; // 3 is the max strength level
+  // }
 
   Future<void> createUser(context, {bool isLawyer = true, bool isPhoneOnly = false}) async {
     //ShowLoading(context).startLoading();
