@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../presentation/resources/color_manager.dart';
 import '../presentation/resources/export_resources.dart';
+import '../core/network/alice_helper.dart';
 
 
 class MyApp extends StatefulWidget {
@@ -33,6 +34,7 @@ class _MyAppState extends State<MyApp> {
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
+            navigatorKey: AliceHelper.alice.getNavigatorKey(),
             builder: EasyLoading.init(),
             debugShowCheckedModeBanner: false,
             title: 'CaseKarao',

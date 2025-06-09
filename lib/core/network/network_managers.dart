@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:get/get.dart';
 import 'package:alice/alice.dart';
+import 'package:flutter/material.dart';
 
 class NetworkManagers extends GetxService {
   late Dio _dio;
@@ -15,8 +16,10 @@ class NetworkManagers extends GetxService {
   void _initializeDio() {
     // Initialize Alice for HTTP inspection
     alice = Alice(
-      showNotification: false,
+      showNotification: true,
       showInspectorOnShake: true,
+      showShareButton: true,
+      navigatorKey: GlobalKey<NavigatorState>(),
     );
 
     _dio = Dio(BaseOptions(
