@@ -1,4 +1,3 @@
-import 'package:casekarao/controller/setup_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,16 +12,18 @@ class OptionalDetailsScreen extends StatefulWidget {
 }
 
 class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
-  final _formKey = GlobalKey<FormState>();
   FocusNode node1 = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.kBackgroundColor,
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
+    return GetBuilder<SetupProfileController>(
+      init: SetupProfileController(),
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: ColorManager.kBackgroundColor,
+          body: SingleChildScrollView(
+            child: Form(
+              key: controller.optionalDetailsFormKey,
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: AppSize.sizeWidth(context) * 0.05,
@@ -81,8 +82,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                   children: [
                     CustomTextFormField(
                       hintText: AppStrings.exTellUsMoreAboutYourself,
-                      controller:
-                          Get.find<SetupProfileController>().bioController,
+                      controller: controller.bioController,
                       fillColor: ColorManager.kWhiteColor,
                       maxLines: 6,
                       focusNode: node1,
@@ -106,7 +106,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                       right: 15,
                       bottom: 10,
                       child: Text(
-                        "${Get.find<SetupProfileController>().bioController.text.length}/500",
+                        "${controller.bioController.text.length}/500",
                         style: getRegularStyle(
                           color: ColorManager.kGreyColor,
                           fontSize: ScreenUtil().setSp(AppSize.s12),
@@ -115,15 +115,15 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
                     ),
                   ],
                 ),
-                heading(AppStrings.languagesSpoken, AppStrings.multiSelect),
-                language(),
+                _heading(AppStrings.languagesSpoken, AppStrings.multiSelect),
+                _language(controller),
 
                 SizedBox(height: AppSize.sizeHeight(context) * 0.2),
-                button(
+                _button(
                   text: AppStrings.submit,
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      Get.find<SetupProfileController>().optionalDetails();
+                    if (controller.optionalDetailsFormKey.currentState!.validate()) {
+                      controller.optionalDetails();
                     }
                   },
                 ),
@@ -131,12 +131,14 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
               ],
             ),
           ),
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 
-  Widget button({
+  Widget _button({
     Function()? onTap,
     String? text,
     Color? color,
@@ -158,7 +160,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
     );
   }
 
-  Widget heading(String text1, String text2) {
+  Widget _heading(String text1, String text2) {
     return Padding(
       padding: EdgeInsets.only(top: AppSize.s20.h, bottom: AppSize.s6.h),
       child: Row(
@@ -182,13 +184,13 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
     );
   }
 
-  Widget language() {
+  Widget _language(SetupProfileController controller) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0.0),
       child: SizedBox(
         height: 45,
         child: DropdownButtonFormField<String>(
-          value: Get.find<SetupProfileController>().selectedType,
+          value: controller.selectedType,
           style: getRegularStyle(color: ColorManager.primary),
           dropdownColor: ColorManager.kWhiteColor,
           icon: Padding(
@@ -208,7 +210,7 @@ class _OptionalDetailsScreenState extends State<OptionalDetailsScreen> {
           ),
           onChanged: (String? newValue) {
             setState(() {
-                Get.find<SetupProfileController>().selectedType =newValue;
+                controller.selectedType = newValue;
             });
           },
           items:

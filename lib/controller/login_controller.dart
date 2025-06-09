@@ -7,7 +7,7 @@ import 'package:casekarao/core/network/network_managers.dart';
 
 class LoginController extends GetxController {
   final NetworkManagers networkManager = Get.find();
-  final isUserRoleController = Get.put(UserRoleController());
+  final isUserRoleController = Get.find<UserRoleController>();
 
   // Text controllers for form fields
   final TextEditingController phoneNumberController = TextEditingController(text: "12345678",);
@@ -18,7 +18,7 @@ class LoginController extends GetxController {
   final FocusNode passwordFocusNode = FocusNode();
 
   // Form key
-  final formKey = GlobalKey<FormState>();
+  final loginFormKey = GlobalKey<FormState>();
 
   // @override
   // void onInit() {
@@ -37,7 +37,7 @@ class LoginController extends GetxController {
 
   /// Login user
   Future<void> login() async {
-    if (!formKey.currentState!.validate()) {
+    if (!loginFormKey.currentState!.validate()) {
       return;
     }
 

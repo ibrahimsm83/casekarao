@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class CreateNewAccountController extends GetxController {
   final NetworkManagers networkManager = Get.find();
-  final isUserRoleController = Get.put(UserRoleController());
+  final isUserRoleController = Get.find<UserRoleController>();
   NewUser? user;
 
   // API service

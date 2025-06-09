@@ -13,7 +13,7 @@ import 'package:casekarao/core/network/network_managers.dart';
 
 class OtpController extends GetxController {
   final TextEditingController textEditingController = TextEditingController();
-  final isUserRoleController = Get.put(UserRoleController());
+  final isUserRoleController = Get.find<UserRoleController>();
   final NetworkManagers networkManager = Get.find();
 
   // Stream controller for error animations (same as existing)

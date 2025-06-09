@@ -16,7 +16,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final GlobalKey<ScaffoldState> screenKey = GlobalKey<ScaffoldState>();
-  final isUserRoleController = Get.put(UserRoleController());
+  final isUserRoleController = Get.find<UserRoleController>();
   Timer? _timer;
 
   _startDelay() {

@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
             backgroundColor: ColorManager.kBackgroundColor,
             body: SingleChildScrollView(
               child: Form(
-                key: controller.formKey,
+                key: controller.loginFormKey,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: AppSize.sizeWidth(context) * 0.05,

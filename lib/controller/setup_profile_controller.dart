@@ -9,7 +9,7 @@ import '../core/network/network_managers.dart';
 import '../export_casekarao.dart';
 
 class SetupProfileController extends GetxController {
-  final isUserRoleController = Get.put(UserRoleController());
+  final isUserRoleController = Get.find<UserRoleController>();
   final NetworkManagers networkManager = Get.find();
 
   /// Observe profileData.value!.data.isVerified and navigate when it equals 1
@@ -105,6 +105,12 @@ class SetupProfileController extends GetxController {
 
   // Education and Certification form key
   final educationFormKey = GlobalKey<FormState>();
+
+  // Business and Availability form key
+  final businessAvailabilityFormKey = GlobalKey<FormState>();
+
+  // Optional Details form key
+  final optionalDetailsFormKey = GlobalKey<FormState>();
 
   @override
   void onInit() {

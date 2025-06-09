@@ -15,7 +15,6 @@ class BusinessAndAvailabilityScreen extends StatefulWidget {
 class _BusinessAndAvailabilityScreenState
     extends State<BusinessAndAvailabilityScreen> {
   int selectedid = 0;
-  final _formKey = GlobalKey<FormState>();
   FocusNode node1 = FocusNode();
   final _officeAddressController = TextEditingController();
 
@@ -93,7 +92,7 @@ class _BusinessAndAvailabilityScreenState
         backgroundColor: ColorManager.kBackgroundColor,
         body: SingleChildScrollView(
           child: Form(
-            key: _formKey,
+            key: controller.businessAvailabilityFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -209,7 +208,7 @@ class _BusinessAndAvailabilityScreenState
                   child: button(
                     text: AppStrings.submit,
                     onTap: () {
-                      bool isValid = _formKey.currentState!.validate();
+                      bool isValid = controller.businessAvailabilityFormKey.currentState!.validate();
 
                       if (isValid) {
                         // Convert daySchedules to slots format
