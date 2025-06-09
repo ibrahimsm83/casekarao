@@ -56,6 +56,7 @@ class CustomRouteGenerator {
           builder: (context) {
             return const CreateNewAccountScreen();
           },
+          settings: settings, // Pass settings to allow access to arguments
         );
       case CustomRouteNames.kOtpVerificationScreenRoute:
         return MaterialPageRoute(

@@ -94,7 +94,13 @@ class _LetsGetStartedViewState extends State<LetsGetStartedView> {
               child: button(
                 text: AppStrings.continueWithPhoneNumber,
                 iconPath: ImageAssets.phoneIcon,
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    CustomRouteNames.kCreateNewAccountScreenRoute,
+                    arguments: {'isPhoneOnly': true},
+                  );
+                },
               ),
             ),
             Text(

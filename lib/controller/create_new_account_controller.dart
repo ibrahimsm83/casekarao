@@ -55,12 +55,12 @@ class CreateNewAccountController extends GetxController {
     _passwordStrength.value = strength / 3; // 3 is the max strength level
   }
 
-  Future<void> createUser(context, {bool isLawyer = true}) async {
+  Future<void> createUser(context, {bool isLawyer = true, bool isPhoneOnly = false}) async {
     //ShowLoading(context).startLoading();
 
     final data = {
-      'name': fullNameController.text.trim(),
-      'email': emailController.text.trim(),
+      'name': isPhoneOnly ? 'You name here' : fullNameController.text.trim(),
+      'email': isPhoneOnly ? 'Your email here' : emailController.text.trim(),
       'phone': phoneNumberController.text.trim(),
       'password': passwordController.text,
       'user_type':

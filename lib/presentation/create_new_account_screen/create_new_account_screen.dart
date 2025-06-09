@@ -28,6 +28,10 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Check if coming from "Continue with Phone Number"
+    final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final bool isPhoneOnly = arguments?['isPhoneOnly'] ?? false;
+
     return Scaffold(
       backgroundColor: ColorManager.kBackgroundColor,
       body: GestureDetector(
@@ -74,63 +78,66 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                       fontSize: ScreenUtil().setSp(AppSize.s14),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: AppSize.s20.h,
-                      bottom: AppSize.s6.h,
-                    ),
-                    child: Text(
-                      AppStrings.fullName,
-                      style: getmediumStyle(
-                        color: ColorManager.kDarkGreyColor,
-                        fontSize: ScreenUtil().setSp(AppSize.s12),
+                  // Conditionally show name and email fields
+                  if (!isPhoneOnly) ...[
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: AppSize.s20.h,
+                        bottom: AppSize.s6.h,
+                      ),
+                      child: Text(
+                        AppStrings.fullName,
+                        style: getmediumStyle(
+                          color: ColorManager.kDarkGreyColor,
+                          fontSize: ScreenUtil().setSp(AppSize.s12),
+                        ),
                       ),
                     ),
-                  ),
-                  CustomTextFormField(
-                    hintText: AppStrings.fullNameHintText,
-                    controller: controller.fullNameController,
-                    fillColor: ColorManager.kWhiteColor,
-                    focusNode: controller.fullNameFocusNode,
-                    horizontalMergin: 0.0,
-                    validator: (String? val) {
-                      if (val == null || val.isEmpty) {
-                        return "Enter name";
-                      }
-                      return null;
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: AppSize.s10.h,
-                      bottom: AppSize.s6.h,
-                    ),
-                    child: Text(
-                      AppStrings.email,
-                      style: getmediumStyle(
-                        color: ColorManager.kDarkGreyColor,
-                        fontSize: ScreenUtil().setSp(AppSize.s12),
-                      ),
-                    ),
-                  ),
-                  CustomTextFormField(
-                    hintText: AppStrings.emailHintText,
-                    controller: controller.emailController,
-                    fillColor: ColorManager.kWhiteColor,
-                    focusNode: controller.emailFocusNode,
-                    horizontalMergin: 0.0,
-                    validator: (String? val) {
-                      if (val == null || val.isEmpty) {
-                        return AppStrings.enterEmailAddress;
-                      } else if (val.isValidEmail) {
+                    CustomTextFormField(
+                      hintText: AppStrings.fullNameHintText,
+                      controller: controller.fullNameController,
+                      fillColor: ColorManager.kWhiteColor,
+                      focusNode: controller.fullNameFocusNode,
+                      horizontalMergin: 0.0,
+                      validator: (String? val) {
+                        if (val == null || val.isEmpty) {
+                          return "Enter name";
+                        }
                         return null;
-                      }
-                      return 'Invalid Email';
-                    },
-                  ),
+                      },
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: AppSize.s10.h,
+                        bottom: AppSize.s6.h,
+                      ),
+                      child: Text(
+                        AppStrings.email,
+                        style: getmediumStyle(
+                          color: ColorManager.kDarkGreyColor,
+                          fontSize: ScreenUtil().setSp(AppSize.s12),
+                        ),
+                      ),
+                    ),
+                    CustomTextFormField(
+                      hintText: AppStrings.emailHintText,
+                      controller: controller.emailController,
+                      fillColor: ColorManager.kWhiteColor,
+                      focusNode: controller.emailFocusNode,
+                      horizontalMergin: 0.0,
+                      validator: (String? val) {
+                        if (val == null || val.isEmpty) {
+                          return AppStrings.enterEmailAddress;
+                        } else if (val.isValidEmail) {
+                          return null;
+                        }
+                        return 'Invalid Email';
+                      },
+                    ),
+                  ],
                   Padding(
                     padding: EdgeInsets.only(
-                      top: AppSize.s10.h,
+                      top: isPhoneOnly ? AppSize.s20.h : AppSize.s10.h,
                       bottom: AppSize.s6.h,
                     ),
                     child: Text(
@@ -219,9 +226,8 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                     onTap: () {
                       if (controller.formKey.currentState!.validate()) {
                         if (controller.phoneNumberController.text.isNotEmpty) {
-                          // Call register with isLawyer=true for lawyer registration
-                          //controller.register(context, isLawyer: true);
-                          controller.createUser(context);
+                          // Call register with isPhoneOnly parameter
+                          controller.createUser(context, isPhoneOnly: isPhoneOnly);
                         } else {
                           CustomSnacksBar.showSnackBar(
                             context,
@@ -236,30 +242,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                     },
                   ),
 
-                  // Display registration status message
-                  // Obx(() {
-                  //   final response = controller.registerResponse;
 
-                  //   if (response.status == Status.COMPLETED) {
-                  //     // Registration successful - show nothing here as we already show a snackbar
-                  //     return SizedBox(height: 10.h);
-                  //   } else if (response.status == Status.ERROR) {
-                  //     // Show error message
-                  //     return Padding(
-                  //       padding: EdgeInsets.symmetric(vertical: 10.h),
-                  //       child: Text(
-                  //         "Error: ${response.message}",
-                  //         style: getRegularStyle(
-                  //           color: Colors.red,
-                  //           fontSize: ScreenUtil().setSp(AppSize.s12),
-                  //         ),
-                  //         textAlign: TextAlign.center,
-                  //       ),
-                  //     );
-                  //   } else {
-                  //     return SizedBox(height: 10.h);
-                  //   }
-                  // }),
                   CustomTextSpan(
                     text1: AppStrings.alreadyHaveAnAccount,
                     text2: AppStrings.login,
@@ -267,7 +250,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                       Navigator.pop(context);
                     },
                   ),
-
+                   if (!isPhoneOnly) ...[
                   Row(
                     children: [
                       Flexible(
@@ -303,7 +286,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                       // );
                     },
                   ),
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 5.h),]
                 ],
               ),
             ),
