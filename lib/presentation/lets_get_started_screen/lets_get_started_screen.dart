@@ -207,7 +207,7 @@ class _LetsGetStartedViewState extends State<LetsGetStartedView> {
                       fillColor: ColorManager.kWhiteColor,
                       contentPadding: EdgeInsets.only(left: 10.0),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0.r),
+                        borderRadius: BorderRadius.circular(10.0.r),
                         borderSide: BorderSide(color: ColorManager.secondary),
                       ),
                       hintText: "Select user type",
@@ -215,12 +215,14 @@ class _LetsGetStartedViewState extends State<LetsGetStartedView> {
                         color: ColorManager.kHintTextColor,
                       ),
                       focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0.r),
                         borderSide: BorderSide(
-                          color: ColorManager.kGreyColor,
+                          color: ColorManager.kTitleBgColor,
                       ),),
                       enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0.r),
                         borderSide: BorderSide(
-                          color: ColorManager.kGreyColor,
+                          color: ColorManager.kTitleBgColor,
                       ),)
                     ),
                     onChanged: (String? newValue) {
