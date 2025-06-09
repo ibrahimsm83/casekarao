@@ -188,6 +188,9 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                     focusNode: controller.passwordFocusNode,
                     obscureText: true,
                     horizontalMergin: 0.0,
+                    onChanged: (value) {
+                      controller.checkPasswordStrength(value);
+                    },
                     validator: (String? val) {
                       if (val == null || val.isEmpty) {
                         return AppStrings.enterPassword;
