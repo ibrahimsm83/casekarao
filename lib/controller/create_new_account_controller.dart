@@ -12,7 +12,7 @@ class CreateNewAccountController extends GetxController {
 
   // API service
   //final ApiService _apiService = ApiService();
-  final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>(debugLabel: 'create_account_form');
   // Focus nodes
   final FocusNode fullNameFocusNode = FocusNode();
   final FocusNode emailFocusNode = FocusNode();

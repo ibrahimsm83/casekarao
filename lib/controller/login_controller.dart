@@ -18,22 +18,8 @@ class LoginController extends GetxController {
   final FocusNode passwordFocusNode = FocusNode();
 
   // Form key
-  final loginFormKey = GlobalKey<FormState>();
+  final loginFormKey = GlobalKey<FormState>(debugLabel: 'login_form');
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   phoneNumberFocusNode.addListener(() {
-  //     if (!phoneNumberFocusNode.hasFocus) {
-  //       formatPhoneNumber();
-  //     }
-  //   });
-  // }
-
-  // /// Format phone number by removing spaces
-  // void formatPhoneNumber() {
-  //   phoneNumberController.text = phoneNumberController.text.replaceAll(" ", "");
-  // }
 
   /// Login user
   Future<void> login() async {

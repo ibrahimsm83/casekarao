@@ -14,10 +14,17 @@ class CreateNewAccountScreen extends StatefulWidget {
 }
 
 class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
-  // Initialize the controller
+  // Initialize the controller with unique tag
   final CreateNewAccountController controller = Get.put(
     CreateNewAccountController(),
+    tag: 'create_account',
   );
+
+  @override
+  void dispose() {
+    Get.delete<CreateNewAccountController>(tag: 'create_account');
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -257,10 +264,7 @@ class _CreateNewAccountScreenState extends State<CreateNewAccountScreen> {
                     text1: AppStrings.alreadyHaveAnAccount,
                     text2: AppStrings.login,
                     onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        CustomRouteNames.kLoginScreenRoute,
-                      );
+                      Navigator.pop(context);
                     },
                   ),
 

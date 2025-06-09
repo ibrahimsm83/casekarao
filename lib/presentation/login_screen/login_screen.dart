@@ -6,13 +6,32 @@ import 'package:get/get.dart';
 import '../../export_casekarao.dart';
 import '../../controller/login_controller.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late LoginController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(LoginController(), tag: 'login');
+  }
+
+  @override
+  void dispose() {
+    Get.delete<LoginController>(tag: 'login');
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<LoginController>(
-      init: LoginController(),
+      tag: 'login',
       builder: (controller) {
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
